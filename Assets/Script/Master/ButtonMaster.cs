@@ -103,7 +103,7 @@ public class ButtonMaster : MonoBehaviour
                 SkinMaster.PlayerSelect++;
             }
         }else{
-            if(SkinMaster.PlayerSelect >= 0){
+            if(SkinMaster.PlayerSelect > 0){
                 SkinMaster.PlayerSelect--;
             }
         }
