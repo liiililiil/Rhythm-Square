@@ -29,23 +29,25 @@ public class TitleMoveMent : MonoBehaviour
     {
         Time += 0.01f;
 
-        if(ButtonMaster.Mode == 4 && ButtonMaster.ModeRecord == 3 && IsActive){
+        if(ButtonMaster.Mode == 4 && ButtonMaster.ModeRecord == 3 && IsActive){ //게임시작일때 위치 지정
             IsActive = false;
             Time = 0;
             StartPos = RectTransform.localPosition;
-        }else if(ButtonMaster.Mode != 4 && !IsActive){
+            Text.alignment = TextAnchor.MiddleCenter;
+        }else if(ButtonMaster.Mode != 4 && !IsActive){ //스위치
             IsActive = true;
             Time = 0;
             StartPos = RectTransform.localPosition;
+            Text.alignment = TextAnchor.MiddleLeft;
         }
 
-        if(ButtonMaster.Mode == 3 && BasicIsActive){
+        if(ButtonMaster.Mode == 3 && BasicIsActive){ //일반상황에서 애니메이션 위치 지정
             BasicIsActive = false;
             Time = 0;
             StartPos = RectTransform.localPosition;
             EndPos = BasicEndPos;
             
-        }else if(ButtonMaster.Mode != 3 && ButtonMaster.Mode != 4 && !BasicIsActive){
+        }else if(ButtonMaster.Mode != 3 && ButtonMaster.Mode != 4 && !BasicIsActive){ //스위치
             BasicIsActive = true;
             Time = 0;
             StartPos = RectTransform.localPosition;
@@ -55,22 +57,18 @@ public class TitleMoveMent : MonoBehaviour
 
         if(!IsActive){
             if(Time <= 1)
-                NowPos = Vector2.Lerp(StartPos, F1(EndPos1), EaseMaster.OutCirc(Time));
+                NowPos = Vector2.Lerp(StartPos, EndPos1, EaseMaster.OutQuint(Time)); //게임시작일때 애니메이션 재생
             else if(Time <= 2)
-                NowPos = Vector2.Lerp(F1(EndPos1) , F1(EndPos2), EaseMaster.InCirc(Time-1));
+                NowPos = Vector2.Lerp(EndPos1 ,EndPos2, EaseMaster.InCirc(Time-1)); 
             else
-                NowPos = BasicStartPos;
+                NowPos = BasicStartPos; //재생완료후 위치 복구
 
-        }else{
+        }else{//일반상황에서 애니메이션
             NowPos = Vector2.Lerp(StartPos, EndPos, EaseMaster.OutQuint(Time));
         }
 
 
-        if(!float.IsNaN(NowPos.x)||!float.IsNaN(NowPos.y))
+        if(!float.IsNaN(NowPos.x)||!float.IsNaN(NowPos.y)) //최종 움직임
             RectTransform.localPosition = NowPos;
-    }
-
-    Vector2 F1(Vector2 i){
-        return i - new Vector2((Text.text.Length-1) * Text.fontSize/2,0);
     }
 }
