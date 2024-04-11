@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class ButtonMaster : MonoBehaviour
 {
@@ -139,6 +140,19 @@ public class ButtonMaster : MonoBehaviour
 
         }
 
+    }
+
+    public void GameStart(){
+        if(Mode !=4){
+            ChangeMode(4);
+            SoundMaster.SlowChange(SoundMaster.Song[InGameSelect].Music);
+
+            StartCoroutine("StartTimeDelay");
+        }
+    }
+
+    IEnumerator StartTimeDelay(){
+        yield return new WaitForSeconds(1);
     }
 
 }

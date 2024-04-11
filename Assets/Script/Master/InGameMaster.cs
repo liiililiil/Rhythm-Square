@@ -8,7 +8,8 @@ public class InGameMaster : MonoBehaviour
     public static Vector2 BorderSize;
     public static bool IsLockUi;
     public static bool IsLock;
-    void Start(){
+    void Awake(){
+        Application.targetFrameRate = 60;
         TileSize = new Vector2(5,5);
         BorderSize = new Vector2(5,5);
         IsLock = true;
