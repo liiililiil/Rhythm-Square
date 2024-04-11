@@ -71,6 +71,6 @@ public class TitleMoveMent : MonoBehaviour
     }
 
     Vector2 F1(Vector2 i){
-        return i - new Vector2((Text.text.Length-2)/2 * ((Text.fontSize-1)/2)/2,0);
+        return i - new Vector2((Text.text.Length-2)/2 * ((Text.fontSize)/2)/2,0);
     }
 }
