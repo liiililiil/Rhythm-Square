@@ -33,12 +33,12 @@ public class ButtonMaster : MonoBehaviour
     }
 
     public void Update(){
-        if(ButtonMaster.InGameSelect+ Mathf.RoundToInt(ButtonMaster.InGameSelectDump) != SelectRecord){
+        if(ButtonMaster.InGameSelect+ Mathf.RoundToInt(ButtonMaster.InGameSelectDump) != SelectRecord){ //곡선택 마우스이동제어
             SoundMaster.SlowChange(SoundMaster.Song[ButtonMaster.InGameSelect+ Mathf.RoundToInt(ButtonMaster.InGameSelectDump)].Music,SoundMaster.Song[InGameSelect+ Mathf.RoundToInt(ButtonMaster.InGameSelectDump)].PreViewStart);
             SelectRecord = ButtonMaster.InGameSelect+ Mathf.RoundToInt(ButtonMaster.InGameSelectDump) ;
         }
 
-        if(Input.GetMouseButtonDown(0) && Mode == 3 && !IsDrop ){
+        if(Input.GetMouseButtonDown(0) && Mode == 3 && !IsDrop ){//마우스 끌기 감지
             IsDrop = true;
             StartY = Input.mousePosition.y;
         }else if(Input.GetMouseButtonUp(0) || Mode != 3){
@@ -74,7 +74,7 @@ public class ButtonMaster : MonoBehaviour
         if((Input.GetKeyUp(KeyCode.D)||Input.GetKeyUp(KeyCode.W)||Input.GetKeyUp(KeyCode.UpArrow)||Input.GetKeyUp(KeyCode.RightArrow)) && Mode == 3)//선택화면 위
             MusicSelect(true);
 
-        if(Input.GetKeyUp(KeyCode.Escape) && Mode != 0) //Esc돌아가기
+        if(Input.GetKeyUp(KeyCode.Escape) && Mode != 0 && Mode != 4) //Esc돌아가기
             ChangeMode(ModeRecord);
 
         else if(Input.GetKeyUp(KeyCode.Escape) && Mode == 0)
