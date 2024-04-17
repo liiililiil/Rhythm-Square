@@ -54,7 +54,7 @@ public class PlayerMoveMent : InGameMaster
 
             }
 
-            transform.position = new Vector2(TargetX,TargetY);        
+            transform.localPosition = new Vector2(TargetX,TargetY);        
             
         }
 
