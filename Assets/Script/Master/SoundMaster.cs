@@ -30,7 +30,8 @@ public class SoundMaster : MonoBehaviour
     public Slider[] Slider = new Slider[2];
     public ButtonMaster ButtonMaster;
     public AudioClip[] BackGround,
-            EffectSound;
+            EffectSound,
+            PlayerSound;
     public float[] SpectrumData = new float[1024];
     public AudioSource[] AudioSource; //사운드 집합
     /*
@@ -96,31 +97,20 @@ public class SoundMaster : MonoBehaviour
 
         //노래가 정상적으로 플레이중인지 감지
         IsRightSong = false;
-
-        // if(ButtonMaster.Mode !=3 &&ButtonMaster.Mode != 4 && ButtonMaster.Mode != 5){ //배경화면일때
-        //     if(AudioSource[0].clip == BackGround[NowPlaying] || AudioSource[0].clip == BackGround[PlayingRecord])
-        //         IsRightSong = true;
-
-        //     if(!IsRightSong){ //노래 픽스
-        //         Debug.Log(IsRightSong);
-        //         BackGroundRandom();
-        //     }
-
-
-        // }else if(ButtonMaster.Mode == 3){ //곡선택일때
-        //     // for(int i = 0; i<Song.Length; i++){ //노래검사
-        //     //     if(AudioSource[0].clip == Song[i].Music)
-        //     //         IsRightSong = true;
-        //     // }
-
-        //     if(AudioSource[0].clip == Song[ButtonMaster.InGameSelect].Music) //노래검사
-        //         IsRightSong = true;
-
-        //     if(!IsRightSong) //노래 픽스
-        //     SlowChange(Song[ButtonMaster.InGameSelect].Music);
-        // }
     }
 
+    public void PlayEffect(int i){
+        AudioSource[1].clip = EffectSound[i];
+        AudioSource[1].Play();
+    }
+    public void PlayShiftSound(bool IsDown){
+        if(IsDown){
+            AudioSource[2].clip = PlayerSound[0];
+        }else{
+            AudioSource[2].clip = PlayerSound[1];
+        }
+        AudioSource[2].Play();
+    }
     public void BackGroundRandom(){
         NowPlaying = UnityEngine.Random.Range(0,BackGround.Length);
 
