@@ -17,16 +17,16 @@ public class PlayerShiftHide : MonoBehaviour
         if(IsFlip){
             if(PlayerMoveMent.Filp == true){
                 if(SpriteRenderer.color.a < 255)
-                    SpriteRenderer.color = new Color(0,0,0,255);
+                    SpriteRenderer.color = new Color(255,255,255,255);
             }else{
                 if(SpriteRenderer.color.a > 0)
-                    SpriteRenderer.color = new Color(0,0,0,0);
+                    SpriteRenderer.color = new Color(255,255,255,0);
             }
         }else{
             if(PlayerMoveMent.BeShift == true){
-                SpriteRenderer.color = new Color(0,0,0,255);
+                SpriteRenderer.color = new Color(255,255,255,255);
             }else{
-                SpriteRenderer.color = new Color(0,0,0,0);
+                SpriteRenderer.color = new Color(255,255,255,0);
             }
         }
 

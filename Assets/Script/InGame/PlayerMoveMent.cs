@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class PlayerMoveMent : InGameMaster
 {
+    public SoundMaster SoundMaster;
     public SkinMaster SkinMaster;
     public ButtonMaster ButtonMaster;
     private SpriteRenderer SpriteRenderer;
@@ -88,17 +89,22 @@ public class PlayerMoveMent : InGameMaster
     }
     
     void PushFilpKey(){ //를립 키 적용
-        if(Input.GetKeyDown(KeyCode.LeftShift)||Input.GetKeyDown(KeyCode.RightShift)||Input.GetKeyDown(KeyCode.LeftControl)||Input.GetKeyDown(KeyCode.RightControl)) 
+        if(Input.GetKeyDown(KeyCode.LeftShift)||Input.GetKeyDown(KeyCode.RightShift)||Input.GetKeyDown(KeyCode.LeftControl)||Input.GetKeyDown(KeyCode.RightControl)){
             Filp = true;
-        else if(Input.GetKeyUp(KeyCode.LeftShift)||Input.GetKeyUp(KeyCode.RightShift)||Input.GetKeyDown(KeyCode.LeftControl)||Input.GetKeyDown(KeyCode.RightControl))
+            SoundMaster.PlayShiftSound(true);
+        }else if(Input.GetKeyUp(KeyCode.LeftShift)||Input.GetKeyUp(KeyCode.RightShift)||Input.GetKeyDown(KeyCode.LeftControl)||Input.GetKeyDown(KeyCode.RightControl)){
             Filp = false;
+            SoundMaster.PlayShiftSound(false);
+        }
     }
 
     void SlowMoveMent(){ //걷기 적용
         if(Input.GetKey(KeyCode.LeftShift)||Input.GetKey(KeyCode.RightShift)||Input.GetKeyDown(KeyCode.LeftControl)||Input.GetKeyDown(KeyCode.RightControl)){
+            SoundMaster.PlayShiftSound(true);
             Speed = 0.075f;
             BeShift = true;
         }else{
+            SoundMaster.PlayShiftSound(false);
             Speed = 0.125f;
             BeShift = false;
         }

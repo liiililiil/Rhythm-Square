@@ -2917,6 +2917,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 605ed47f72dcdbc409518cbb2567a4aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SoundMaster: {fileID: 1385216406}
   SkinMaster: {fileID: 1385216405}
   ButtonMaster: {fileID: 1385216402}
 --- !u!1 &946226333
@@ -4760,33 +4761,33 @@ MonoBehaviour:
     Offset: 0
     PreViewStart: 0
     PreViewEnd: 150
-    Difficulty: 0
+    Difficulty: 1
     Artist: Tutorial
     Title: How To Play?
     LockSize: {x: 5, y: 5}
     UnLockSize: {x: 5, y: 5}
     IsLock: 1
-  - Music: {fileID: 8300000, guid: 3ca769c6dca037b409af11c0f805c4bf, type: 3}
-    TitleSprite: {fileID: 21300000, guid: f1ec6b137a8215f48b8ad3c0b07247a5, type: 3}
-    Bpm: 125
-    Offset: 0
-    PreViewStart: 77.5
-    PreViewEnd: 152
-    Difficulty: 0
-    Artist: Teminite
-    Title: Party Time
-    LockSize: {x: 0, y: 0}
-    UnLockSize: {x: 0, y: 0}
-    IsLock: 0
   - Music: {fileID: 8300000, guid: e97da74cd6f3f834fa104b28477fbe70, type: 3}
     TitleSprite: {fileID: 21300000, guid: 59b343d76dba6e540a06b4c223b8e8c4, type: 3}
     Bpm: 132
     Offset: 5
     PreViewStart: 29
     PreViewEnd: 152
-    Difficulty: 108
+    Difficulty: 5
     Artist: Partricia Taxxon
     Title: sd_bbb
+    LockSize: {x: 0, y: 0}
+    UnLockSize: {x: 0, y: 0}
+    IsLock: 0
+  - Music: {fileID: 8300000, guid: 3ca769c6dca037b409af11c0f805c4bf, type: 3}
+    TitleSprite: {fileID: 21300000, guid: f1ec6b137a8215f48b8ad3c0b07247a5, type: 3}
+    Bpm: 125
+    Offset: 0
+    PreViewStart: 77.5
+    PreViewEnd: 152
+    Difficulty: 12
+    Artist: Teminite
+    Title: Party Time
     LockSize: {x: 0, y: 0}
     UnLockSize: {x: 0, y: 0}
     IsLock: 0
@@ -4803,7 +4804,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 8f9c3f1d199ce5a488dddbfb941196a8, type: 3}
   - {fileID: 8300000, guid: 632bdb7e1738a344882f9cccef2cd16c, type: 3}
   - {fileID: 8300000, guid: 1fe2d7676e9b4f44cb69a8bf18a7d6db, type: 3}
-  EffectSound: []
+  EffectSound:
+  - {fileID: 8300000, guid: 65442cce716e5964199ce1df057cd482, type: 3}
+  - {fileID: 8300000, guid: 608e0a1b52bf2df40ac1fe025f92e973, type: 3}
+  PlayerSound:
+  - {fileID: 8300000, guid: 2543c92fab502be4399fa0de15ac085f, type: 3}
+  - {fileID: 8300000, guid: 7c815882c79fb2f4d90388e36f87e80c, type: 3}
   SpectrumData:
   - 0
   - 0
