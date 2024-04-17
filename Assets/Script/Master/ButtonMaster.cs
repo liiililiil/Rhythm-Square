@@ -36,6 +36,8 @@ public class ButtonMaster : MonoBehaviour
         if(ButtonMaster.InGameSelect+ Mathf.RoundToInt(ButtonMaster.InGameSelectDump) != SelectRecord){ //곡선택 마우스이동제어
             SoundMaster.SlowChange(SoundMaster.Song[ButtonMaster.InGameSelect+ Mathf.RoundToInt(ButtonMaster.InGameSelectDump)].Music,SoundMaster.Song[InGameSelect+ Mathf.RoundToInt(ButtonMaster.InGameSelectDump)].PreViewStart);
             SelectRecord = ButtonMaster.InGameSelect+ Mathf.RoundToInt(ButtonMaster.InGameSelectDump) ;
+            SoundMaster.PlayEffect(0);
+            
         }
 
         if(Input.GetMouseButtonDown(0) && Mode == 3 && !IsDrop ){//마우스 끌기 감지
@@ -82,7 +84,7 @@ public class ButtonMaster : MonoBehaviour
     }
 
     public void ChangeMode(int i){//메뉴 변경
-        SoundMaster.AudioSource[1].Play();
+        SoundMaster.PlayEffect(0);
             if(Mode != 1)
                 ModeRecord = Mode; //이전 메뉴 기억
             Mode = i;
@@ -128,13 +130,11 @@ public class ButtonMaster : MonoBehaviour
             if(InGameSelect < SoundMaster.Song.Length - 1){
                 InGameSelect += 1;
                 SoundMaster.SlowChange(SoundMaster.Song[InGameSelect].Music,SoundMaster.Song[InGameSelect].PreViewStart);
-                SoundMaster.AudioSource[1].Play();
             }
         }else{
             if(InGameSelect  > 0){
                 InGameSelect  -=1;
                 SoundMaster.SlowChange(SoundMaster.Song[InGameSelect].Music,SoundMaster.Song[InGameSelect].PreViewStart);
-                SoundMaster.AudioSource[1].Play();
             }
                 
 
@@ -145,7 +145,9 @@ public class ButtonMaster : MonoBehaviour
     public void GameStart(){
         if(Mode !=4){
             ChangeMode(4);
-            SoundMaster.SlowChange(SoundMaster.Song[InGameSelect].Music);
+            SoundMaster.PlayEffect(1);
+            SoundMaster.AudioSource[0].Stop();
+            
 
             StartCoroutine("StartTimeDelay");
         }
@@ -153,6 +155,7 @@ public class ButtonMaster : MonoBehaviour
 
     IEnumerator StartTimeDelay(){
         yield return new WaitForSeconds(1);
+        SoundMaster.SlowChange(SoundMaster.Song[InGameSelect].Music);
     }
 
 }
