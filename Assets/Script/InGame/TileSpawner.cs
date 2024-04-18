@@ -2,10 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TileSpawner : MonoBehaviour
+public class TileSpawner : GetMasters
 {
 
-    public SkinMaster SkinMaster;
     
     public GameObject PreFab;
     void Start()
@@ -16,7 +15,6 @@ public class TileSpawner : MonoBehaviour
                 Tile Tile = Prefab.GetComponent<Tile>();
                 Prefab.transform.SetParent(transform);
                 Tile.ThisPos = new Vector2(i,j);
-                Tile.SkinMaster = SkinMaster;
                 
             }
         }

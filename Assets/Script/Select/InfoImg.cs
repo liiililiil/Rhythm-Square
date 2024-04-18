@@ -2,9 +2,8 @@ using Unity.Burst.Intrinsics;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InfoImg : MonoBehaviour
+public class InfoImg : GetMasters
 {
-    public GameObject Master;
     public int i;
     private bool IsMove;
     private bool IsFirstMove;
@@ -15,16 +14,8 @@ public class InfoImg : MonoBehaviour
     private Vector2 StartPos;
     private Vector2 Result;
     private RectTransform RectTransform;
-    private SoundMaster SoundMaster;
-    private ButtonMaster ButtonMaster;
-    private EaseMaster EaseMaster;
 
     void Start(){
-        //마스터 불러오기
-        SoundMaster = Master.GetComponent<SoundMaster>();
-        ButtonMaster = Master.GetComponent<ButtonMaster>();
-        EaseMaster = Master.GetComponent<EaseMaster>();
-
         RectTransform = GetComponent<RectTransform>();
         SelectRecord = -1;
         Image = GetComponent<Image>();

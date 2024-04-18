@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MultiMoveMent : MonoBehaviour
+public class MultiMoveMent : GetMasters
 {
-    public ButtonMaster ButtonMaster;
-    public EaseMaster EaseMaster;
     public Vector2[] Pos;
     public int[] NeedMode;
     private Vector2 Result;

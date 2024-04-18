@@ -1,8 +1,7 @@
 using UnityEngine;
 
-public class Centor : MonoBehaviour
+public class Centor : GetMasters
 {
-    public EaseMaster EaseMaster;
     public Vector2[] Pos;
     public int[] NeedMode;
     public GameObject PreFab;
@@ -13,16 +12,10 @@ public class Centor : MonoBehaviour
     private float TargetScale;
     private float Time;
     private int ModeRecord;
-    
-    private SoundMaster SoundMaster;
-    private ButtonMaster ButtonMaster;
 
     void Awake()
     {
         ModeRecord = -1;
-        GameObject Master = GameObject.Find("Master");
-        SoundMaster = Master.GetComponent<SoundMaster>();
-        ButtonMaster = Master.GetComponent<ButtonMaster>();
 
         for(int i = 0; i < 365; i++){
             float Angle = i * 1f * Mathf.Deg2Rad;

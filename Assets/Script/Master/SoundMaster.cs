@@ -23,12 +23,11 @@ public class Song{ //인게임 곡 정보란
 
 
 
-public class SoundMaster : MonoBehaviour
+public class SoundMaster : GetMasters
 {
     public float ChangeSpeed;
     public Song[] Song;
     public Slider[] Slider = new Slider[2];
-    public ButtonMaster ButtonMaster;
     public AudioClip[] BackGround,
             EffectSound,
             PlayerSound;
@@ -47,17 +46,16 @@ public class SoundMaster : MonoBehaviour
     private bool IsChange;
     private bool IsInGame;
     private bool IsBackGronud;
+    public Coroutine PlayCoroutine; //시작코루틴 저장용
+    public Coroutine EndCoroutine; //종료 코루틴 종료용
+
     public bool IsRightSong; //노래의 비정상 재생 감지
     private int PlayingRecord;
-    private Coroutine PlayCoroutine; //시작코루틴 저장용
-    private Coroutine EndCoroutine; //종료 코루틴 종료용
-
     public void Awake(){
         InGamePlaying =-1;
         IsBackGronud = false;
         IsInGame = false;
         PlayingRecord = -1;
-        ButtonMaster = GetComponent<ButtonMaster>();
         AudioSource = GetComponents<AudioSource>();
 
     }

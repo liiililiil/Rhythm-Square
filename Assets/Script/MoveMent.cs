@@ -1,10 +1,7 @@
 using UnityEngine;
 
-public class MoveMent : MonoBehaviour
+public class MoveMent : GetMasters
 {
-    public EaseMaster EaseMaster;
-    public ButtonMaster ButtonMaster;
-
     public int NeedMode;
     public Vector2 start;
     public Vector2 Target;

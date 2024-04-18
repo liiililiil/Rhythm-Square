@@ -1,11 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
-public class ImgHide : MonoBehaviour
+public class ImgHide : GetMasters
 {
     private bool IsImage;
     private Image Image;
     private SpriteRenderer SpriteRenderer;
-    public ButtonMaster ButtonMaster;
     public int NeedMode;
     void Start(){
         try{

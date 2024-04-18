@@ -1,11 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
-public class TextViewer : MonoBehaviour
+public class TextViewer : GetMasters
 {
     public int Type;
-    public ButtonMaster ButtonMaster;
-    public SoundMaster SoundMaster;
     private string TargetText = "Error";
     private string TextRecord = "Error";
     private int Time;

@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SkinSelecter : MonoBehaviour
+public class SkinSelecter : GetMasters
 {
     public bool IsPlayer;
-    public SkinMaster SkinMaster;
     private Image Image;
 
 

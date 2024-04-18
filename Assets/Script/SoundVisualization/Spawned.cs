@@ -2,12 +2,11 @@ using System;
 using Unity.Mathematics;
 using UnityEngine;
 
-public class Spawned : MonoBehaviour
+public class Spawned : GetMasters
 {
     public int Select;
     private float TargetSize; 
     public float SpectrumData;
-    public SoundMaster SoundMaster;
     void Update()
     {
         SpectrumData = (float)Math.Pow(SoundMaster.SpectrumData[Select]*(10+Select*0.2),1.1);

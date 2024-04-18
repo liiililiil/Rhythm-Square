@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TitleMoveMent : MonoBehaviour
+public class TitleMoveMent : GetMasters
 {
-    public ButtonMaster ButtonMaster;
-    public EaseMaster EaseMaster;
     public Vector2 BasicStartPos;
     public Vector2 BasicEndPos;
     

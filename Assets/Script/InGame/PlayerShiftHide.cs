@@ -9,7 +9,7 @@ public class PlayerShiftHide : MonoBehaviour
     private SpriteRenderer SpriteRenderer;
     
 
-    void Start(){
+    void Awake(){
         SpriteRenderer = GetComponent<SpriteRenderer>();
     }
     void Update()

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Tile : InGameMaster
 {
-    public SkinMaster SkinMaster;
     public Vector2 ThisPos;
     private SpriteRenderer SpriteRenderer;
 

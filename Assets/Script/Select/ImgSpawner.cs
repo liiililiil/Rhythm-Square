@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using Unity.Burst.Intrinsics;
 using UnityEngine;
 
-public class ImgSpawner : MonoBehaviour
+public class ImgSpawner : GetMasters
 {
     public GameObject PreFab;
-    public SoundMaster SoundMaster;
-    public GameObject Master;
     private Vector2 SpawnPos;
     void Start()
     {

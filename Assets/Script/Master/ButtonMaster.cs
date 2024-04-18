@@ -1,11 +1,8 @@
 using UnityEngine;
 using System.Collections;
 
-public class ButtonMaster : MonoBehaviour
-{
-    protected SoundMaster SoundMaster;
-    protected SkinMaster SkinMaster;
-    
+public class ButtonMaster : GetMasters
+{   
     public int Mode; //현재 창
     public int ModeRecord;//창 기록
     /*
@@ -23,9 +20,7 @@ public class ButtonMaster : MonoBehaviour
     private float StartY;
     private int SelectRecord;
 
-    public void Awake(){
-        SkinMaster = GetComponent<SkinMaster>();
-        SoundMaster = GetComponent<SoundMaster>();
+    public void Start(){
         SelectRecord = -1;
         ModeRecord = -1;
         Mode = 0;
@@ -144,17 +139,18 @@ public class ButtonMaster : MonoBehaviour
 
     public void GameStart(){
         if(Mode !=4){
+            SoundMaster.AudioSource[0].Stop();
             ChangeMode(4);
             SoundMaster.PlayEffect(1);
-            SoundMaster.AudioSource[0].Stop();
-            
+            if(SoundMaster.PlayCoroutine != null) StopCoroutine(SoundMaster.PlayCoroutine);
+            if(SoundMaster.EndCoroutine != null) StopCoroutine(SoundMaster.EndCoroutine);
 
             StartCoroutine("StartTimeDelay");
         }
     }
 
     IEnumerator StartTimeDelay(){
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(5);
         SoundMaster.SlowChange(SoundMaster.Song[InGameSelect].Music);
     }
 

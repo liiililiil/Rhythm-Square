@@ -6,9 +6,8 @@ using UnityEngine.UI;
 public class Border : InGameMaster{
     private SpriteRenderer SpriteRenderer;
 
-    void Start() {
+    void Awake() {
         SpriteRenderer = GetComponent<SpriteRenderer>();
-        
     }
     void Update()
     {

@@ -6,29 +6,24 @@ using UnityEngine.UI;
 
 public class PlayerMoveMent : InGameMaster
 {
-    public SoundMaster SoundMaster;
-    public SkinMaster SkinMaster;
-    public ButtonMaster ButtonMaster;
     private SpriteRenderer SpriteRenderer;
     private float TargetX;
     private float TargetY;
     private Vector2 LockPos;
-    static public bool BeShift;
-    static public bool Filp;
-    
     private bool IsActive = true;
-    private float Speed; 
+    private float Speed;
 
+    public bool BeShift;
+    public bool Filp;
 
-
-
-    
+    void Awake(){
+        SpriteRenderer = GetComponent<SpriteRenderer>();
+    }
     void Start()
 
     {
         LockPos.x = 0;
         LockPos.y = 0;        
-        SpriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame

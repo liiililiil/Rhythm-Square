@@ -56,5 +56,6 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Rhythm Square Re.sln"
+    "dotnet.defaultSolution": "Rhythm-Square.sln",
+    "dotnet.preferCSharpExtension": true
 }

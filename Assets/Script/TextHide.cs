@@ -1,8 +1,7 @@
 using UnityEngine;
 
-public class TextHide : MonoBehaviour
+public class TextHide : GetMasters
 {   
-    public ButtonMaster ButtonMaster;
     public Vector2 Max;
     public int Speed;
     public int NeedMode;
