@@ -17,8 +17,8 @@ public class SoundVisualize : MonoBehaviour
     //증폭 배율
     const float BAR_MULTIPLIER = 5000f;
 
-    //움직이는 속도
-    const float BAR_SCALE_SPEED = 100f;
+    //감소 속도
+    const float BAR_DECREASE_SPEED = 100f;
     
 
     private float[] samples = new float[SAMPLE_SIZE];
@@ -64,12 +64,21 @@ public class SoundVisualize : MonoBehaviour
             }
 
             //최소값 설정
-            float clampedValue = Mathf.Max(sampleValue, BAR_MIN_HEIGHT);
+            sampleValue = Mathf.Max(sampleValue, BAR_MIN_HEIGHT);
 
-            //사이즈 적용
             Vector2 sizeDelta = barRectTransforms[i].sizeDelta;
 
-            if()
+            //부드럽게 감소되도록 처리
+            if(sizeDelta.y > sampleValue - BAR_DECREASE_SPEED * Time.deltaTime)
+            {
+                sizeDelta.y -= BAR_DECREASE_SPEED * Time.deltaTime;
+            }
+            else
+            {
+                sizeDelta.y = sampleValue;
+            }
+
+            //크기 적용
             barRectTransforms[i].sizeDelta = sizeDelta;
         }
     }
