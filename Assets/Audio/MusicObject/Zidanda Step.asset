@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b61e54665d8e4cb4687103f4fa795464, type: 3}
+  m_Name: Zidanda Step
+  m_EditorClassIdentifier: Assembly-CSharp::Music
+  audioClip: {fileID: 8300000, guid: d3544160b711ccb4a8a1399b52f0fca4, type: 3}
+  sprite: {fileID: 4325700180379299132, guid: c2aa8b8d5ed7c2b4ba9ee046a8e08455, type: 3}
+  title: Zidanda Step
+  bpm: 128
+  artist: MYUKKE.
