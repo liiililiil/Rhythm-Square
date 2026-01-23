@@ -9,16 +9,16 @@ public class SoundVisualize : MonoBehaviour
     const int BAR_COUNT = 360;
 
     //반지름
-    const float RADIAN  = 100;
+    const float RADIAN  = 300;
 
-    const float BAR_MAX_HEIGHT = 100f;
-    const float BAR_MIN_HEIGHT = 2f;
+    const float BAR_High_HEIGHT = 300f;
+    const float BAR_MIN_HEIGHT = 1f;
 
     //증폭 배율
-    const float BAR_MULTIPLIER = 50f;
+    const float BAR_MULTIPLIER = 5000f;
 
     //움직이는 속도
-    const float BAR_SCALE_SPEED = 5f;
+    const float BAR_SCALE_SPEED = 100f;
     
 
     private float[] samples = new float[SAMPLE_SIZE];
@@ -40,7 +40,7 @@ public class SoundVisualize : MonoBehaviour
             barRectTransforms[i].anchoredPosition = position;
 
             //회전 설정
-            barRectTransforms[i].rotation = Quaternion.Euler(0, 0, angle);
+            barRectTransforms[i].rotation = Quaternion.Euler(0, 0, angle + 90);
 
         }
         
@@ -57,11 +57,19 @@ public class SoundVisualize : MonoBehaviour
 
             float sampleValue = samples[i % SAMPLE_SIZE] * BAR_MULTIPLIER;
 
-            float clampedValue = Mathf.Clamp(sampleValue, BAR_MIN_HEIGHT, BAR_MAX_HEIGHT);
+            //너무 크면 로그 스케일 적용
+            if(sampleValue > BAR_High_HEIGHT)
+            {
+                sampleValue = Mathf.Log10(sampleValue - BAR_High_HEIGHT) + BAR_High_HEIGHT;
+            }
 
-            //사이즈 계산
+            //최소값 설정
+            float clampedValue = Mathf.Max(sampleValue, BAR_MIN_HEIGHT);
+
+            //사이즈 적용
             Vector2 sizeDelta = barRectTransforms[i].sizeDelta;
-            sizeDelta.y = Mathf.Lerp(sizeDelta.y, clampedValue, Time.deltaTime * BAR_SCALE_SPEED);
+
+            if()
             barRectTransforms[i].sizeDelta = sizeDelta;
         }
     }
