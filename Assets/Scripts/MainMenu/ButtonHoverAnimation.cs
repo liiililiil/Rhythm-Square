@@ -69,7 +69,7 @@ public class ButtonHoverAnimation : MonoBehaviour, IPointerEnterHandler, IPointe
         }
 
         rt.SetTopBottom(end, end);
-        StopCoroutine(barScaleCoroutine);
+        this.SafeStopCoroutine(barScaleCoroutine);
     }
 
     IEnumerator SetTextPosition(float start, float end, float duration, EaseType easeType)
@@ -93,7 +93,7 @@ public class ButtonHoverAnimation : MonoBehaviour, IPointerEnterHandler, IPointe
 
         rt.SetPosX(end);
 
-        StopCoroutine(textPositionCoroutine);
+        this.SafeStopCoroutine(textPositionCoroutine);
     }
     
 
