@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 /// <summary>
 /// 오디오 관련 스크립터블 오브젝트들을 정의합니다.
@@ -12,11 +13,12 @@ namespace AudioManagement
     [CreateAssetMenu(fileName = "EmptyMusic", menuName = "AudioAssets/New Music")]
     public class Music : ScriptableObject
     {
-        public AudioClip audioClip;
+        public AssetReferenceT<AudioClip> audioClip;
         public Sprite sprite;
         public string title;
         public string artist;
         public float bpm;
+
     }
 
 
