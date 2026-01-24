@@ -1,6 +1,6 @@
 using Types;
 using UnityEngine;
-using Easeing;
+using Easing;
 
 
 namespace MainMenu.StateChanger
@@ -10,6 +10,15 @@ namespace MainMenu.StateChanger
     public struct MenuStateChange<T>
     {
         public MenuState TargetState;
+        public T Value;
+        public float Duration;
+        public EaseType EaseType;
+    }
+
+    // 기본
+    [System.Serializable]
+    public struct MenuStateDefault<T>
+    {
         public T Value;
         public float Duration;
         public EaseType EaseType;
