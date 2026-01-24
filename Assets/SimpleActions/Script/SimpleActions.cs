@@ -6,7 +6,7 @@ namespace SimpleActions
     //경량화된 이벤트
     public class SimpleEvent
     {
-        List<Action> actions;
+        List<Action> actions = new List<Action>();
 
         public void AddListener(Action action)
         {
@@ -36,7 +36,7 @@ namespace SimpleActions
 
     public class SimpleEvent<T>
     {
-        List<Action<T>> actions;
+        List<Action<T>> actions = new List<Action<T>>();
 
         public void AddListener(Action<T> action)
         {
@@ -66,7 +66,7 @@ namespace SimpleActions
 
     public class SimpleEvent<T1, T2>
     {
-        List<Action<T1, T2>> actions;
+        List<Action<T1, T2>> actions = new List<Action<T1, T2>>();
 
         public void AddListener(Action<T1, T2> action)
         {
@@ -96,7 +96,7 @@ namespace SimpleActions
 
     public class SimpleEvent<T1, T2, T3>
     {
-        List<Action<T1, T2, T3>> actions;
+        List<Action<T1, T2, T3>> actions = new List<Action<T1, T2, T3>>();
 
         public void AddListener(Action<T1, T2, T3> action)
         {
