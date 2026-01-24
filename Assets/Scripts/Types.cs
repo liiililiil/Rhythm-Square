@@ -29,13 +29,6 @@ namespace Types
         public float sfxVolume;
     }
 
-    // 적응형 음악을 위한 음악 파트 나누기
-    public struct MusicPart
-    {
-        public FloatRange startAt;
-        public FloatRange loop;
-        public FloatRange endAt;
-    }
 
     // 실수 범위
     public struct FloatRange
@@ -44,7 +37,6 @@ namespace Types
         public float end;
     }
 
-    
 
 
 
