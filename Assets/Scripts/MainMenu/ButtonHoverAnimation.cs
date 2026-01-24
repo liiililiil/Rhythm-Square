@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Utils;
-using Easeing;
+using Easing;
 
 public class ButtonHoverAnimation : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
@@ -38,15 +38,15 @@ public class ButtonHoverAnimation : MonoBehaviour, IPointerEnterHandler, IPointe
     public void OnPointerEnter(PointerEventData eventData)
     {
         //마우스가 버튼 위에 있을 때 애니메이션 재생
-        this.SafeStartCoroutine(barScaleCoroutine, SetBarScale(NORMAL_Y_SIZE, ON_HOVER_Y_SIZE, 0.2f, EASE_TYPE));
-        this.SafeStartCoroutine(textPositionCoroutine, SetTextPosition(NORMAL_TEXT_X_POS, ON_HOVER_TEXT_X_POS, 0.2f, EASE_TYPE));
+        this.SafeStartCoroutine(ref barScaleCoroutine, SetBarScale(NORMAL_Y_SIZE, ON_HOVER_Y_SIZE, 0.2f, EASE_TYPE));
+        this.SafeStartCoroutine(ref textPositionCoroutine, SetTextPosition(NORMAL_TEXT_X_POS, ON_HOVER_TEXT_X_POS, 0.2f, EASE_TYPE));
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         //마우스가 버튼에서 벗어났을 때 애니메이션 재생
-        this.SafeStartCoroutine(barScaleCoroutine, SetBarScale(ON_HOVER_Y_SIZE, NORMAL_Y_SIZE, 0.2f, EASE_TYPE));
-        this.SafeStartCoroutine(textPositionCoroutine, SetTextPosition(ON_HOVER_TEXT_X_POS, NORMAL_TEXT_X_POS, 0.2f, EASE_TYPE));
+        this.SafeStartCoroutine(ref barScaleCoroutine, SetBarScale(ON_HOVER_Y_SIZE, NORMAL_Y_SIZE, 0.2f, EASE_TYPE));
+        this.SafeStartCoroutine(ref textPositionCoroutine, SetTextPosition(ON_HOVER_TEXT_X_POS, NORMAL_TEXT_X_POS, 0.2f, EASE_TYPE));
 
     }
 
@@ -70,7 +70,7 @@ public class ButtonHoverAnimation : MonoBehaviour, IPointerEnterHandler, IPointe
         }
 
         rt.SetTopBottom(end, end);
-        this.SafeStopCoroutine(barScaleCoroutine);
+        this.SafeStopCoroutine(ref barScaleCoroutine);
     }
 
     IEnumerator SetTextPosition(float start, float end, float duration, EaseType easeType)
@@ -94,7 +94,7 @@ public class ButtonHoverAnimation : MonoBehaviour, IPointerEnterHandler, IPointe
 
         rt.SetPosX(end);
 
-        this.SafeStopCoroutine(textPositionCoroutine);
+        this.SafeStopCoroutine(ref textPositionCoroutine);
     }
     
 
