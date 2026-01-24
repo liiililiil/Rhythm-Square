@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Mach Roger
+  m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
+  m_GroupName: Mach Roger
+  m_GUID: bf7ed04d1ea0444428a0699d82c1411d
+  m_SerializeEntries:
+  - m_GUID: 3ed515772a26047469843f1af7e35184
+    m_Address: Assets/Audio/Music/Mach Roger.wav
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Music
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 46a61c2a556134c4e814fab0abc0e2d5
+    m_Address: Assets/Sprites/MusicTitle/Mach Roger.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - MusicTitle
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 73ecec2544eade146a9b398e9a6527a5
+    m_Address: Assets/Audio/MusicObject/Mach Roger.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - MusicObject
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 3bb385a73fe80c94fbacc8b780355829, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 6550b38d68047204a85d66326b654290, type: 2}
+    - {fileID: 11400000, guid: 7d2451be40b16d54ea20431f21e34776, type: 2}

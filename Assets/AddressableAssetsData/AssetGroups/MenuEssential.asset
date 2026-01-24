@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: MenuEssential
+  m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
+  m_GroupName: MenuEssential
+  m_GUID: 21131b92d6a2d3e4abf5379ca3fa9cfe
+  m_SerializeEntries:
+  - m_GUID: 923955235dc07114192e88b10e79beea
+    m_Address: Assets/Sprites/SVGs/PlayerIcon.svg
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c878f45d4272cb942961c67831a84ae0
+    m_Address: Assets/Sprites/SVGs/Modern Arrow Four Way.svg
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d4660eb3c99bacc4daee8e16df18034e
+    m_Address: Assets/Sprites/SVGs/Fill Box.svg
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 3bb385a73fe80c94fbacc8b780355829, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: bd02bc3ba4e0de34b9d26c381505077a, type: 2}
+    - {fileID: 11400000, guid: 68d73a9edb6b5354784715f5db3b6dcd, type: 2}

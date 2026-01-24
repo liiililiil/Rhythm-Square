@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 468a46d0ae32c3544b7d98094e6448a9, type: 3}
   m_Name: AddressableAssetSettings
   m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetSettings
-  m_DefaultGroup: c9f8fbef54f11e549a4270d7e6a6efb2
+  m_DefaultGroup: 42352ccc3da452b43a874cc576dd636f
   m_currentHash:
     serializedVersion: 2
-    Hash: 93bb36b3421205b00ff32a7873fd817a
+    Hash: 00000000000000000000000000000000
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 0
   m_CatalogRequestsTimeout: 0
@@ -24,11 +24,11 @@ MonoBehaviour:
   m_InternalBundleIdMode: 1
   m_AssetLoadMode: 0
   m_BundledAssetProviderType:
-    m_AssemblyName: Unity.ResourceManager, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-    m_ClassName: UnityEngine.ResourceManagement.ResourceProviders.BundledAssetProvider
+    m_AssemblyName: 
+    m_ClassName: 
   m_AssetBundleProviderType:
-    m_AssemblyName: Unity.ResourceManager, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-    m_ClassName: UnityEngine.ResourceManagement.ResourceProviders.AssetBundleProvider
+    m_AssemblyName: 
+    m_ClassName: 
   m_IgnoreUnsupportedFilesInBuild: 0
   m_UniqueBundleIds: 0
   m_EnableJsonCatalog: 0
@@ -60,48 +60,53 @@ MonoBehaviour:
   m_BuildAddressablesWithPlayerBuild: 0
   m_overridePlayerVersion: '[UnityEditor.PlayerSettings.bundleVersion]'
   m_GroupAssets:
-  - {fileID: 11400000, guid: 32e0244810d874d40b8b9aeb7ac6a7d2, type: 2}
-  - {fileID: 11400000, guid: 57564fe78d5518749a4a4f648fcdb0c1, type: 2}
+  - {fileID: 11400000, guid: ec8d9f11d921c1b4ebc7bafbfa8c2dfb, type: 2}
+  - {fileID: 11400000, guid: 9f3bdbcd0675f7041af1dca8d206b93f, type: 2}
+  - {fileID: 11400000, guid: aca79a144cba10d48ad0124a4c3409fd, type: 2}
+  - {fileID: 11400000, guid: 1142c9c456892e04a885654ca7372f0c, type: 2}
+  - {fileID: 11400000, guid: 11239cbef2e5db948aa701989e3717f1, type: 2}
   m_BuildSettings:
     m_LogResourceManagerExceptions: 1
     m_BundleBuildPath: Temp/com.unity.addressables/AssetBundles
   m_ProfileSettings:
     m_Profiles:
     - m_InheritedParent: 
-      m_Id: a84e73d96e63a8f419af920285b0653e
+      m_Id: 96dd4e9c219332f4cafe97aab9c5da21
       m_ProfileName: Default
       m_Values:
-      - m_Id: 19d8a76900ff111458ceab4e7af0d500
-        m_Value: '[UnityEngine.AddressableAssets.Addressables.BuildPath]/[BuildTarget]'
-      - m_Id: 237230d9df21d9a419b1cd8d398bbd69
-        m_Value: <undefined>
-      - m_Id: 25a03088395cbde4eb66d22a6c016595
+      - m_Id: 0b55644bb6732414aa3c2f87f2c0f315
         m_Value: 'ServerData/[BuildTarget]'
-      - m_Id: 33679809fb845e14fa52b1e333e1a090
-        m_Value: '[UnityEditor.EditorUserBuildSettings.activeBuildTarget]'
-      - m_Id: 6e563f41510d6044281ad01c0c96736b
+      - m_Id: 2b58391ccdc95bb4fadabe09f50b55c6
+        m_Value: <undefined>
+      - m_Id: 3fea586d40bcfa04986184eb03fcae86
+        m_Value: '[UnityEngine.AddressableAssets.Addressables.BuildPath]/[BuildTarget]'
+      - m_Id: e928610d349f1b945ae39b27a2c507d7
         m_Value: '{UnityEngine.AddressableAssets.Addressables.RuntimePath}/[BuildTarget]'
+      - m_Id: fc52adb933c9d0748818cff702c66310
+        m_Value: '[UnityEditor.EditorUserBuildSettings.activeBuildTarget]'
     m_ProfileEntryNames:
-    - m_Id: 19d8a76900ff111458ceab4e7af0d500
-      m_Name: Local.BuildPath
-      m_InlineUsage: 0
-    - m_Id: 237230d9df21d9a419b1cd8d398bbd69
-      m_Name: Remote.LoadPath
-      m_InlineUsage: 0
-    - m_Id: 25a03088395cbde4eb66d22a6c016595
+    - m_Id: 0b55644bb6732414aa3c2f87f2c0f315
       m_Name: Remote.BuildPath
       m_InlineUsage: 0
-    - m_Id: 33679809fb845e14fa52b1e333e1a090
-      m_Name: BuildTarget
+    - m_Id: 2b58391ccdc95bb4fadabe09f50b55c6
+      m_Name: Remote.LoadPath
       m_InlineUsage: 0
-    - m_Id: 6e563f41510d6044281ad01c0c96736b
+    - m_Id: 3fea586d40bcfa04986184eb03fcae86
+      m_Name: Local.BuildPath
+      m_InlineUsage: 0
+    - m_Id: e928610d349f1b945ae39b27a2c507d7
       m_Name: Local.LoadPath
+      m_InlineUsage: 0
+    - m_Id: fc52adb933c9d0748818cff702c66310
+      m_Name: BuildTarget
       m_InlineUsage: 0
     m_ProfileVersion: 1
   m_LabelTable:
     m_LabelNames:
     - default
-    - PlayableSongs
+    - MusicObject
+    - Music
+    - MusicTitle
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: df03c84c57ff522418aa503cb2c1cafc, type: 2}
@@ -114,4 +119,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cb3f155459d27fc46a57a3ed49bf4914, type: 2}
   - {fileID: 11400000, guid: 4b15408f450c11d4ea190859da40d6b1, type: 2}
   - {fileID: 11400000, guid: eaef82ac93632e14e86485a8764c64fb, type: 2}
-  m_ActiveProfileId: a84e73d96e63a8f419af920285b0653e
+  m_ActiveProfileId: 96dd4e9c219332f4cafe97aab9c5da21

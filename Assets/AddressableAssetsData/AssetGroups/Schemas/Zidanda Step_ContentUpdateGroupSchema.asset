@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5834b5087d578d24c926ce20cd31e6d6, type: 3}
-  m_Name: Packed Assets_ContentUpdateGroupSchema
+  m_Name: Zidanda Step_ContentUpdateGroupSchema
   m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.GroupSchemas.ContentUpdateGroupSchema
-  m_Group: {fileID: 11400000, guid: 32e0244810d874d40b8b9aeb7ac6a7d2, type: 2}
+  m_Group: {fileID: 11400000, guid: aca79a144cba10d48ad0124a4c3409fd, type: 2}
   m_StaticContent: 0

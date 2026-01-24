@@ -12,8 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b61e54665d8e4cb4687103f4fa795464, type: 3}
   m_Name: Mach Roger
   m_EditorClassIdentifier: Assembly-CSharp::Music
-  audioClip: {fileID: 8300000, guid: 3ed515772a26047469843f1af7e35184, type: 3}
+  audioClip:
+    m_AssetGUID: 3ed515772a26047469843f1af7e35184
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
   sprite: {fileID: 424836421422347277, guid: 46a61c2a556134c4e814fab0abc0e2d5, type: 3}
   title: Mach Roger
-  bpm: 180
   artist: MYUKKE.
+  bpm: 180
