@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Utils;
+using Easeing;
 
 public class ButtonHoverAnimation : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
