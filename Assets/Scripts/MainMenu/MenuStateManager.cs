@@ -2,7 +2,7 @@ using UnityEngine;
 
 
 
-public class MainMenuManager : MonoBehaviour
+public class MenuStateManager : MonoBehaviour
 {
     
     public void ChangeMenuState(int newState)
