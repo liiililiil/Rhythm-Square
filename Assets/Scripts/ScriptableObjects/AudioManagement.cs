@@ -28,7 +28,7 @@ namespace AudioManagement
     [CreateAssetMenu(fileName = "EmptyPlayableMusic", menuName = "AudioAssets/New Playable Music")]
     public class PlayableMusic : ScriptableObject
     {
-        public Music music;
+        public AssetReferenceT<Music> music;
         public int difficultyLevel;
 
         public float previewStartTime;
