@@ -2,7 +2,7 @@ using System;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-namespace Easeing
+namespace Easing
 {
     [Serializable]
     public enum EaseType
