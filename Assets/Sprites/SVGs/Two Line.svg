@@ -1,0 +1,6 @@
+<svg width="300mm" height="300mm" version="1.1" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+ <g fill="#fff" stroke-width=".26458">
+  <path d="m0 40h300v20h-300"/>
+  <path d="m300 260h-300v-20h300"/>
+ </g>
+</svg>

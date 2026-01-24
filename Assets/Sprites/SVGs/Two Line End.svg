@@ -1,0 +1,7 @@
+<svg width="300mm" height="300mm" version="1.1" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+ <g fill="#fff" stroke-width=".26458">
+  <path d="m280 40-80 220h20l80-220"/>
+  <path d="m290 40-10 20h-280v-20"/>
+  <path d="m210 260v-20h-210v20"/>
+ </g>
+</svg>
