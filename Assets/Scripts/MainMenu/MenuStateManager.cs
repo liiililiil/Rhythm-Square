@@ -10,6 +10,11 @@ public class MenuStateManager : Managers<MenuStateManager>
     private void Awake() {
         Singleton(false);
     }
+
+    private void Start() 
+    {
+        ChangeMenuState(MenuState.Main);   
+    }
     
     //메뉴 변경(버튼 용)
     public void ChangeMenuState(int newState)
