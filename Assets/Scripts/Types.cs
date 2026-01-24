@@ -1,5 +1,6 @@
 namespace Types
 {
+    // 메뉴 상태들
     public enum MenuState
     {
         //초기 설정 로딩
@@ -20,6 +21,15 @@ namespace Types
         //제작자
         Credits
     }
+
+    // 설정
+    public struct Settings
+    {
+        public float musicVolume;
+        public float sfxVolume;
+    }
+
+    
 
 
 
