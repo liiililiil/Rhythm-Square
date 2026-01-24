@@ -28,15 +28,15 @@ namespace Utils
     public static class CoroutineExtensions
     {
         // 이전 코루틴을 멈추고 새 코루틴 시작
-        public static void SafeStartCoroutine(this MonoBehaviour mb, Coroutine coroutine, IEnumerator enumerator)
+        public static void SafeStartCoroutine(this MonoBehaviour mb,ref Coroutine coroutine, IEnumerator enumerator)
         {
-            mb.SafeStopCoroutine(coroutine);
+            mb.SafeStopCoroutine(ref coroutine);
 
             coroutine = mb.StartCoroutine(enumerator);
         }
 
         // 코루틴 멈추기
-        public static void SafeStopCoroutine(this MonoBehaviour mb, Coroutine coroutine)
+        public static void SafeStopCoroutine(this MonoBehaviour mb,ref Coroutine coroutine)
         {
             if(coroutine != null)
             {
