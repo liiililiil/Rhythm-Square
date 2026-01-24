@@ -1,16 +1,18 @@
 using UnityEngine;
 
-public class MenuMusicManager : MonoBehaviour
+public class MenuMusicManager : Managers<MenuMusicManager>
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public AudioSource audioSource;
+
+    private void Awake()
     {
-        
+        Singleton(false);
+
+        if(audioSource == null)
+        {
+            audioSource = GetComponent<AudioSource>();
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }
