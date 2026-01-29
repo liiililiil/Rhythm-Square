@@ -3,6 +3,28 @@ using UnityEngine;
 
 namespace Utils
 {
+    public static class Temps{
+        /// <summary>
+        /// 임시!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        /// 메뉴의 비트 당 시간
+        /// </summary>
+
+        public const float BPM_TO_SEC = 60f / 130f;
+    }
+
+    public static class Vector2Utils
+    {
+        public static Vector2 FloatToVector2(float value)
+        {
+            return new Vector2(value,value);
+        }
+
+        public static Vector3 FloatToVector3(float value)
+        {
+            return new Vector3(value, value, value);
+        }
+    }
+
     public static class RectTransformExtensions
     {
         public static void SetTopBottom(this RectTransform rt, float top, float bottom)
