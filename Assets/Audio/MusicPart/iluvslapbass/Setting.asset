@@ -16,8 +16,8 @@ MonoBehaviour:
     start: 35.57
     end: 36.99
   loop:
-    start: 36.99
-    end: 62
+    start: 36.97
+    end: 48.045
   endAt:
     start: 64.7
     end: 66.5

@@ -16,8 +16,8 @@ MonoBehaviour:
     start: 94.2
     end: 96.1
   loop:
-    start: 96.1
-    end: 107.17
+    start: 96.06
+    end: 103.44
   endAt:
     start: 109.9
     end: 112
