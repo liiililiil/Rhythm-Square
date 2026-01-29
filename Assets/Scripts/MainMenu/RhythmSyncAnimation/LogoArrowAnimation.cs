@@ -17,14 +17,28 @@ public class LogoArrowAnimation : MonoBehaviour
     
     float t;
 
+    [SerializeField]
+    EaseType easeType;
+
 
     void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
     }
 
-    private void Start() {
+    private void OnEnable()
+    {
         MenuMusicManager.Instance.invokeBeat.AddListener(NextStep);
+    }
+
+    private void OnDisable()
+    {
+        MenuMusicManager.Instance.invokeBeat.RemoveListener(NextStep);
+        
+        elapsed = 0;
+        t = 0;
+
+        rectTransform.eulerAngles = Vector2.zero;
     }
 
     void Update()
@@ -39,7 +53,7 @@ public class LogoArrowAnimation : MonoBehaviour
         }
 
         t = elapsed / Temps.BPM_TO_SEC;
-        t = Ease.Easing(t,EaseType.OutSine);
+        t = Ease.Easing(t,easeType);
 
         SetRectTranform(t);
     }
@@ -49,14 +63,14 @@ public class LogoArrowAnimation : MonoBehaviour
     {
 
         //크기
-        float sizeDelta = Mathf.Lerp(1.2f,1f,t);
+        float sizeDelta = Mathf.LerpUnclamped(1.2f,1f,t);
 
         rectTransform.localScale = Vector2Utils.FloatToVector2(sizeDelta);
 
         //각도
         Vector3 rotation = rectTransform.eulerAngles;
 
-        rotation.z = Mathf.Lerp(step * 90, (step+1) * 90, t);
+        rotation.z = Mathf.LerpUnclamped(step * 90, (step+1) * 90, t);
         rectTransform.eulerAngles = rotation; 
     }
 
@@ -64,6 +78,8 @@ public class LogoArrowAnimation : MonoBehaviour
     {
         elapsed = 0;
         step += 1;
+
+        step %= 4;
     }
 
 }
