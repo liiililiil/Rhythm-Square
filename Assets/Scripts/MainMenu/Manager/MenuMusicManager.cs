@@ -4,7 +4,9 @@ using System.Collections;
 using AudioManagement;
 using Utils;
 using Types;
-using Easing;
+using SimpleEasing;
+using SimpleActions;
+
 public class MenuMusicManager : Managers<MenuMusicManager>
 {
     [SerializeField]
@@ -13,24 +15,16 @@ public class MenuMusicManager : Managers<MenuMusicManager>
     [SerializeField]
     private AudioSource audioSourceTwo;
 
-    private bool isAudioSourceOne = false;
-
-    private AudioSource audioSource
-    {
-        get => isAudioSourceOne ? audioSourceOne : audioSourceTwo;
-        set
-        {
-            if (isAudioSourceOne)
-                audioSourceOne = value;
-            else
-                audioSourceTwo = value;
-        }
-    }
+    private AudioSource audioSource;
+    private AudioSource otherSource;
     
-
+    
+    //음악
     [Space(10), SerializeField]
     private Music menuMusic;
 
+    
+    //각 메뉴 상태별 음악 위치
     [Space(10), SerializeField]
     private MusicPart main;
     [SerializeField]
@@ -38,28 +32,46 @@ public class MenuMusicManager : Managers<MenuMusicManager>
     [SerializeField]
     private MusicPart credits;
     [SerializeField]
-    private MusicPart exitWarning;
-    
-    [Space(10), SerializeField]
+    private MusicPart exitWarning;  
+
+    //노래 부분 기록
     private MusicPart currentPart;
-    [SerializeField]
     private MusicPart previousPart;
 
+    //현재 메뉴 기록
     private MenuState previousMenuState;
-
     private MenuState currentMenuState;
 
+
+    [SerializeField]
     private bool isFading = false;
 
+    // 노래 관리용 코루틴
     private Coroutine coroutine;
     private Coroutine sourceCoroutine;
 
-    private const float SOURCE_FADE_DURATION = 0.5f;
+    // 박자 마다 실행되는 이벤트
+    public SimpleEvent invokeBeat = new SimpleEvent();
+
+    // 다음 박자
+    [SerializeField]
+    private float nextBeat;
+
+    // 오디오 소스 교체 시간
+    private const float SOURCE_FADE_DURATION = 1f;
 
 
 
     private void Awake()
     {
+
+        //기초 설정
+        audioSource = audioSourceOne;
+        otherSource = audioSourceTwo;
+
+        currentPart = main;
+        previousPart = main;
+
         Singleton(false);
     }
 
@@ -71,6 +83,8 @@ public class MenuMusicManager : Managers<MenuMusicManager>
     private void Update()
     {
 
+        AudioLoop();
+        BeatDetection();
 
     }
 
@@ -82,7 +96,8 @@ public class MenuMusicManager : Managers<MenuMusicManager>
             {
                 if(audioSource.time >= currentPart.loop.end)
                 {
-                    audioSource.time = currentPart.loop.start;
+                    audioSource.time -= currentPart.loop.end - currentPart.loop.start;
+                    BeatTimeCorrection();
                 }
             } 
         } catch
@@ -91,9 +106,22 @@ public class MenuMusicManager : Managers<MenuMusicManager>
         }
     }
 
+    private void BeatDetection()
+    {
+        if(audioSource.time >= nextBeat)
+        {
+            invokeBeat.Invoke();
+            nextBeat +=  Temps.BPM_TO_SEC;
+        }
+    }
     private void SourceChange()
     {
-        isAudioSourceOne = !isAudioSourceOne;
+
+        //오디오 스왑
+        AudioSource temp = audioSource;
+        audioSource = otherSource;
+        otherSource = temp;
+
 
         audioSource.volume = 1;
         audioSource.Play();
@@ -106,9 +134,8 @@ public class MenuMusicManager : Managers<MenuMusicManager>
     private IEnumerator SourceSlowChange()
     {
 
-        AudioSource other = isAudioSourceOne ? audioSourceTwo : audioSourceOne;
         float elapsed = 0;
-        float otherVolume = other.volume;
+        float otherVolume = otherSource.volume;
 
 
         while(elapsed <= SOURCE_FADE_DURATION)
@@ -116,19 +143,24 @@ public class MenuMusicManager : Managers<MenuMusicManager>
             elapsed += Time.deltaTime;
             float t = Mathf.Clamp01(elapsed / SOURCE_FADE_DURATION);
 
-            t = Ease.Easing(EaseType.OutQuint, t);
+            t = Ease.Easing(t, EaseType.Linear);
 
             audioSource.volume = Mathf.Lerp(0, SettingManager.Instance.setting.musicVolume, t);
-            other.volume = Mathf.Lerp(otherVolume, 0, t);
+            otherSource.volume = Mathf.Lerp(otherVolume, 0, t);
 
             yield return null;
         }
 
         audioSource.volume = SettingManager.Instance.setting.musicVolume;
-        other.Stop();
+        otherSource.Stop();
 
         this.SafeStopCoroutine(ref sourceCoroutine);
     }
+
+    private void BeatTimeCorrection(){
+        nextBeat = Mathf.Floor(audioSource.time / Temps.BPM_TO_SEC + 1f) * Temps.BPM_TO_SEC;
+    }
+
 
 
     
@@ -140,70 +172,40 @@ public class MenuMusicManager : Managers<MenuMusicManager>
         previousMenuState = currentMenuState;
         currentMenuState = newState;
         
-        bool isSkipFading = false;
-        bool isSkipStart = false;
-
-        // Debug.Log(previousMenuState);
-        
-        if(previousMenuState == MenuState.ExitWarning || currentMenuState == MenuState.ExitWarning) isSkipFading = true;
-
         switch(newState)
         {
             case Types.MenuState.Main:
-                if(previousMenuState != MenuState.MainWaitng) isSkipStart = true;
-                if(previousMenuState == MenuState.ExitWarning) isSkipStart = false;
+                GoToPart(main);
+                break;
 
-                this.SafeStartCoroutine(ref coroutine, FadeToPart(main, isSkipStart, isSkipFading));
-                break;
             case Types.MenuState.Setting:
-                if(previousMenuState == MenuState.Main) isSkipFading = true;
-                
-                this.SafeStartCoroutine(ref coroutine, FadeToPart(setting, isSkipStart, isSkipFading));
+                GoToPart(setting);
                 break;
+
             case Types.MenuState.Credits:
-                this.SafeStartCoroutine(ref coroutine, FadeToPart(credits));
+                GoToPart(credits);
                 break;
             case Types.MenuState.ExitWarning:
-                this.SafeStartCoroutine(ref coroutine, FadeToPart(exitWarning, isSkipStart, isSkipFading));
+                GoToPart(exitWarning);
                 break;
             
         }
+
     }
 
-    private IEnumerator FadeToPart(MusicPart newPart,bool isSkipStart = false, bool isSkipFade = false)
+        private void GoToPart(MusicPart newPart)
     {
         previousPart = currentPart;
         currentPart = newPart;
 
-        if (!isSkipFade)
-        {
-            isFading = true;
+        float delta = currentPart.loop.start - previousPart.loop.start;
+        float targetTime = otherSource.time+ delta;
 
-            audioSource.time = previousPart.endAt.start; 
-            while(audioSource.time <= previousPart.endAt.end)
-            {
-                yield return null;
-            }
+        targetTime = currentPart.loop.start + Mathf.Repeat(targetTime - currentPart.loop.start, currentPart.loop.end - currentPart.loop.start);
 
-            isFading = false; 
+        audioSource.time =  targetTime;
+        BeatTimeCorrection();
 
-
-        }
-
-        if(!isSkipStart)
-        {
-            audioSource.time = currentPart.startAt.start;
-        }
-        else
-        {
-            audioSource.time = currentPart.loop.start;
-        }
-        
-
-        this.SafeStopCoroutine(ref coroutine);
-
-
+        isFading = false; 
     }
-
-
 }
