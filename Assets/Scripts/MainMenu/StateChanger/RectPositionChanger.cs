@@ -2,16 +2,16 @@ using UnityEngine;
 using Types;
 using MainMenu.StateChanger;
 using System.Collections;
-using Easing;
+using SimpleEasing;
 using Utils;
 
 
 public class RectPositionChanger : StateChanger
 {
     [SerializeField]
-    private MenuStateChange<Vector2>[] positionState;
+    private SlowMenuStateChange<Vector2>[] stateChange;
     [SerializeField]
-    private MenuStateDefault<Vector2> defaultPosition;
+    private SlowMenuStateDefault<Vector2> stateDefault;
 
     private RectTransform rectTransform;
 
@@ -23,17 +23,17 @@ public class RectPositionChanger : StateChanger
 
     protected override void OnInvoke(MenuState newState)
     {
-        foreach(var stateChange in positionState)
+        foreach(var stateChange in stateChange)
         {
-            if(stateChange.TargetState == newState)
+            if(stateChange.targetState == newState)
             {
-                this.SafeStartCoroutine(ref coroutine, ChangePositionCoroutine(stateChange.Value, stateChange.Duration, stateChange.EaseType));
+                this.SafeStartCoroutine(ref coroutine, ChangePositionCoroutine(stateChange.value, stateChange.duration, stateChange.easeType));
                 return;
             }
         }
 
         //기본값으로 변경
-        this.SafeStartCoroutine(ref coroutine, ChangePositionCoroutine(defaultPosition.Value, defaultPosition.Duration, defaultPosition.EaseType));
+        this.SafeStartCoroutine(ref coroutine, ChangePositionCoroutine(stateDefault.value, stateDefault.duration, stateDefault.easeType));
     }
 
     IEnumerator ChangePositionCoroutine(Vector2 targetPos, float duration, EaseType easeType)
@@ -45,7 +45,7 @@ public class RectPositionChanger : StateChanger
         {
             elapsed += Time.deltaTime;
             float t = Mathf.Clamp01(elapsed / duration);
-            t = Ease.Easing(easeType, t);
+            t = Ease.Easing(t, easeType);
 
             rectTransform.anchoredPosition = Vector2.LerpUnclamped(startPos, targetPos, t);
 

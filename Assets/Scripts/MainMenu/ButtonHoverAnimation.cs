@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Utils;
-using Easing;
+using SimpleEasing;
 
 public class ButtonHoverAnimation : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
@@ -60,7 +60,7 @@ public class ButtonHoverAnimation : MonoBehaviour, IPointerEnterHandler, IPointe
         {
             elapsed += Time.deltaTime;
             float t = Mathf.Clamp01(elapsed / duration);
-            t = Ease.Easing(easeType, t);
+            t = Ease.Easing(t, easeType);
 
             float newY = Mathf.Lerp(start, end, t);
 
@@ -82,7 +82,7 @@ public class ButtonHoverAnimation : MonoBehaviour, IPointerEnterHandler, IPointe
         {
             elapsed += Time.deltaTime;
             float t = Mathf.Clamp01(elapsed / duration);
-            t = Ease.Easing(easeType, t);
+            t = Ease.Easing(t, easeType);
 
             float newX = Mathf.Lerp(start, end, t);
 
