@@ -56,8 +56,9 @@ namespace SimpleActions
                 {
                     actions[i].Invoke(param);
                 }
-                catch (NullReferenceException)
+                catch (NullReferenceException ex)
                 {
+                    UnityEngine.Debug.LogWarning($"Some Action Was delete : {ex}");
                     actions.RemoveAt(i);
                 }
             }
