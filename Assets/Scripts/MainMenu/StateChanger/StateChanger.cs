@@ -1,33 +1,62 @@
 using Types;
 using UnityEngine;
-using Easing;
+using SimpleEasing;
+using System;
 
 
 namespace MainMenu.StateChanger
 {
-    // 메뉴 상태에 따른 변화
     [System.Serializable]
-    public struct MenuStateChange<T>
+    public abstract class StateChange<T>
     {
-        public MenuState TargetState;
-        public T Value;
-        public float Duration;
-        public EaseType EaseType;
+        public T value;
+    }
+
+    [System.Serializable]
+    public abstract class MenuStateChange<T> : StateChange<T>
+    {
+        public MenuState targetState;
+
+    }
+
+    public abstract class MenuStateDefault<T> : StateChange<T>
+    {
+    }
+
+    // 즉시 실행되는 목록
+    [System.Serializable]
+    public class InstantMenuStateChange<T> : MenuStateChange<T>
+    {
     }
 
     // 기본
     [System.Serializable]
-    public struct MenuStateDefault<T>
+    public class InstantMenuStateDefault<T> : MenuStateDefault<T>
     {
-        public T Value;
-        public float Duration;
-        public EaseType EaseType;
+    }
+
+
+    // 느리게 실행되는 목록
+    [System.Serializable]
+    public class SlowMenuStateChange<T> : MenuStateChange<T>
+    {
+        public float duration;
+        public EaseType easeType;
+    }
+
+    // 기본
+    [System.Serializable]
+    public class SlowMenuStateDefault<T> : MenuStateDefault<T>
+    {
+        public float duration;
+        public EaseType easeType;
     }
 
 
 
     public abstract class StateChanger : MonoBehaviour
-    {
+    {    
+        
         protected void Start() 
         {
             MenuStateManager.Instance.onMenuStateChanged.AddListener(OnInvoke);
