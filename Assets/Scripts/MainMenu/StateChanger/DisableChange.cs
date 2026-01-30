@@ -12,20 +12,35 @@ public class DisableChange : StateChanger
     
     protected override void OnInvoke(MenuState newState)
     {
+        ChangeState(stateDefault, true);
+
         foreach(var stateChange in stateChange)
         {
             if(stateChange.targetState == newState)
             {
-                stateChange.value.enabled = false;
+                ChangeState(stateChange, false);
                 return;
             }
             else
             {
-                stateChange.value.enabled = true;
+                ChangeState(stateChange, true);
             }
         }
 
         //기본값으로 변경
-        stateDefault.value.enabled = false;
+        ChangeState(stateDefault, false);
+    }
+
+    // null 감지 가능한 값 변경 함수
+    private void ChangeState(StateChange<MonoBehaviour> targetStateChange, bool value)
+    {
+        if(targetStateChange.value == null)
+        {
+            Debug.LogWarning($"state에 지정된 Action이 없어 무시되었습니다.",this);
+        }
+            else
+        {
+            targetStateChange.value.enabled = value;
+        }
     }
 }
