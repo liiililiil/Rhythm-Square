@@ -58,7 +58,7 @@ namespace SimpleActions
                 }
                 catch (NullReferenceException ex)
                 {
-                    UnityEngine.Debug.LogWarning($"Some Action Was delete : {ex}");
+                    UnityEngine.Debug.LogWarning($"Some Action Was delete : {ex.Message}");
                     actions.RemoveAt(i);
                 }
             }

@@ -7,6 +7,7 @@ using SimpleEasingConfig;
 
 namespace SimpleEasingDisplay
 {
+    #if UNITY_EDITOR
     [CustomPropertyDrawer(typeof(EaseType))]
     public class EasingTypeDrawer : PropertyDrawer
     {
@@ -133,4 +134,5 @@ namespace SimpleEasingDisplay
             );
         }
     }
+    #endif
 }
