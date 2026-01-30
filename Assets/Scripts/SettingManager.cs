@@ -7,6 +7,6 @@ public class SettingManager : Managers<SettingManager>
         Singleton();
     }
     private void Start() {
-        setting.musicVolume = 1;
+        setting.musicVolume = 0.6f;
     }
 }
