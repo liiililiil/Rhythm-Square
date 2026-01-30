@@ -17,6 +17,8 @@ public class RectPositionChanger : StateChanger
 
     private Coroutine coroutine;
 
+    private Vector2 currentPosition;
+
     private void Awake() {
         rectTransform = GetComponent<RectTransform>();
     }
@@ -27,13 +29,22 @@ public class RectPositionChanger : StateChanger
         {
             if(stateChange.targetState == newState)
             {
-                this.SafeStartCoroutine(ref coroutine, ChangePositionCoroutine(stateChange.value, stateChange.duration, stateChange.easeType));
+                ChangePosition(stateChange.value, stateChange.duration, stateChange.easeType);
                 return;
             }
         }
 
+        ChangePosition(stateDefault.value, stateDefault.duration, stateDefault.easeType);
+    }
+
+    private void ChangePosition(Vector2 targetVector, float duration, EaseType easeType)
+    {
+        //이동하려는 위치와 현재 위치가 같으면 무시
+        if(currentPosition == targetVector) return;
+        currentPosition = targetVector;
+
         //기본값으로 변경
-        this.SafeStartCoroutine(ref coroutine, ChangePositionCoroutine(stateDefault.value, stateDefault.duration, stateDefault.easeType));
+        this.SafeStartCoroutine(ref coroutine, ChangePositionCoroutine(targetVector, duration, easeType));
     }
 
     IEnumerator ChangePositionCoroutine(Vector2 targetPos, float duration, EaseType easeType)
