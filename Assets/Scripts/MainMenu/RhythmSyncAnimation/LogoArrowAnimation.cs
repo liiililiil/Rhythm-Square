@@ -2,19 +2,13 @@ using UnityEngine;
 
 using SimpleEasing;
 using Utils;
+using RhythmSqaureUtils;
 
 public class LogoArrowAnimation : MonoBehaviour
 {
     RectTransform rectTransform;
 
-    [SerializeField]
-    int step = 0;
-
-    [SerializeField]
     float elapsed = 0;
-
-    [SerializeField]
-    
     float t;
 
     [SerializeField]
@@ -26,25 +20,25 @@ public class LogoArrowAnimation : MonoBehaviour
         rectTransform = GetComponent<RectTransform>();
     }
 
-    private void OnEnable()
+    private void Start()
     {
-        MenuMusicManager.Instance.invokeBeat.AddListener(NextStep);
+        MenuMusicManager.Instance.OnBeat.AddListener(NextStep);
     }
 
-    private void OnDisable()
-    {
-        MenuMusicManager.Instance.invokeBeat.RemoveListener(NextStep);
-        
-        elapsed = 0;
-        t = 0;
-
-        rectTransform.eulerAngles = Vector2.zero;
-    }
 
     void Update()
     {
-        elapsed += Time.deltaTime;
+        // 특정 박자 마다 조금 느리게 시간 흐르기
+        if((MenuMusicManager.Instance.beat - (Consts.SIGNATURE * 4)) % (Consts.SIGNATURE * 8) >= 30)
+        {
+            elapsed += Time.deltaTime / 2;
+        }
+        else
+        {    
+            elapsed += Time.deltaTime;
+        }
 
+        // 재생이 완료되면
         if(elapsed >= Temps.BPM_TO_SEC)
         {
             //보정
@@ -52,9 +46,11 @@ public class LogoArrowAnimation : MonoBehaviour
             return;
         }
 
+        // 정규화 후 Easing
         t = elapsed / Temps.BPM_TO_SEC;
         t = Ease.Easing(t,easeType);
 
+        // Eased 값을 가지고 크기와 회전 제어
         SetRectTranform(t);
     }
 
@@ -64,22 +60,22 @@ public class LogoArrowAnimation : MonoBehaviour
 
         //크기
         float sizeDelta = Mathf.LerpUnclamped(1.2f,1f,t);
-
         rectTransform.localScale = Vector2Utils.FloatToVector2(sizeDelta);
 
         //각도
         Vector3 rotation = rectTransform.eulerAngles;
 
-        rotation.z = Mathf.LerpUnclamped(step * 90, (step+1) * 90, t);
+        rotation.z = Mathf.LerpUnclamped(MenuMusicManager.Instance.beat * 90, (MenuMusicManager.Instance.beat +1) * 90, t);
         rectTransform.eulerAngles = rotation; 
     }
 
     private void NextStep()
     {
-        elapsed = 0;
-        step += 1;
-
-        step %= 4;
+        
+        if((MenuMusicManager.Instance.beat - (Consts.SIGNATURE * 4)) % 32 != 30)
+        {
+            elapsed = 0;
+        }
     }
 
 }
