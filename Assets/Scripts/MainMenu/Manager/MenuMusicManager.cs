@@ -38,24 +38,24 @@ public class MenuMusicManager : Managers<MenuMusicManager>
     private MusicPart currentPart;
     private MusicPart previousPart;
 
-    //현재 메뉴 기록
-    private MenuState previousMenuState;
-    private MenuState currentMenuState;
-
-
-    [SerializeField]
-    private bool isFading = false;
 
     // 노래 관리용 코루틴
     private Coroutine coroutine;
     private Coroutine sourceCoroutine;
 
     // 박자 마다 실행되는 이벤트
-    public SimpleEvent invokeBeat = new SimpleEvent();
+    public SimpleEvent OnBeat = new SimpleEvent();
+
+    //박자 변경되면 실행되는 이벤트
+    public SimpleEvent<int> OnResetBeat = new SimpleEvent<int>();
 
     // 다음 박자
     [SerializeField]
-    private float nextBeat;
+    private float nextSec;
+    public int beat {get; private set;}
+
+    // 오디오 반복해야하는지
+    private bool isLoop;
 
     // 오디오 소스 교체 시간
     private const float SOURCE_FADE_DURATION = 1f;
@@ -90,28 +90,32 @@ public class MenuMusicManager : Managers<MenuMusicManager>
 
     private void AudioLoop()
     {
+
+        // 반복 설정 안하면 넘기기
+        if(!isLoop) return;
+        
+        // 첫 변경시 Previous가 Null이 뜨므로 예외 처리 하기
         try
         {
-            if (!isFading)
+            if(audioSource.time >= currentPart.loop.end)
             {
-                if(audioSource.time >= currentPart.loop.end)
-                {
-                    audioSource.time -= currentPart.loop.end - currentPart.loop.start;
-                    BeatTimeCorrection();
-                }
-            } 
+                audioSource.time -= currentPart.loop.end - currentPart.loop.start;
+                BeatTimeCorrection();
+            }
         } catch
         {
             return;
         }
     }
 
+    // 비트 감지
     private void BeatDetection()
     {
-        if(audioSource.time >= nextBeat)
+        if(audioSource.time >= nextSec)
         {
-            invokeBeat.Invoke();
-            nextBeat +=  Temps.BPM_TO_SEC;
+            OnBeat.Invoke();
+            beat++;
+            nextSec +=  Temps.BPM_TO_SEC;
         }
     }
     private void SourceChange()
@@ -133,11 +137,11 @@ public class MenuMusicManager : Managers<MenuMusicManager>
 
     private IEnumerator SourceSlowChange()
     {
-
+        // 너무 빠른 변경으로 인한 버그 방지
         float elapsed = 0;
         float otherVolume = otherSource.volume;
 
-
+        //오디오 천천히 전환하기
         while(elapsed <= SOURCE_FADE_DURATION)
         {
             elapsed += Time.deltaTime;
@@ -151,27 +155,23 @@ public class MenuMusicManager : Managers<MenuMusicManager>
             yield return null;
         }
 
+        //전환 완료되면 보정 및 끄기
         audioSource.volume = SettingManager.Instance.setting.musicVolume;
         otherSource.Stop();
 
         this.SafeStopCoroutine(ref sourceCoroutine);
     }
-
-    private void BeatTimeCorrection(){
-        nextBeat = Mathf.Floor(audioSource.time / Temps.BPM_TO_SEC + 1f) * Temps.BPM_TO_SEC;
-    }
-
-
-
     
+    // 음악 시간 변경시 그 시간에 맞게 변수를 조정
+    private void BeatTimeCorrection(){
+        nextSec = Mathf.Floor(audioSource.time / Temps.BPM_TO_SEC + 1f) * Temps.BPM_TO_SEC;
+        beat = (int)(audioSource.time / Temps.BPM_TO_SEC);
+    }
 
     private void OnMenuStateChanged(Types.MenuState newState)
     {
         SourceChange();
 
-        previousMenuState = currentMenuState;
-        currentMenuState = newState;
-        
         switch(newState)
         {
             case Types.MenuState.Main:
@@ -193,19 +193,45 @@ public class MenuMusicManager : Managers<MenuMusicManager>
 
     }
 
-        private void GoToPart(MusicPart newPart)
-    {
-        previousPart = currentPart;
-        currentPart = newPart;
 
+    private void StartToPart(MusicPart musicPart)
+    {
+        isLoop = true;
+        MusicPartChange(musicPart);
+
+        audioSource.time = musicPart.startAt.start;
+        BeatTimeCorrection();
+    }
+
+    private void EndToPart(MusicPart musicPart)
+    {
+        isLoop = false;
+        MusicPartChange(musicPart);
+
+        audioSource.time = musicPart.endAt.start;
+        BeatTimeCorrection();
+    }
+
+    private void GoToPart(MusicPart newPart)
+    {
+        isLoop = true;
+        MusicPartChange(newPart);
+
+        // 이동까지의 시간 계산
         float delta = currentPart.loop.start - previousPart.loop.start;
         float targetTime = otherSource.time+ delta;
 
+        // 적응형 오디오를 위해 이전 파츠와 이어지도록 조정
         targetTime = currentPart.loop.start + Mathf.Repeat(targetTime - currentPart.loop.start, currentPart.loop.end - currentPart.loop.start);
 
         audioSource.time =  targetTime;
         BeatTimeCorrection();
+    }
 
-        isFading = false; 
+
+    private void MusicPartChange(MusicPart newPart)
+    {
+        previousPart = currentPart;
+        currentPart = newPart;
     }
 }
