@@ -12,6 +12,15 @@ namespace Utils
         public const float BPM_TO_SEC = 60f / 130f;
     }
 
+    public static class CameraUtils
+    {
+        public static Vector2 GetMousePosition()
+        {
+            Vector3 mouse = Input.mousePosition;
+            return Camera.main.ScreenToWorldPoint(mouse);
+        }
+    }
+
     public static class Vector2Utils
     {
         public static Vector2 FloatToVector2(float value)
@@ -22,6 +31,16 @@ namespace Utils
         public static Vector3 FloatToVector3(float value)
         {
             return new Vector3(value, value, value);
+        }
+    }
+
+    public static class FloatUtils
+    {
+        public static float LookAt2d(Vector2 a, Vector2 b)
+        {
+            Vector2 d = b - a;
+
+            return Mathf.Atan2(d.y, d.x) * Mathf.Rad2Deg;
         }
     }
 
@@ -38,6 +57,11 @@ namespace Utils
             rt.offsetMin = min;
             rt.offsetMax = max;
         }
+        
+        public static void SetScale(this RectTransform rt, Vector2 scale)
+        {
+            rt.localScale = scale;
+        }
 
         public static void SetPosX(this RectTransform rt, float x)
         {
@@ -45,6 +69,18 @@ namespace Utils
             pos.x = x;
             rt.anchoredPosition = pos;
         }
+
+        public static Vector2 GetRectInCanvas(this RectTransform rt, RectTransform canvas)
+        {
+            Vector3[] corners = new Vector3[4];
+            rt.GetWorldCorners(corners);
+
+            Vector2 min = canvas.InverseTransformPoint(corners[0]);
+            Vector2 max = canvas.InverseTransformPoint(corners[2]);
+
+            return (min + max) * 0.5f;
+        }
+
     }
 
     public static class CoroutineExtensions
@@ -67,5 +103,14 @@ namespace Utils
             }
         }
     }
-    
+}
+
+
+// 이 게임에서만 사용되는 유틸 
+namespace RhythmSqaureUtils
+{
+    public static class Consts{
+        public const int SIGNATURE = 4;
+
+    }
 }
