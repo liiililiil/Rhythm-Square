@@ -52,15 +52,7 @@ namespace SimpleActions
         {
             for (int i = actions.Count - 1; i >= 0; i--)
             {
-                try
-                {
-                    actions[i].Invoke(param);
-                }
-                catch (NullReferenceException ex)
-                {
-                    UnityEngine.Debug.LogWarning($"Some Action Was delete : {ex.Message}");
-                    actions.RemoveAt(i);
-                }
+                actions[i].Invoke(param);
             }
         }
     }
