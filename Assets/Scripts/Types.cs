@@ -31,12 +31,38 @@ namespace Types
         Credits = 8
     }
 
+    // 언어들
+    public enum Language : byte
+    {
+        Korean = 0,
+        English = 1,   
+    }
+
+
     // 설정
-    public class Settings
+    public class Setting
     {
         public float musicVolume;
         public float sfxVolume;
+        public Language language;
+
+        public Setting(float _musicVolume, float _sfxVolume, Language _langeuage)
+        {
+            musicVolume = _musicVolume;
+            sfxVolume = _sfxVolume;
+            language = _langeuage;
+        }
+
+        public Setting()
+        {
+            musicVolume = 0.6f;
+            sfxVolume = 0.6f;
+            
+            //일단 보편적인 언어인 영어로 설정
+            language = Language.English;
+        }
     }
+
 
 
     // 실수 범위
