@@ -57,11 +57,6 @@ namespace Utils
             rt.offsetMin = min;
             rt.offsetMax = max;
         }
-        
-        public static void SetScale(this RectTransform rt, Vector2 scale)
-        {
-            rt.localScale = scale;
-        }
 
         public static void SetPosX(this RectTransform rt, float x)
         {
@@ -86,7 +81,7 @@ namespace Utils
     public static class CoroutineExtensions
     {
         // 이전 코루틴을 멈추고 새 코루틴 시작
-        public static void SafeStartCoroutine(this MonoBehaviour mb,ref Coroutine coroutine, IEnumerator enumerator)
+        public static void SafeStartCoroutine(this MonoBehaviour mb, ref Coroutine coroutine, IEnumerator enumerator)
         {
             mb.SafeStopCoroutine(ref coroutine);
 
@@ -94,13 +89,22 @@ namespace Utils
         }
 
         // 코루틴 멈추기
-        public static void SafeStopCoroutine(this MonoBehaviour mb,ref Coroutine coroutine)
+        public static void SafeStopCoroutine(this MonoBehaviour mb, ref Coroutine coroutine)
         {
             if(coroutine != null)
             {
                 mb.StopCoroutine(coroutine);
                 coroutine = null;
             }
+        }
+
+        // 코루틴을 검사하여 코루틴이 비어있는 경우만 시작
+        public static bool CheckedStartCoroutine(this MonoBehaviour mb, ref Coroutine coroutine, IEnumerator enumerator)
+        {
+            if(coroutine != null) return false;
+
+            coroutine = mb.StartCoroutine(enumerator);
+            return true;
         }
     }
 }
