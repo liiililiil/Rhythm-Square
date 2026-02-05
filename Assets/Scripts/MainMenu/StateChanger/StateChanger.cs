@@ -23,16 +23,18 @@ namespace MainMenu.StateChanger
     {
     }
 
-    // 즉시 실행되는 목록
+    // 지연후 실행되는 목록
     [System.Serializable]
-    public class InstantMenuStateChange<T> : MenuStateChange<T>
+    public class DelayedMenuStateChange<T> : MenuStateChange<T>
     {
+        public float delay;
     }
 
     // 기본
     [System.Serializable]
-    public class InstantMenuStateDefault<T> : MenuStateDefault<T>
+    public class DelayedMenuStateDefault<T> : MenuStateDefault<T>
     {
+        public float delay;
     }
 
 
