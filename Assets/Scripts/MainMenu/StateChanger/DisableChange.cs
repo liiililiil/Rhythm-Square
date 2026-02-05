@@ -1,46 +1,65 @@
+using System.Collections;
+using System.Collections.Generic;
 using MainMenu.StateChanger;
 using Types;
 using UnityEngine;
+using Utils;
 
 public class DisableChange : StateChanger
 {
 
     [SerializeField]
-    private InstantMenuStateChange<MonoBehaviour>[] stateChange;
+    private DelayedMenuStateChange<MonoBehaviour[]>[] stateChange;
     [SerializeField]
-    private InstantMenuStateDefault<MonoBehaviour> stateDefault;
+    private DelayedMenuStateDefault<MonoBehaviour[]> stateDefault;
+
+    private List<Coroutine> coroutines = new List<Coroutine>();
     
     protected override void OnInvoke(MenuState newState)
     {
-        ChangeState(stateDefault, true);
+        ClearCoroutine();
+
+        ChangeState(stateDefault.value, true);
 
         foreach(var stateChange in stateChange)
         {
             if(stateChange.targetState == newState)
             {
-                ChangeState(stateChange, false);
+                ChangeState(stateChange.value, false, stateChange.delay);
                 return;
             }
             else
             {
-                ChangeState(stateChange, true);
+                ChangeState(stateChange.value, true);
             }
         }
 
         //기본값으로 변경
-        ChangeState(stateDefault, false);
+        ChangeState(stateDefault.value, false, stateDefault.delay);
+    }
+
+    // 코루틴 정리용
+    private void ClearCoroutine()
+    {
+        for(int i = coroutines.Count-1; i >= 0; i--)
+        {
+            Coroutine coroutine = coroutines[i];
+            this.SafeStopCoroutine(ref coroutine);
+        }
+
+        coroutines.Clear();
     }
 
     // null 감지 가능한 값 변경 함수
-    private void ChangeState(StateChange<MonoBehaviour> targetStateChange, bool value)
+    private void ChangeState(MonoBehaviour[] targets, bool value, float delay = 0)
     {
-        if(targetStateChange.value == null)
-        {
-            Debug.LogWarning($"state에 지정된 Action이 없어 무시되었습니다.",this);
-        }
-            else
-        {
-            targetStateChange.value.enabled = value;
-        }
+        coroutines.Add(StartCoroutine(DelayedDiasble(targets, value, delay)));
+    }
+
+    private IEnumerator DelayedDiasble(MonoBehaviour[] targets, bool value, float delay)
+    {
+        if (delay > 0) yield return new WaitForSeconds(delay);
+        foreach(MonoBehaviour target in targets)
+            target.enabled = value;
     }
 }
