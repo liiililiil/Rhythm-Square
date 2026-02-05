@@ -74,7 +74,7 @@ public class LogoPlayerAnimation : MonoBehaviour
         float targetZ = FloatUtils.LookAt2d(rectTransform.GetRectInCanvas(canvas.transform as RectTransform), mousePos);
         
         //스무딩하게
-        mouseValue = Mathf.Lerp(mouseValue, targetZ, 0.1f);
+        mouseValue = Mathf.Lerp(mouseValue, targetZ, 0.5f);
 
         return mouseValue;
     }
