@@ -1,5 +1,6 @@
 using SimpleActions;
-using Types;
+using Types.Menu;
+using UnityEditor;
 using UnityEngine;
 
 
@@ -16,7 +17,9 @@ public class MenuStateManager : Managers<MenuStateManager>
 
     private void Start() 
     {
-        ChangeMenuState(MenuState.Main);   
+        onMenuStateChanged.AddListener(OnChangeMenuState);
+        
+        ChangeMenuState(MenuState.Main);
     }
     
     //메뉴 변경(버튼 용)
@@ -36,4 +39,24 @@ public class MenuStateManager : Managers<MenuStateManager>
         //메뉴 상태 변경 처리
         onMenuStateChanged.Invoke(newState);
     }   
+
+    //wait 변경을 위한 함수
+    private void OnChangeMenuState(MenuState menuState)
+    {
+        switch (menuState)
+        {
+            case MenuState.ExitWating:
+            Invoke(nameof(Exit), 2.1f);
+            break;
+        }
+    }
+
+    private void Exit()
+    {
+        #if UNITY_EDITOR
+            EditorApplication.isPlaying = false; // 에디터 플레이 종료
+        #else
+            Application.Quit(); // 실제 빌드 종료
+        #endif
+    }
 }
