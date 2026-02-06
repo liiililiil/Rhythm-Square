@@ -27,12 +27,6 @@ MonoBehaviour:
     m_SerializedLabels:
     - MusicTitle
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 73ecec2544eade146a9b398e9a6527a5
-    m_Address: Assets/Audio/MusicObject/Mach Roger.asset
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - MusicObject
-    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 3bb385a73fe80c94fbacc8b780355829, type: 2}
   m_SchemaSet:

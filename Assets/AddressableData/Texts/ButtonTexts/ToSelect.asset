@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa3a00617ae854d4b90baba2f6decd79, type: 3}
-  m_Name: ExitWarningText
+  m_Script: {fileID: 11500000, guid: 6ab87b5663e64ce4b950eb353823fdd4, type: 3}
+  m_Name: ToSelect
   m_EditorClassIdentifier: Assembly-CSharp::GameManagement.MultinationalString
-  korean: "\uC885\uB8CC \uD558\uC2DC\uACA0\uC2B5\uB2C8\uAE4C?"
-  english: Do You want to Exit?
+  korean: "\uACE1 \uC120\uD0DD"
+  english: Select
