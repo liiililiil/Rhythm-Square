@@ -14,22 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
   m_GroupName: MenuEssential
   m_GUID: 21131b92d6a2d3e4abf5379ca3fa9cfe
-  m_SerializeEntries:
-  - m_GUID: 923955235dc07114192e88b10e79beea
-    m_Address: Assets/Sprites/SVGs/PlayerIcon.svg
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: c878f45d4272cb942961c67831a84ae0
-    m_Address: Assets/Sprites/SVGs/Modern Arrow Four Way.svg
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: d4660eb3c99bacc4daee8e16df18034e
-    m_Address: Assets/Sprites/SVGs/Fill Box.svg
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
+  m_SerializeEntries: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 3bb385a73fe80c94fbacc8b780355829, type: 2}
   m_SchemaSet:
