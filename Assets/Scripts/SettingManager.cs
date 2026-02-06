@@ -1,5 +1,5 @@
 using UnityEngine;
-using Types;
+using Types.Menu;
 using SimpleActions;
 public class SettingManager : Managers<SettingManager>
 {
@@ -13,6 +13,12 @@ public class SettingManager : Managers<SettingManager>
     }
     private void Start()
     {
+        onChangeSetting.Invoke(setting);
+    }
+
+    public void ChangeLanguage(Language language)
+    {
+        setting.language = language;
         onChangeSetting.Invoke(setting);
     }
 }
