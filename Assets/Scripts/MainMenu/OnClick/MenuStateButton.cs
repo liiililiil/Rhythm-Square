@@ -1,11 +1,11 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 using Utils;
-using Types;
+using Types.Menu;
 using SimpleEasing;
-using UnityEngine.UI;
 
 public class MenuStateButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
