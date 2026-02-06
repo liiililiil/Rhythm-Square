@@ -1,11 +1,7 @@
-using Types;
+using Types.Menu;
 using UnityEngine;
 
-/// <summary>
-/// 코드 내부에서 사용되는 내부 스크립터블 오브젝트를 정의합니다.
-/// </summary>
-
-namespace GameManagement
+namespace ScriptManagement
 {
     /// <summary>
     /// 언어 기능을 위한 다국적 스트링 오브젝트입니다.
@@ -33,6 +29,4 @@ namespace GameManagement
             }
         }
     }
-
 }
-
