@@ -3,9 +3,10 @@ using System.Collections;
 
 using AudioManagement;
 using Utils;
-using Types;
+using Types.Menu;
 using SimpleEasing;
 using SimpleActions;
+using System;
 
 public class MenuMusicManager : Managers<MenuMusicManager>
 {
@@ -118,6 +119,7 @@ public class MenuMusicManager : Managers<MenuMusicManager>
             nextSec +=  Temps.BPM_TO_SEC;
         }
     }
+
     private void SourceChange()
     {
 
@@ -168,31 +170,46 @@ public class MenuMusicManager : Managers<MenuMusicManager>
         beat = (int)(audioSource.time / Temps.BPM_TO_SEC);
     }
 
-    private void OnMenuStateChanged(Types.MenuState newState)
+    private void OnMenuStateChanged(MenuState newState)
     {
-        SourceChange();
+        
 
         switch(newState)
         {
-            case Types.MenuState.Main:
+            case MenuState.Main:
                 GoToPart(main);
                 break;
 
-            case Types.MenuState.Setting:
+            case MenuState.Setting:
                 GoToPart(setting);
                 break;
 
-            case Types.MenuState.Credits:
+            case MenuState.Credits:
                 GoToPart(credits);
                 break;
-            case Types.MenuState.ExitWarning:
+
+            case MenuState.ExitWarning:
                 GoToPart(exitWarning);
+                break;
+
+            case MenuState.ExitWating:
+                EndToPart(exitWarning);
+                break;
+
+            default:
+                MusicStop();
                 break;
             
         }
 
     }
 
+    private void MusicStop()
+    {
+        SourceChange();
+        audioSource.Stop();
+
+    }
 
     private void StartToPart(MusicPart musicPart)
     {
@@ -214,6 +231,8 @@ public class MenuMusicManager : Managers<MenuMusicManager>
 
     private void GoToPart(MusicPart newPart)
     {
+        SourceChange();
+
         isLoop = true;
         MusicPartChange(newPart);
 
