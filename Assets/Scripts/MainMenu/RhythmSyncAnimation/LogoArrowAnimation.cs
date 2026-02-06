@@ -2,7 +2,6 @@ using UnityEngine;
 
 using SimpleEasing;
 using Utils;
-using RhythmSqaureUtils;
 
 public class LogoArrowAnimation : MonoBehaviour
 {
@@ -29,7 +28,7 @@ public class LogoArrowAnimation : MonoBehaviour
     void Update()
     {
         // 특정 박자 마다 조금 느리게 시간 흐르기
-        if((MenuMusicManager.Instance.beat - (Consts.SIGNATURE * 4)) % (Consts.SIGNATURE * 8) >= 30)
+        if((MenuMusicManager.Instance.beat - 16) % 32 >= 30)
         {
             elapsed += Time.deltaTime / 2;
         }
@@ -72,7 +71,7 @@ public class LogoArrowAnimation : MonoBehaviour
     private void NextStep()
     {
         
-        if((MenuMusicManager.Instance.beat - (Consts.SIGNATURE * 4)) % 32 != 30)
+        if((MenuMusicManager.Instance.beat - 16) % 32 != 30)
         {
             elapsed = 0;
         }

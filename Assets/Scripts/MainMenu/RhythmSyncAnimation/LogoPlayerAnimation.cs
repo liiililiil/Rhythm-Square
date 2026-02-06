@@ -1,7 +1,6 @@
 using UnityEngine;
 using Utils;
 using SimpleEasing;
-using RhythmSqaureUtils;
 
 public class LogoPlayerAnimation : MonoBehaviour
 {
@@ -74,13 +73,16 @@ public class LogoPlayerAnimation : MonoBehaviour
         float targetZ = FloatUtils.LookAt2d(rectTransform.GetRectInCanvas(canvas.transform as RectTransform), mousePos);
         
         //스무딩하게
-        mouseValue = Mathf.Lerp(mouseValue, targetZ, 0.5f);
+        float speed = 5f;   // 클수록 빠르게 따라감
+
+        float t = 1f - Mathf.Exp(-speed * Time.deltaTime);
+        mouseValue = Mathf.Lerp(mouseValue, targetZ, t);
 
         return mouseValue;
     }
     private void NextStep()
     {
-        if((MenuMusicManager.Instance.beat - (Consts.SIGNATURE * 4)) % (Consts.SIGNATURE * 4) == 15)
+        if((MenuMusicManager.Instance.beat - 16) % 16 == 15)
         {
             elapsed = 0;
         }

@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using MainMenu.StateChanger;
-using Types;
 using UnityEngine;
+
+using Types.Menu.StateChange;
+using Types.Menu;
 using Utils;
 
 public class DisableChange : StateChanger
@@ -18,14 +19,13 @@ public class DisableChange : StateChanger
     protected override void OnInvoke(MenuState newState)
     {
         ClearCoroutine();
-
-        ChangeState(stateDefault.value, true);
-
+        
         foreach(var stateChange in stateChange)
         {
             if(stateChange.targetState == newState)
             {
                 ChangeState(stateChange.value, false, stateChange.delay);
+                ChangeState(stateDefault.value, true);
                 return;
             }
             else
