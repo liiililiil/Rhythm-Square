@@ -108,13 +108,3 @@ namespace Utils
         }
     }
 }
-
-
-// 이 게임에서만 사용되는 유틸 
-namespace RhythmSqaureUtils
-{
-    public static class Consts{
-        public const int SIGNATURE = 4;
-
-    }
-}
