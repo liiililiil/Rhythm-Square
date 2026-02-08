@@ -89,7 +89,7 @@ public class MenuStateButton : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
     }
 
-    IEnumerator BarEasingScaleChange(Vector2 start, Vector2 end, float duration, EaseType EASETYPE)
+    IEnumerator BarEasingScaleChange(Vector2 start, Vector2 end, float duration, EaseType easeType)
     {
         RectTransform rt = bar.GetComponent<RectTransform>();
 
@@ -100,7 +100,7 @@ public class MenuStateButton : MonoBehaviour, IPointerEnterHandler, IPointerExit
             elapsed += Time.deltaTime;
             float t = Mathf.Clamp01(elapsed / duration);
 
-            t = Ease.Easing(t, EASETYPE);
+            t = Ease.Easing(t, easeType);
 
             Vector2 newScale = Vector2.Lerp(start, end, t);
             rt.localScale = newScale;
@@ -114,7 +114,7 @@ public class MenuStateButton : MonoBehaviour, IPointerEnterHandler, IPointerExit
         this.SafeStopCoroutine(ref barScaleCoroutine);
     }
 
-    IEnumerator TextEasingPositionChange(Vector2 start, Vector2 end, float duration, EaseType EASETYPE)
+    IEnumerator TextEasingPositionChange(Vector2 start, Vector2 end, float duration, EaseType easeType)
     {
         RectTransform rt = text.GetComponent<RectTransform>();
         float elapsed = 0f;
@@ -124,7 +124,7 @@ public class MenuStateButton : MonoBehaviour, IPointerEnterHandler, IPointerExit
             elapsed += Time.deltaTime;
             float t = Mathf.Clamp01(elapsed / duration);
 
-            t = Ease.Easing(t, EASETYPE);
+            t = Ease.Easing(t, easeType);
 
             Vector2 newPosition = Vector2.Lerp(start, end, t);
             rt.anchoredPosition = newPosition;
@@ -133,12 +133,10 @@ public class MenuStateButton : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
         // 보정
         rt.anchoredPosition = end;
-
-        this.SafeStopCoroutine(ref textPositionCoroutine);
     }
 
 
-    IEnumerator TextOnClick(int start, int end, float duration, EaseType EASETYPE)
+    IEnumerator TextOnClick(int start, int end, float duration, EaseType easeType)
     {
         Text targetText = text.GetComponent<Text>();
 
@@ -149,7 +147,7 @@ public class MenuStateButton : MonoBehaviour, IPointerEnterHandler, IPointerExit
             elapsed += Time.deltaTime;
             float t = Mathf.Clamp01(elapsed / duration);
 
-            t = Ease.Easing(t, EASETYPE);
+            t = Ease.Easing(t, easeType);
 
             int newSize = (int)Mathf.Lerp(start, end, t);
             targetText.fontSize = newSize;
