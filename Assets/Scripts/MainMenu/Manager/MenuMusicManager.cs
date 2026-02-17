@@ -6,7 +6,6 @@ using Utils;
 using Types.Menu;
 using SimpleEasing;
 using SimpleActions;
-using System;
 
 public class MenuMusicManager : Managers<MenuMusicManager>
 {
@@ -84,9 +83,22 @@ public class MenuMusicManager : Managers<MenuMusicManager>
     private void Update()
     {
 
+        AudioSetting();
         AudioLoop();
         BeatDetection();
 
+    }
+
+    /// <summary>
+    /// 업데이트에서 사용되는 함수들
+    /// </summary>
+    #region Update
+    private void AudioSetting()
+    {   
+        //노래 변경 중이라면 무시
+        if(sourceCoroutine != null) return;
+
+        audioSource.volume = SettingManager.Instance.setting.volumes.GetMatchedAudio(Types.Menu.AudioType.Music);
     }
 
     private void AudioLoop()
@@ -136,7 +148,9 @@ public class MenuMusicManager : Managers<MenuMusicManager>
 
 
     }
-
+#endregion
+    
+    
     private IEnumerator SourceSlowChange()
     {
         // 너무 빠른 변경으로 인한 버그 방지
@@ -151,20 +165,20 @@ public class MenuMusicManager : Managers<MenuMusicManager>
 
             t = Ease.Easing(t, EaseType.Linear);
 
-            audioSource.volume = Mathf.Lerp(0, SettingManager.Instance.setting.musicVolume, t);
+            audioSource.volume = Mathf.Lerp(0, SettingManager.Instance.setting.volumes.GetMatchedAudio(Types.Menu.AudioType.Music), t);
             otherSource.volume = Mathf.Lerp(otherVolume, 0, t);
 
             yield return null;
         }
 
         //전환 완료되면 보정 및 끄기
-        audioSource.volume = SettingManager.Instance.setting.musicVolume;
+        audioSource.volume = SettingManager.Instance.setting.volumes.GetMatchedAudio(Types.Menu.AudioType.Music);
         otherSource.Stop();
 
         this.SafeStopCoroutine(ref sourceCoroutine);
     }
     
-    // 음악 시간 변경시 그 시간에 맞게 변수를 조정
+    // 음악 시간 변경시 그 시간에 박자와 다음 박자를 계산
     private void BeatTimeCorrection(){
         nextSec = Mathf.Floor(audioSource.time / Temps.BPM_TO_SEC + 1f) * Temps.BPM_TO_SEC;
         beat = (int)(audioSource.time / Temps.BPM_TO_SEC);
