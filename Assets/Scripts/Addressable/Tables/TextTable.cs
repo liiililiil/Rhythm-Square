@@ -10,27 +10,27 @@ namespace Tables.TextTable
     public class TextTable : Managers<TextTable>
     {
         
-        Loader<MultinationalString, TextIndex> mainMenu = new Loader<MultinationalString, TextIndex>();
+        Loader<MultinationalString, TextIndex> loader = new Loader<MultinationalString, TextIndex>();
 
         private void Awake() {
-            LoadMainMenu();
+            Load(Type.Addressable.Tag.Text.MAIN_MENU);
             Singleton(true);
         }
 
-        public void LoadMainMenu()
+        public void Load(string tag)
         {
-            this.SafeStartCoroutine(ref mainMenu.coroutine, mainMenu.LoadingAsset(Type.Addressable.Tag.Text.MAIN_MENU));
+            this.SafeStartCoroutine(ref loader.coroutine, loader.LoadingAsset(tag));
         }
 
-        public MultinationalString GetMainMenuText(TextIndex textIndex)
+        public MultinationalString GetText(TextIndex textIndex)
         {
-            return mainMenu.table[textIndex];
+            return loader.table[textIndex];
         }
 
         //메인메뉴 텍스트 해제
-        public void ReleaseMainMenu()
+        public void Release()
         {
-            mainMenu.Release();
+            loader.Release();
         }
     }
 
