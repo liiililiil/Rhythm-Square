@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ab87b5663e64ce4b950eb353823fdd4, type: 3}
   m_Name: ToMenu
   m_EditorClassIdentifier: Assembly-CSharp::GameManagement.MultinationalString
+  index: 1101
   korean: "\uBA54\uB274"
   english: Menu
