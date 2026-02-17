@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace Utils
 {
@@ -107,4 +108,22 @@ namespace Utils
             return true;
         }
     }
+
+    public static class AddressableUtils
+    {
+        public static void SafeRelease(AsyncOperationHandle asyncOperationHandle)
+        {
+            if (asyncOperationHandle.IsValid())
+            {
+                asyncOperationHandle.Release();
+                asyncOperationHandle = default;
+            }
+            else
+            {
+                Debug.LogError("이 핸들은 아직 로딩중입니다!");
+            }
+        }
+    }
 }
+
+
