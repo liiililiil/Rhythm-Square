@@ -6,6 +6,8 @@ using System.Collections;
 using Utils;
 using Types.Menu;
 using ScriptManagement;
+using Types.Addressable.Table;
+using Tables.TextTable;
 
 
 [RequireComponent(typeof(Text))]
@@ -13,7 +15,7 @@ using ScriptManagement;
 public class MultinationalTextSupport : MonoBehaviour
 {
     [SerializeField]
-    private MultinationalString text;
+    private TextIndex index;
     private Text textObject;
 
     private Coroutine coroutine;
@@ -21,14 +23,12 @@ public class MultinationalTextSupport : MonoBehaviour
 
     private void Awake()
     {
-        TryGetComponent<Text>(out textObject);
+        TryGetComponent(out textObject);
 
         //예외 검사
         try
         {
-            if(text == null) throw new Exception("텍스트가 존재하지 않습니다!");
-
-            if(textObject.text != "") Debug.LogWarning("Text에 이미 텍스트가 존재합니다! 덮어쓰기 되었습니다.", this);
+            // if(textObject.text != "") Debug.LogWarning("Text에 이미 텍스트가 존재합니다! 덮어쓰기 됩니다!", this);
         }
         catch (Exception ex)
         {
@@ -39,15 +39,35 @@ public class MultinationalTextSupport : MonoBehaviour
 
     private void Start()
     {
-        OnChangeSetting(SettingManager.Instance.setting);
+        OnChangeSetting();
         SettingManager.Instance.onChangeSetting.AddListener(OnChangeSetting);
     }
 
-    private void OnChangeSetting(Setting setting)
+    private void OnChangeSetting()
     {
+        Invoke("Tester",1);
+        return;
+
+        string targetText= TextTable.Instance.GetMainMenuText(index).GetString(SettingManager.Instance.setting.language);
+
+        // 같은 텍스트면 무시
+        if(targetText  == textObject.text) return;
+
         // text가 꺼져있으면 그냥 바로 바꾸기
-        if(!textObject.enabled) textObject.text = text.GetString(SettingManager.Instance.setting.language);
-        else this.SafeStartCoroutine(ref coroutine, SlowChangeText(textObject.text, text.GetString(setting.language),DURATION));
+        if(!textObject.enabled) textObject.text = targetText;
+        else this.SafeStartCoroutine(ref coroutine, SlowChangeText(textObject.text, targetText,DURATION));
+    }
+
+    private void Tester()
+    {
+        string targetText= TextTable.Instance.GetMainMenuText(index).GetString(SettingManager.Instance.setting.language);
+
+        // 같은 텍스트면 무시
+        if(targetText  == textObject.text) return;
+
+        // text가 꺼져있으면 그냥 바로 바꾸기
+        if(!textObject.enabled) textObject.text = targetText;
+        else this.SafeStartCoroutine(ref coroutine, SlowChangeText(textObject.text, targetText,DURATION));
     }
 
     IEnumerator SlowChangeText(string start, string end, float duration)
