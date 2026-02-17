@@ -15,17 +15,21 @@ MonoBehaviour:
   m_GroupName: Zidanda Step
   m_GUID: 2c64cf8f8febf2847af41ebca5c975f1
   m_SerializeEntries:
+  - m_GUID: 2933fc57d3156c047ab20d0dbde192fa
+    m_Address: Assets/AddressableData/Audio/Music/Info/EmptyMusicInfo.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c2aa8b8d5ed7c2b4ba9ee046a8e08455
     m_Address: Assets/Sprites/MusicTitle/Zidanda Step.png
     m_ReadOnly: 0
     m_SerializedLabels:
-    - MusicTitle
+    - MusicInfo
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d3544160b711ccb4a8a1399b52f0fca4
-    m_Address: Assets/Audio/Music/Zidanda Step.wav
+    m_Address: Assets/AddressableData/Audio/Music/Asset/Zidanda Step.wav
     m_ReadOnly: 0
-    m_SerializedLabels:
-    - Music
+    m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 3bb385a73fe80c94fbacc8b780355829, type: 2}

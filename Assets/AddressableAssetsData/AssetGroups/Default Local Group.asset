@@ -14,7 +14,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
   m_GroupName: Default Local Group
   m_GUID: 42352ccc3da452b43a874cc576dd636f
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 085b1222dc022394490499bc292917ee
+    m_Address: Assets/AddressableData
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 35d5553b03b0c264d8da720e6721d886
+    m_Address: Assets/AddressableData/Audio/Music/Clip/MachRoger.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Music
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5ee38268f147d8f48a46f604add79ccc
+    m_Address: Assets/AddressableData/Audio/Music/Clip/Zidanda Step.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Music
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 986859d3dc6427e4d997bfb0abd81d78
+    m_Address: Assets/Audio/Music/iluvslapbass.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Music
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 3bb385a73fe80c94fbacc8b780355829, type: 2}
   m_SchemaSet:

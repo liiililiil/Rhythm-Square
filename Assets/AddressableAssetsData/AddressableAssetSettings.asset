@@ -15,7 +15,7 @@ MonoBehaviour:
   m_DefaultGroup: 42352ccc3da452b43a874cc576dd636f
   m_currentHash:
     serializedVersion: 2
-    Hash: 58d39aa0ee6a813ff852b3f74108feb4
+    Hash: 1ca3c0b371a8422f6cfea95b0b239cf6
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 0
   m_CatalogRequestsTimeout: 0
@@ -54,7 +54,7 @@ MonoBehaviour:
     m_Id: 
   m_RemoteCatalogLoadPath:
     m_Id: 
-  m_ContentStateBuildPathProfileVariableName: 
+  m_ContentStateBuildPathProfileVariableName: <default settings path>
   m_CustomContentStateBuildPath: 
   m_ContentStateBuildPath: 
   m_BuildAddressablesWithPlayerBuild: 0
@@ -105,10 +105,10 @@ MonoBehaviour:
     m_ProfileVersion: 1
   m_LabelTable:
     m_LabelNames:
-    - default
-    - MusicObject
     - Music
-    - MusicTitle
+    - MusicInfo
+    - MainMenu
+    - Playerable
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: df03c84c57ff522418aa503cb2c1cafc, type: 2}

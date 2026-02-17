@@ -14,7 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
   m_GroupName: MenuEssential
   m_GUID: 21131b92d6a2d3e4abf5379ca3fa9cfe
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: a035f8bd9426df84e8119d8fa0318d08
+    m_Address: Assets/Sprites/SVGs/Menu/Diamond.svg
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f3eeae20fb0be4141a612ea612c6fe1b
+    m_Address: Assets/Sprites/SVGs/Menu
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 3bb385a73fe80c94fbacc8b780355829, type: 2}
   m_SchemaSet:

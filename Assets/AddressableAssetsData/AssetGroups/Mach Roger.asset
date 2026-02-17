@@ -16,16 +16,20 @@ MonoBehaviour:
   m_GUID: bf7ed04d1ea0444428a0699d82c1411d
   m_SerializeEntries:
   - m_GUID: 3ed515772a26047469843f1af7e35184
-    m_Address: Assets/Audio/Music/Mach Roger.wav
+    m_Address: Assets/AddressableData/Audio/Music/Asset/Mach Roger.wav
     m_ReadOnly: 0
-    m_SerializedLabels:
-    - Music
+    m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 46a61c2a556134c4e814fab0abc0e2d5
     m_Address: Assets/Sprites/MusicTitle/Mach Roger.png
     m_ReadOnly: 0
     m_SerializedLabels:
-    - MusicTitle
+    - MusicInfo
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c2b2daf1d5cd13a4384090065f708264
+    m_Address: Assets/AddressableData/Audio/Music/Info/EmptyMusicInfo 1.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 3bb385a73fe80c94fbacc8b780355829, type: 2}
