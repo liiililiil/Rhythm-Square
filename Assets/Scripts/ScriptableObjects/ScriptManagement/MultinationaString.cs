@@ -1,3 +1,4 @@
+using Types.Addressable.Table;
 using Types.Menu;
 using UnityEngine;
 
@@ -7,7 +8,7 @@ namespace ScriptManagement
     /// 언어 기능을 위한 다국적 스트링 오브젝트입니다.
     /// </summary>
     [CreateAssetMenu(fileName = "EmptyString", menuName = "StringAssets/New MultinationalString")]
-    public class MultinationalString : ScriptableObject
+    public class MultinationalString : IndexedScriptableObject<TextIndex>
     {
         [SerializeField]
         private string korean;
