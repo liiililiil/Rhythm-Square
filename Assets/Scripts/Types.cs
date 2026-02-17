@@ -457,7 +457,7 @@ namespace Types.Addressable
         //에셋 로딩
         handle =
             Addressables.LoadAssetsAsync<_T1>(
-                Type.Addressable.Tag.Text.MAIN_MENU,
+                label,
                 loadedAsset =>
                 {
                     AssetBind(loadedAsset);  
@@ -493,7 +493,7 @@ namespace Types.Addressable
     /// <typeparam name="_T2">에셋의 인덱스</typeparam>
     public class EachLoader<_T1, _T2>: Loader<_T1,_T2> where _T1 : IndexedScriptableObject<_T2> where _T2: System.Enum
     {        
-        public new Dictionary<_T2, AsyncOperationHandle<_T1>> handle;
+        public new Dictionary<_T2, AsyncOperationHandle<_T1>> handle = new Dictionary<_T2, AsyncOperationHandle<_T1>>();
 
         public new void Release()
         {
@@ -557,7 +557,7 @@ namespace Types.Addressable
             //에셋 로딩 시작
             foreach (var location in countHandle.Result)
             {
-
+                        
                 var loaded= Addressables.LoadAssetAsync<_T1>(location);
 
                 //핸들 그룹화 하기위해 추가
@@ -569,23 +569,20 @@ namespace Types.Addressable
             AsyncOperationHandle groupHandle = Addressables.ResourceManager.CreateGenericGroupOperation(groupHandles);
 
             yield return groupHandle;
-
-            // 성공시 값 저장
-            if (groupHandle.Status == AsyncOperationStatus.Succeeded)
+            foreach(var eachHandle in loadedHandle)
             {
-                foreach(var handle in loadedHandle)
+                // 성공시 값 저장
+                if (eachHandle.Status == AsyncOperationStatus.Succeeded)
                 {
-                    AssetBind(handle.Result);
+                    //에셋 핸들에 넣기
+                    handle.Add(eachHandle.Result.index, eachHandle);
+                    AssetBind(eachHandle.Result);
                 }
-            }
-            else 
-            {   
-                // 에러 전달
-                Debug.LogError(groupHandle.OperationException);
-
-                foreach(var handle in loadedHandle)
+                else
                 {
-                    AssetLoadManager.Instance.LoadingRecoder.LoadingError(recoderBindedIndex.Pop(), groupHandle.OperationException);
+                    // 에러 전달
+                    Debug.LogError(eachHandle.OperationException);
+                    AssetLoadManager.Instance.LoadingRecoder.LoadingError(recoderBindedIndex.Pop(), eachHandle.OperationException);
                 }
             }
 
@@ -599,6 +596,7 @@ namespace Types.Addressable
 
         protected new void AssetBind(_T1 asset)
         {
+
             //레코더에게 완료알림
             AssetLoadManager.Instance.LoadingRecoder.CompleteLoading(recoderBindedIndex.Pop());
 
@@ -614,21 +612,31 @@ namespace Types.Addressable
 
 namespace Types.Addressable.Table
 {
+    // 스프라이트 목록
+    public enum SpriteIndex
+    {
+        // 메인메뉴용
+        Diamond = 101,
+        EmptyDiamond = 102,
+        Square = 103,
+        MordernArrows = 104,
+        PlayerIcon = 105
+    }
     // 텍스트 목록
     public enum TextIndex
     {
         //버튼 텍스트
-        MainMenu_ToMenu = 1101,
-        MainMenu_ToSelect = 1102,
-        MainMenu_ToSetting = 1103,
-        MainMenu_ToExit = 1104,
-        MainMenu_SFX = 1105,
-        MainMenu_Music = 1106,
-        MainMenu_Offset = 1107,
+        ToMenu = 1101,
+        ToSelect = 1102,
+        ToSetting = 1103,
+        ToExit = 1104,
+        SFX = 1105,
+        Music = 1106,
+        Offset = 1107,
 
         //MainMenu 텍스트
-        MainMenu_ExitWarning = 1201,
-        MainMenu_Language = 1202,
+        ExitWarning = 1201,
+        Language = 1202,
 
         //오디오 정보
     }
@@ -637,11 +645,11 @@ namespace Types.Addressable.Table
     public enum MusicIndex
     {
         // 배경용
-        BackGround_iluvslapbass = 101,
+        iluvslapbass = 101,
         
         // 플레이용
-        Playable_MachRoger = 201,
-        Playable_ZidandaStep = 202,
+        MachRoger = 201,
+        ZidandaStep = 202,
     }
 
 }
@@ -649,9 +657,17 @@ namespace Type.Addressable.Tag
 {
     //어드레서블 태그 관리용 상수
 
-    public class Text
+    //통용되는 상수
+    public class Generic
     {
         public const string MAIN_MENU = "MainMenu";
+        public const string TEXT = "Text";
+        public const string SPRITE = "Sprite";
+    }
+
+    public class Text
+    {
+        public const string MAIN_MENU = Generic.MAIN_MENU+Generic.TEXT;
         
     }
 
@@ -661,6 +677,11 @@ namespace Type.Addressable.Tag
         public const string MUSICINFO = "MusicInfo";
         public const string PLAYERABLE = "Playerable";
 
+    }
+
+    public class Sprite
+    {
+        public const string MAIN_MENU = Generic.MAIN_MENU+Generic.SPRITE;
     }
 
 }
