@@ -45,17 +45,17 @@ public class LanguageSwitch : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         switch (SettingManager.Instance.setting.language)
         {
             case Language.Korean:
-                SettingManager.Instance.ChangeLanguage(Language.English);
+                SettingManager.Instance.SetLanguage(Language.English);
                 break;
             case Language.English:
-                SettingManager.Instance.ChangeLanguage(Language.Korean);
+                SettingManager.Instance.SetLanguage(Language.Korean);
                 break;
         }
     }
 
-    private void OnChangeSetting(Setting setting)
+    private void OnChangeSetting()
     {
-        ChangePosition(setting.language);
+        ChangePosition(SettingManager.Instance.setting.language);
     }
 
     private void ChangePosition(Language language)
