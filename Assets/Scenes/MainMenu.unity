@@ -527,6 +527,7 @@ GameObject:
   - component: {fileID: 82723848}
   - component: {fileID: 82723850}
   - component: {fileID: 82723849}
+  - component: {fileID: 82723851}
   m_Layer: 0
   m_Name: Right Limit
   m_TagString: Untagged
@@ -560,7 +561,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 82723847}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef8b96895a0ec4ba685178a052544251, type: 3}
   m_Name: 
@@ -573,7 +574,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 3286163911610860551, guid: d4660eb3c99bacc4daee8e16df18034e, type: 3}
+  m_Sprite: {fileID: 0}
   m_PreserveAspect: 0
 --- !u!222 &82723850
 CanvasRenderer:
@@ -583,6 +584,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 82723847}
   m_CullTransparentMesh: 1
+--- !u!114 &82723851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 82723847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6830e515cce4084589ac513aa22a04d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SVGSpriteLoader
+  spriteIndex: 103
 --- !u!1 &309142827
 GameObject:
   m_ObjectHideFlags: 0
@@ -630,6 +644,7 @@ GameObject:
   - component: {fileID: 323695786}
   - component: {fileID: 323695788}
   - component: {fileID: 323695787}
+  - component: {fileID: 323695789}
   m_Layer: 0
   m_Name: Outside
   m_TagString: Untagged
@@ -663,7 +678,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 323695785}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef8b96895a0ec4ba685178a052544251, type: 3}
   m_Name: 
@@ -676,7 +691,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 3286163911610860551, guid: 83e11d449f2926d48a069eb287169df6, type: 3}
+  m_Sprite: {fileID: 0}
   m_PreserveAspect: 0
 --- !u!222 &323695788
 CanvasRenderer:
@@ -686,6 +701,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 323695785}
   m_CullTransparentMesh: 1
+--- !u!114 &323695789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 323695785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6830e515cce4084589ac513aa22a04d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SVGSpriteLoader
+  spriteIndex: 102
 --- !u!1 &336291945
 GameObject:
   m_ObjectHideFlags: 0
@@ -697,6 +725,7 @@ GameObject:
   - component: {fileID: 336291946}
   - component: {fileID: 336291948}
   - component: {fileID: 336291947}
+  - component: {fileID: 336291949}
   m_Layer: 0
   m_Name: InSide
   m_TagString: Untagged
@@ -730,7 +759,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 336291945}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef8b96895a0ec4ba685178a052544251, type: 3}
   m_Name: 
@@ -743,7 +772,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 3286163911610860551, guid: a035f8bd9426df84e8119d8fa0318d08, type: 3}
+  m_Sprite: {fileID: 0}
   m_PreserveAspect: 0
 --- !u!222 &336291948
 CanvasRenderer:
@@ -753,6 +782,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 336291945}
   m_CullTransparentMesh: 1
+--- !u!114 &336291949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 336291945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6830e515cce4084589ac513aa22a04d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SVGSpriteLoader
+  spriteIndex: 101
 --- !u!1 &365964029
 GameObject:
   m_ObjectHideFlags: 0
@@ -1245,6 +1287,7 @@ GameObject:
   - component: {fileID: 493010107}
   - component: {fileID: 493010109}
   - component: {fileID: 493010108}
+  - component: {fileID: 493010110}
   m_Layer: 0
   m_Name: Bar
   m_TagString: Untagged
@@ -1278,7 +1321,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 493010106}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef8b96895a0ec4ba685178a052544251, type: 3}
   m_Name: 
@@ -1291,7 +1334,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 3286163911610860551, guid: d4660eb3c99bacc4daee8e16df18034e, type: 3}
+  m_Sprite: {fileID: 0}
   m_PreserveAspect: 0
 --- !u!222 &493010109
 CanvasRenderer:
@@ -1301,6 +1344,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 493010106}
   m_CullTransparentMesh: 1
+--- !u!114 &493010110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 493010106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6830e515cce4084589ac513aa22a04d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SVGSpriteLoader
+  spriteIndex: 103
 --- !u!1 &502271036
 GameObject:
   m_ObjectHideFlags: 0
@@ -1757,6 +1813,7 @@ GameObject:
   - component: {fileID: 597237493}
   - component: {fileID: 597237495}
   - component: {fileID: 597237494}
+  - component: {fileID: 597237496}
   m_Layer: 0
   m_Name: Outside
   m_TagString: Untagged
@@ -1790,7 +1847,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 597237492}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef8b96895a0ec4ba685178a052544251, type: 3}
   m_Name: 
@@ -1803,7 +1860,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 3286163911610860551, guid: 83e11d449f2926d48a069eb287169df6, type: 3}
+  m_Sprite: {fileID: 0}
   m_PreserveAspect: 0
 --- !u!222 &597237495
 CanvasRenderer:
@@ -1813,6 +1870,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 597237492}
   m_CullTransparentMesh: 1
+--- !u!114 &597237496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 597237492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6830e515cce4084589ac513aa22a04d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SVGSpriteLoader
+  spriteIndex: 102
 --- !u!1 &608803316
 GameObject:
   m_ObjectHideFlags: 0
@@ -1959,6 +2029,7 @@ GameObject:
   - component: {fileID: 613897203}
   - component: {fileID: 613897202}
   - component: {fileID: 613897204}
+  - component: {fileID: 613897205}
   m_Layer: 0
   m_Name: InputField
   m_TagString: Untagged
@@ -1994,7 +2065,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 613897200}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef8b96895a0ec4ba685178a052544251, type: 3}
   m_Name: 
@@ -2007,7 +2078,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 3286163911610860551, guid: d4660eb3c99bacc4daee8e16df18034e, type: 3}
+  m_Sprite: {fileID: 0}
   m_PreserveAspect: 0
 --- !u!222 &613897203
 CanvasRenderer:
@@ -2085,6 +2156,19 @@ MonoBehaviour:
   m_CaretWidth: 1
   m_ReadOnly: 0
   m_ShouldActivateOnSelect: 1
+--- !u!114 &613897205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 613897200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6830e515cce4084589ac513aa22a04d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SVGSpriteLoader
+  spriteIndex: 103
 --- !u!1 &628071920
 GameObject:
   m_ObjectHideFlags: 0
@@ -2094,8 +2178,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 628071921}
-  - component: {fileID: 628071925}
-  - component: {fileID: 628071924}
+  - component: {fileID: 628071929}
+  - component: {fileID: 628071928}
   - component: {fileID: 628071922}
   - component: {fileID: 628071926}
   - component: {fileID: 628071927}
@@ -2145,36 +2229,6 @@ MonoBehaviour:
   bar: {fileID: 1575850163}
   text: {fileID: 523476036}
   onCilckState: 3
---- !u!114 &628071924
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 628071920}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef8b96895a0ec4ba685178a052544251, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.VectorGraphics::Unity.VectorGraphics.SVGImage
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_PreserveAspect: 0
---- !u!222 &628071925
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 628071920}
-  m_CullTransparentMesh: 1
 --- !u!114 &628071926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2215,10 +2269,40 @@ MonoBehaviour:
   stateDefault:
     value:
     - {fileID: 628071922}
-    - {fileID: 628071924}
+    - {fileID: 628071928}
     - {fileID: 523476038}
     - {fileID: 1575850165}
     delay: 1
+--- !u!114 &628071928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 628071920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef8b96895a0ec4ba685178a052544251, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.VectorGraphics::Unity.VectorGraphics.SVGImage
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_PreserveAspect: 0
+--- !u!222 &628071929
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 628071920}
+  m_CullTransparentMesh: 1
 --- !u!1 &658185774
 GameObject:
   m_ObjectHideFlags: 0
@@ -2404,6 +2488,7 @@ GameObject:
   - component: {fileID: 681133945}
   - component: {fileID: 681133947}
   - component: {fileID: 681133946}
+  - component: {fileID: 681133948}
   m_Layer: 0
   m_Name: Bar
   m_TagString: Untagged
@@ -2437,7 +2522,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 681133944}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef8b96895a0ec4ba685178a052544251, type: 3}
   m_Name: 
@@ -2450,7 +2535,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 3286163911610860551, guid: d4660eb3c99bacc4daee8e16df18034e, type: 3}
+  m_Sprite: {fileID: 0}
   m_PreserveAspect: 0
 --- !u!222 &681133947
 CanvasRenderer:
@@ -2460,6 +2545,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 681133944}
   m_CullTransparentMesh: 1
+--- !u!114 &681133948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 681133944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6830e515cce4084589ac513aa22a04d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SVGSpriteLoader
+  spriteIndex: 103
 --- !u!1 &703043459
 GameObject:
   m_ObjectHideFlags: 0
@@ -2471,6 +2569,7 @@ GameObject:
   - component: {fileID: 703043460}
   - component: {fileID: 703043462}
   - component: {fileID: 703043461}
+  - component: {fileID: 703043463}
   m_Layer: 0
   m_Name: Fill
   m_TagString: Untagged
@@ -2506,7 +2605,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 703043459}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef8b96895a0ec4ba685178a052544251, type: 3}
   m_Name: 
@@ -2519,7 +2618,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 3286163911610860551, guid: a035f8bd9426df84e8119d8fa0318d08, type: 3}
+  m_Sprite: {fileID: 0}
   m_PreserveAspect: 0
 --- !u!222 &703043462
 CanvasRenderer:
@@ -2529,6 +2628,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 703043459}
   m_CullTransparentMesh: 1
+--- !u!114 &703043463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 703043459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6830e515cce4084589ac513aa22a04d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SVGSpriteLoader
+  spriteIndex: 101
 --- !u!1 &772245957
 GameObject:
   m_ObjectHideFlags: 0
@@ -2540,6 +2652,7 @@ GameObject:
   - component: {fileID: 772245958}
   - component: {fileID: 772245960}
   - component: {fileID: 772245959}
+  - component: {fileID: 772245961}
   m_Layer: 0
   m_Name: Bar
   m_TagString: Untagged
@@ -2573,7 +2686,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 772245957}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef8b96895a0ec4ba685178a052544251, type: 3}
   m_Name: 
@@ -2586,7 +2699,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 3286163911610860551, guid: d4660eb3c99bacc4daee8e16df18034e, type: 3}
+  m_Sprite: {fileID: 0}
   m_PreserveAspect: 0
 --- !u!222 &772245960
 CanvasRenderer:
@@ -2596,6 +2709,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 772245957}
   m_CullTransparentMesh: 1
+--- !u!114 &772245961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 772245957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6830e515cce4084589ac513aa22a04d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SVGSpriteLoader
+  spriteIndex: 103
 --- !u!1 &775362490
 GameObject:
   m_ObjectHideFlags: 0
@@ -2647,6 +2773,7 @@ GameObject:
   - component: {fileID: 818227289}
   - component: {fileID: 818227291}
   - component: {fileID: 818227290}
+  - component: {fileID: 818227292}
   m_Layer: 0
   m_Name: InSide
   m_TagString: Untagged
@@ -2680,7 +2807,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 818227288}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef8b96895a0ec4ba685178a052544251, type: 3}
   m_Name: 
@@ -2693,7 +2820,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 3286163911610860551, guid: a035f8bd9426df84e8119d8fa0318d08, type: 3}
+  m_Sprite: {fileID: 0}
   m_PreserveAspect: 0
 --- !u!222 &818227291
 CanvasRenderer:
@@ -2703,6 +2830,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 818227288}
   m_CullTransparentMesh: 1
+--- !u!114 &818227292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 818227288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6830e515cce4084589ac513aa22a04d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SVGSpriteLoader
+  spriteIndex: 101
 --- !u!1 &823042574
 GameObject:
   m_ObjectHideFlags: 0
@@ -3166,8 +3306,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 925130330}
-  - component: {fileID: 925130333}
-  - component: {fileID: 925130332}
+  - component: {fileID: 925130338}
+  - component: {fileID: 925130337}
   - component: {fileID: 925130334}
   - component: {fileID: 925130335}
   - component: {fileID: 925130336}
@@ -3199,36 +3339,6 @@ RectTransform:
   m_AnchoredPosition: {x: 1450, y: 300.00003}
   m_SizeDelta: {x: 1000, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &925130332
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 925130329}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef8b96895a0ec4ba685178a052544251, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.VectorGraphics::Unity.VectorGraphics.SVGImage
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_PreserveAspect: 0
---- !u!222 &925130333
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 925130329}
-  m_CullTransparentMesh: 1
 --- !u!114 &925130334
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3287,10 +3397,40 @@ MonoBehaviour:
   stateDefault:
     value:
     - {fileID: 925130334}
-    - {fileID: 925130332}
+    - {fileID: 925130337}
     - {fileID: 985840145}
     - {fileID: 681133946}
     delay: 1
+--- !u!114 &925130337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 925130329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef8b96895a0ec4ba685178a052544251, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.VectorGraphics::Unity.VectorGraphics.SVGImage
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_PreserveAspect: 0
+--- !u!222 &925130338
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 925130329}
+  m_CullTransparentMesh: 1
 --- !u!1 &985840143
 GameObject:
   m_ObjectHideFlags: 0
@@ -3395,6 +3535,7 @@ GameObject:
   - component: {fileID: 1008290352}
   - component: {fileID: 1008290354}
   - component: {fileID: 1008290353}
+  - component: {fileID: 1008290355}
   m_Layer: 0
   m_Name: Fill
   m_TagString: Untagged
@@ -3430,7 +3571,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1008290351}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef8b96895a0ec4ba685178a052544251, type: 3}
   m_Name: 
@@ -3443,7 +3584,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 3286163911610860551, guid: a035f8bd9426df84e8119d8fa0318d08, type: 3}
+  m_Sprite: {fileID: 0}
   m_PreserveAspect: 0
 --- !u!222 &1008290354
 CanvasRenderer:
@@ -3453,6 +3594,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1008290351}
   m_CullTransparentMesh: 1
+--- !u!114 &1008290355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1008290351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6830e515cce4084589ac513aa22a04d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SVGSpriteLoader
+  spriteIndex: 101
 --- !u!1 &1023064198
 GameObject:
   m_ObjectHideFlags: 0
@@ -3597,6 +3751,7 @@ GameObject:
   - component: {fileID: 1048082343}
   - component: {fileID: 1048082345}
   - component: {fileID: 1048082344}
+  - component: {fileID: 1048082346}
   m_Layer: 0
   m_Name: Left Limit
   m_TagString: Untagged
@@ -3630,7 +3785,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1048082342}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef8b96895a0ec4ba685178a052544251, type: 3}
   m_Name: 
@@ -3643,7 +3798,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 3286163911610860551, guid: d4660eb3c99bacc4daee8e16df18034e, type: 3}
+  m_Sprite: {fileID: 0}
   m_PreserveAspect: 0
 --- !u!222 &1048082345
 CanvasRenderer:
@@ -3653,6 +3808,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1048082342}
   m_CullTransparentMesh: 1
+--- !u!114 &1048082346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1048082342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6830e515cce4084589ac513aa22a04d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SVGSpriteLoader
+  spriteIndex: 103
 --- !u!1 &1055360356
 GameObject:
   m_ObjectHideFlags: 0
@@ -3767,6 +3935,7 @@ GameObject:
   - component: {fileID: 1071733698}
   - component: {fileID: 1071733700}
   - component: {fileID: 1071733699}
+  - component: {fileID: 1071733701}
   m_Layer: 0
   m_Name: Fill
   m_TagString: Untagged
@@ -3802,7 +3971,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1071733697}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef8b96895a0ec4ba685178a052544251, type: 3}
   m_Name: 
@@ -3815,7 +3984,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 3286163911610860551, guid: a035f8bd9426df84e8119d8fa0318d08, type: 3}
+  m_Sprite: {fileID: 0}
   m_PreserveAspect: 0
 --- !u!222 &1071733700
 CanvasRenderer:
@@ -3825,6 +3994,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1071733697}
   m_CullTransparentMesh: 1
+--- !u!114 &1071733701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1071733697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6830e515cce4084589ac513aa22a04d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SVGSpriteLoader
+  spriteIndex: 101
 --- !u!1 &1085501072
 GameObject:
   m_ObjectHideFlags: 0
@@ -3836,6 +4018,7 @@ GameObject:
   - component: {fileID: 1085501073}
   - component: {fileID: 1085501075}
   - component: {fileID: 1085501074}
+  - component: {fileID: 1085501076}
   m_Layer: 0
   m_Name: Line
   m_TagString: Untagged
@@ -3871,7 +4054,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1085501072}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef8b96895a0ec4ba685178a052544251, type: 3}
   m_Name: 
@@ -3884,7 +4067,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 3286163911610860551, guid: d4660eb3c99bacc4daee8e16df18034e, type: 3}
+  m_Sprite: {fileID: 0}
   m_PreserveAspect: 0
 --- !u!222 &1085501075
 CanvasRenderer:
@@ -3894,6 +4077,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1085501072}
   m_CullTransparentMesh: 1
+--- !u!114 &1085501076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1085501072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6830e515cce4084589ac513aa22a04d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SVGSpriteLoader
+  spriteIndex: 103
 --- !u!1 &1087192138
 GameObject:
   m_ObjectHideFlags: 0
@@ -3905,6 +4101,7 @@ GameObject:
   - component: {fileID: 1087192139}
   - component: {fileID: 1087192141}
   - component: {fileID: 1087192140}
+  - component: {fileID: 1087192142}
   m_Layer: 0
   m_Name: Line
   m_TagString: Untagged
@@ -3940,7 +4137,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1087192138}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef8b96895a0ec4ba685178a052544251, type: 3}
   m_Name: 
@@ -3953,7 +4150,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 3286163911610860551, guid: d4660eb3c99bacc4daee8e16df18034e, type: 3}
+  m_Sprite: {fileID: 0}
   m_PreserveAspect: 0
 --- !u!222 &1087192141
 CanvasRenderer:
@@ -3963,6 +4160,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1087192138}
   m_CullTransparentMesh: 1
+--- !u!114 &1087192142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1087192138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6830e515cce4084589ac513aa22a04d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SVGSpriteLoader
+  spriteIndex: 103
 --- !u!1 &1136151917
 GameObject:
   m_ObjectHideFlags: 0
@@ -3973,6 +4183,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1136151919}
   - component: {fileID: 1136151920}
+  - component: {fileID: 1136151923}
   - component: {fileID: 1136151922}
   - component: {fileID: 1136151921}
   m_Layer: 0
@@ -4033,6 +4244,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b44b5c0d47d8654082179ee535a646b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Tables.MusicTable.MusicTable
+--- !u!114 &1136151923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1136151917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fb36287051457643bd9df94a4b98714, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Tables.SpriteTable.SpriteTable
 --- !u!1 &1237095159
 GameObject:
   m_ObjectHideFlags: 0
@@ -4088,6 +4311,7 @@ GameObject:
   - component: {fileID: 1254994481}
   - component: {fileID: 1254994483}
   - component: {fileID: 1254994482}
+  - component: {fileID: 1254994484}
   m_Layer: 0
   m_Name: Line
   m_TagString: Untagged
@@ -4123,7 +4347,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1254994480}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef8b96895a0ec4ba685178a052544251, type: 3}
   m_Name: 
@@ -4136,7 +4360,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 3286163911610860551, guid: d4660eb3c99bacc4daee8e16df18034e, type: 3}
+  m_Sprite: {fileID: 0}
   m_PreserveAspect: 0
 --- !u!222 &1254994483
 CanvasRenderer:
@@ -4146,6 +4370,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1254994480}
   m_CullTransparentMesh: 1
+--- !u!114 &1254994484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1254994480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6830e515cce4084589ac513aa22a04d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SVGSpriteLoader
+  spriteIndex: 103
 --- !u!1 &1274076086
 GameObject:
   m_ObjectHideFlags: 0
@@ -4294,6 +4531,7 @@ GameObject:
   - component: {fileID: 1331591320}
   - component: {fileID: 1331591322}
   - component: {fileID: 1331591321}
+  - component: {fileID: 1331591323}
   m_Layer: 0
   m_Name: Bar
   m_TagString: Untagged
@@ -4327,7 +4565,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1331591319}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef8b96895a0ec4ba685178a052544251, type: 3}
   m_Name: 
@@ -4340,7 +4578,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 3286163911610860551, guid: d4660eb3c99bacc4daee8e16df18034e, type: 3}
+  m_Sprite: {fileID: 0}
   m_PreserveAspect: 0
 --- !u!222 &1331591322
 CanvasRenderer:
@@ -4350,6 +4588,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1331591319}
   m_CullTransparentMesh: 1
+--- !u!114 &1331591323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1331591319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6830e515cce4084589ac513aa22a04d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SVGSpriteLoader
+  spriteIndex: 103
 --- !u!1 &1336874043
 GameObject:
   m_ObjectHideFlags: 0
@@ -4781,6 +5032,7 @@ GameObject:
   - component: {fileID: 1391516877}
   - component: {fileID: 1391516881}
   - component: {fileID: 1391516880}
+  - component: {fileID: 1391516882}
   - component: {fileID: 1391516878}
   - component: {fileID: 1391516879}
   m_Layer: 0
@@ -4850,7 +5102,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1391516876}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef8b96895a0ec4ba685178a052544251, type: 3}
   m_Name: 
@@ -4873,6 +5125,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1391516876}
   m_CullTransparentMesh: 1
+--- !u!114 &1391516882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1391516876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6830e515cce4084589ac513aa22a04d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SVGSpriteLoader
+  spriteIndex: 105
 --- !u!1 &1442689059
 GameObject:
   m_ObjectHideFlags: 0
@@ -4884,6 +5149,7 @@ GameObject:
   - component: {fileID: 1442689060}
   - component: {fileID: 1442689062}
   - component: {fileID: 1442689061}
+  - component: {fileID: 1442689063}
   m_Layer: 0
   m_Name: Right Limit
   m_TagString: Untagged
@@ -4917,7 +5183,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1442689059}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef8b96895a0ec4ba685178a052544251, type: 3}
   m_Name: 
@@ -4930,7 +5196,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 3286163911610860551, guid: d4660eb3c99bacc4daee8e16df18034e, type: 3}
+  m_Sprite: {fileID: 0}
   m_PreserveAspect: 0
 --- !u!222 &1442689062
 CanvasRenderer:
@@ -4940,6 +5206,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1442689059}
   m_CullTransparentMesh: 1
+--- !u!114 &1442689063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1442689059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6830e515cce4084589ac513aa22a04d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SVGSpriteLoader
+  spriteIndex: 103
 --- !u!1 &1462887588
 GameObject:
   m_ObjectHideFlags: 0
@@ -5086,6 +5365,7 @@ GameObject:
   - component: {fileID: 1509582762}
   - component: {fileID: 1509582764}
   - component: {fileID: 1509582763}
+  - component: {fileID: 1509582765}
   m_Layer: 0
   m_Name: Left Limit
   m_TagString: Untagged
@@ -5119,7 +5399,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1509582761}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef8b96895a0ec4ba685178a052544251, type: 3}
   m_Name: 
@@ -5132,7 +5412,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 3286163911610860551, guid: d4660eb3c99bacc4daee8e16df18034e, type: 3}
+  m_Sprite: {fileID: 0}
   m_PreserveAspect: 0
 --- !u!222 &1509582764
 CanvasRenderer:
@@ -5142,6 +5422,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1509582761}
   m_CullTransparentMesh: 1
+--- !u!114 &1509582765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1509582761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6830e515cce4084589ac513aa22a04d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SVGSpriteLoader
+  spriteIndex: 103
 --- !u!1 &1532185837
 GameObject:
   m_ObjectHideFlags: 0
@@ -5198,6 +5491,7 @@ GameObject:
   - component: {fileID: 1575850164}
   - component: {fileID: 1575850166}
   - component: {fileID: 1575850165}
+  - component: {fileID: 1575850167}
   m_Layer: 0
   m_Name: Bar
   m_TagString: Untagged
@@ -5231,7 +5525,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1575850163}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef8b96895a0ec4ba685178a052544251, type: 3}
   m_Name: 
@@ -5244,7 +5538,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 3286163911610860551, guid: d4660eb3c99bacc4daee8e16df18034e, type: 3}
+  m_Sprite: {fileID: 0}
   m_PreserveAspect: 0
 --- !u!222 &1575850166
 CanvasRenderer:
@@ -5254,6 +5548,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1575850163}
   m_CullTransparentMesh: 1
+--- !u!114 &1575850167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1575850163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6830e515cce4084589ac513aa22a04d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SVGSpriteLoader
+  spriteIndex: 103
 --- !u!1 &1608029091
 GameObject:
   m_ObjectHideFlags: 0
@@ -5265,6 +5572,7 @@ GameObject:
   - component: {fileID: 1608029092}
   - component: {fileID: 1608029094}
   - component: {fileID: 1608029093}
+  - component: {fileID: 1608029095}
   m_Layer: 0
   m_Name: Outside
   m_TagString: Untagged
@@ -5298,7 +5606,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1608029091}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef8b96895a0ec4ba685178a052544251, type: 3}
   m_Name: 
@@ -5311,7 +5619,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 3286163911610860551, guid: 83e11d449f2926d48a069eb287169df6, type: 3}
+  m_Sprite: {fileID: 0}
   m_PreserveAspect: 0
 --- !u!222 &1608029094
 CanvasRenderer:
@@ -5321,6 +5629,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1608029091}
   m_CullTransparentMesh: 1
+--- !u!114 &1608029095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1608029091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6830e515cce4084589ac513aa22a04d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SVGSpriteLoader
+  spriteIndex: 102
 --- !u!1 &1703216473
 GameObject:
   m_ObjectHideFlags: 0
@@ -5332,6 +5653,7 @@ GameObject:
   - component: {fileID: 1703216474}
   - component: {fileID: 1703216476}
   - component: {fileID: 1703216475}
+  - component: {fileID: 1703216479}
   - component: {fileID: 1703216477}
   - component: {fileID: 1703216478}
   m_Layer: 0
@@ -5367,7 +5689,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1703216473}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef8b96895a0ec4ba685178a052544251, type: 3}
   m_Name: 
@@ -5380,7 +5702,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 3286163911610860551, guid: c878f45d4272cb942961c67831a84ae0, type: 3}
+  m_Sprite: {fileID: 0}
   m_PreserveAspect: 0
 --- !u!222 &1703216476
 CanvasRenderer:
@@ -5424,6 +5746,19 @@ MonoBehaviour:
     - {fileID: 1703216475}
     - {fileID: 1703216477}
     delay: 1
+--- !u!114 &1703216479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1703216473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6830e515cce4084589ac513aa22a04d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SVGSpriteLoader
+  spriteIndex: 104
 --- !u!1 &1725389888
 GameObject:
   m_ObjectHideFlags: 0
@@ -5514,6 +5849,7 @@ GameObject:
   - component: {fileID: 1739292785}
   - component: {fileID: 1739292787}
   - component: {fileID: 1739292786}
+  - component: {fileID: 1739292788}
   m_Layer: 0
   m_Name: Bar
   m_TagString: Untagged
@@ -5547,7 +5883,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1739292784}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef8b96895a0ec4ba685178a052544251, type: 3}
   m_Name: 
@@ -5560,7 +5896,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 3286163911610860551, guid: d4660eb3c99bacc4daee8e16df18034e, type: 3}
+  m_Sprite: {fileID: 0}
   m_PreserveAspect: 0
 --- !u!222 &1739292787
 CanvasRenderer:
@@ -5570,6 +5906,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1739292784}
   m_CullTransparentMesh: 1
+--- !u!114 &1739292788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1739292784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6830e515cce4084589ac513aa22a04d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SVGSpriteLoader
+  spriteIndex: 103
 --- !u!1 &1847172507
 GameObject:
   m_ObjectHideFlags: 0
@@ -5581,6 +5930,7 @@ GameObject:
   - component: {fileID: 1847172508}
   - component: {fileID: 1847172510}
   - component: {fileID: 1847172509}
+  - component: {fileID: 1847172511}
   m_Layer: 0
   m_Name: Left Limit
   m_TagString: Untagged
@@ -5614,7 +5964,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1847172507}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef8b96895a0ec4ba685178a052544251, type: 3}
   m_Name: 
@@ -5627,7 +5977,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 3286163911610860551, guid: d4660eb3c99bacc4daee8e16df18034e, type: 3}
+  m_Sprite: {fileID: 0}
   m_PreserveAspect: 0
 --- !u!222 &1847172510
 CanvasRenderer:
@@ -5637,6 +5987,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1847172507}
   m_CullTransparentMesh: 1
+--- !u!114 &1847172511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1847172507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6830e515cce4084589ac513aa22a04d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SVGSpriteLoader
+  spriteIndex: 103
 --- !u!1 &1930399249
 GameObject:
   m_ObjectHideFlags: 0
@@ -5648,6 +6011,7 @@ GameObject:
   - component: {fileID: 1930399250}
   - component: {fileID: 1930399252}
   - component: {fileID: 1930399251}
+  - component: {fileID: 1930399253}
   m_Layer: 0
   m_Name: InSide
   m_TagString: Untagged
@@ -5681,7 +6045,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1930399249}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef8b96895a0ec4ba685178a052544251, type: 3}
   m_Name: 
@@ -5694,7 +6058,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 3286163911610860551, guid: a035f8bd9426df84e8119d8fa0318d08, type: 3}
+  m_Sprite: {fileID: 0}
   m_PreserveAspect: 0
 --- !u!222 &1930399252
 CanvasRenderer:
@@ -5704,6 +6068,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1930399249}
   m_CullTransparentMesh: 1
+--- !u!114 &1930399253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1930399249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6830e515cce4084589ac513aa22a04d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SVGSpriteLoader
+  spriteIndex: 101
 --- !u!1 &1940938470
 GameObject:
   m_ObjectHideFlags: 0
@@ -6008,6 +6385,7 @@ GameObject:
   - component: {fileID: 1967607409}
   - component: {fileID: 1967607411}
   - component: {fileID: 1967607410}
+  - component: {fileID: 1967607412}
   m_Layer: 0
   m_Name: Right Limit
   m_TagString: Untagged
@@ -6041,7 +6419,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1967607408}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef8b96895a0ec4ba685178a052544251, type: 3}
   m_Name: 
@@ -6054,7 +6432,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 3286163911610860551, guid: d4660eb3c99bacc4daee8e16df18034e, type: 3}
+  m_Sprite: {fileID: 0}
   m_PreserveAspect: 0
 --- !u!222 &1967607411
 CanvasRenderer:
@@ -6064,6 +6442,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1967607408}
   m_CullTransparentMesh: 1
+--- !u!114 &1967607412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1967607408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6830e515cce4084589ac513aa22a04d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SVGSpriteLoader
+  spriteIndex: 103
 --- !u!1 &2041698323
 GameObject:
   m_ObjectHideFlags: 0
@@ -6168,6 +6559,7 @@ GameObject:
   - component: {fileID: 2072184550}
   - component: {fileID: 2072184552}
   - component: {fileID: 2072184551}
+  - component: {fileID: 2072184553}
   m_Layer: 0
   m_Name: Bar
   m_TagString: Untagged
@@ -6201,7 +6593,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2072184549}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef8b96895a0ec4ba685178a052544251, type: 3}
   m_Name: 
@@ -6214,7 +6606,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 3286163911610860551, guid: d4660eb3c99bacc4daee8e16df18034e, type: 3}
+  m_Sprite: {fileID: 0}
   m_PreserveAspect: 0
 --- !u!222 &2072184552
 CanvasRenderer:
@@ -6224,6 +6616,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2072184549}
   m_CullTransparentMesh: 1
+--- !u!114 &2072184553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2072184549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6830e515cce4084589ac513aa22a04d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SVGSpriteLoader
+  spriteIndex: 103
 --- !u!1 &2074477297
 GameObject:
   m_ObjectHideFlags: 0
@@ -6338,6 +6743,7 @@ GameObject:
   - component: {fileID: 2128539603}
   - component: {fileID: 2128539606}
   - component: {fileID: 2128539605}
+  - component: {fileID: 2128539607}
   m_Layer: 0
   m_Name: InSide
   m_TagString: Untagged
@@ -6371,7 +6777,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2128539602}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef8b96895a0ec4ba685178a052544251, type: 3}
   m_Name: 
@@ -6384,7 +6790,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 3286163911610860551, guid: d4660eb3c99bacc4daee8e16df18034e, type: 3}
+  m_Sprite: {fileID: 0}
   m_PreserveAspect: 0
 --- !u!222 &2128539606
 CanvasRenderer:
@@ -6394,6 +6800,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2128539602}
   m_CullTransparentMesh: 1
+--- !u!114 &2128539607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2128539602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6830e515cce4084589ac513aa22a04d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SVGSpriteLoader
+  spriteIndex: 103
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
