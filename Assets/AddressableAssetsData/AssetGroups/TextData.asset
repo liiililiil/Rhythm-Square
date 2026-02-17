@@ -19,55 +19,55 @@ MonoBehaviour:
     m_Address: Assets/AddressableData/Texts/ButtonTexts/Offset.asset
     m_ReadOnly: 0
     m_SerializedLabels:
-    - MainMenu
+    - MainMenuText
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1468902cbd66027438d8dbc2e6e04732
     m_Address: Assets/Data/Texts/UiTexts/ExitWarningText.asset
     m_ReadOnly: 0
     m_SerializedLabels:
-    - MainMenu
+    - MainMenuText
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 49851ca62c43f3a4e8021329d5331969
     m_Address: Assets/AddressableData/Texts/ButtonTexts/SFX.asset
     m_ReadOnly: 0
     m_SerializedLabels:
-    - MainMenu
+    - MainMenuText
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4f6259f3c5be07d4a91c8cb9950e652b
     m_Address: Assets/Data/Texts/ButtonTexts/ToSelect.asset
     m_ReadOnly: 0
     m_SerializedLabels:
-    - MainMenu
+    - MainMenuText
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5c4c5d955189e1242a9321dd732f91dc
     m_Address: Assets/AddressableData/Texts/ButtonTexts/ToExit.asset
     m_ReadOnly: 0
     m_SerializedLabels:
-    - MainMenu
+    - MainMenuText
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 7b2a237170bf9204e9d4bf90233b5124
     m_Address: Assets/AddressableData/Texts/ButtonTexts/Music.asset
     m_ReadOnly: 0
     m_SerializedLabels:
-    - MainMenu
+    - MainMenuText
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c4cb3d5545d8df444818fdef9550e413
     m_Address: Assets/AddressableData/Texts/ButtonTexts/ToMenu.asset
     m_ReadOnly: 0
     m_SerializedLabels:
-    - MainMenu
+    - MainMenuText
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e1be3e4f55e9b0f4c9a202d566e8f738
     m_Address: Assets/Data/Texts/UiTexts/Language.asset
     m_ReadOnly: 0
     m_SerializedLabels:
-    - MainMenu
+    - MainMenuText
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e45841503b6e15b43a66f3291675b048
     m_Address: Assets/AddressableData/Texts/ButtonTexts/ToSetting.asset
     m_ReadOnly: 0
     m_SerializedLabels:
-    - MainMenu
+    - MainMenuText
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f9191552c0ddbbf42a184792293139ce
     m_Address: Assets/Data/Texts

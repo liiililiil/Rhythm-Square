@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4a8ac37b0d11d542a3e068e42fa99ca, type: 3}
-  m_Name: ZidandaStep
+  m_Name: MachRoger
   m_EditorClassIdentifier: Assembly-CSharp::AudioManagement.MusicInfo
-  index: 202
-  sprite: {fileID: 4325700180379299132, guid: c2aa8b8d5ed7c2b4ba9ee046a8e08455, type: 3}
-  title: Zidanda Step
+  index: 201
+  sprite: {fileID: 424836421422347277, guid: 46a61c2a556134c4e814fab0abc0e2d5, type: 3}
+  title: Mach Roger
   artist: MYUKKE.
-  bpm: 128
+  bpm: 180

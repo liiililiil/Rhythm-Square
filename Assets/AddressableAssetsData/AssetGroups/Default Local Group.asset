@@ -32,11 +32,10 @@ MonoBehaviour:
     m_SerializedLabels:
     - Music
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 986859d3dc6427e4d997bfb0abd81d78
-    m_Address: Assets/Audio/Music/iluvslapbass.mp3
+  - m_GUID: b9e8a389f0df13642a951100c71f5a16
+    m_Address: Assets/Audio/Music
     m_ReadOnly: 0
-    m_SerializedLabels:
-    - Music
+    m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 3bb385a73fe80c94fbacc8b780355829, type: 2}
