@@ -12,6 +12,7 @@ namespace AudioManagement
     [CreateAssetMenu(fileName = "EmptyMusicInfo", menuName = "AudioAssets/New Music Info")]
     public class MusicInfo : IndexedScriptableObject<MusicIndex>
     {
+        public Sprite sprite;
         public string title;
         public string artist;
         public float bpm;
