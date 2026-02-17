@@ -23,18 +23,7 @@ public class MultinationalTextSupport : MonoBehaviour
 
     private void Awake()
     {
-        TryGetComponent(out textObject);
-
-        //예외 검사
-        try
-        {
-            // if(textObject.text != "") Debug.LogWarning("Text에 이미 텍스트가 존재합니다! 덮어쓰기 됩니다!", this);
-        }
-        catch (Exception ex)
-        {
-            Debug.LogError(ex, this);
-            return;
-        }
+        textObject = GetComponent<Text>();
     }
 
     private void Start()
@@ -48,7 +37,7 @@ public class MultinationalTextSupport : MonoBehaviour
         Invoke("Tester",1);
         return;
 
-        string targetText= TextTable.Instance.GetMainMenuText(index).GetString(SettingManager.Instance.setting.language);
+        string targetText= TextTable.Instance.GetText(index).GetString(SettingManager.Instance.setting.language);
 
         // 같은 텍스트면 무시
         if(targetText  == textObject.text) return;
@@ -60,7 +49,7 @@ public class MultinationalTextSupport : MonoBehaviour
 
     private void Tester()
     {
-        string targetText= TextTable.Instance.GetMainMenuText(index).GetString(SettingManager.Instance.setting.language);
+        string targetText= TextTable.Instance.GetText(index).GetString(SettingManager.Instance.setting.language);
 
         // 같은 텍스트면 무시
         if(targetText  == textObject.text) return;
