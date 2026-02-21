@@ -15,11 +15,22 @@ MonoBehaviour:
   m_GroupName: MenuEssential
   m_GUID: 21131b92d6a2d3e4abf5379ca3fa9cfe
   m_SerializeEntries:
+  - m_GUID: 24a1a54afdbe17349a4c460583248601
+    m_Address: Assets/Prefabs/Menu
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 480ec7150176fe248a27559dfbebd8c0
     m_Address: Assets/AddressableData/Sprite/MainMenu/Square.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - MainMenuSprite
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 641a1365ecad7344c92b7c7089b08c36
+    m_Address: Assets/AddressableData/Assets/AddressableData
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - MainMenuPrefab
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 83e11d449f2926d48a069eb287169df6
     m_Address: Assets/Sprites/SVGs/Menu/EmptyDiamond.svg

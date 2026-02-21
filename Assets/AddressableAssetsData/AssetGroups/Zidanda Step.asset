@@ -21,6 +21,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - MusicInfo
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5ee38268f147d8f48a46f604add79ccc
+    m_Address: Assets/AddressableData/Audio/Music/Clip/Zidanda Step.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Music
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8fc0a3e3461de3b458e16aad8a416572
     m_Address: Assets/AddressableData/Audio/Music/Playerable/ZidandaStep.asset
     m_ReadOnly: 0

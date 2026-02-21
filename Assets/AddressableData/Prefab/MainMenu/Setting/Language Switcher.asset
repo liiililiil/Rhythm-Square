@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6c52cf1b2f08094fa8d40a72f679f60, type: 3}
+  m_Name: Language Switcher
+  m_EditorClassIdentifier: Assembly-CSharp::AddressableManagement.AddressablePrefab
+  index: 12001
+  prefab: {fileID: 7749105005623780201, guid: 39fde5e7ca43b6449a3760982b86a088, type: 3}

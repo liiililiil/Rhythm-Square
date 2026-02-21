@@ -15,7 +15,7 @@ MonoBehaviour:
   m_DefaultGroup: 42352ccc3da452b43a874cc576dd636f
   m_currentHash:
     serializedVersion: 2
-    Hash: f170caef09f88d6b9c3283e553b15968
+    Hash: 32495a7e11fc887ad1dc9da9d5fab900
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 0
   m_CatalogRequestsTimeout: 0
@@ -111,6 +111,7 @@ MonoBehaviour:
     - Playerable
     - MainMenuText
     - MainMenuSprite
+    - MainMenuPrefab
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: df03c84c57ff522418aa503cb2c1cafc, type: 2}

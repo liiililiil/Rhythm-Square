@@ -20,18 +20,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 35d5553b03b0c264d8da720e6721d886
-    m_Address: Assets/AddressableData/Audio/Music/Clip/MachRoger.asset
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Music
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 5ee38268f147d8f48a46f604add79ccc
-    m_Address: Assets/AddressableData/Audio/Music/Clip/Zidanda Step.asset
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Music
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b9e8a389f0df13642a951100c71f5a16
     m_Address: Assets/Audio/Music
     m_ReadOnly: 0
