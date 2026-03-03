@@ -26,6 +26,13 @@ namespace Types
         
     }
 }
+namespace Type.MainMenu
+{
+    public class Const{
+        public const float BPM_TO_SEC = 60f / 130f;
+
+    }
+}
 
 namespace Types.Menu
 {
@@ -34,7 +41,7 @@ namespace Types.Menu
     {
         //초기 설정 로딩
         InitLoading = 0,
-        MainWaitng = 1,
+        InitWaitng = 1,
 
         //타이틀
         Main = 2,
@@ -308,8 +315,21 @@ namespace Types.Addressable
 
         public bool IsAllComplete()
         {
+            if(GetTotalPrograss() < 1f) return false;
             return leftPrograss <= 0;
         }
+
+        public IEnumerator WaitForCompleteAllLoading(Action callback)
+        {
+
+            while (!IsAllComplete() || GetTotalPrograss() < 1f)
+            {
+                yield return null;
+            }
+            callback.Invoke();
+        }
+
+
     }
     
     //로딩될 공간이 포함된 어드레서블 에셋
@@ -376,7 +396,7 @@ namespace Types.Addressable
 
             //에셋 로딩 신고
             int index;
-            AssetLoadManager.Instance.LoadingRecoder.StartLoading(out index);
+            AssetLoadManager.Instance.loadingRecoder.StartLoading(out index);
 
             //로딩
             _handle = Addressables.LoadAssetAsync<T>(addressableAsset);
@@ -386,21 +406,21 @@ namespace Types.Addressable
                 {
 
                     //진행도 기록
-                    AssetLoadManager.Instance.LoadingRecoder.SetPrograss(index, _handle.PercentComplete);
+                    AssetLoadManager.Instance.loadingRecoder.SetPrograss(index, _handle.PercentComplete);
                     yield return null;
                 }
 
                 if(_handle.Status == AsyncOperationStatus.Succeeded)
                 {   
                     //로딩 성공시 신고 후 콜백 함수 호출 
-                    AssetLoadManager.Instance.LoadingRecoder.CompleteLoading(index);
+                    AssetLoadManager.Instance.loadingRecoder.CompleteLoading(index);
                     InvokeLoadingComplete.Invoke();
                 }
                 else
                 {
                     //실패시 신고후 오류 반환
                     Debug.LogError(_handle.OperationException);
-                    AssetLoadManager.Instance.LoadingRecoder.LoadingError(index, _handle.OperationException);
+                    AssetLoadManager.Instance.loadingRecoder.LoadingError(index, _handle.OperationException);
                 }
             } 
             finally
@@ -438,10 +458,10 @@ namespace Types.Addressable
 
     protected Stack<int> recoderBindedIndex = new Stack<int>();
 
-    public virtual IEnumerator LoadingAsset(string label)
+    public virtual IEnumerator LoadingAsset(string label, Action callback = null)
     {
         
-        Debug.Log(" 로딩 시작 ");
+        // Debug.Log(" 로딩 시작 ");
         //에셋 갯수 확인 후 그 갯수만큼 신고
         countHandle = Addressables.LoadResourceLocationsAsync(label);
         yield return countHandle;
@@ -450,7 +470,7 @@ namespace Types.Addressable
         {
             // 부여된 인덱스 저장
             int index;
-            AssetLoadManager.Instance.LoadingRecoder.StartLoading(out index);
+            AssetLoadManager.Instance.loadingRecoder.StartLoading(out index);
             recoderBindedIndex.Push(index);
         }
         
@@ -472,14 +492,15 @@ namespace Types.Addressable
             Debug.LogError(handle.OperationException);
         }
 
-        Debug.Log("로딩 완료");
+        // 콜백
+        callback?.Invoke();
     }
 
 
     protected virtual void AssetBind(_T1 asset)
     {
         //레코더에게 완료알림
-        AssetLoadManager.Instance.LoadingRecoder.CompleteLoading(recoderBindedIndex.Pop());
+        AssetLoadManager.Instance.loadingRecoder.CompleteLoading(recoderBindedIndex.Pop());
         
         //바인딩
         table.Add(asset.index, asset);
@@ -532,7 +553,7 @@ namespace Types.Addressable
         }
         
 
-        public new IEnumerator LoadingAsset(string label)
+        public new IEnumerator LoadingAsset(string label, Action callback = null)
         {
             
             // 에셋 로딩 확인할 그룹화 하기 전 핸들 리스트
@@ -550,7 +571,7 @@ namespace Types.Addressable
             {
                 // 부여된 인덱스 저장
                 int index;
-                AssetLoadManager.Instance.LoadingRecoder.StartLoading(out index);
+                AssetLoadManager.Instance.loadingRecoder.StartLoading(out index);
                 recoderBindedIndex.Push(index);
             }
             
@@ -582,15 +603,18 @@ namespace Types.Addressable
                 {
                     // 에러 전달
                     Debug.LogError(eachHandle.OperationException);
-                    AssetLoadManager.Instance.LoadingRecoder.LoadingError(recoderBindedIndex.Pop(), eachHandle.OperationException);
+                    AssetLoadManager.Instance.loadingRecoder.LoadingError(recoderBindedIndex.Pop(), eachHandle.OperationException);
                 }
             }
 
-            Debug.Log("로딩 완료");
+            // Debug.Log("로딩 완료");
 
             //정리
             groupHandles.Clear();
             loadedHandle.Clear();
+
+            //콜백
+            callback?.Invoke();
         }
 
 
@@ -598,7 +622,7 @@ namespace Types.Addressable
         {
 
             //레코더에게 완료알림
-            AssetLoadManager.Instance.LoadingRecoder.CompleteLoading(recoderBindedIndex.Pop());
+            AssetLoadManager.Instance.loadingRecoder.CompleteLoading(recoderBindedIndex.Pop());
 
             //바인딩
             table.Add(asset.index, asset);
@@ -652,23 +676,38 @@ namespace Types.Addressable.Table
         ZidandaStep = 202,
     }
 
+
+    // 프리팹 목록
+    public enum PrefabIndex
+    {
+        //메인메뉴용
+        Title = 11001,
+        Logo = 11002,
+        SettingButton = 11003,
+        SelectButton = 11004,
+        ExitButton = 11005,
+
+        //메뉴 > 설정
+        LanguageSwitch = 12001,
+        SettingToMenuButton = 12002,
+        MusicVolumeSlider = 12003,
+        SFXVolumeSlider = 12004,
+        OffsetSlider = 12005,
+
+        //메뉴 > 종료 경고
+        ExitWarningText = 13001,
+        ProgramExitButton = 13002,
+        ExitToMenuButton = 13003,
+        
+    }
+
 }
 namespace Type.Addressable.Tag
 {
     //어드레서블 태그 관리용 상수
-
-    //통용되는 상수
-    public class Generic
-    {
-        public const string MAIN_MENU = "MainMenu";
-        public const string TEXT = "Text";
-        public const string SPRITE = "Sprite";
-    }
-
     public class Text
     {
-        public const string MAIN_MENU = Generic.MAIN_MENU+Generic.TEXT;
-        
+        public const string MAIN_MENU = "MainMenuText";
     }
 
     public class Audio
@@ -676,12 +715,16 @@ namespace Type.Addressable.Tag
         public const string MUSIC = "Music";
         public const string MUSICINFO = "MusicInfo";
         public const string PLAYERABLE = "Playerable";
-
     }
 
     public class Sprite
     {
-        public const string MAIN_MENU = Generic.MAIN_MENU+Generic.SPRITE;
+        public const string MAIN_MENU = "MainMenuSprite";
+    }
+
+    public class Prefab
+    {
+        public const string MAIN_MENU = "MainMenuPrefab";
     }
 
 }
