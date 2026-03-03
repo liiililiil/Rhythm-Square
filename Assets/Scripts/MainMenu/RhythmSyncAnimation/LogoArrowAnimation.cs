@@ -38,7 +38,7 @@ public class LogoArrowAnimation : MonoBehaviour
         }
 
         // 재생이 완료되면
-        if(elapsed >= Temps.BPM_TO_SEC)
+        if(elapsed >= Type.MainMenu.Const.BPM_TO_SEC)
         {
             //보정
             SetRectTranform(1);
@@ -46,7 +46,7 @@ public class LogoArrowAnimation : MonoBehaviour
         }
 
         // 정규화 후 Easing
-        t = elapsed / Temps.BPM_TO_SEC;
+        t = elapsed / Type.MainMenu.Const.BPM_TO_SEC;
         t = Ease.Easing(t,easeType);
 
         // Eased 값을 가지고 크기와 회전 제어
