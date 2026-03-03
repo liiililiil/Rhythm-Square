@@ -13,11 +13,20 @@ public class SVGSpriteLoader : MonoBehaviour
         sVGImage = GetComponent<SVGImage>();
     }
 
-    private void Start() {
-        Invoke("Tester", 2);
+    private void Start()
+    {
+        if (AssetLoadManager.Instance.loadingRecoder.IsAllComplete())
+        {
+            sVGImage.sprite = SpriteTable.Instance.GetSprite(spriteIndex).sprite;
+        }
+        else
+        {
+            AssetLoadManager.Instance.OnMainMenuAssetLoaded.AddListener(OnMainMenuAssetLoaded);
+            
+        }
     }
 
-    private void Tester()
+    private void OnMainMenuAssetLoaded()
     {
         sVGImage.sprite = SpriteTable.Instance.GetSprite(spriteIndex).sprite;
     }
