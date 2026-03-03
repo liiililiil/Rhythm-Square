@@ -16,16 +16,24 @@ namespace Tables.MusicTable
         EachLoader<PlayableMusic, MusicIndex> playable = new EachLoader<PlayableMusic, MusicIndex>();
 
         private void Awake() {
-            Load();
             Singleton(true);
         }
         
         public void Load()
         {
-            this.SafeStartCoroutine(ref music.coroutine, music.LoadingAsset(Type.Addressable.Tag.Audio.MUSIC));
+            this.SafeStartCoroutine(ref music.coroutine, music.LoadingAsset(Type.Addressable.Tag.Audio.MUSIC, ClipPreload));
             this.SafeStartCoroutine(ref info.coroutine, info.LoadingAsset(Type.Addressable.Tag.Audio.MUSICINFO));
             this.SafeStartCoroutine(ref playable.coroutine, playable.LoadingAsset(Type.Addressable.Tag.Audio.PLAYERABLE));
         }
+
+        private void ClipPreload()
+        {
+            foreach (var music in music.table.Values)
+            {
+                music.audioClip.LoadAudioData();
+            }
+        }
+        
 
         public void Release(MusicIndex ignore)
         {
