@@ -17,13 +17,15 @@ public class LogoPlayerAnimation : MonoBehaviour
 
     private void Awake() 
     {
-        canvas = transform.GetComponentInParent<Canvas>();
-        rectTransform = GetComponent<RectTransform>();
+
     }
 
     
     private void Start()
-    {
+    {        
+        canvas = transform.GetComponentInParent<Canvas>();
+        rectTransform = GetComponent<RectTransform>();
+
         MenuMusicManager.Instance.OnBeat.AddListener(NextStep);
     }
     void Update()
@@ -46,13 +48,13 @@ public class LogoPlayerAnimation : MonoBehaviour
     {
         elapsed += Time.deltaTime;
 
-        if(elapsed >= Temps.BPM_TO_SEC * 2)
+        if(elapsed >= Type.MainMenu.Const.BPM_TO_SEC * 2)
         {
             //보정
             return 0;
         }
 
-        t = elapsed / (Temps.BPM_TO_SEC * 2);
+        t = elapsed / (Type.MainMenu.Const.BPM_TO_SEC * 2);
         t = Ease.Easing(t,easeType);
 
         return Mathf.LerpUnclamped(0,360,t);
