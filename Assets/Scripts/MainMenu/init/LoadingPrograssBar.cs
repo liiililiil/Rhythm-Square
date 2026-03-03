@@ -1,12 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LoadingPrograss : MonoBehaviour
+public class LoadingPrograssBar : MonoBehaviour
 {
     [SerializeField]
     private GameObject bar;
-
-    [SerializeField]
     private Text text;
 
     RectTransform barRect;
