@@ -36,6 +36,11 @@ namespace SimpleActions
                 }
             }
         }
+
+        ~OneTimeEvent()
+        {
+            actions.Clear();
+        }
     } 
     //경량화된 이벤트
     public class SimpleEvent
@@ -56,8 +61,20 @@ namespace SimpleActions
         {
             for(int i = actions.Count -1; i >=0; i--)
             {
-                actions[i].Invoke();
+                try
+                {
+                    actions[i].Invoke();
+                } catch (Exception ex)
+                {
+                    Debug.LogError(ex);
+                }
+                
             }
+        }
+        
+        ~SimpleEvent()
+        {
+            actions.Clear();
         }
     }
 
@@ -82,6 +99,10 @@ namespace SimpleActions
                 actions[i].Invoke(param);
             }
         }
+        ~SimpleEvent()
+        {
+            actions.Clear();
+        }
     }
 
     public class SimpleEvent<T1, T2>
@@ -105,6 +126,11 @@ namespace SimpleActions
                 actions[i].Invoke(param1, param2);
             }
         }
+
+        ~SimpleEvent()
+        {
+            actions.Clear();
+        }
     }
 
     public class SimpleEvent<T1, T2, T3>
@@ -127,6 +153,10 @@ namespace SimpleActions
             {
                 actions[i].Invoke(param1, param2, param3);
             }
+        }
+        ~SimpleEvent()
+        {
+            actions.Clear();
         }
     }
 }
