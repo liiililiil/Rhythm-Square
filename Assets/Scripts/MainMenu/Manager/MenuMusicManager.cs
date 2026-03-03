@@ -6,6 +6,8 @@ using Utils;
 using Types.Menu;
 using SimpleEasing;
 using SimpleActions;
+using Tables.MusicTable;
+using Types.Addressable.Table;
 
 public class MenuMusicManager : Managers<MenuMusicManager>
 {
@@ -18,21 +20,13 @@ public class MenuMusicManager : Managers<MenuMusicManager>
     private AudioSource audioSource;
     private AudioSource otherSource;
     
-    
-    //음악
-    [Space(10), SerializeField]
-    private Music menuMusic;
-
-    
     //각 메뉴 상태별 음악 위치
     [Space(10), SerializeField]
-    private MusicPart main;
+    private MusicPart high;
     [SerializeField]
-    private MusicPart setting;
+    private MusicPart middle;
     [SerializeField]
-    private MusicPart credits;
-    [SerializeField]
-    private MusicPart exitWarning;  
+    private MusicPart low;  
 
     //노래 부분 기록
     private MusicPart currentPart;
@@ -69,13 +63,29 @@ public class MenuMusicManager : Managers<MenuMusicManager>
         audioSource = audioSourceOne;
         otherSource = audioSourceTwo;
 
-        currentPart = main;
-        previousPart = main;
+        currentPart = high;
+        previousPart = high;
 
         Singleton(false);
     }
 
-    private void Start()
+    private void Start() {
+        AssetLoadManager.Instance.OnMainMenuAssetLoaded.AddListener(MusicLoad);
+    }
+
+    private void MusicLoad()
+    {
+        AudioClip audioClip = MusicTable.Instance.GetMusic(MusicIndex.iluvslapbass).audioClip;
+        audioSourceOne.clip = audioClip;
+        audioSourceTwo.clip = audioClip;
+
+        audioSourceOne.volume = 0;
+        audioSourceTwo.volume = 0;
+
+        audioSource.Play();
+    }
+
+    private void OnEnable()
     {
         MenuStateManager.Instance.onMenuStateChanged.AddListener(OnMenuStateChanged);
     }
@@ -128,7 +138,7 @@ public class MenuMusicManager : Managers<MenuMusicManager>
         {
             OnBeat.Invoke();
             beat++;
-            nextSec +=  Temps.BPM_TO_SEC;
+            nextSec +=  Type.MainMenu.Const.BPM_TO_SEC;
         }
     }
 
@@ -180,8 +190,8 @@ public class MenuMusicManager : Managers<MenuMusicManager>
     
     // 음악 시간 변경시 그 시간에 박자와 다음 박자를 계산
     private void BeatTimeCorrection(){
-        nextSec = Mathf.Floor(audioSource.time / Temps.BPM_TO_SEC + 1f) * Temps.BPM_TO_SEC;
-        beat = (int)(audioSource.time / Temps.BPM_TO_SEC);
+        nextSec = Mathf.Floor(audioSource.time / Type.MainMenu.Const.BPM_TO_SEC + 1f) * Type.MainMenu.Const.BPM_TO_SEC;
+        beat = (int)(audioSource.time / Type.MainMenu.Const.BPM_TO_SEC);
     }
 
     private void OnMenuStateChanged(MenuState newState)
@@ -190,24 +200,31 @@ public class MenuMusicManager : Managers<MenuMusicManager>
 
         switch(newState)
         {
+            case MenuState.InitLoading:
+                break;
+
+            case MenuState.InitWaitng:
+                StartToPart(high);
+                break;
+
             case MenuState.Main:
-                GoToPart(main);
+                GoToPart(high);
                 break;
 
             case MenuState.Setting:
-                GoToPart(setting);
+                GoToPart(middle);
                 break;
 
             case MenuState.Credits:
-                GoToPart(credits);
+                GoToPart(low);
                 break;
 
             case MenuState.ExitWarning:
-                GoToPart(exitWarning);
+                GoToPart(low);
                 break;
 
             case MenuState.ExitWating:
-                EndToPart(exitWarning);
+                EndToPart(low);
                 break;
 
             default:
