@@ -4,14 +4,6 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace Utils
 {
-    public static class Temps{
-        /// <summary>
-        /// 임시!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        /// 메뉴의 비트 당 시간
-        /// </summary>
-
-        public const float BPM_TO_SEC = 60f / 130f;
-    }
 
     public static class CameraUtils
     {
