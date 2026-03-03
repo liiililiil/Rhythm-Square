@@ -10,7 +10,6 @@ namespace Tables.SpriteTable{
     {
         Loader<AddressableSprite, SpriteIndex> loader = new Loader<AddressableSprite, SpriteIndex>();
         private void Awake() {
-            LoadMainMenu(Type.Addressable.Tag.Sprite.MAIN_MENU);
             Singleton(true);
         }
 

@@ -13,7 +13,6 @@ namespace Tables.TextTable
         Loader<MultinationalString, TextIndex> loader = new Loader<MultinationalString, TextIndex>();
 
         private void Awake() {
-            Load(Type.Addressable.Tag.Text.MAIN_MENU);
             Singleton(true);
         }
 
