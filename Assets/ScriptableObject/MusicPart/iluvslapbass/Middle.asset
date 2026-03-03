@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7966c95ba946a1849b6cef5dc4efee5e, type: 3}
-  m_Name: Setting
+  m_Name: Middle
   m_EditorClassIdentifier: Assembly-CSharp:AudioManagement:MusicPart
   startAt:
     start: 35.57
