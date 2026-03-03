@@ -69,6 +69,12 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ceaadec029037784d98f062a238a0414
+    m_Address: Assets/AddressableData/Audio/Music/Clip/iluvslapbass.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Music
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d4660eb3c99bacc4daee8e16df18034e
     m_Address: Assets/Sprites/SVGs/Menu/Fill Box.svg
     m_ReadOnly: 0
