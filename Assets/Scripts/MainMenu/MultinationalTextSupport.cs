@@ -4,8 +4,6 @@ using UnityEngine.UI;
 using System.Collections;
 
 using Utils;
-using Types.Menu;
-using ScriptManagement;
 using Types.Addressable.Table;
 using Tables.TextTable;
 
@@ -28,26 +26,19 @@ public class MultinationalTextSupport : MonoBehaviour
 
     private void Start()
     {
-        OnChangeSetting();
+        if(AssetLoadManager.Instance.loadingRecoder.IsAllComplete())
+        {
+            OnChangeSetting();
+        }
+        else
+        {
+            AssetLoadManager.Instance.OnMainMenuAssetLoaded.AddListener(OnChangeSetting);
+        }
+
         SettingManager.Instance.onChangeSetting.AddListener(OnChangeSetting);
     }
 
     private void OnChangeSetting()
-    {
-        Invoke("Tester",1);
-        return;
-
-        string targetText= TextTable.Instance.GetText(index).GetString(SettingManager.Instance.setting.language);
-
-        // 같은 텍스트면 무시
-        if(targetText  == textObject.text) return;
-
-        // text가 꺼져있으면 그냥 바로 바꾸기
-        if(!textObject.enabled) textObject.text = targetText;
-        else this.SafeStartCoroutine(ref coroutine, SlowChangeText(textObject.text, targetText,DURATION));
-    }
-
-    private void Tester()
     {
         string targetText= TextTable.Instance.GetText(index).GetString(SettingManager.Instance.setting.language);
 
