@@ -18,8 +18,9 @@ public class MenuStateManager : Managers<MenuStateManager>
     private void Start() 
     {
         onMenuStateChanged.AddListener(OnChangeMenuState);
+        AssetLoadManager.Instance.OnMainMenuAssetLoaded.AddListener(() => ChangeMenuState(MenuState.InitWaitng));
         
-        ChangeMenuState(MenuState.Main);
+        ChangeMenuState(MenuState.InitLoading);
     }
     
     //메뉴 변경(버튼 용)
@@ -45,10 +46,18 @@ public class MenuStateManager : Managers<MenuStateManager>
     {
         switch (menuState)
         {
+            case MenuState.InitWaitng:
+                Invoke(nameof(ChangeToMainMenu), 2.1f);
+                break;
             case MenuState.ExitWating:
-            Invoke(nameof(Exit), 2.1f);
-            break;
+                Invoke(nameof(Exit), 2.1f);
+                break;
         }
+    }
+
+    private void ChangeToMainMenu()
+    {
+        ChangeMenuState(MenuState.Main);
     }
 
     private void Exit()
