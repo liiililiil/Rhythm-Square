@@ -15,7 +15,7 @@ MonoBehaviour:
   m_DefaultGroup: 42352ccc3da452b43a874cc576dd636f
   m_currentHash:
     serializedVersion: 2
-    Hash: 32495a7e11fc887ad1dc9da9d5fab900
+    Hash: a5271a2190a0f9ffc4b0605db2ca6b24
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 0
   m_CatalogRequestsTimeout: 0
@@ -65,6 +65,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8296fe5b7bb843d4183a105ce2630469, type: 2}
   - {fileID: 11400000, guid: aca79a144cba10d48ad0124a4c3409fd, type: 2}
   - {fileID: 11400000, guid: 1142c9c456892e04a885654ca7372f0c, type: 2}
+  - {fileID: 11400000, guid: 9c9f4a02f8d0f104aa30e8149b9a91ab, type: 2}
   - {fileID: 11400000, guid: 11239cbef2e5db948aa701989e3717f1, type: 2}
   - {fileID: 11400000, guid: 7069f3a97613c8d48956b5a18d227dca, type: 2}
   m_BuildSettings:
@@ -112,6 +113,7 @@ MonoBehaviour:
     - MainMenuText
     - MainMenuSprite
     - MainMenuPrefab
+    - BackGroundInfo
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: df03c84c57ff522418aa503cb2c1cafc, type: 2}
