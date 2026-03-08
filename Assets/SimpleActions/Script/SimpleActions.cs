@@ -61,14 +61,7 @@ namespace SimpleActions
         {
             for(int i = actions.Count -1; i >=0; i--)
             {
-                try
-                {
-                    actions[i].Invoke();
-                } catch (Exception ex)
-                {
-                    Debug.LogError(ex);
-                }
-                
+                actions[i].Invoke();
             }
         }
         

@@ -1,6 +1,6 @@
 using UnityEngine;
 using Tables.PrefabTable;
-using Types.Addressable.Table;
+using Type.Addressable.Table;
 public class PrefabLoader : MonoBehaviour
 {
     [SerializeField]

@@ -1,3 +1,4 @@
+using Type.Menu;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -30,7 +31,6 @@ public class OffsetSlider : MonoBehaviour
     private void Update() {
         //인풋 포커싱 중에는 텍스트 변경 중단
         if(inputField.isFocused) return;
-        inputField.text = SettingManager.Instance.setting.offset.ToString();
     }
     
 
@@ -52,11 +52,14 @@ public class OffsetSlider : MonoBehaviour
 
     private void OnValueChange(float value)
     {
-        SettingManager.Instance.SetOffset((int)value, true);
+        SettingManager.Instance.SetOffset((int)value, false);
     }
     
-    private void OnChangeValue()
+    private void OnChangeValue(Setting setting)
     {
-        slider.value = SettingManager.Instance.setting.offset;
+
+        Debug.Log("test");
+        slider.value = setting.offset;
+        inputField.text = setting.offset.ToString();
     }
 }

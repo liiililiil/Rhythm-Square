@@ -1,6 +1,7 @@
+using Type.Menu;
 using UnityEngine;
 using UnityEngine.UI;
-using Menu = Types.Menu;
+using Menu = Type.Menu;
 
 public class AudioSlider : MonoBehaviour
 {
@@ -27,8 +28,8 @@ public class AudioSlider : MonoBehaviour
     {
         SettingManager.Instance.SetVolume(value, audioType, true);
     }
-    private void OnChangeValue()
+    private void OnChangeValue(Setting setting)
     {
-        slider.value = SettingManager.Instance.setting.volumes.GetMatchedAudio(audioType);
+        slider.value = setting.volumes.GetMatchedAudio(audioType);
     }
 }

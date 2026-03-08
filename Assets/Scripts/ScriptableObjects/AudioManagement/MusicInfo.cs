@@ -1,4 +1,4 @@
-using Types.Addressable.Table;
+using Type.Addressable.Table;
 using UnityEngine;
 
 

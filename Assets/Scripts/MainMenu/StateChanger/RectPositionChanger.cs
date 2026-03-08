@@ -3,8 +3,8 @@ using System.Collections;
 
 using SimpleEasing;
 using Utils;
-using Types.Menu.StateChange;
-using Types.Menu;
+using Type.Menu.StateChange;
+using Type.Menu;
 
 public class RectPositionChanger : StateChanger
 {

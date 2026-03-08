@@ -1,6 +1,6 @@
 using UnityEngine;
 
-using Types.Menu;
+using Type.Menu;
 
 
 

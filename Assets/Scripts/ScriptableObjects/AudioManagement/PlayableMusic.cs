@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-using Types.Addressable.Table;
+using Type.Addressable.Table;
 
 /// <summary>
 /// 오디오 관련 스크립터블 오브젝트들을 정의합니다.

@@ -1,6 +1,6 @@
 using UnityEngine;
 using Tables.SpriteTable;
-using Types.Addressable.Table;
+using Type.Addressable.Table;
 using Unity.VectorGraphics;
 public class SVGSpriteLoader : MonoBehaviour
 {

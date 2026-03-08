@@ -1,7 +1,7 @@
 using AddressableManagement;
 using SimpleActions;
-using Types.Addressable;
-using Types.Addressable.Table;
+using Type.Addressable;
+using Type.Addressable.Table;
 
 using UnityEngine;
 using Utils;

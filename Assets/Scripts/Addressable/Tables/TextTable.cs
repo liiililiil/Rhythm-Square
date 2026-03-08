@@ -2,8 +2,8 @@ using System.Collections.Generic;
 using ScriptManagement;
 
 using Utils;
-using Types.Addressable.Table;
-using Types.Addressable;
+using Type.Addressable.Table;
+using Type.Addressable;
 
 namespace Tables.TextTable
 {

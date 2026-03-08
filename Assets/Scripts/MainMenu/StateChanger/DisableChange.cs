@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using Types.Menu.StateChange;
-using Types.Menu;
+using Type.Menu.StateChange;
+using Type.Menu;
 using Utils;
 
 public class DisableChange : StateChanger

@@ -1,5 +1,5 @@
 using SimpleActions;
-using Types.Menu;
+using Type.Menu;
 using UnityEditor;
 using UnityEngine;
 

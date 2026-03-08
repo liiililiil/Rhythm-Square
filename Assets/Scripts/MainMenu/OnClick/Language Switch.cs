@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 using SimpleEasing;
-using Types.Menu;
+using Type.Menu;
 using System.Collections;
 using Utils;
 
@@ -37,12 +37,12 @@ public class LanguageSwitch : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        ChangePosition(SettingManager.Instance.setting.language);
+        ChangePosition(SettingManager.Instance.GetSetting().language);
     }
 
     public void OnPointerClick(PointerEventData exentData)
     {
-        switch (SettingManager.Instance.setting.language)
+        switch (SettingManager.Instance.GetSetting().language)
         {
             case Language.Korean:
                 SettingManager.Instance.SetLanguage(Language.English);
@@ -53,9 +53,9 @@ public class LanguageSwitch : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         }
     }
 
-    private void OnChangeSetting()
+    private void OnChangeSetting(Setting setting)
     {
-        ChangePosition(SettingManager.Instance.setting.language);
+        ChangePosition(setting.language);
     }
 
     private void ChangePosition(Language language)

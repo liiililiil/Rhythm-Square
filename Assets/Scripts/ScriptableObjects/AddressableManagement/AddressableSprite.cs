@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 
 using AudioManagement;
-using Types.Addressable.Table;
+using Type.Addressable.Table;
 namespace AddressableManagement
 {
     /// <summary>

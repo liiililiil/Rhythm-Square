@@ -1,6 +1,6 @@
 using UnityEngine;
 using SimpleActions;
-using Types.Addressable;
+using Type.Addressable;
 
 public class AssetLoadManager : Managers<AssetLoadManager>
 {

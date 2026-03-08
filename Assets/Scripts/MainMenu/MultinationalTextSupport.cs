@@ -4,8 +4,9 @@ using UnityEngine.UI;
 using System.Collections;
 
 using Utils;
-using Types.Addressable.Table;
+using Type.Addressable.Table;
 using Tables.TextTable;
+using Type.Menu;
 
 
 [RequireComponent(typeof(Text))]
@@ -40,7 +41,11 @@ public class MultinationalTextSupport : MonoBehaviour
 
     private void OnChangeSetting()
     {
-        string targetText= TextTable.Instance.GetText(index).GetString(SettingManager.Instance.setting.language);
+        OnChangeSetting(SettingManager.Instance.GetSetting());
+    }
+    private void OnChangeSetting(Setting setting)
+    {
+        string targetText= TextTable.Instance.GetText(index).GetString(setting.language);
 
         // 같은 텍스트면 무시
         if(targetText  == textObject.text) return;
