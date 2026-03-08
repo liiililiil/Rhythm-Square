@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: BackGroundMusic
+  m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
+  m_GroupName: BackGroundMusic
+  m_GUID: 69374b6e23f807144ae75f134c4ed962
+  m_SerializeEntries:
+  - m_GUID: 49bbb3b71aca7bb4d9d0e6541a327dee
+    m_Address: Assets/AddressableData/Audio/Music/Info/iluvslapbass.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - MusicInfo
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 986859d3dc6427e4d997bfb0abd81d78
+    m_Address: Assets/Audio/Music/iluvslapbass.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ceaadec029037784d98f062a238a0414
+    m_Address: Assets/AddressableData/Audio/Music/Clip/iluvslapbass.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Music
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f4a2386be842ab549b26fd1faebbe3db
+    m_Address: Assets/AddressableData/Audio/Music/BackGround/iluvslapbass.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - BackGroundInfo
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 3bb385a73fe80c94fbacc8b780355829, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: be1c4ba847546b74baad8aca1243b7e9, type: 2}
+    - {fileID: 11400000, guid: daca0084d86ff2148b25bfb97c875597, type: 2}

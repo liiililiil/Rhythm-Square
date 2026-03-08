@@ -48,11 +48,6 @@ MonoBehaviour:
     m_SerializedLabels:
     - MainMenuSprite
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 986859d3dc6427e4d997bfb0abd81d78
-    m_Address: Assets/Audio/Music/iluvslapbass.mp3
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a035f8bd9426df84e8119d8fa0318d08
     m_Address: Assets/Sprites/SVGs/Menu/Diamond.svg
     m_ReadOnly: 0
@@ -68,12 +63,6 @@ MonoBehaviour:
     m_Address: Assets/Sprites/SVGs/Menu/Modern Arrow Four Way.svg
     m_ReadOnly: 0
     m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: ceaadec029037784d98f062a238a0414
-    m_Address: Assets/AddressableData/Audio/Music/Clip/iluvslapbass.asset
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Music
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d4660eb3c99bacc4daee8e16df18034e
     m_Address: Assets/Sprites/SVGs/Menu/Fill Box.svg

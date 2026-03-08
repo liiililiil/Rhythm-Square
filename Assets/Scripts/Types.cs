@@ -15,26 +15,29 @@ using Utils;
 
 using System.Linq;
 
-namespace Types
+namespace Type
 {
     // 실수 범위
     [Serializable]
-    public struct FloatRange
+    public class FloatRange
     {
         public float start;
         public float end;
         
     }
 }
-namespace Type.MainMenu
-{
-    public class Const{
-        public const float BPM_TO_SEC = 60f / 130f;
 
+namespace Type.Audio
+{
+    [Serializable]
+    public class MusicPart
+    {
+        public FloatRange startAt;
+        public FloatRange loop;
+        public FloatRange endAt;
     }
 }
-
-namespace Types.Menu
+namespace Type.Menu
 {
     // 메뉴 상태들
     public enum MenuState : byte
@@ -151,7 +154,7 @@ namespace Types.Menu
 
 }
 
-namespace Types.Menu.StateChange
+namespace Type.Menu.StateChange
 {
     [Serializable]
     public abstract class StateChange<T>
@@ -201,7 +204,7 @@ namespace Types.Menu.StateChange
 
 }
 
-namespace Types.Addressable
+namespace Type.Addressable
 {
     // 에셋 로딩을 통합 관리하기위한 클래스
     public class AddressableLoadingRecoder
@@ -555,6 +558,8 @@ namespace Types.Addressable
 
         public new IEnumerator LoadingAsset(string label, Action callback = null)
         {
+            // 이미 로딩된 경우 예외 처리
+            if(countHandle.IsValid()) throw new Exception("이미 로딩된 에셋입니다!");
             
             // 에셋 로딩 확인할 그룹화 하기 전 핸들 리스트
             List<AsyncOperationHandle> groupHandles = new List<AsyncOperationHandle>();
@@ -569,8 +574,10 @@ namespace Types.Addressable
             // 갯수만큼 신고
             for(int i = 0; i < countHandle.Result.Count; i++)
             {
+
                 // 부여된 인덱스 저장
                 int index;
+
                 AssetLoadManager.Instance.loadingRecoder.StartLoading(out index);
                 recoderBindedIndex.Push(index);
             }
@@ -634,7 +641,7 @@ namespace Types.Addressable
 
 }
 
-namespace Types.Addressable.Table
+namespace Type.Addressable.Table
 {
     // 스프라이트 목록
     public enum SpriteIndex
@@ -715,6 +722,7 @@ namespace Type.Addressable.Tag
         public const string MUSIC = "Music";
         public const string MUSICINFO = "MusicInfo";
         public const string PLAYERABLE = "Playerable";
+        public const string BACKGROUNDINFO = "BackGroundInfo";
     }
 
     public class Sprite

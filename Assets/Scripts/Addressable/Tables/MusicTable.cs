@@ -4,8 +4,8 @@ using UnityEngine;
 using AudioManagement;
 using ScriptManagement;
 using Utils;
-using Types.Addressable.Table;
-using Types.Addressable;
+using Type.Addressable.Table;
+using Type.Addressable;
 
 namespace Tables.MusicTable
 {
@@ -14,6 +14,7 @@ namespace Tables.MusicTable
         EachLoader<Music, MusicIndex> music = new EachLoader<Music, MusicIndex>();
         EachLoader<MusicInfo, MusicIndex> info = new EachLoader<MusicInfo, MusicIndex>();
         EachLoader<PlayableMusic, MusicIndex> playable = new EachLoader<PlayableMusic, MusicIndex>();
+        EachLoader<BackGroundInfo, MusicIndex> backgroundInfo = new EachLoader<BackGroundInfo, MusicIndex>();
 
         private void Awake() {
             Singleton(true);
@@ -24,6 +25,7 @@ namespace Tables.MusicTable
             this.SafeStartCoroutine(ref music.coroutine, music.LoadingAsset(Type.Addressable.Tag.Audio.MUSIC, ClipPreload));
             this.SafeStartCoroutine(ref info.coroutine, info.LoadingAsset(Type.Addressable.Tag.Audio.MUSICINFO));
             this.SafeStartCoroutine(ref playable.coroutine, playable.LoadingAsset(Type.Addressable.Tag.Audio.PLAYERABLE));
+            this.SafeStartCoroutine(ref backgroundInfo.coroutine, backgroundInfo.LoadingAsset(Type.Addressable.Tag.Audio.BACKGROUNDINFO));
         }
 
         private void ClipPreload()
@@ -54,6 +56,11 @@ namespace Tables.MusicTable
         public PlayableMusic GetPlaybleMusic(MusicIndex musicIndex)
         {
             return playable.table[musicIndex];
+        }
+
+        public BackGroundInfo GetBackGroundInfo(MusicIndex musicIndex)
+        {
+            return backgroundInfo.table[musicIndex];
         }
 
     }
