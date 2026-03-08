@@ -33,10 +33,10 @@ public class LogoPlayerAnimation : MonoBehaviour
         Vector3 rotation = rectTransform.eulerAngles;
         rotation.z = 0;
 
-        // 회전 값 획득
+        // 특정 박자 당 회전 값 획득
         rotation.z += RhythmSync();
 
-        // 위를 바라보고 있으므로 90도 회전
+        // 플레이어 바라보게, 위를 바라보고 있으므로 90도 회전
         rotation.z += MouseTracking() - 90;
 
         rectTransform.eulerAngles = rotation;
@@ -46,15 +46,15 @@ public class LogoPlayerAnimation : MonoBehaviour
     // 특정 박자 때마다 한바퀴 돌리기
     private float RhythmSync()
     {
-        elapsed += Time.deltaTime;
-
-        if(elapsed >= Type.MainMenu.Const.BPM_TO_SEC * 2)
+        if(elapsed >= MenuMusicManager.Instance.beatPerSec * 2)
         {
             //보정
             return 0;
         }
 
-        t = elapsed / (Type.MainMenu.Const.BPM_TO_SEC * 2);
+        elapsed += Time.deltaTime;
+
+        t = elapsed / (MenuMusicManager.Instance.beatPerSec * 2);
         t = Ease.Easing(t,easeType);
 
         return Mathf.LerpUnclamped(0,360,t);
@@ -84,7 +84,11 @@ public class LogoPlayerAnimation : MonoBehaviour
     }
     private void NextStep()
     {
-        if((MenuMusicManager.Instance.beat - 16) % 16 == 15)
+        int beatOffset = MenuMusicManager.Instance.backGroundInfo.beatOffset;
+        int resetCycle = MenuMusicManager.Instance.backGroundInfo.playerBeatResetCycle;
+        int cycle = MenuMusicManager.Instance.backGroundInfo.playerBeatCycle;
+        
+        if((MenuMusicManager.Instance.beat - beatOffset) % resetCycle == cycle)
         {
             elapsed = 0;
         }

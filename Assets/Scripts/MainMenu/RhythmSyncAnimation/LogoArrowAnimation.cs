@@ -2,6 +2,7 @@ using UnityEngine;
 
 using SimpleEasing;
 using Utils;
+using AudioManagement;
 
 public class LogoArrowAnimation : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class LogoArrowAnimation : MonoBehaviour
 
     float elapsed = 0;
     float t;
+
 
     [SerializeField]
     EaseType easeType;
@@ -27,10 +29,14 @@ public class LogoArrowAnimation : MonoBehaviour
 
     void Update()
     {
+        int beatOffset = MenuMusicManager.Instance.backGroundInfo.beatOffset;
+        int resetCycle = MenuMusicManager.Instance.backGroundInfo.arrowBeatResetCycle;
+        int cycle = MenuMusicManager.Instance.backGroundInfo.arrowBeatCycle;
+
         // 특정 박자 마다 조금 느리게 시간 흐르기
-        if((MenuMusicManager.Instance.beat - 16) % 32 >= 30)
+        if((MenuMusicManager.Instance.beat - beatOffset ) % resetCycle >= cycle)
         {
-            elapsed += Time.deltaTime / 2;
+            elapsed += Time.deltaTime / (resetCycle - cycle);
         }
         else
         {    
@@ -38,7 +44,7 @@ public class LogoArrowAnimation : MonoBehaviour
         }
 
         // 재생이 완료되면
-        if(elapsed >= Type.MainMenu.Const.BPM_TO_SEC)
+        if(elapsed >= MenuMusicManager.Instance.beatPerSec)
         {
             //보정
             SetRectTranform(1);
@@ -46,7 +52,7 @@ public class LogoArrowAnimation : MonoBehaviour
         }
 
         // 정규화 후 Easing
-        t = elapsed / Type.MainMenu.Const.BPM_TO_SEC;
+        t = elapsed / MenuMusicManager.Instance.beatPerSec;
         t = Ease.Easing(t,easeType);
 
         // Eased 값을 가지고 크기와 회전 제어
@@ -70,8 +76,11 @@ public class LogoArrowAnimation : MonoBehaviour
 
     private void NextStep()
     {
-        
-        if((MenuMusicManager.Instance.beat - 16) % 32 != 30)
+        int beatOffset = MenuMusicManager.Instance.backGroundInfo.beatOffset;
+        int resetCycle = MenuMusicManager.Instance.backGroundInfo.arrowBeatResetCycle;
+        int cycle = MenuMusicManager.Instance.backGroundInfo.arrowBeatCycle;
+
+        if((MenuMusicManager.Instance.beat - beatOffset ) % resetCycle != cycle)
         {
             elapsed = 0;
         }
