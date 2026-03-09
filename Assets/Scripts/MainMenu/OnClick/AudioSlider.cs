@@ -12,20 +12,25 @@ public class AudioSlider : MonoBehaviour
     private Slider slider;
 
     private void OnEnable() {
-        slider.onValueChanged.AddListener(OnValueChange);
+        slider.onValueChanged.AddListener(OnSliderChange);
     }
 
     private void OnDisable()
     {
-        slider.onValueChanged.RemoveListener(OnValueChange);
+        slider.onValueChanged.RemoveListener(OnSliderChange);
     }
 
     private void Start() {
-        SettingManager.Instance.GetSetting().volumes[Menu.AudioType.Music].onValueChanged.AddListener(OnValueChange);
+        SettingManager.Instance.GetSetting().volumes[audioType].onValueChanged.AddListener(OnSettingChange);
     }
 
-    private void OnValueChange(float value)
+    private void OnSettingChange(float value)
     {
-        SettingManager.Instance.SetVolume(value, audioType, true);
+        slider.SetValueWithoutNotify(value);
+    }
+
+    private void OnSliderChange(float value)
+    {
+        SettingManager.Instance.SetVolume(value, audioType);
     }
 }

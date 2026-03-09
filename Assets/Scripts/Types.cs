@@ -90,7 +90,6 @@ namespace Type.Menu
         public void SetMatchedAudio(AudioType audioType, float value)
         {
             volumes[audioType].value = value;
-            volumes[audioType].onValueChanged.Invoke(value);
         }
 
         //볼륨 종료
