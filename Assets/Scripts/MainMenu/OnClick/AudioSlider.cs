@@ -21,15 +21,11 @@ public class AudioSlider : MonoBehaviour
     }
 
     private void Start() {
-        SettingManager.Instance.onChangeSetting.AddListener(OnChangeValue);
+        SettingManager.Instance.GetSetting().volumes[Menu.AudioType.Music].onValueChanged.AddListener(OnValueChange);
     }
 
     private void OnValueChange(float value)
     {
         SettingManager.Instance.SetVolume(value, audioType, true);
-    }
-    private void OnChangeValue(Setting setting)
-    {
-        slider.value = setting.volumes.GetMatchedAudio(audioType);
     }
 }

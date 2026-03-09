@@ -15,13 +15,13 @@ public class OffsetSlider : MonoBehaviour
 
     private void OnEnable() {
         slider.onValueChanged.AddListener(OnValueChange);
-        SettingManager.Instance.onChangeSetting.AddListener(OnChangeValue);
+        SettingManager.Instance.onChangeOffset.AddListener(OnChangeValue);
     }
 
     private void OnDisable()
     {
         slider.onValueChanged.RemoveListener(OnValueChange);
-        SettingManager.Instance.onChangeSetting.RemoveListener(OnChangeValue);
+        SettingManager.Instance.onChangeOffset.RemoveListener(OnChangeValue);
     }
 
     private void Start() {
@@ -55,11 +55,9 @@ public class OffsetSlider : MonoBehaviour
         SettingManager.Instance.SetOffset((int)value, false);
     }
     
-    private void OnChangeValue(Setting setting)
+    private void OnChangeValue(int value)
     {
-
-        Debug.Log("test");
-        slider.value = setting.offset;
-        inputField.text = setting.offset.ToString();
+        slider.value = value;
+        inputField.text = value.ToString();
     }
 }

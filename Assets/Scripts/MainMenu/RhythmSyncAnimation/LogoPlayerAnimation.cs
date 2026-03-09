@@ -78,7 +78,8 @@ public class LogoPlayerAnimation : MonoBehaviour
         float speed = 5f;   // 클수록 빠르게 따라감
 
         float t = 1f - Mathf.Exp(-speed * Time.deltaTime);
-        mouseValue = Mathf.Lerp(mouseValue, targetZ, t);
+
+        mouseValue = Mathf.LerpAngle(mouseValue, targetZ, t);
 
         return mouseValue;
     }

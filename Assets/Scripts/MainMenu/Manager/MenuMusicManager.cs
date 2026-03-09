@@ -88,7 +88,7 @@ public class MenuMusicManager : Managers<MenuMusicManager>
 
     private void Start() {
         AssetLoadManager.Instance.OnMainMenuAssetLoaded.AddListener(MusicLoad);
-        SettingManager.Instance.onChangeSetting.AddListener(VolumeUpdate);
+        SettingManager.Instance.GetSetting().volumes[Type.Menu.AudioType.Music].onValueChanged.AddListener(VolumeUpdate);
     }
 
     private void MusicLoad()
@@ -123,16 +123,16 @@ public class MenuMusicManager : Managers<MenuMusicManager>
 
     }
 
-    private void VolumeUpdate(Setting setting)
+    private void VolumeUpdate(float value)
     {   
         //노래 변경 중이라면 무시
         if(sourceCoroutine != null) return;
 
-        audioSource.volume = setting.volumes.GetMatchedAudio(Type.Menu.AudioType.Music);
+        audioSource.volume = value;
     }
     private void VolumeUpdate()
     {
-        VolumeUpdate(SettingManager.Instance.GetSetting());
+        VolumeUpdate(SettingManager.Instance.GetSetting().GetMatchedAudio(Type.Menu.AudioType.Music));
     }
 
 
@@ -205,14 +205,14 @@ public class MenuMusicManager : Managers<MenuMusicManager>
 
             t = Ease.Easing(t, EaseType.Linear);
 
-            audioSource.volume = Mathf.Lerp(0, SettingManager.Instance.GetSetting().volumes.GetMatchedAudio(Type.Menu.AudioType.Music), t);
+            audioSource.volume = Mathf.Lerp(0, SettingManager.Instance.GetSetting().GetMatchedAudio(Type.Menu.AudioType.Music), t);
             otherSource.volume = Mathf.Lerp(otherVolume, 0, t);
 
             yield return null;
         }
 
         //전환 완료되면 보정 및 끄기
-        audioSource.volume = SettingManager.Instance.GetSetting().volumes.GetMatchedAudio(Type.Menu.AudioType.Music);
+        audioSource.volume = SettingManager.Instance.GetSetting().GetMatchedAudio(Type.Menu.AudioType.Music);
         otherSource.Stop();
 
         this.SafeStopCoroutine(ref sourceCoroutine);

@@ -27,7 +27,7 @@ public class LanguageSwitch : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     private const float TEXT_POSITION_Y = 25f;
 
     private void Start() {
-        SettingManager.Instance.onChangeSetting.AddListener(OnChangeSetting);
+        SettingManager.Instance.onChangeLanguage.AddListener(ChangePosition);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -51,11 +51,6 @@ public class LanguageSwitch : MonoBehaviour, IPointerEnterHandler, IPointerExitH
                 SettingManager.Instance.SetLanguage(Language.Korean);
                 break;
         }
-    }
-
-    private void OnChangeSetting(Setting setting)
-    {
-        ChangePosition(setting.language);
     }
 
     private void ChangePosition(Language language)

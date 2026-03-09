@@ -36,16 +36,16 @@ public class MultinationalTextSupport : MonoBehaviour
             AssetLoadManager.Instance.OnMainMenuAssetLoaded.AddListener(OnChangeSetting);
         }
 
-        SettingManager.Instance.onChangeSetting.AddListener(OnChangeSetting);
+        SettingManager.Instance.onChangeLanguage.AddListener(OnChangeSetting);
     }
 
     private void OnChangeSetting()
     {
-        OnChangeSetting(SettingManager.Instance.GetSetting());
+        OnChangeSetting(SettingManager.Instance.GetSetting().language);
     }
-    private void OnChangeSetting(Setting setting)
+    private void OnChangeSetting(Language language)
     {
-        string targetText= TextTable.Instance.GetText(index).GetString(setting.language);
+        string targetText= TextTable.Instance.GetText(index).GetString(language);
 
         // 같은 텍스트면 무시
         if(targetText  == textObject.text) return;

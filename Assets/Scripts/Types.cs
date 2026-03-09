@@ -80,22 +80,41 @@ namespace Type.Menu
     // 설정
     public class Setting
     {
-        public Volumes volumes;
+        //볼륨 영역
+        public Dictionary<AudioType,Volume> volumes{get; private set;} = new Dictionary<AudioType, Volume>();
+        public float GetMatchedAudio(AudioType audioType)
+        {
+            return volumes[audioType].value;
+        }
+
+        public void SetMatchedAudio(AudioType audioType, float value)
+        {
+            volumes[audioType].value = value;
+            volumes[audioType].onValueChanged.Invoke(value);
+        }
+
+        //볼륨 종료
+
         public Language language;
 
         public int offset;
 
-        public Setting(Volumes _volumes, int _offset, Language _langeuage)
+        public Setting(int _offset, Language _langeuage)
         {
-            volumes = _volumes;
+            //볼륨 영역
+            volumes.Add(AudioType.Music, new Volume(0.6f));
+            volumes.Add(AudioType.SFX, new Volume(0.6f));
+            
+
             offset = _offset;
             language = _langeuage;
         }
 
         public Setting()
         {
-
-            volumes = new Volumes();
+            //볼륨 영역
+            volumes.Add(AudioType.Music, new Volume(0.6f));
+            volumes.Add(AudioType.SFX, new Volume(0.6f));
 
             offset = 0;
 
@@ -103,44 +122,23 @@ namespace Type.Menu
             language = Language.English;
         }
     }
-
-    //오디오 나열
-    public class Volumes
+    
+    //단일 볼륨 나열
+    public class Volume
     {
-        private float music;
-        private float sfx;
+        public float value;
+        public SimpleEvent<float> onValueChanged = new SimpleEvent<float>();
 
-        public float GetMatchedAudio(AudioType audioType)
+        public void EventInvoke()
         {
-            switch (audioType)
-            {
-                case AudioType.Music:
-                    return music;
-                case AudioType.SFX:
-                    return sfx;
-                default:
-                    return -1;
-            }
+            onValueChanged.Invoke(value);
         }
 
-        public void SettMatchedAudio(AudioType audioType, float value)
+        public Volume(float initValue)
         {
-            switch (audioType)
-            {
-                case AudioType.Music:
-                    music = value;
-                    break;
-
-                case AudioType.SFX:
-                    sfx = value;
-                    break;
-            }
+            value = initValue;
         }
 
-        public Volumes(){
-            music = 0.6f;
-            sfx = 0.6f;
-        }
     }
 
     //오디오 종류 나열
