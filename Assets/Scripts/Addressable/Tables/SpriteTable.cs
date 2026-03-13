@@ -12,6 +12,10 @@ namespace Tables.SpriteTable{
         private void Awake() {
             Singleton(true);
         }
+        void Start()
+        {
+            loader.RecoderBind(AssetLoadManager.Instance.addressableLoadRecoder);
+        }
 
         public void LoadMainMenu(string tag)
         {

@@ -13,6 +13,10 @@ namespace Tables.PrefabTable{
             Singleton(true);
         }
 
+        private void Start() {
+            loader.RecoderBind(AssetLoadManager.Instance.addressableLoadRecoder);
+        }
+
         public void LoadMainMenu(string tag)
         {
             this.SafeStartCoroutine(ref loader.coroutine, loader.LoadingAsset(tag));

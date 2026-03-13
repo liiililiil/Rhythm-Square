@@ -19,6 +19,14 @@ namespace Tables.MusicTable
         private void Awake() {
             Singleton(true);
         }
+
+        private void Start() {
+            music.RecoderBind(AssetLoadManager.Instance.addressableLoadRecoder);
+            info.RecoderBind(AssetLoadManager.Instance.addressableLoadRecoder);
+            playable.RecoderBind(AssetLoadManager.Instance.addressableLoadRecoder);
+            backgroundInfo.RecoderBind(AssetLoadManager.Instance.addressableLoadRecoder);
+
+        }
         
         public void Load()
         {
