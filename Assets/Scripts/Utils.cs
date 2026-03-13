@@ -25,16 +25,17 @@ namespace Utils
         {
             return new Vector3(value, value, value);
         }
-    }
-
-    public static class FloatUtils
-    {
         public static float LookAt2d(Vector2 a, Vector2 b)
         {
             Vector2 d = b - a;
 
             return Mathf.Atan2(d.y, d.x) * Mathf.Rad2Deg;
         }
+    }
+
+    public static class FloatUtils
+    {
+
     }
 
     public static class RectTransformExtensions
