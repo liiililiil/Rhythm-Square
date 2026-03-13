@@ -18,8 +18,10 @@ public class LoadingPrograssBar : MonoBehaviour
 
 
     private void Start() {
-        AssetLoadManager.Instance.loadingRecoder.OnStartLoading.AddListener(add);
-        AssetLoadManager.Instance.loadingRecoder.OnCompleteLoading.AddListener(Complete);
+        AssetLoadManager.Instance.loadRecoder.OnStartLoading.AddListener(add);
+        AssetLoadManager.Instance.loadRecoder.OnCompleteLoading.AddListener(Complete);
+        AssetLoadManager.Instance.addressableLoadRecoder.OnStartLoading.AddListener(add);
+        AssetLoadManager.Instance.addressableLoadRecoder.OnCompleteLoading.AddListener(Complete);
     }
 
     private void add(int empty)
