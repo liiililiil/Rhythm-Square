@@ -27,16 +27,21 @@ public class MultinationalTextSupport : MonoBehaviour
 
     private void Start()
     {
-        if(AssetLoadManager.Instance.loadingRecoder.IsAllComplete())
+        if(AssetLoadManager.Instance.addressableLoadRecoder.IsAllComplete())
         {
             OnChangeSetting();
         }
         else
         {
-            AssetLoadManager.Instance.OnMainMenuAssetLoaded.AddListener(OnChangeSetting);
+            AssetLoadManager.Instance.LoaderBind(TextBind);
         }
 
         SettingManager.Instance.onChangeLanguage.AddListener(OnChangeSetting);
+    }
+
+    private void TextBind()
+    {
+        textObject.text= TextTable.Instance.GetText(index).GetString(SettingManager.Instance.GetSetting().language);
     }
 
     private void OnChangeSetting()

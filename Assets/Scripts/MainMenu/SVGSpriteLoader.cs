@@ -15,13 +15,13 @@ public class SVGSpriteLoader : MonoBehaviour
 
     private void Start()
     {
-        if (AssetLoadManager.Instance.loadingRecoder.IsAllComplete())
+        if (AssetLoadManager.Instance.addressableLoadRecoder.IsAllComplete())
         {
             sVGImage.sprite = SpriteTable.Instance.GetSprite(spriteIndex).sprite;
         }
         else
         {
-            AssetLoadManager.Instance.OnMainMenuAssetLoaded.AddListener(OnMainMenuAssetLoaded);
+            AssetLoadManager.Instance.LoaderBind(OnMainMenuAssetLoaded);
             
         }
     }
