@@ -204,17 +204,16 @@ namespace Type.Menu.StateChange
 namespace Type.Addressable
 {
     // 에셋 로딩을 통합 관리하기위한 클래스
-    public class AddressableLoadingRecoder
+    public class LoadingRecoder
     {
-        private int index;
-        private int leftPrograss;
+        private int index = 0;
+        private int leftPrograss = 0;
 
         private List<float> prograssList = new List<float>();
-        private bool isRecode = false;
 
         
         //에셋 레코더가 시작될떄 호출되는 이벤트
-        public SimpleEvent OnOpenRecoder = new SimpleEvent();
+        public SimpleEvent OnRecodeReset = new SimpleEvent();
 
         //에셋 로딩이 시작될때 마다 호출되는 이벤트
         public SimpleEvent<int> OnStartLoading = new SimpleEvent<int>();
@@ -225,29 +224,19 @@ namespace Type.Addressable
         //에셋 로딩중 오류가 발생될떄 마다 호출되는 이벤트
         public SimpleEvent<int, Exception> OnErrorLoading = new SimpleEvent<int, Exception>();
 
-        public void OpenRecode()
+        public void RecodeReset()
         {
             index = 0;
             leftPrograss = 0;
             prograssList.Clear();
-
-            isRecode = true;
         }
 
         public void CloseRecode()
         {
-            isRecode = false;
         }
         
         public void StartLoading(out int startIndex)
         {
-            if(!isRecode)
-            {
-                Debug.LogError("기록 중이지 않습니다!");
-                startIndex = -1;
-                return;
-            }
-
             startIndex = index;
             index++;
             leftPrograss++;
@@ -340,11 +329,14 @@ namespace Type.Addressable
         private AssetReferenceT<T> addressableAsset;
         private AsyncOperationHandle<T> _handle;
 
+        private LoadingRecoder loadingRecoder = null;
+
         private bool isloading;
 
-        public AssetHolder(AssetReferenceT<T> asset)
+        public AssetHolder(AssetReferenceT<T> asset, LoadingRecoder recoder)
         {
             addressableAsset = asset;
+            loadingRecoder = recoder;
         }
 
         //레퍼런스를 스크립트적으로 등록할때 사용
@@ -395,8 +387,8 @@ namespace Type.Addressable
             isloading = true;
 
             //에셋 로딩 신고
-            int index;
-            AssetLoadManager.Instance.loadingRecoder.StartLoading(out index);
+            int index = -1;
+            if(loadingRecoder != null) loadingRecoder.StartLoading(out index);
 
             //로딩
             _handle = Addressables.LoadAssetAsync<T>(addressableAsset);
@@ -406,21 +398,21 @@ namespace Type.Addressable
                 {
 
                     //진행도 기록
-                    AssetLoadManager.Instance.loadingRecoder.SetPrograss(index, _handle.PercentComplete);
+                    if(loadingRecoder != null) loadingRecoder.SetPrograss(index, _handle.PercentComplete);
                     yield return null;
                 }
 
                 if(_handle.Status == AsyncOperationStatus.Succeeded)
                 {   
                     //로딩 성공시 신고 후 콜백 함수 호출 
-                    AssetLoadManager.Instance.loadingRecoder.CompleteLoading(index);
+                    if(loadingRecoder != null) loadingRecoder.CompleteLoading(index);
                     InvokeLoadingComplete.Invoke();
                 }
                 else
                 {
                     //실패시 신고후 오류 반환
                     Debug.LogError(_handle.OperationException);
-                    AssetLoadManager.Instance.loadingRecoder.LoadingError(index, _handle.OperationException);
+                    if(loadingRecoder != null) loadingRecoder.LoadingError(index, _handle.OperationException);
                 }
             } 
             finally
@@ -443,8 +435,23 @@ namespace Type.Addressable
         public AsyncOperationHandle<IList<UnityEngine.ResourceManagement.ResourceLocations.IResourceLocation>> countHandle;
         public AsyncOperationHandle<IList<_T1>> handle;
 
+        protected LoadingRecoder loadingRecoder;
+
         //값 저장을 위한 타입
         public Dictionary<_T2, _T1> table = new Dictionary<_T2, _T1>();
+
+        public Loader(LoadingRecoder recoder){
+            RecoderBind(recoder);
+        }
+        public Loader()
+        {
+            
+        }
+
+        public void RecoderBind(LoadingRecoder recoder)
+        {
+            loadingRecoder = recoder;
+        }
 
 
         //릴리즈 함수
@@ -470,8 +477,10 @@ namespace Type.Addressable
         {
             // 부여된 인덱스 저장
             int index;
-            AssetLoadManager.Instance.loadingRecoder.StartLoading(out index);
-            recoderBindedIndex.Push(index);
+            if(loadingRecoder != null){
+                loadingRecoder.StartLoading(out index);
+                recoderBindedIndex.Push(index);
+            }
         }
         
         //에셋 로딩
@@ -500,7 +509,7 @@ namespace Type.Addressable
     protected virtual void AssetBind(_T1 asset)
     {
         //레코더에게 완료알림
-        AssetLoadManager.Instance.loadingRecoder.CompleteLoading(recoderBindedIndex.Pop());
+        if(loadingRecoder != null) loadingRecoder.CompleteLoading(recoderBindedIndex.Pop());
         
         //바인딩
         table.Add(asset.index, asset);
@@ -516,6 +525,14 @@ namespace Type.Addressable
     {        
         public new Dictionary<_T2, AsyncOperationHandle<_T1>> handle = new Dictionary<_T2, AsyncOperationHandle<_T1>>();
 
+        public EachLoader(LoadingRecoder recoder) : base(recoder)
+        {
+        }
+
+        public EachLoader() : base()
+        {
+            
+        }
         public new void Release()
         {
             AddressableUtils.SafeRelease(countHandle);
@@ -575,8 +592,10 @@ namespace Type.Addressable
                 // 부여된 인덱스 저장
                 int index;
 
-                AssetLoadManager.Instance.loadingRecoder.StartLoading(out index);
-                recoderBindedIndex.Push(index);
+                if(loadingRecoder != null){
+                    loadingRecoder.StartLoading(out index);
+                    recoderBindedIndex.Push(index);
+                }
             }
             
             //에셋 로딩 시작
@@ -607,7 +626,7 @@ namespace Type.Addressable
                 {
                     // 에러 전달
                     Debug.LogError(eachHandle.OperationException);
-                    AssetLoadManager.Instance.loadingRecoder.LoadingError(recoderBindedIndex.Pop(), eachHandle.OperationException);
+                    if(loadingRecoder != null) loadingRecoder.LoadingError(recoderBindedIndex.Pop(), eachHandle.OperationException);
                 }
             }
 
@@ -626,7 +645,7 @@ namespace Type.Addressable
         {
 
             //레코더에게 완료알림
-            AssetLoadManager.Instance.loadingRecoder.CompleteLoading(recoderBindedIndex.Pop());
+            if(loadingRecoder != null) loadingRecoder.CompleteLoading(recoderBindedIndex.Pop());
 
             //바인딩
             table.Add(asset.index, asset);
@@ -647,8 +666,10 @@ namespace Type.Addressable.Table
         Diamond = 101,
         EmptyDiamond = 102,
         Square = 103,
-        MordernArrows = 104,
-        PlayerIcon = 105
+        ModernArrows = 104,
+        PlayerIcon = 105,
+        SingleModernArrow = 106,
+        
     }
     // 텍스트 목록
     public enum TextIndex
