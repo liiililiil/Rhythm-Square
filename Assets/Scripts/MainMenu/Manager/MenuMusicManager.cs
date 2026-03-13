@@ -57,12 +57,11 @@ public class MenuMusicManager : Managers<MenuMusicManager>
 
 
     // 다음 박자
-    [SerializeField]
-    private float nextSec;
+    private float nextSec = 999999;
     public int beat {get; private set;}
 
     // 오디오 반복해야하는지
-    private bool isLoop;
+    private bool isLoop = false;
 
     // 오디오 소스 교체 시간
     private const float SOURCE_FADE_DURATION = 1f;
@@ -87,7 +86,7 @@ public class MenuMusicManager : Managers<MenuMusicManager>
     }
 
     private void Start() {
-        AssetLoadManager.Instance.OnMainMenuAssetLoaded.AddListener(MusicLoad);
+        AssetLoadManager.Instance.LoaderBind(MusicLoad);
         SettingManager.Instance.GetSetting().volumes[Type.Menu.AudioType.Music].onValueChanged.AddListener(VolumeUpdate);
     }
 
@@ -219,11 +218,13 @@ public class MenuMusicManager : Managers<MenuMusicManager>
     }
     
     // 음악 시간 변경시 그 시간에 박자와 다음 박자를 계산
-    private void BeatTimeCorrection(){
-        nextSec = Mathf.Floor(audioSource.time / beatPerSec + 1f) * beatPerSec;
-        beat = (int)(audioSource.time / beatPerSec);
-    }
+    private void BeatTimeCorrection()
+    {
+        float time = audioSource.time;
 
+        beat = (int)(time / beatPerSec);
+        nextSec = (beat+1) * beatPerSec;
+    }
     private void OnMenuStateChanged(MenuState newState)
     {
         
