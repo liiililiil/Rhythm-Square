@@ -293,14 +293,28 @@ public class MenuMusicManager : Managers<MenuMusicManager>
 
         RangeChange(range);
 
-        // 이동까지의 시간 계산
-        float delta = currentRange.start - previousRange.start;
-        float targetTime = otherSource.time+ delta;
+        // audio의 time이 range에 없으면 그 range안으로 오도록 조정
+        if(!(otherSource.time >= range.start && otherSource.time <= range.end))
+        {
+            // 이동까지의 시간 계산
+            float delta = currentRange.start - previousRange.start;
+            float targetTime = otherSource.time+ delta;
 
-        // 적응형 오디오를 위해 이전 파츠와 이어지도록 조정
-        targetTime = currentRange.start + Mathf.Repeat(targetTime - currentRange.start, currentRange.end - currentRange.start);
+            // Debug.Log($"delta : {delta} | targetTime : {targetTime}, | range : {range.start} | current : {otherSource.time}");
 
-        audioSource.time =  targetTime;
+
+            // 적응형 오디오를 위해 이전 파츠와 이어지도록 조정
+            targetTime = currentRange.start + Mathf.Repeat(targetTime - currentRange.start, currentRange.end - currentRange.start);
+
+            audioSource.time =  targetTime;
+        }
+        else
+        {
+            // 이미 range 안이면 시간 바로 적용
+            audioSource.time = otherSource.time;
+        }
+
+
         BeatTimeCorrection();
     }
 
