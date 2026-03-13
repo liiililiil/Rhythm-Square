@@ -72,7 +72,7 @@ public class LogoPlayerAnimation : MonoBehaviour
 
         //상대 좌표로 변환
         mousePos += rectTransform.anchoredPosition;
-        float targetZ = FloatUtils.LookAt2d(rectTransform.GetRectInCanvas(canvas.transform as RectTransform), mousePos);
+        float targetZ = Vector2Utils.LookAt2d(rectTransform.GetRectInCanvas(canvas.transform as RectTransform), mousePos);
         
         //스무딩하게
         float speed = 5f;   // 클수록 빠르게 따라감
