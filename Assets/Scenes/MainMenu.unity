@@ -545,6 +545,8 @@ MonoBehaviour:
   player: {fileID: 526172775}
   arrows: {fileID: 521329384}
   stayPos: {x: 0, y: 0}
+  endPos: {x: -950, y: 0}
+  slidingSpeed: 3000
 --- !u!114 &526172780
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1354,7 +1356,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MenuMusicManager
   audioSourceOne: {fileID: 1376124204}
   audioSourceTwo: {fileID: 1376124206}
-  nextSec: 0
 --- !u!82 &1376124206
 AudioSource:
   m_ObjectHideFlags: 0
