@@ -47,10 +47,10 @@ public class MenuStateManager : Managers<MenuStateManager>
         switch (menuState)
         {
             case MenuState.InitWaitng:
-                Invoke(nameof(ChangeToMainMenu), 2.1f);
+                Invoke(nameof(ChangeToMainMenu), MenuMusicManager.Instance.beatPerSec * 4);
                 break;
             case MenuState.ExitWating:
-                Invoke(nameof(Exit), 2.1f);
+                Invoke(nameof(Exit), MenuMusicManager.Instance.beatPerSec * 4);
                 break;
         }
     }
