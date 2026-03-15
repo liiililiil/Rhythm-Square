@@ -15,6 +15,19 @@ public class IntroPlayer : MonoBehaviour
     [SerializeField]
     private Vector2 stayPos;
 
+    [SerializeField]
+    private Vector2 endPos;
+
+    [Space(10), SerializeField]
+    private float slidingSpeed;
+
+
+
+    private RectTransform playerRect;
+    private RectTransform arrowsRect;
+
+    
+
 
     private int beat;
 
@@ -29,6 +42,9 @@ public class IntroPlayer : MonoBehaviour
     private void Start() {
         MenuMusicManager.Instance.OnBeat.AddListener(NextBeat);
         AssetLoadManager.Instance.LoaderBind(NextBeat);
+
+        playerRect = player.GetComponent<RectTransform>();
+        arrowsRect = arrows.GetComponent<RectTransform>();
     }
 
 
@@ -42,9 +58,14 @@ public class IntroPlayer : MonoBehaviour
                 PlayerGoingToCenter();
                 break;
             case 3:
+                PlayerSliding();
+                break;
+            case 4:
+                PlayerGoingToEnd();
                 break;
             case 5:
-            
+                Destroy(gameObject);
+                
                 break;
             default:
                 AssetLoadManager.Instance.OnMainMenuAssetLoaded.RemoveListener(NextBeat);
@@ -55,34 +76,66 @@ public class IntroPlayer : MonoBehaviour
 
     private void PlayerGoingToCenter()
     {
-        RectTransform rectTransform = player.GetComponent<RectTransform>();
 
         // 랜덤 위치로 이동
-        rectTransform.rotation = Quaternion.Euler(new Vector3(0,0,Random.Range(0,360)));    
-        rectTransform.anchoredPosition -= (Vector2)rectTransform.up * 1800;
+        playerRect.rotation = Quaternion.Euler(new Vector3(0,0,Random.Range(0,360)));    
+        playerRect.anchoredPosition -= (Vector2)playerRect.up * 1000;
 
-        // 이미지 보이게
-        player.GetComponent<SVGImage>().enabled = true;
+        // 이미지 보이게 (조금 이따가)
+        StartCoroutine(CoroutineUtils.SlowStart(PlayerEnabled, MenuMusicManager.Instance.beatPerSec / 2));
 
         StartCoroutine(AnimatedPosition(player, Vector2Utils.FloatToVector2(0),MenuMusicManager.Instance.beatPerSec, EaseType.InCirc));
     }
 
-    private void PlayerBind()
+    public void PlayerEnabled()
     {
+        player.GetComponent<SVGImage>().enabled = true;
     }
 
+    private void PlayerSliding()
+    {
+        StartCoroutine(Slide(player, slidingSpeed, MenuMusicManager.Instance.beatPerSec));
 
-    private IEnumerator ContinuesLootAt(GameObject target, GameObject lookAt, float duration)
+        StartCoroutine(AnimatedRotation(player, playerRect.eulerAngles.z + 120, MenuMusicManager.Instance.beatPerSec, EaseType.Linear));
+    }
+
+    private void PlayerGoingToEnd()
+    {
+        StartCoroutine(AnimatedRotation(player, endPos, MenuMusicManager.Instance.beatPerSec, EaseType.OutCubic));
+        StartCoroutine(AnimatedPosition(player, endPos, MenuMusicManager.Instance.beatPerSec * 1.1f, EaseType.InBack));
+    }
+
+    private IEnumerator Slide(GameObject gameObject, float startSpeed, float duration)
+    {
+        RectTransform rectTransform = gameObject.GetComponent<RectTransform>();
+
+        float elapsed = 0;
+        while(elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsed / duration);
+
+            float speed = Mathf.Lerp(startSpeed, 0, t);
+
+            // Debug.Log(speed);
+            
+            rectTransform.Translate(Vector2.up * speed * Time.deltaTime);
+
+            yield return null;
+        }
+
+    }
+    private IEnumerator ContinuesLootAt(GameObject target, Vector2 lookAt, float duration)
     {
         RectTransform rectTransform = target.GetComponent<RectTransform>();
-        RectTransform rectTransformLookAt = lookAt.GetComponent<RectTransform>();
 
         float elapsed = 0;
         while(elapsed < duration)
         {
             elapsed += Time.deltaTime;
 
-            Vector2Utils.LookAt2d(rectTransform.anchoredPosition, rectTransformLookAt.anchoredPosition);
+            float targetRotation = Vector2Utils.LookAt2d(rectTransform.anchoredPosition, lookAt);
+            rectTransform.rotation = Quaternion.Euler(new Vector3(0,0, targetRotation + 270));
 
             yield return null;
         }
@@ -110,7 +163,7 @@ public class IntroPlayer : MonoBehaviour
     private IEnumerator AnimatedRotation(GameObject obj, float targetRotation, float duration, EaseType easeType)
     {
         RectTransform rectTransform = obj.GetComponent<RectTransform>();
-        float start = rectTransform.rotation.z;
+        float start = rectTransform.eulerAngles.z;
 
         float elapsed = 0;
         while(elapsed < duration)
@@ -119,7 +172,7 @@ public class IntroPlayer : MonoBehaviour
             float t = Mathf.Clamp01(elapsed / duration);
             t = Ease.Easing(t, easeType);
 
-            float target= Mathf.LerpUnclamped(start, targetRotation, t);
+            float target= Mathf.LerpAngle(start, targetRotation, t);
 
             rectTransform.rotation = Quaternion.Euler(new Vector3(0,0,target));
 
@@ -127,6 +180,43 @@ public class IntroPlayer : MonoBehaviour
         }
 
         rectTransform.rotation = Quaternion.Euler(new Vector3(0,0,targetRotation));
+        
+    }
+
+    private IEnumerator AnimatedRotation(GameObject obj, Vector2 target, float duration, EaseType easeType)
+    {
+        RectTransform rectTransform = obj.GetComponent<RectTransform>();
+
+        //시작 각
+        float start = rectTransform.eulerAngles.z;
+
+
+        // 바라볼 위치
+        float endRotation;
+        
+
+        float elapsed = 0;
+        while(elapsed < duration)
+        {
+            elapsed += Time.deltaTime;  
+            float t = Mathf.Clamp01(elapsed / duration);
+            t = Ease.Easing(t, easeType);
+
+            // 바라볼 위치
+            endRotation = Vector2Utils.LookAt2d(rectTransform.anchoredPosition, target) - 90;
+
+            // 보간
+            float targetRotation = Mathf.LerpAngle(start, endRotation, t);
+
+            rectTransform.rotation = Quaternion.Euler(new Vector3(0,0,targetRotation ));
+
+            yield return null;
+        }
+
+        // 바라볼 위치
+        endRotation = Vector2Utils.LookAt2d(rectTransform.anchoredPosition, target);
+
+        rectTransform.rotation = Quaternion.Euler(new Vector3(0,0,endRotation));
         
     }
 
