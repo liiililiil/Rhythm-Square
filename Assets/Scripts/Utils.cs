@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -14,6 +15,15 @@ namespace Utils
         }
     }
 
+    public static class CoroutineUtils
+    {
+        public static IEnumerator SlowStart(Action action, float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            action.Invoke();
+        }
+    }
+
     public static class Vector2Utils
     {
         public static Vector2 FloatToVector2(float value)
@@ -25,11 +35,19 @@ namespace Utils
         {
             return new Vector3(value, value, value);
         }
+
+        /// <summary>
+        /// a에서 b를 바라보기 위한 오일러 각도를 구합니다.
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
         public static float LookAt2d(Vector2 a, Vector2 b)
         {
-            Vector2 d = b - a;
+            float dx = b.x - a.x;
+            float dy = b.y - a.y;
 
-            return Mathf.Atan2(d.y, d.x) * Mathf.Rad2Deg;
+            return Mathf.Atan2(dy, dx) * Mathf.Rad2Deg;
         }
     }
 
@@ -117,6 +135,7 @@ namespace Utils
             }
         }
     }
+    
 }
 
 
