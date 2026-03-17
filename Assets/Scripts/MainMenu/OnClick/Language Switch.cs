@@ -28,6 +28,9 @@ public class LanguageSwitch : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     private void Start() {
         SettingManager.Instance.onChangeLanguage.AddListener(ChangePosition);
+
+        //초기화
+        ChangePosition(SettingManager.Instance.GetSetting().language);
     }
 
     public void OnPointerEnter(PointerEventData eventData)

@@ -22,6 +22,9 @@ public class AudioSlider : MonoBehaviour
 
     private void Start() {
         SettingManager.Instance.GetSetting().volumes[audioType].onValueChanged.AddListener(OnSettingChange);
+
+        // 초기화
+        slider.SetValueWithoutNotify(SettingManager.Instance.GetSetting().volumes[audioType].value);
     }
 
     private void OnSettingChange(float value)

@@ -25,6 +25,8 @@ public class OffsetSlider : MonoBehaviour
     }
 
     private void Start() {
+        //초기화
+        OnChangeValue(SettingManager.Instance.GetSetting().offset);
         
     }
 
