@@ -431,14 +431,14 @@ namespace Type.Addressable
     /// <typeparam name="_T2">에셋의 인덱스</typeparam>
     public class Loader<_T1, _T2> where _T1 : IndexedScriptableObject<_T2> where _T2: System.Enum
     {
-        public Coroutine coroutine;
-        public AsyncOperationHandle<IList<UnityEngine.ResourceManagement.ResourceLocations.IResourceLocation>> countHandle;
-        public AsyncOperationHandle<IList<_T1>> handle;
+        protected Coroutine coroutine;
+        protected AsyncOperationHandle<IList<UnityEngine.ResourceManagement.ResourceLocations.IResourceLocation>> countHandle;
+        protected AsyncOperationHandle<IList<_T1>> handle;
 
         protected LoadingRecoder loadingRecoder;
 
         //값 저장을 위한 타입
-        public Dictionary<_T2, _T1> table = new Dictionary<_T2, _T1>();
+        protected Dictionary<_T2, _T1> table = new Dictionary<_T2, _T1>();
 
         public Loader(LoadingRecoder recoder){
             RecoderBind(recoder);
@@ -522,9 +522,9 @@ namespace Type.Addressable
     /// <typeparam name="_T1">에셋의 타입</typeparam>
     /// <typeparam name="_T2">에셋의 인덱스</typeparam>
     public class EachLoader<_T1, _T2>: Loader<_T1,_T2> where _T1 : IndexedScriptableObject<_T2> where _T2: System.Enum
-    {        
-        public new Dictionary<_T2, AsyncOperationHandle<_T1>> handle = new Dictionary<_T2, AsyncOperationHandle<_T1>>();
-
+    {
+        protected new Dictionary<_T2, AsyncOperationHandle<_T1>> handle = new Dictionary<_T2, AsyncOperationHandle<_T1>>();
+         
         public EachLoader(LoadingRecoder recoder) : base(recoder)
         {
         }
@@ -548,6 +548,7 @@ namespace Type.Addressable
             table.Clear();
 
         }
+
         //릴리즈 함수
         public void Release(_T2 ignore)
         {
@@ -639,22 +640,7 @@ namespace Type.Addressable
             //콜백
             callback?.Invoke();
         }
-
-
-        protected new void AssetBind(_T1 asset)
-        {
-
-            //레코더에게 완료알림
-            if(loadingRecoder != null) loadingRecoder.CompleteLoading(recoderBindedIndex.Pop());
-
-            //바인딩
-            table.Add(asset.index, asset);
-
-
-        }
     }
-
-
 }
 
 namespace Type.Addressable.Table
