@@ -6,12 +6,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Collections;
 
-public class AssetLoadManager : Managers<AssetLoadManager>
+public class MenuAssetLoadManager : Managers<MenuAssetLoadManager>
 {
 
     public SimpleEvent OnMainMenuAssetLoaded = new SimpleEvent();
 
-    public LoadingRecoder loadRecoder = new LoadingRecoder();
+    public LoadingRecoder assetLoadRecoder = new LoadingRecoder();
     public LoadingRecoder addressableLoadRecoder = new LoadingRecoder();
 
     private Stack<int> loaderIndex = new Stack<int>();
@@ -30,20 +30,20 @@ public class AssetLoadManager : Managers<AssetLoadManager>
     public void LoaderBind(Action action)
     {
         int index;
-        loadRecoder.StartLoading(out index);
+        assetLoadRecoder.StartLoading(out index);
 
         loaderIndex.Push(index);
         loaderAction.Push(action);
     }
 
     // 천천히 로딩 하기
-    private IEnumerator ProgressiveLoading()
+    private IEnumerator MenuProgressiveLoading()
     {
         while(loaderIndex.Count > 0)
         {
             loaderAction.Pop().Invoke();
 
-            loadRecoder.CompleteLoading(loaderIndex.Pop());
+            assetLoadRecoder.CompleteLoading(loaderIndex.Pop());
 
             yield return null;
         }
@@ -58,8 +58,8 @@ public class AssetLoadManager : Managers<AssetLoadManager>
         Tables.TextTable.TextTable.Instance.Load(Type.Addressable.Tag.Text.MAIN_MENU);
         Tables.MusicTable.MusicTable.Instance.Load();
 
-        // 어드레서블 로딩이 끝나면 에셋 불러오기를 시작
-        StartCoroutine(addressableLoadRecoder.WaitForCompleteAllLoading(() => StartCoroutine(ProgressiveLoading())));
+        // 어드레서블 로딩이 끝나면 오브젝트의 에셋 불러오기를 시작
+        StartCoroutine(addressableLoadRecoder.WaitForCompleteAllLoading(() => StartCoroutine(MenuProgressiveLoading())));
     }
     
 }
