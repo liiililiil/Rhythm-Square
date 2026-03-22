@@ -431,14 +431,14 @@ namespace Type.Addressable
     /// <typeparam name="_T2">에셋의 인덱스</typeparam>
     public class Loader<_T1, _T2> where _T1 : IndexedScriptableObject<_T2> where _T2: System.Enum
     {
-        protected Coroutine coroutine;
+        public Coroutine coroutine;
         protected AsyncOperationHandle<IList<UnityEngine.ResourceManagement.ResourceLocations.IResourceLocation>> countHandle;
         protected AsyncOperationHandle<IList<_T1>> handle;
 
         protected LoadingRecoder loadingRecoder;
 
         //값 저장을 위한 타입
-        protected Dictionary<_T2, _T1> table = new Dictionary<_T2, _T1>();
+        public Dictionary<_T2, _T1> table = new Dictionary<_T2, _T1>();
 
         public Loader(LoadingRecoder recoder){
             RecoderBind(recoder);
