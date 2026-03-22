@@ -1,5 +1,6 @@
 using System.Collections;
 using SimpleEasing;
+using Type.Menu;
 using Unity.VectorGraphics;
 using UnityEngine;
 
@@ -21,6 +22,9 @@ public class IntroPlayer : MonoBehaviour
     [Space(10), SerializeField]
     private float slidingSpeed;
 
+    [Space(10), SerializeField]
+    private MenuState disableMenuState;
+
 
 
     private RectTransform playerRect;
@@ -41,13 +45,21 @@ public class IntroPlayer : MonoBehaviour
 
     private void Start() {
         MenuMusicManager.Instance.OnBeat.AddListener(NextBeat);
-        AssetLoadManager.Instance.LoaderBind(NextBeat);
+        MenuAssetLoadManager.Instance.LoaderBind(NextBeat);
+        MenuStateManager.Instance.onMenuStateChanged.AddListener(DisableObject);
 
         playerRect = player.GetComponent<RectTransform>();
         arrowsRect = arrows.GetComponent<RectTransform>();
     }
 
+    private void DisableObject(MenuState menuState)
+    {
+        // 목표 메뉴가 아니면 넘기기
+        if(menuState != disableMenuState) return;
+        player.SetActive(false);
 
+        MenuStateManager.Instance.onMenuStateChanged.RemoveListener(DisableObject);
+    }
     private void NextBeat()
     {
         beat++;
@@ -64,11 +76,10 @@ public class IntroPlayer : MonoBehaviour
                 PlayerGoingToEnd();
                 break;
             case 5:
-                Destroy(gameObject);
                 
                 break;
             default:
-                AssetLoadManager.Instance.OnMainMenuAssetLoaded.RemoveListener(NextBeat);
+                MenuAssetLoadManager.Instance.OnMainMenuAssetLoaded.RemoveListener(NextBeat);
                 break;
         }
     }
@@ -125,21 +136,7 @@ public class IntroPlayer : MonoBehaviour
         }
 
     }
-    private IEnumerator ContinuesLootAt(GameObject target, Vector2 lookAt, float duration)
-    {
-        RectTransform rectTransform = target.GetComponent<RectTransform>();
 
-        float elapsed = 0;
-        while(elapsed < duration)
-        {
-            elapsed += Time.deltaTime;
-
-            float targetRotation = Vector2Utils.LookAt2d(rectTransform.anchoredPosition, lookAt);
-            rectTransform.rotation = Quaternion.Euler(new Vector3(0,0, targetRotation + 270));
-
-            yield return null;
-        }
-    }
     private IEnumerator AnimatedPosition(GameObject obj, Vector2 targetPos, float duration, EaseType easeType)
     {
         RectTransform rectTransform = obj.GetComponent<RectTransform>();

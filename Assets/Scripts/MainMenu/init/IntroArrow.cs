@@ -1,5 +1,6 @@
 using System.Collections;
 using SimpleEasing;
+using Type.Menu;
 using Unity.VectorGraphics;
 using UnityEngine;
 
@@ -28,6 +29,9 @@ public class IntroArrow : MonoBehaviour
     [SerializeField]
     private EaseType ARROW_ROTATION;
 
+    [Space(10),SerializeField]
+    private MenuState disableMenuState;
+
     private int beat;
 
 
@@ -40,10 +44,22 @@ public class IntroArrow : MonoBehaviour
 
     private void Start() {
         MenuMusicManager.Instance.OnBeat.AddListener(NextBeat);
-        AssetLoadManager.Instance.LoaderBind(NextBeat);
+        MenuAssetLoadManager.Instance.LoaderBind(NextBeat);
+        MenuStateManager.Instance.onMenuStateChanged.AddListener(DisableObject);
     }
 
 
+    private void DisableObject(MenuState menuState)
+    {
+        // 목표 메뉴가 아니면 넘기기
+        if(menuState != disableMenuState) return;
+        leftArrow.gameObject.SetActive(false);
+        rightArrow.gameObject.SetActive(false);
+        upArrow.gameObject.SetActive(false);
+        downArrow.gameObject.SetActive(false);
+
+        MenuStateManager.Instance.onMenuStateChanged.RemoveListener(DisableObject);
+    }
     private void NextBeat()
     {
         beat++;
@@ -61,7 +77,7 @@ public class IntroArrow : MonoBehaviour
                 PlayerBind();
                 break;
             default:
-                AssetLoadManager.Instance.OnMainMenuAssetLoaded.RemoveListener(NextBeat);
+                MenuAssetLoadManager.Instance.OnMainMenuAssetLoaded.RemoveListener(NextBeat);
                 break;
         }
     }
