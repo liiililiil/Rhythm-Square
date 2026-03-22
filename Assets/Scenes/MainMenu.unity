@@ -548,6 +548,7 @@ MonoBehaviour:
   stayPos: {x: 0, y: 0}
   endPos: {x: -930, y: 0}
   slidingSpeed: 3000
+  disableMenuState: 2
 --- !u!114 &526172780
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1146,7 +1147,6 @@ MonoBehaviour:
     delay: 0
   stateDefault:
     value:
-    - {fileID: 526172777}
     - {fileID: 526172779}
     - {fileID: 521329386}
     delay: 0
