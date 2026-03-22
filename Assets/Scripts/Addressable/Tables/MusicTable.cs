@@ -21,10 +21,10 @@ namespace Tables.MusicTable
         }
 
         private void Start() {
-            music.RecoderBind(AssetLoadManager.Instance.addressableLoadRecoder);
-            info.RecoderBind(AssetLoadManager.Instance.addressableLoadRecoder);
-            playable.RecoderBind(AssetLoadManager.Instance.addressableLoadRecoder);
-            backgroundInfo.RecoderBind(AssetLoadManager.Instance.addressableLoadRecoder);
+            music.RecoderBind(MenuAssetLoadManager.Instance.addressableLoadRecoder);
+            info.RecoderBind(MenuAssetLoadManager.Instance.addressableLoadRecoder);
+            playable.RecoderBind(MenuAssetLoadManager.Instance.addressableLoadRecoder);
+            backgroundInfo.RecoderBind(MenuAssetLoadManager.Instance.addressableLoadRecoder);
 
         }
         

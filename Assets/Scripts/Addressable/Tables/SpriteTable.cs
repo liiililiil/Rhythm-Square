@@ -14,7 +14,7 @@ namespace Tables.SpriteTable{
         }
         void Start()
         {
-            loader.RecoderBind(AssetLoadManager.Instance.addressableLoadRecoder);
+            loader.RecoderBind(MenuAssetLoadManager.Instance.addressableLoadRecoder);
         }
 
         public void LoadMainMenu(string tag)

@@ -6,13 +6,13 @@ public class PrefabLoader : MonoBehaviour
     [SerializeField]
     private PrefabIndex[] prefabIndex;
     private void Start() {
-        if(AssetLoadManager.Instance.addressableLoadRecoder.IsAllComplete())
+        if(MenuAssetLoadManager.Instance.assetLoadRecoder.IsAllComplete())
         {
             OnLoadMainMenuAsset();
         }
         else
         {
-            AssetLoadManager.Instance.LoaderBind(OnLoadMainMenuAsset);
+            MenuAssetLoadManager.Instance.LoaderBind(OnLoadMainMenuAsset);
         }
     }
 

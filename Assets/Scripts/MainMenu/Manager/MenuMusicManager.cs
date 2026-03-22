@@ -86,7 +86,7 @@ public class MenuMusicManager : Managers<MenuMusicManager>
     }
 
     private void Start() {
-        AssetLoadManager.Instance.LoaderBind(MusicLoad);
+        MenuAssetLoadManager.Instance.LoaderBind(MusicLoad);
         SettingManager.Instance.GetSetting().volumes[Type.Menu.AudioType.Music].onValueChanged.AddListener(VolumeUpdate);
     }
 

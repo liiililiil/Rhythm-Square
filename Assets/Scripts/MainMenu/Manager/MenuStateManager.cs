@@ -18,7 +18,7 @@ public class MenuStateManager : Managers<MenuStateManager>
     private void Start() 
     {
         onMenuStateChanged.AddListener(OnChangeMenuState);
-        AssetLoadManager.Instance.OnMainMenuAssetLoaded.AddListener(() => ChangeMenuState(MenuState.InitWaitng));
+        MenuAssetLoadManager.Instance.OnMainMenuAssetLoaded.AddListener(() => ChangeMenuState(MenuState.InitWaitng));
         
         ChangeMenuState(MenuState.InitLoading);
     }
