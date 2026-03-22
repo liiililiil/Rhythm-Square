@@ -3,42 +3,52 @@ using UnityEngine.UI;
 
 public class LoadingPrograssBar : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject bar;
     private Text text;
 
-    RectTransform barRect;
+    [SerializeField]
+    RectTransform assetLoadingBarRect;
+    [SerializeField]
+    RectTransform AddressableLoadingBarRect;
 
-    int index;
-    int completeIndex;
-    private void Awake()
-    {
-        barRect = bar.GetComponent<RectTransform>();
-    }
+    int assetCount;
+    int assetCompleteCount;
 
+    int addressableCount;
+    int addressableCompleteCount;
 
     private void Start() {
-        AssetLoadManager.Instance.loadRecoder.OnStartLoading.AddListener(add);
-        AssetLoadManager.Instance.loadRecoder.OnCompleteLoading.AddListener(Complete);
-        AssetLoadManager.Instance.addressableLoadRecoder.OnStartLoading.AddListener(add);
-        AssetLoadManager.Instance.addressableLoadRecoder.OnCompleteLoading.AddListener(Complete);
+        MenuAssetLoadManager.Instance.assetLoadRecoder.OnStartLoading.AddListener(AssetAdd);
+        MenuAssetLoadManager.Instance.assetLoadRecoder.OnCompleteLoading.AddListener(AssetComplete);
+        MenuAssetLoadManager.Instance.addressableLoadRecoder.OnStartLoading.AddListener(AddressableAdd);
+        MenuAssetLoadManager.Instance.addressableLoadRecoder.OnCompleteLoading.AddListener(AddressableComplete);
     }
 
-    private void add(int empty)
+    private void AddressableAdd(int empty)
     {
-        index++;
-        BarUpdate();
+        addressableCount++;
     }
 
-    private void Complete(int empty)
+    private void AddressableComplete(int empty)
     {
-        completeIndex++;
-        BarUpdate();
+        addressableCompleteCount++;
+        BarUpdate(AddressableLoadingBarRect, addressableCount, addressableCompleteCount);
+        
     }
-    private void BarUpdate()
+
+    private void AssetAdd(int empty)
     {
-        if (index == 0 || completeIndex == 0) return;
-        barRect.localScale = new Vector3((float)completeIndex / index, 1, 1);
+        assetCount++;
+    }
+
+    private void AssetComplete(int empty)
+    {
+        assetCompleteCount++;
+        BarUpdate(assetLoadingBarRect, assetCount, assetCompleteCount);
+    }
+    private void BarUpdate(RectTransform target, int count, int complete)
+    {
+        if (count == 0 || complete == 0) return;
+        target.localScale = new Vector3((float)complete / count, 1, 1);
         
     }
 
