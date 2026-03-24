@@ -592,7 +592,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -10, y: 40}
+  m_AnchoredPosition: {x: -10, y: 30}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2449288385410118114
@@ -687,7 +687,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 1500, y: 40}
+  m_AnchoredPosition: {x: 1500, y: -500}
   m_SizeDelta: {x: 500, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5550457873194815226
@@ -717,12 +717,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RectPositionChanger
   stateChange:
-  - value: {x: 500, y: 50}
+  - value: {x: -400, y: -500}
     targetState: 5
     duration: 1
     easeType: 5
   stateDefault:
-    value: {x: 1500, y: 50}
+    value: {x: 400, y: -500}
     duration: 0.7
     easeType: 20
 --- !u!114 &3270580152341913561
