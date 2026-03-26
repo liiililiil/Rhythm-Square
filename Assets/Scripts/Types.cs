@@ -14,6 +14,8 @@ using SimpleEasing;
 using Utils;
 
 using System.Linq;
+using System.Data.SqlTypes;
+using UnityEditor;
 
 namespace Type
 {
@@ -24,6 +26,76 @@ namespace Type
         public float start;
         public float end;
         
+    }
+
+    // 게임 오브젝트와 함께 추가로 필요한 컴포넌트가 한번에 포함된 타입
+
+    [Serializable]
+    public class ObjectWithComponent<T> where T : MonoBehaviour
+    {
+        [SerializeField]
+        private GameObject gameObject;
+
+        private T _component;
+
+        private Func<T> getter;
+        public T Component
+        {
+            get
+            {
+                return getter();
+            }
+            set
+            {
+                _component = value;
+            }
+        }
+
+        ObjectWithComponent()
+        {
+            getter = ComponentInit;
+        }
+
+        private T ComponentInit()
+        {
+            gameObject.TryGetComponent(out _component);
+            getter = GetComponent;
+
+            return _component;
+        }
+
+        private T GetComponent()
+        {
+            return _component;
+        }
+        
+    }
+
+    [CustomPropertyDrawer(typeof(ObjectWithComponent<>), true)]
+    public class ObjectWithComponentDrawer : PropertyDrawer
+    {
+        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+        {
+            // 내부의 'gameObject' 필드를 찾습니다.
+            SerializedProperty gameObjectProperty = property.FindPropertyRelative("gameObject");
+
+            if (gameObjectProperty != null)
+            {
+                // 클래스의 레이블(이름)을 유지하면서 GameObject 필드만 그립니다.
+                EditorGUI.PropertyField(position, gameObjectProperty, label);
+            }
+            else
+            {
+                // 필드를 찾지 못했을 경우 대비책
+                EditorGUI.LabelField(position, label.text, "gameObject 필드를 찾을 수 없습니다.");
+            }
+        }
+
+        public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+        {
+            // 한 줄 높이만 사용하도록 설정 (접힘/펼침 공간 제거)
+            return EditorGUIUtility.singleLineHeight;
+        }
     }
 }
 
