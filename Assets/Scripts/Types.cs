@@ -28,35 +28,30 @@ namespace Type
         
     }
 
-    // 게임 오브젝트와 함께 추가로 필요한 컴포넌트가 한번에 포함된 타입
-
-    [Serializable]
-    public class ObjectWithComponent<T> where T : MonoBehaviour
+    // 처음 컴포넌를 겟하면 그 컴포넌트를 불러 올수 있는 클래스
+    public class InitableComponent<_T1> where _T1 : MonoBehaviour
     {
-        [SerializeField]
-        private GameObject gameObject;
+        private _T1 _component;
 
-        private T _component;
-
-        private Func<T> getter;
-        public T Component
+        private Func<_T1> getter;
+        public _T1 Component
         {
             get
             {
                 return getter();
             }
-            set
+            private set
             {
                 _component = value;
             }
         }
 
-        ObjectWithComponent()
+        public InitableComponent(GameObject gameObject)
         {
-            getter = ComponentInit;
+            getter = () => ComponentInit(gameObject);
         }
 
-        private T ComponentInit()
+        private _T1 ComponentInit(GameObject gameObject)
         {
             gameObject.TryGetComponent(out _component);
             getter = GetComponent;
@@ -64,31 +59,70 @@ namespace Type
             return _component;
         }
 
-        private T GetComponent()
+        private _T1 GetComponent()
         {
             return _component;
+        }
+    }
+
+    // 게임 오브젝트와 함께 추가로 필요한 컴포넌트가 한번에 포함된 타입
+
+    [Serializable]
+    public class ObjectWithComponent<_T1> where _T1 : MonoBehaviour
+    {
+        [SerializeField]
+        private GameObject gameObject;
+
+        public InitableComponent<_T1> component;
+
+        public ObjectWithComponent(){
+            component = new InitableComponent<_T1>(gameObject);
+        }
+
+    }
+
+    [Serializable]
+    public class ObjectWithComponent<_T1,_T2> where _T1 : MonoBehaviour where _T2 : MonoBehaviour
+    {
+        [SerializeField]
+        private GameObject gameObject;
+
+        public InitableComponent<_T1> firstComponent;
+        public InitableComponent<_T2> secondComponent;
+
+        public ObjectWithComponent(){
+            firstComponent = new InitableComponent<_T1>(gameObject);
+            secondComponent = new InitableComponent<_T2>(gameObject);
         }
         
     }
 
+
     [CustomPropertyDrawer(typeof(ObjectWithComponent<>), true)]
-    public class ObjectWithComponentDrawer : PropertyDrawer
+    public class FirstObjectWithComponentDrawer : PropertyDrawer
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             // 내부의 'gameObject' 필드를 찾습니다.
             SerializedProperty gameObjectProperty = property.FindPropertyRelative("gameObject");
+            EditorGUI.PropertyField(position, gameObjectProperty, label);
+        }
 
-            if (gameObjectProperty != null)
-            {
-                // 클래스의 레이블(이름)을 유지하면서 GameObject 필드만 그립니다.
-                EditorGUI.PropertyField(position, gameObjectProperty, label);
-            }
-            else
-            {
-                // 필드를 찾지 못했을 경우 대비책
-                EditorGUI.LabelField(position, label.text, "gameObject 필드를 찾을 수 없습니다.");
-            }
+        public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+        {
+            // 한 줄 높이만 사용하도록 설정 (접힘/펼침 공간 제거)
+            return EditorGUIUtility.singleLineHeight;
+        }
+    }
+
+    [CustomPropertyDrawer(typeof(ObjectWithComponent<,>), true)]
+    public class SecondObjectWithComponentDrawer : PropertyDrawer
+    {
+        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+        {
+            // 내부의 'gameObject' 필드를 찾습니다.
+            SerializedProperty gameObjectProperty = property.FindPropertyRelative("gameObject");
+            EditorGUI.PropertyField(position, gameObjectProperty, label);
         }
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
