@@ -11,7 +11,7 @@ public class MenuStateButton : MonoBehaviour, IPointerEnterHandler, IPointerExit
 {
     private Vector2 normalScale;
     private Vector2 normalTextPos;
-    private int normalFontSize;
+    private float normalFontSize;
 
 
 
@@ -22,7 +22,7 @@ public class MenuStateButton : MonoBehaviour, IPointerEnterHandler, IPointerExit
     private Vector2 onHoverTextPos;
     
     [Space(10), SerializeField]
-    private int onClickFontSize;
+    private float onClickFontSize;
 
 
     
@@ -34,6 +34,11 @@ public class MenuStateButton : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
     [Space(10),SerializeField]
     private MenuState onCilckState;
+
+    //각 Rect
+    private RectTransform barRect;
+    private RectTransform textRect;
+
     
     //애니메이션 용 코루틴들
     private Coroutine barScaleCoroutine;
@@ -44,9 +49,12 @@ public class MenuStateButton : MonoBehaviour, IPointerEnterHandler, IPointerExit
     const EaseType EASETYPE = EaseType.OutCubic;
 
     private void Awake() {
+        barRect = bar.GetComponent<RectTransform>();
+        textRect = text.GetComponent<RectTransform>();
+
         // 현재 설정된 값을 기본값으로 설정
-        normalScale = bar.GetComponent<RectTransform>().localScale;
-        normalTextPos = text.GetComponent<RectTransform>().anchoredPosition;
+        normalScale = barRect.localScale;
+        normalTextPos = textRect.anchoredPosition;
         normalFontSize = text.GetComponent<Text>().fontSize;
 
     }
@@ -68,8 +76,26 @@ public class MenuStateButton : MonoBehaviour, IPointerEnterHandler, IPointerExit
         // 클릭 효과가 재생 중인 경우 무시
         if(onClickCoroutine != null) return;
 
-        this.SafeStartCoroutine(ref barScaleCoroutine, BarEasingScaleChange(startScale, endScale, duration, targetEaseType));
-        this.SafeStartCoroutine(ref textPositionCoroutine, TextEasingPositionChange(startPosition, endPosition, duration, targetEaseType));
+        this.SafeStartCoroutine(
+            ref barScaleCoroutine, 
+            Utils.Generic.AnimationUtils.EasingChange(
+                startScale, 
+                endScale, 
+                value => barRect.localScale = value,
+                duration, targetEaseType
+            )
+        );
+
+        this.SafeStartCoroutine(
+            ref textPositionCoroutine,
+            Utils.Generic.AnimationUtils.EasingChange(
+                startPosition,
+                endPosition,
+                value => textRect.anchoredPosition = value,
+                duration,
+                targetEaseType
+            )
+);
     }
     
     public void OnPointerClick(PointerEventData exentData)
@@ -81,83 +107,29 @@ public class MenuStateButton : MonoBehaviour, IPointerEnterHandler, IPointerExit
         MenuStateManager.Instance.ChangeMenuState(onCilckState);
 
         //위치 돌아가기
-        this.SafeStartCoroutine(ref textPositionCoroutine, TextEasingPositionChange(onHoverTextPos, normalTextPos, DURATION, EASETYPE));
+        this.SafeStartCoroutine(
+            ref textPositionCoroutine,
+            Utils.Generic.AnimationUtils.EasingChange(
+                onHoverTextPos,
+                normalTextPos,
+                value => textRect.anchoredPosition = value,
+                DURATION,
+                EASETYPE
+            )
+        );
 
         //애니메이션 재생
-        this.SafeStartCoroutine(ref onClickCoroutine, TextOnClick(onClickFontSize, normalFontSize, DURATION, EASETYPE));
+        // this.SafeStartCoroutine(
+        //     ref onClickCoroutine,
+        //     Utils.Generic.AnimationUtils.EasingChange(
+        //         onClickFontSize,
+        //         normalFontSize,
+        //         value => text. = Utils.Vector2Utils.FloatToVector2(value),
+        //         DURATION,
+        //         EASETYPE
+        //     )
+        // );
         
 
     }
-
-    IEnumerator BarEasingScaleChange(Vector2 start, Vector2 end, float duration, EaseType easeType)
-    {
-        RectTransform rt = bar.GetComponent<RectTransform>();
-
-        float elapsed = 0f;
-
-        while (elapsed < duration)
-        {
-            elapsed += Time.deltaTime;
-            float t = Mathf.Clamp01(elapsed / duration);
-
-            t = Ease.Easing(t, easeType);
-
-            Vector2 newScale = Vector2.Lerp(start, end, t);
-            rt.localScale = newScale;
-
-            yield return null;
-        }
-
-        //보정
-        rt.localScale = end;
-
-        this.SafeStopCoroutine(ref barScaleCoroutine);
-    }
-
-    IEnumerator TextEasingPositionChange(Vector2 start, Vector2 end, float duration, EaseType easeType)
-    {
-        RectTransform rt = text.GetComponent<RectTransform>();
-        float elapsed = 0f;
-
-        while (elapsed < duration)
-        {
-            elapsed += Time.deltaTime;
-            float t = Mathf.Clamp01(elapsed / duration);
-
-            t = Ease.Easing(t, easeType);
-
-            Vector2 newPosition = Vector2.Lerp(start, end, t);
-            rt.anchoredPosition = newPosition;
-            yield return null;
-        }
-
-        // 보정
-        rt.anchoredPosition = end;
-    }
-
-
-    IEnumerator TextOnClick(int start, int end, float duration, EaseType easeType)
-    {
-        Text targetText = text.GetComponent<Text>();
-
-        float elapsed = 0f;
-
-        while (elapsed < duration)
-        {
-            elapsed += Time.deltaTime;
-            float t = Mathf.Clamp01(elapsed / duration);
-
-            t = Ease.Easing(t, easeType);
-
-            int newSize = (int)Mathf.Lerp(start, end, t);
-            targetText.fontSize = newSize;
-            yield return null;
-        }
-
-        //보정
-        targetText.fontSize = end;
-
-        this.SafeStopCoroutine(ref onClickCoroutine);
-    }
-
 }

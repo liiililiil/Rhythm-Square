@@ -13,14 +13,14 @@ public class RectPositionChanger : StateChanger
     [SerializeField]
     private SlowMenuStateDefault<Vector2> stateDefault;
 
-    private RectTransform rectTransform;
+    private RectTransform rect;
 
     private Coroutine coroutine;
 
     private Vector2 currentPosition;
 
     private void Awake() {
-        rectTransform = GetComponent<RectTransform>();
+        rect = GetComponent<RectTransform>();
     }
 
     protected override void OnInvoke(MenuState newState)
@@ -44,28 +44,17 @@ public class RectPositionChanger : StateChanger
         currentPosition = targetVector;
 
         //기본값으로 변경
-        this.SafeStartCoroutine(ref coroutine, ChangePositionCoroutine(targetVector, duration, easeType));
+        this.SafeStartCoroutine(
+            ref coroutine,
+            Utils.Generic.AnimationUtils.EasingChange(
+                rect.anchoredPosition,
+                targetVector,
+                value => rect.anchoredPosition = value,
+                duration,
+                easeType
+            )
+        );
     }
 
-    IEnumerator ChangePositionCoroutine(Vector2 targetPos, float duration, EaseType easeType)
-    {
-        Vector2 startPos = rectTransform.anchoredPosition;
-        float elapsed = 0f;
-
-        while(elapsed < duration)
-        {
-            elapsed += Time.deltaTime;
-            float t = Mathf.Clamp01(elapsed / duration);
-            t = Ease.Easing(t, easeType);
-
-            rectTransform.anchoredPosition = Vector2.LerpUnclamped(startPos, targetPos, t);
-
-            yield return null;
-        }
-
-        rectTransform.anchoredPosition = targetPos;
-
-        this.SafeStopCoroutine(ref coroutine);
-    }
 
 }
