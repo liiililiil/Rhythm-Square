@@ -29,7 +29,7 @@ namespace Type
     }
 
     // 처음 컴포넌를 겟하면 그 컴포넌트를 불러 올수 있는 클래스
-    public class InitableComponent<_T1> where _T1 : MonoBehaviour
+    public class InitableComponent<_T1> where _T1 : Component
     {
         private _T1 _component;
 
@@ -68,7 +68,7 @@ namespace Type
     // 게임 오브젝트와 함께 추가로 필요한 컴포넌트가 한번에 포함된 타입
 
     [Serializable]
-    public class ObjectWithComponent<_T1> where _T1 : MonoBehaviour
+    public class ObjectWithComponent<_T1> where _T1 : Component
     {
         [SerializeField]
         private GameObject gameObject;
@@ -82,7 +82,7 @@ namespace Type
     }
 
     [Serializable]
-    public class ObjectWithComponent<_T1,_T2> where _T1 : MonoBehaviour where _T2 : MonoBehaviour
+    public class ObjectWithComponent<_T1,_T2> where _T1 : Component where _T2 : Component
     {
         [SerializeField]
         private GameObject gameObject;
