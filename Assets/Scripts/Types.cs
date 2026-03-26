@@ -112,8 +112,8 @@ namespace Type.Menu
         public Setting()
         {
             //볼륨 영역
-            volumes.Add(AudioType.Music, new Volume(0.6f));
-            volumes.Add(AudioType.SFX, new Volume(0.6f));
+            volumes.Add(AudioType.Music, new Volume(0.1f));
+            volumes.Add(AudioType.SFX, new Volume(0.1f));
 
             offset = 0;
 
@@ -259,9 +259,12 @@ namespace Type.Addressable
                 return;
             }
 
-            if (prograssList[loadIndex] >= 1f)
-                return; // 이미 완료된 경우 무시
-                
+            if (prograssList[loadIndex] == 1)
+            {
+                Debug.LogWarning($"이미 완료된 loadIndex: {loadIndex}");
+            }
+
+            
             leftPrograss--;
             prograssList[loadIndex] = 1;
             OnCompleteLoading.Invoke(loadIndex);
@@ -281,6 +284,8 @@ namespace Type.Addressable
             leftPrograss--;
             prograssList[loadIndex] = -1;
             OnErrorLoading.Invoke(loadIndex, ex);
+
+            Debug.LogWarning($"에러가 발생하였습니다!");
         }
 
 
@@ -467,10 +472,9 @@ namespace Type.Addressable
 
     public virtual IEnumerator LoadingAsset(string label, Action callback = null)
     {
-        
-        // Debug.Log(" 로딩 시작 ");
         //에셋 갯수 확인 후 그 갯수만큼 신고
         countHandle = Addressables.LoadResourceLocationsAsync(label);
+
         yield return countHandle;
 
         for(int i = 0; i < countHandle.Result.Count; i++)
@@ -740,3 +744,5 @@ namespace Type.Addressable.Tag
     }
 
 }
+
+
