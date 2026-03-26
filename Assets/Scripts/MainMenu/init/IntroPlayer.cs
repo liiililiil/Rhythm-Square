@@ -45,7 +45,7 @@ public class IntroPlayer : MonoBehaviour
 
     private void Start() {
         MenuMusicManager.Instance.OnBeat.AddListener(NextBeat);
-        MenuAssetLoadManager.Instance.LoaderBind(NextBeat);
+        MenuAssetLoadManager.Instance.AssetLoaderBind(NextBeat);
         MenuStateManager.Instance.onMenuStateChanged.AddListener(DisableObject);
 
         playerRect = player.GetComponent<RectTransform>();
