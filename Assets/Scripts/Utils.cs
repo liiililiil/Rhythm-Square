@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using SimpleEasing;
 using UnityEngine;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
@@ -138,4 +139,71 @@ namespace Utils
     
 }
 
+namespace Utils.Generic
+{
 
+    public static class AnimationUtils
+    {
+
+        public static IEnumerator EasingChange<_T1>(_T1 start, _T1 end, Action<_T1> applyAction, float duration, EaseType easeType, Action callback = null)
+        {
+            // Lerp 함수 찾기
+            Func<_T1,_T1,float,_T1> lerp = Utils.Generic.Generic.GetLerp<_T1>();
+
+            float elapsed = 0;
+            while(elapsed < duration)
+            {
+                elapsed += Time.deltaTime;
+                float t = Mathf.Clamp01(elapsed / duration);
+                t = Ease.Easing(t, easeType);
+
+                _T1 target= lerp(start, end, t);
+
+                applyAction(target);
+
+                yield return null;
+            }
+
+            // 보정 및 콜백
+            applyAction(end);
+            callback?.Invoke();
+        }
+    }
+    public static class Generic
+    {
+
+
+        public static Func<_T1,_T1,float,_T1> GetLerp<_T1>()
+        {
+            switch (typeof(_T1))
+            {
+                case System.Type t when t == typeof(Vector2):
+                    return (Func<_T1, _T1, float, _T1>)(object)GetVector2Lerp();
+
+                case System.Type t when t == typeof(Vector3):
+                    return (Func<_T1, _T1, float, _T1>)(object)GetVector3Lerp();
+
+                case System.Type t when t == typeof(float):
+                    return (Func<_T1, _T1, float, _T1>)(object)GetFloatLerp();
+
+                default:
+                    throw new NotSupportedException($"타입 {typeof(_T1)}에 대응되는 Lerp가 존재하지 않습니다!");
+            }
+        }
+        public static Func<float, float, float, float> GetFloatLerp()
+        {
+            return Mathf.LerpUnclamped;
+        }
+
+        public static Func<Vector2, Vector2, float, Vector2> GetVector2Lerp()
+        {
+            return Vector2.LerpUnclamped;
+        }
+
+        public static Func<Vector3, Vector3, float, Vector3> GetVector3Lerp()
+        {
+            return Vector3.LerpUnclamped;
+        }
+        
+    }
+}
