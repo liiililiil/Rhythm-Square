@@ -45,10 +45,12 @@ public class LoadingPrograssBar : MonoBehaviour
         assetCompleteCount++;
         BarUpdate(assetLoadingBarRect, assetCount, assetCompleteCount);
     }
-    private void BarUpdate(RectTransform target, int count, int complete)
+    private void BarUpdate(RectTransform target, float count, float complete)
     {
         if (count == 0 || complete == 0) return;
-        target.localScale = new Vector3((float)complete / count, 1, 1);
+        target.localScale = new Vector3(complete / count, 1, 1);
+
+        Debug.Log($"Assets => complete : {assetCompleteCount} | count : {assetCount} | result : {(float)assetCompleteCount / assetCount} \n addressable => complete : {addressableCompleteCount} | count : {addressableCount} | result : {(float)addressableCompleteCount / addressableCount}");
         
     }
 
