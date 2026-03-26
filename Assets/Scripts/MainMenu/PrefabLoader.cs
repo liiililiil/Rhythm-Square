@@ -8,16 +8,17 @@ public class PrefabLoader : MonoBehaviour
     private void Start() {
         if(MenuAssetLoadManager.Instance.assetLoadRecoder.IsAllComplete())
         {
-            OnLoadMainMenuAsset();
+            OnLoadAsset();
         }
         else
         {
-            MenuAssetLoadManager.Instance.LoaderBind(OnLoadMainMenuAsset);
+            MenuAssetLoadManager.Instance.AssetLoaderBind(OnLoadAsset);
         }
     }
 
-    private void OnLoadMainMenuAsset()
+    private void OnLoadAsset()
     {
+        gameObject.name += " And End";
         foreach (var index in prefabIndex)
         {
             Instantiate(PrefabTable.Instance.GetPrefab(index).prefab).GetComponent<RectTransform>().SetParent(transform, false);

@@ -17,17 +17,18 @@ public class SVGSpriteLoader : MonoBehaviour
     {
         if (MenuAssetLoadManager.Instance.assetLoadRecoder.IsAllComplete())
         {
-            sVGImage.sprite = SpriteTable.Instance.GetSprite(spriteIndex).sprite;
+            OnMainMenuAssetLoaded();
         }
         else
         {
-            MenuAssetLoadManager.Instance.LoaderBind(OnMainMenuAssetLoaded);
+            MenuAssetLoadManager.Instance.AssetLoaderBind(OnMainMenuAssetLoaded);
             
         }
     }
 
     private void OnMainMenuAssetLoaded()
     {
+        gameObject.name += " And End";
         sVGImage.sprite = SpriteTable.Instance.GetSprite(spriteIndex).sprite;
     }
 }

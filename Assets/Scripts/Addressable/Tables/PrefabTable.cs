@@ -17,7 +17,7 @@ namespace Tables.PrefabTable{
             loader.RecoderBind(MenuAssetLoadManager.Instance.addressableLoadRecoder);
         }
 
-        public void LoadMainMenu(string tag)
+        public void Load(string tag)
         {
             this.SafeStartCoroutine(ref loader.coroutine, loader.LoadingAsset(tag));
         }

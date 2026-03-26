@@ -29,18 +29,19 @@ public class MultinationalTextSupport : MonoBehaviour
     {
         if(MenuAssetLoadManager.Instance.assetLoadRecoder.IsAllComplete())
         {
-            OnChangeSetting();
+            TextBind();
         }
         else
         {
-            MenuAssetLoadManager.Instance.LoaderBind(TextBind);
-        }
+            MenuAssetLoadManager.Instance.AssetLoaderBind(TextBind);
+        }   
 
         SettingManager.Instance.onChangeLanguage.AddListener(OnChangeSetting);
     }
 
     private void TextBind()
     {
+        gameObject.name += " And End";
         textObject.text= TextTable.Instance.GetText(index).GetString(SettingManager.Instance.GetSetting().language);
     }
 

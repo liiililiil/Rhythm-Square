@@ -16,6 +16,10 @@ namespace Tables.TextTable
             Singleton(true);
         }
 
+        private void Start() {
+            loader.RecoderBind(MenuAssetLoadManager.Instance.addressableLoadRecoder);
+        }
+
         public void Load(string tag)
         {
             this.SafeStartCoroutine(ref loader.coroutine, loader.LoadingAsset(tag));

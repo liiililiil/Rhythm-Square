@@ -86,7 +86,7 @@ public class MenuMusicManager : Managers<MenuMusicManager>
     }
 
     private void Start() {
-        MenuAssetLoadManager.Instance.LoaderBind(MusicLoad);
+        MenuAssetLoadManager.Instance.AssetLoaderBind(MusicLoad);
         SettingManager.Instance.GetSetting().volumes[Type.Menu.AudioType.Music].onValueChanged.AddListener(VolumeUpdate);
     }
 
@@ -152,7 +152,7 @@ public class MenuMusicManager : Managers<MenuMusicManager>
             if(audioSource.time >= currentRange.end)
             {
                 audioSource.time -= currentRange.end - currentRange.start;
-                BeatTimeCorrection();
+                BeatTimeCorrection(currentRange.end - currentRange.start);
             }
         } catch
         {
@@ -218,9 +218,8 @@ public class MenuMusicManager : Managers<MenuMusicManager>
     }
     
     // 음악 시간 변경시 그 시간에 박자와 다음 박자를 계산
-    private void BeatTimeCorrection()
+    private void BeatTimeCorrection(float time)
     {
-        float time = audioSource.time;
 
         beat = (int)(time / beatPerSec);
         nextSec = (beat+1) * beatPerSec;
@@ -281,7 +280,7 @@ public class MenuMusicManager : Managers<MenuMusicManager>
         audioSource.time = range.start;
 
         VolumeUpdate();
-        BeatTimeCorrection();
+        BeatTimeCorrection(range.start);
 
         if(nextLoop != null) this.SafeStartCoroutine(ref loopCoroutine, LoopWait(range, nextLoop));
     }
@@ -315,7 +314,7 @@ public class MenuMusicManager : Managers<MenuMusicManager>
         }
 
 
-        BeatTimeCorrection();
+        BeatTimeCorrection(otherSource.time);
     }
 
 
