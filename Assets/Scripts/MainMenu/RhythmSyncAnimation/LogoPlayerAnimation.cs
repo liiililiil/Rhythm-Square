@@ -1,6 +1,8 @@
 using UnityEngine;
 using Utils;
 using SimpleEasing;
+using Type.Menu;
+using System;
 
 public class LogoPlayerAnimation : MonoBehaviour
 {
@@ -9,16 +11,35 @@ public class LogoPlayerAnimation : MonoBehaviour
 
     [Header("RhythmSyncPart")]
     [SerializeField]
-    EaseType easeType;
-    float elapsed = 0;
-    float t;
+    private EaseType easeType;
+    private float elapsed = 0;
+    private float t;
 
-    float mouseValue;
+    private float mouseValue;
+
+    private Func<float> rotationAction;
 
     private void Awake() 
     {
+        MenuStateManager.Instance.onMenuStateChanged.AddListener(MenuStateChange);
+
+        rotationAction = RotationWait;
 
     }
+
+    private void MenuStateChange(MenuState _menuState)
+    {
+        // 메뉴로 상태가 바뀌면 액션 함수 바꾸기 
+        if(_menuState == MenuState.Main)
+        {
+            rotationAction = Rotation; 
+
+            //어차피 한번 바꾸면 되니까 해제
+            MenuStateManager.Instance.onMenuStateChanged.RemoveListener(MenuStateChange);
+        } 
+
+        
+    } 
 
     
     private void Start()
@@ -29,18 +50,31 @@ public class LogoPlayerAnimation : MonoBehaviour
         MenuMusicManager.Instance.OnBeat.AddListener(NextStep);
     }
     void Update()
-    {
-        Vector3 rotation = rectTransform.eulerAngles;
-        rotation.z = 0;
-
-        // 특정 박자 당 회전 값 획득
-        rotation.z += RhythmSync();
-
-        // 플레이어 바라보게, 위를 바라보고 있으므로 90도 회전
-        rotation.z += MouseTracking() - 90;
-
+    {   
+        Vector3 rotation = new Vector3(0,0,rotationAction.Invoke());
         rectTransform.eulerAngles = rotation;
     
+    }
+
+
+    private float RotationWait()
+    {
+        //각 고정
+        return 90;
+    }
+
+    private float Rotation()
+    {
+        float rotation = rectTransform.eulerAngles.z;
+        rotation = 0;
+
+        // 특정 박자 당 회전 값 획득
+        rotation += RhythmSync();
+
+        // 플레이어 바라보게, 위를 바라보고 있으므로 90도 회전
+        rotation += MouseTracking() - 90;
+
+        return rotation;
     }
 
     // 특정 박자 때마다 한바퀴 돌리기
