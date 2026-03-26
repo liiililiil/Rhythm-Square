@@ -24,7 +24,8 @@ MonoBehaviour:
   - m_GUID: 986859d3dc6427e4d997bfb0abd81d78
     m_Address: Assets/Audio/Music/iluvslapbass.mp3
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Music
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ceaadec029037784d98f062a238a0414
     m_Address: Assets/AddressableData/Audio/Music/Clip/iluvslapbass.asset

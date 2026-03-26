@@ -41,7 +41,8 @@ MonoBehaviour:
   - m_GUID: d3544160b711ccb4a8a1399b52f0fca4
     m_Address: Assets/AddressableData/Audio/Music/Asset/Zidanda Step.wav
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Music
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 3bb385a73fe80c94fbacc8b780355829, type: 2}

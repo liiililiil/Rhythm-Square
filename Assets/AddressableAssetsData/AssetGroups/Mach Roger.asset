@@ -24,7 +24,8 @@ MonoBehaviour:
   - m_GUID: 3ed515772a26047469843f1af7e35184
     m_Address: Assets/AddressableData/Audio/Music/Asset/Mach Roger.wav
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Music
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 46a61c2a556134c4e814fab0abc0e2d5
     m_Address: Assets/Sprites/MusicTitle/Mach Roger.png
