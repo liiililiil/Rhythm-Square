@@ -44,7 +44,7 @@ public class IntroArrow : MonoBehaviour
 
     private void Start() {
         MenuMusicManager.Instance.OnBeat.AddListener(NextBeat);
-        MenuAssetLoadManager.Instance.LoaderBind(NextBeat);
+        MenuAssetLoadManager.Instance.AssetLoaderBind(NextBeat);
         MenuStateManager.Instance.onMenuStateChanged.AddListener(DisableObject);
     }
 
