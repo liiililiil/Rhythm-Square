@@ -273,7 +273,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4847212adb51444ea9779abed022381, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SliderHandle
-  inside: {fileID: 8317767380940547966}
+  inside:
+    gameObject: {fileID: 8317767380940547966}
 --- !u!1 &4873119189056509643
 GameObject:
   m_ObjectHideFlags: 0

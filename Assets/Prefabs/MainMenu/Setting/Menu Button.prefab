@@ -261,8 +261,10 @@ MonoBehaviour:
   onHoverScale: {x: 1, y: 1.2}
   onHoverTextPos: {x: 575, y: 0}
   onClickFontSize: 75
-  bar: {fileID: 6448607502060419634}
-  text: {fileID: 5829708185637238891}
+  bar:
+    gameObject: {fileID: 6448607502060419634}
+  text:
+    gameObject: {fileID: 5829708185637238891}
   onCilckState: 2
 --- !u!114 &5660435701616294058
 MonoBehaviour:

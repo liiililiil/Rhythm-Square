@@ -418,9 +418,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b41e841d35b992248b0586db06c19db7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LanguageSwitch
-  korean: {fileID: 3454199007220194811}
-  english: {fileID: 6509155035509095897}
-  bar: {fileID: 4925968003146769942}
+  korean:
+    gameObject: {fileID: 3454199007220194811}
+  english:
+    gameObject: {fileID: 6509155035509095897}
+  bar:
+    gameObject: {fileID: 4925968003146769942}
 --- !u!114 &84341871290658181
 MonoBehaviour:
   m_ObjectHideFlags: 0

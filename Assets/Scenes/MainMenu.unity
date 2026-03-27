@@ -455,11 +455,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f1310341b46ff34b87686b86d4b3498, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::IntroArrow
-  rightArrow: {fileID: 837055067}
-  leftArrow: {fileID: 2059430347}
-  upArrow: {fileID: 2048322991}
-  downArrow: {fileID: 1927993422}
-  player: {fileID: 526172775}
+  rightArrow:
+    gameObject: {fileID: 837055067}
+  leftArrow:
+    gameObject: {fileID: 2059430347}
+  upArrow:
+    gameObject: {fileID: 2048322991}
+  downArrow:
+    gameObject: {fileID: 1927993422}
+  player:
+    gameObject: {fileID: 526172775}
   ARROW_ANIMATION: 17
   ARROW_ROTATION: 5
   disableMenuState: 2
@@ -544,8 +549,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84ad650b6a1765e459f79ef3753f9f96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::IntroPlayer
-  player: {fileID: 526172775}
-  arrows: {fileID: 521329384}
+  player:
+    gameObject: {fileID: 526172775}
+  arrows:
+    gameObject: {fileID: 521329384}
   stayPos: {x: 0, y: 0}
   endPos: {x: -930, y: 0}
   slidingSpeed: 3000
