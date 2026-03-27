@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 using Utils;
 using Type.Menu;
 using SimpleEasing;
+using Type;
 
 public class MenuStateButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
@@ -27,17 +28,13 @@ public class MenuStateButton : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
     
     [Space(10),SerializeField]
-    private GameObject bar;
+    private ObjectWithComponent<RectTransform> bar;
 
     [SerializeField]
-    private GameObject text;
+    private ObjectWithComponent<RectTransform, Text> text;
 
     [Space(10),SerializeField]
     private MenuState onCilckState;
-
-    //각 Rect
-    private RectTransform barRect;
-    private RectTransform textRect;
 
     
     //애니메이션 용 코루틴들
@@ -49,14 +46,14 @@ public class MenuStateButton : MonoBehaviour, IPointerEnterHandler, IPointerExit
     const EaseType EASETYPE = EaseType.OutCubic;
 
     private void Awake() {
-        barRect = bar.GetComponent<RectTransform>();
-        textRect = text.GetComponent<RectTransform>();
+        bar.Bind();
+        text.Bind();
 
         // 현재 설정된 값을 기본값으로 설정
-        normalScale = barRect.localScale;
-        normalTextPos = textRect.anchoredPosition;
-        normalFontSize = text.GetComponent<Text>().fontSize;
+        normalScale = bar.component.component.localScale;
+        normalTextPos = text.firstComponent.component.anchoredPosition;
 
+        normalFontSize = text.secondComponent.component.fontSize;
     }
 
     // 버튼 호버, 호버 해제 시 애니메이션 재생
@@ -81,8 +78,9 @@ public class MenuStateButton : MonoBehaviour, IPointerEnterHandler, IPointerExit
             Utils.Generic.AnimationUtils.EasingChange(
                 startScale, 
                 endScale, 
-                value => barRect.localScale = value,
-                duration, targetEaseType
+                value => bar.component.component.localScale = value,
+                duration, targetEaseType,
+                () => this.SafeStopCoroutine(ref barScaleCoroutine)
             )
         );
 
@@ -91,9 +89,10 @@ public class MenuStateButton : MonoBehaviour, IPointerEnterHandler, IPointerExit
             Utils.Generic.AnimationUtils.EasingChange(
                 startPosition,
                 endPosition,
-                value => textRect.anchoredPosition = value,
+                value => text.firstComponent.component.anchoredPosition = value,
                 duration,
-                targetEaseType
+                targetEaseType,
+                () => this.SafeStopCoroutine(ref textPositionCoroutine)
             )
 );
     }
@@ -112,23 +111,25 @@ public class MenuStateButton : MonoBehaviour, IPointerEnterHandler, IPointerExit
             Utils.Generic.AnimationUtils.EasingChange(
                 onHoverTextPos,
                 normalTextPos,
-                value => textRect.anchoredPosition = value,
+                value => text.firstComponent.component.anchoredPosition = value,
                 DURATION,
-                EASETYPE
+                EASETYPE,
+                () => this.SafeStopCoroutine(ref textPositionCoroutine)
             )
         );
 
-        //애니메이션 재생
-        // this.SafeStartCoroutine(
-        //     ref onClickCoroutine,
-        //     Utils.Generic.AnimationUtils.EasingChange(
-        //         onClickFontSize,
-        //         normalFontSize,
-        //         value => text. = Utils.Vector2Utils.FloatToVector2(value),
-        //         DURATION,
-        //         EASETYPE
-        //     )
-        // );
+        // 애니메이션 재생
+        this.SafeStartCoroutine(
+            ref onClickCoroutine,
+            Utils.Generic.AnimationUtils.EasingChange(
+                onClickFontSize,
+                normalFontSize,
+                value => text.secondComponent.component.fontSize = (int)value,
+                DURATION,
+                EASETYPE,
+                () => this.SafeStopCoroutine(ref onClickCoroutine)
+            )
+        );
         
 
     }

@@ -1,5 +1,6 @@
 using System.Collections;
 using SimpleEasing;
+using Type;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Utils;
@@ -7,11 +8,9 @@ using Utils;
 public class SliderHandle : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
 {
     [SerializeField]
-    private GameObject inside;
+    private ObjectWithComponent<RectTransform> inside;
 
     private Coroutine coroutine;
-
-    private RectTransform insideRectTransform;
 
     private bool isHolding = false;
     private bool isHover = false;
@@ -24,16 +23,16 @@ public class SliderHandle : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     private const float ONCLICK_DURATION = 0.2f;
 
     private const EaseType EASETYPE = EaseType.OutCubic;
-    
 
-    private void Awake()
-    {
-        insideRectTransform = inside.GetComponent<RectTransform>();
+    private void Start() {
+        //초기화
+        inside.Bind();
     }
+    
     public void OnPointerDown(PointerEventData eventData)
     {
         isHolding = true;
-        this.SafeStartCoroutine(ref coroutine, InsideEasingScale(insideRectTransform.localScale, Vector2Utils.FloatToVector2(ON_CLICK_SCALE), ONCLICK_DURATION, EASETYPE));
+        ScaleAnimation(Vector2Utils.FloatToVector2(ON_CLICK_SCALE), ONCLICK_DURATION);
     }
 
     public void OnPointerUp(PointerEventData eventData)
@@ -50,7 +49,7 @@ public class SliderHandle : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
             end = NOMAL_SCALE;
         }
 
-        this.SafeStartCoroutine(ref coroutine, InsideEasingScale(insideRectTransform.localScale, Vector2Utils.FloatToVector2(end), ONCLICK_DURATION, EASETYPE));
+        ScaleAnimation(Vector2Utils.FloatToVector2(end), NOMAL_DURATION);
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -59,40 +58,31 @@ public class SliderHandle : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         // 클릭 이벤트 중인 경우 무시
         if(isHolding) return;
 
-        this.SafeStartCoroutine(ref coroutine, InsideEasingScale(insideRectTransform.localScale, Vector2Utils.FloatToVector2(ON_HOVER_SCALE), NOMAL_DURATION, EASETYPE));
+        ScaleAnimation(Vector2Utils.FloatToVector2(ON_HOVER_SCALE), NOMAL_DURATION);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         isHover = false;
 
+        ScaleAnimation(Vector2Utils.FloatToVector2(NOMAL_SCALE), NOMAL_DURATION);
+
         // 클릭 이벤트 중인 경우 무시
         if(isHolding) return;
 
-        this.SafeStartCoroutine(ref coroutine, InsideEasingScale(insideRectTransform.localScale, Vector2Utils.FloatToVector2(NOMAL_SCALE), NOMAL_DURATION, EASETYPE));
-
     }
 
-    IEnumerator InsideEasingScale(Vector2 start, Vector2 end, float duration, EaseType EASETYPE)
+    private void ScaleAnimation(Vector2 target, float duration)
     {
-        
-
-        float elapsed = 0f;
-
-        while (elapsed < duration)
-        {
-            elapsed += Time.deltaTime;
-            float t = Mathf.Clamp01(elapsed / duration);
-
-            t = Ease.Easing(t, EASETYPE);
-
-            Vector2 newScale = Vector2.Lerp(start, end, t);
-            insideRectTransform.localScale = newScale;
-
-            yield return null;
-        }
-
-        //보정
-        insideRectTransform.localScale = end;
+        this.SafeStartCoroutine(
+            ref coroutine,
+            Utils.Generic.AnimationUtils.EasingChange<Vector2>(
+                inside.component.component.localScale,
+                target,
+                value => inside.component.component.localScale = value,
+                duration,
+                EASETYPE
+            )
+        );
     }
 }

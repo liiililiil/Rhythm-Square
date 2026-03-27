@@ -5,16 +5,17 @@ using SimpleEasing;
 using Type.Menu;
 using System.Collections;
 using Utils;
+using Type;
 
 public class LanguageSwitch : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     [SerializeField]
-    private GameObject korean;
+    private ObjectWithComponent<RectTransform> korean;
     [SerializeField]
-    private GameObject english;
+    private ObjectWithComponent<RectTransform> english;
 
     [Space(10), SerializeField]
-    private GameObject bar;
+    private ObjectWithComponent<RectTransform> bar;
 
     private Coroutine BarCoroutine;
     private Coroutine koreanCoroutine;
@@ -27,10 +28,16 @@ public class LanguageSwitch : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     private const float TEXT_POSITION_Y = 25f;
 
     private void Start() {
+        korean.Bind();
+        english.Bind();
+        bar.Bind();
+        
         SettingManager.Instance.onChangeLanguage.AddListener(ChangePosition);
 
         //초기화
         ChangePosition(SettingManager.Instance.GetSetting().language);
+
+
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -76,32 +83,40 @@ public class LanguageSwitch : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
 
         //적용
-        this.SafeStartCoroutine(ref BarCoroutine, SlowChangePosition(bar, (bar.transform as RectTransform).anchoredPosition, new Vector2(value *BAR_POSITION_X, BAR_POSITION_Y), DURATION, EASETYPE));
-        this.SafeStartCoroutine(ref koreanCoroutine, SlowChangePosition(korean, (korean.transform as RectTransform).anchoredPosition, new Vector2(-200, -value *TEXT_POSITION_Y - 25),DURATION, EASETYPE));
-        this.SafeStartCoroutine(ref englishCoroutine, SlowChangePosition(english, (english.transform as RectTransform).anchoredPosition, new Vector2(200, value *TEXT_POSITION_Y - 25),DURATION, EASETYPE));
+        // 1. Bar 변환
+        this.SafeStartCoroutine(
+            ref BarCoroutine,
+            Utils.Generic.AnimationUtils.EasingChange(
+                bar.component.component.anchoredPosition,
+                new Vector2(value * BAR_POSITION_X, BAR_POSITION_Y),
+                val => bar.component.component.anchoredPosition = val,
+                DURATION,
+                EASETYPE
+            )
+        );
+
+        // 2. Korean 변환
+        this.SafeStartCoroutine(
+            ref koreanCoroutine,
+            Utils.Generic.AnimationUtils.EasingChange(
+                korean.component.component.anchoredPosition,
+                new Vector2(-200, -value * TEXT_POSITION_Y - 25),
+                val => korean.component.component.anchoredPosition = val,
+                DURATION,
+                EASETYPE
+            )
+        );
+
+        // 3. English 변환
+        this.SafeStartCoroutine(
+            ref englishCoroutine,
+            Utils.Generic.AnimationUtils.EasingChange(
+                english.component.component.anchoredPosition,
+                new Vector2(200, value * TEXT_POSITION_Y - 25),
+                val => english.component.component.anchoredPosition = val,
+                DURATION,
+                EASETYPE
+            )
+        );
     }
-
-    private IEnumerator SlowChangePosition(GameObject gameObject, Vector2 start, Vector2 end, float duration, EaseType easeType)
-    {
-        RectTransform rt = gameObject.GetComponent<RectTransform>();
-        float elapsed = 0f;
-
-        while (elapsed < duration)
-        {
-            elapsed += Time.deltaTime;
-            float t = Mathf.Clamp01(elapsed / duration);
-
-            t = Ease.Easing(t, easeType);
-
-            Vector2 newPosition = Vector2.Lerp(start, end, t);
-            rt.anchoredPosition = newPosition;
-            yield return null;
-        }
-
-        // 보정
-        rt.anchoredPosition = end;
-
-    }
-
-
 }

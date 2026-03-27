@@ -1,5 +1,6 @@
 using System.Collections;
 using SimpleEasing;
+using Type;
 using Type.Menu;
 using Unity.VectorGraphics;
 using UnityEngine;
@@ -8,9 +9,9 @@ using Utils;
 public class IntroPlayer : MonoBehaviour
 {
     [SerializeField]
-    private GameObject player;
+    private ObjectWithComponent<RectTransform, SVGImage> player;
     [SerializeField]
-    private GameObject arrows;
+    private ObjectWithComponent<RectTransform> arrows;
 
 
     [SerializeField]
@@ -24,12 +25,6 @@ public class IntroPlayer : MonoBehaviour
 
     [Space(10), SerializeField]
     private MenuState disableMenuState;
-
-
-
-    private RectTransform playerRect;
-    private RectTransform arrowsRect;
-
     
 
 
@@ -44,19 +39,22 @@ public class IntroPlayer : MonoBehaviour
 
 
     private void Start() {
+        //초기화
+        player.Bind();
+        arrows.Bind();
+
         MenuMusicManager.Instance.OnBeat.AddListener(NextBeat);
         MenuAssetLoadManager.Instance.AssetLoaderBind(NextBeat);
         MenuStateManager.Instance.onMenuStateChanged.AddListener(DisableObject);
 
-        playerRect = player.GetComponent<RectTransform>();
-        arrowsRect = arrows.GetComponent<RectTransform>();
+ 
     }
 
     private void DisableObject(MenuState menuState)
     {
         // 목표 메뉴가 아니면 넘기기
         if(menuState != disableMenuState) return;
-        player.SetActive(false);
+        player.gameObject.SetActive(false);
 
         MenuStateManager.Instance.onMenuStateChanged.RemoveListener(DisableObject);
     }
@@ -89,31 +87,58 @@ public class IntroPlayer : MonoBehaviour
     {
 
         // 랜덤 위치로 이동
-        playerRect.rotation = Quaternion.Euler(new Vector3(0,0,Random.Range(0,360)));    
-        playerRect.anchoredPosition -= (Vector2)playerRect.up * 1000;
+        player.firstComponent.component.rotation = Quaternion.Euler(new Vector3(0,0,Random.Range(0,360)));    
+        player.firstComponent.component.anchoredPosition -= (Vector2)player.firstComponent.component.up * 1000;
 
         // 이미지 보이게 (조금 이따가)
         StartCoroutine(CoroutineUtils.SlowStart(PlayerEnabled, MenuMusicManager.Instance.beatPerSec / 2));
 
-        StartCoroutine(AnimatedPosition(player, Vector2Utils.FloatToVector2(0),MenuMusicManager.Instance.beatPerSec, EaseType.InCirc));
+        StartCoroutine(
+            Utils.Generic.AnimationUtils.EasingChange(
+                player.firstComponent.component.anchoredPosition,
+                Vector2Utils.FloatToVector2(0),
+                val => player.firstComponent.component.anchoredPosition = val,
+                MenuMusicManager.Instance.beatPerSec,
+                EaseType.InCirc
+            )
+        );
     }
 
     public void PlayerEnabled()
     {
-        player.GetComponent<SVGImage>().enabled = true;
+        player.secondComponent.component.enabled = true;
     }
 
     private void PlayerSliding()
     {
-        StartCoroutine(Slide(player, slidingSpeed, MenuMusicManager.Instance.beatPerSec));
+        StartCoroutine(Slide(player.gameObject, slidingSpeed, MenuMusicManager.Instance.beatPerSec));
+        StartCoroutine(
+            Utils.Generic.AnimationUtils.EasingChange(
+                player.firstComponent.component.eulerAngles.z,
+                player.firstComponent.component.eulerAngles.z + 120f,
+                val => player.firstComponent.component.rotation = Quaternion.Euler(0, 0, val),
+                MenuMusicManager.Instance.beatPerSec,
+                EaseType.Linear,
+                () => Debug.Log("완료됨")
+            )
+        );
 
-        StartCoroutine(AnimatedRotation(player, playerRect.eulerAngles.z + 120, MenuMusicManager.Instance.beatPerSec, EaseType.Linear));
     }
 
     private void PlayerGoingToEnd()
     {
-        StartCoroutine(AnimatedRotation(player, endPos, MenuMusicManager.Instance.beatPerSec, EaseType.OutCubic));
-        StartCoroutine(AnimatedPosition(player, endPos, MenuMusicManager.Instance.beatPerSec * 1.1f, EaseType.InBack));
+        StartCoroutine(AnimatedRotation(player.gameObject, endPos, MenuMusicManager.Instance.beatPerSec, EaseType.OutCubic));
+        StartCoroutine(
+            Utils.Generic.AnimationUtils.EasingChange(
+                player.firstComponent.component.anchoredPosition,
+                endPos,
+                val => player.firstComponent.component.anchoredPosition = val,
+                MenuMusicManager.Instance.beatPerSec * 1.1f,
+                EaseType.InBack
+            )
+        );
+
+
     }
 
     private IEnumerator Slide(GameObject gameObject, float startSpeed, float duration)
@@ -135,49 +160,6 @@ public class IntroPlayer : MonoBehaviour
             yield return null;
         }
 
-    }
-
-    private IEnumerator AnimatedPosition(GameObject obj, Vector2 targetPos, float duration, EaseType easeType)
-    {
-        RectTransform rectTransform = obj.GetComponent<RectTransform>();
-        Vector2 startPos = rectTransform.anchoredPosition;
-
-        float elapsed = 0;
-        while(elapsed < duration)
-        {
-            elapsed += Time.deltaTime;
-            float t = Mathf.Clamp01(elapsed / duration);
-            t = Ease.Easing(t, easeType);
-
-            rectTransform.anchoredPosition = Vector2.LerpUnclamped(startPos, targetPos, t);
-
-            yield return null;
-        }
-
-        rectTransform.anchoredPosition = targetPos;
-    }
-
-    private IEnumerator AnimatedRotation(GameObject obj, float targetRotation, float duration, EaseType easeType)
-    {
-        RectTransform rectTransform = obj.GetComponent<RectTransform>();
-        float start = rectTransform.eulerAngles.z;
-
-        float elapsed = 0;
-        while(elapsed < duration)
-        {
-            elapsed += Time.deltaTime;
-            float t = Mathf.Clamp01(elapsed / duration);
-            t = Ease.Easing(t, easeType);
-
-            float target= Mathf.LerpAngle(start, targetRotation, t);
-
-            rectTransform.rotation = Quaternion.Euler(new Vector3(0,0,target));
-
-            yield return null;
-        }
-
-        rectTransform.rotation = Quaternion.Euler(new Vector3(0,0,targetRotation));
-        
     }
 
     private IEnumerator AnimatedRotation(GameObject obj, Vector2 target, float duration, EaseType easeType)

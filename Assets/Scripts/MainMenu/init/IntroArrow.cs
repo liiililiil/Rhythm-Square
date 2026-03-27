@@ -1,7 +1,9 @@
 using System.Collections;
 using SimpleEasing;
+using Type;
 using Type.Menu;
 using Unity.VectorGraphics;
+using Unity.VisualScripting;
 using UnityEngine;
 
 using Utils;
@@ -9,19 +11,19 @@ using Utils;
 public class IntroArrow : MonoBehaviour
 {
     [SerializeField]
-    private GameObject rightArrow;
+    private ObjectWithComponent<RectTransform, SVGImage> rightArrow;
 
     [SerializeField]
-    private GameObject leftArrow;
+    private ObjectWithComponent<RectTransform, SVGImage> leftArrow;
 
     [SerializeField]
-    private GameObject upArrow;
+    private ObjectWithComponent<RectTransform, SVGImage> upArrow;
 
     [SerializeField]
-    private GameObject downArrow;
+    private ObjectWithComponent<RectTransform, SVGImage> downArrow;
 
     [SerializeField]
-    private GameObject player;
+    private ObjectWithComponent<RectTransform> player;
 
     [SerializeField]
     private EaseType ARROW_ANIMATION;
@@ -38,14 +40,25 @@ public class IntroArrow : MonoBehaviour
     private const int END_POS = 200;
     private readonly Vector2 END_SCALE = Vector2Utils.FloatToVector2(1);
 
-
+    private InitableComponent<RectTransform> rectTransform;
 
 
 
     private void Start() {
+        
+        //초기화
+        rightArrow.Bind();
+        leftArrow.Bind();
+        upArrow.Bind();
+        downArrow.Bind();
+        player.Bind();
+
+        rectTransform = new InitableComponent<RectTransform>(gameObject);
+
         MenuMusicManager.Instance.OnBeat.AddListener(NextBeat);
         MenuAssetLoadManager.Instance.AssetLoaderBind(NextBeat);
         MenuStateManager.Instance.onMenuStateChanged.AddListener(DisableObject);
+
     }
 
 
@@ -86,21 +99,46 @@ public class IntroArrow : MonoBehaviour
     {
         float beat = MenuMusicManager.Instance.beatPerSec * 2;
 
-        // 표시
-        upArrow.GetComponent<SVGImage>().enabled = true;
-        downArrow.GetComponent<SVGImage>().enabled = true;
+        upArrow.secondComponent.component.enabled = true;
+        downArrow.secondComponent.component.enabled = true;
 
         // 이동할 위치
         Vector2 upEnd = new Vector2(0,END_POS);
         Vector2 downEnd = new Vector2(0,-END_POS);
 
-        // 이동
-        StartCoroutine(AnimatedPosition(upArrow, upEnd, beat, ARROW_ANIMATION));
-        StartCoroutine(AnimatedPosition(downArrow, downEnd, beat, ARROW_ANIMATION));
+            // 이동
+            StartCoroutine(Utils.Generic.AnimationUtils.EasingChange(
+                upArrow.firstComponent.component.anchoredPosition,
+                upEnd,
+                val => upArrow.firstComponent.component.anchoredPosition = val,
+                beat,
+                ARROW_ANIMATION
+            ));
 
-        // 넓이
-        StartCoroutine(AnimatedScale(upArrow, END_SCALE, beat, ARROW_ANIMATION));
-        StartCoroutine(AnimatedScale(downArrow, END_SCALE, beat, ARROW_ANIMATION));
+            StartCoroutine(Utils.Generic.AnimationUtils.EasingChange(
+                downArrow.firstComponent.component.anchoredPosition,
+                downEnd,
+                val => downArrow.firstComponent.component.anchoredPosition = val,
+                beat,
+                ARROW_ANIMATION
+            ));
+
+            // 넓이
+            StartCoroutine(Utils.Generic.AnimationUtils.EasingChange<Vector2>(
+                upArrow.firstComponent.component.localScale,
+                END_SCALE,
+                val => upArrow.firstComponent.component.localScale = val,
+                beat,
+                ARROW_ANIMATION
+            ));
+            
+            StartCoroutine(Utils.Generic.AnimationUtils.EasingChange<Vector2>(
+                downArrow.firstComponent.component.localScale,
+                END_SCALE,
+                val => downArrow.firstComponent.component.localScale = val,
+                beat,
+                ARROW_ANIMATION
+            ));
     }
 
     private void VerticalAppeared()
@@ -108,99 +146,72 @@ public class IntroArrow : MonoBehaviour
         float beat = MenuMusicManager.Instance.beatPerSec * 2;
 
         // 표시
-        rightArrow.GetComponent<SVGImage>().enabled = true;
-        leftArrow.GetComponent<SVGImage>().enabled = true;
+        rightArrow.secondComponent.component.enabled = true;
+        leftArrow.secondComponent.component.enabled = true;
 
         // 이동할 위치
         Vector2 rightEnd = new Vector2(END_POS,0);
         Vector2 leftEnd = new Vector2(-END_POS,0);
 
-        // 이동
-        StartCoroutine(AnimatedPosition(rightArrow, rightEnd, beat, ARROW_ANIMATION));
-        StartCoroutine(AnimatedPosition(leftArrow, leftEnd, beat, ARROW_ANIMATION));
+            // 이동
+            StartCoroutine(Utils.Generic.AnimationUtils.EasingChange(
+                rightArrow.firstComponent.component.anchoredPosition,
+                rightEnd,
+                val => rightArrow.firstComponent.component.anchoredPosition = val,
+                beat,
+                ARROW_ANIMATION
+            ));
 
-        // 넓이
-        StartCoroutine(AnimatedScale(rightArrow, END_SCALE, beat, ARROW_ANIMATION));
-        StartCoroutine(AnimatedScale(leftArrow, END_SCALE, beat, ARROW_ANIMATION));
+            StartCoroutine(Utils.Generic.AnimationUtils.EasingChange(
+                leftArrow.firstComponent.component.anchoredPosition,
+                leftEnd,
+                val => leftArrow.firstComponent.component.anchoredPosition = val,
+                beat,
+                ARROW_ANIMATION
+            ));
+
+            // 넓이
+            StartCoroutine(Utils.Generic.AnimationUtils.EasingChange<Vector2>(
+                rightArrow.firstComponent.component.localScale,
+                END_SCALE,
+                val => rightArrow.firstComponent.component.localScale = val,
+                beat,
+                ARROW_ANIMATION
+            ));
+            
+            StartCoroutine(Utils.Generic.AnimationUtils.EasingChange<Vector2>(
+                leftArrow.firstComponent.component.localScale,
+                END_SCALE,
+                val => leftArrow.firstComponent.component.localScale = val,
+                beat,
+                ARROW_ANIMATION
+            ));
+
 
         
     }
 
     private void ArrowsRotation()
     {
-        StartCoroutine(AnimatedRotation(gameObject, 360, MenuMusicManager.Instance.beatPerSec * 3, ARROW_ROTATION));
+        StartCoroutine(
+            Utils.Generic.AnimationUtils.EasingChange(
+            rectTransform.component.eulerAngles.z,
+            360,
+            val => rectTransform.component.rotation = Quaternion.Euler(0,0,val),
+            MenuMusicManager.Instance.beatPerSec *3,
+            ARROW_ROTATION
+            )
+        );
+
     }
 
     private void PlayerBind()
     {
         RectTransform rectTransform = gameObject.GetComponent<RectTransform>();
 
-        transform.SetParent(player.transform);
+        transform.SetParent(player.component.component);
         rectTransform.localPosition = Vector3.zero;
     }
 
-
-    private IEnumerator AnimatedPosition(GameObject obj, Vector2 targetPos, float duration, EaseType easeType)
-    {
-        RectTransform rectTransform = obj.GetComponent<RectTransform>();
-        Vector2 startPos = rectTransform.anchoredPosition;
-
-        float elapsed = 0;
-        while(elapsed < duration)
-        {
-            elapsed += Time.deltaTime;
-            float t = Mathf.Clamp01(elapsed / duration);
-            t = Ease.Easing(t, easeType);
-
-            rectTransform.anchoredPosition = Vector2.LerpUnclamped(startPos, targetPos, t);
-
-            yield return null;
-        }
-
-        rectTransform.anchoredPosition = targetPos;
-    }
-
-    private IEnumerator AnimatedScale(GameObject obj, Vector2 targetScale, float duration, EaseType easeType)
-    {
-        RectTransform rectTransform = obj.GetComponent<RectTransform>();
-        Vector2 startScale = rectTransform.localScale;
-
-        float elapsed = 0;
-        while(elapsed < duration)
-        {
-            elapsed += Time.deltaTime;
-            float t = Mathf.Clamp01(elapsed / duration);
-            t = Ease.Easing(t, easeType);
-
-            rectTransform.localScale = Vector2.LerpUnclamped(startScale, targetScale, t);
-
-            yield return null;
-        }
-
-        rectTransform.localScale = targetScale;
-    }
-
-    private IEnumerator AnimatedRotation(GameObject obj, float targetRotation, float duration, EaseType easeType)
-    {
-        RectTransform rectTransform = obj.GetComponent<RectTransform>();
-        float start = rectTransform.rotation.z;
-
-        float elapsed = 0;
-        while(elapsed < duration)
-        {
-            elapsed += Time.deltaTime;
-            float t = Mathf.Clamp01(elapsed / duration);
-            t = Ease.Easing(t, easeType);
-
-            float target= Mathf.LerpUnclamped(start, targetRotation, t);
-
-            rectTransform.rotation = Quaternion.Euler(new Vector3(0,0,target));
-
-            yield return null;
-        }
-
-        rectTransform.rotation = Quaternion.Euler(new Vector3(0,0,targetRotation));
-        
-    }
 
 }
