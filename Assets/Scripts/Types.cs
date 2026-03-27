@@ -34,7 +34,7 @@ namespace Type
         private _T1 _component;
 
         private Func<_T1> getter;
-        public _T1 Component
+        public _T1 component
         {
             get
             {
@@ -46,7 +46,7 @@ namespace Type
             }
         }
 
-        public InitableComponent(GameObject gameObject)
+        public InitableComponent(GameObject gameObject) 
         {
             getter = () => ComponentInit(gameObject);
         }
@@ -63,6 +63,7 @@ namespace Type
         {
             return _component;
         }
+        
     }
 
     // 게임 오브젝트와 함께 추가로 필요한 컴포넌트가 한번에 포함된 타입
@@ -71,11 +72,11 @@ namespace Type
     public class ObjectWithComponent<_T1> where _T1 : Component
     {
         [SerializeField]
-        private GameObject gameObject;
+        public GameObject gameObject;
 
         public InitableComponent<_T1> component;
 
-        public ObjectWithComponent(){
+        public void Bind(){
             component = new InitableComponent<_T1>(gameObject);
         }
 
@@ -85,19 +86,20 @@ namespace Type
     public class ObjectWithComponent<_T1,_T2> where _T1 : Component where _T2 : Component
     {
         [SerializeField]
-        private GameObject gameObject;
+        public GameObject gameObject;
 
         public InitableComponent<_T1> firstComponent;
         public InitableComponent<_T2> secondComponent;
 
-        public ObjectWithComponent(){
+        public void Bind()
+        {
             firstComponent = new InitableComponent<_T1>(gameObject);
             secondComponent = new InitableComponent<_T2>(gameObject);
         }
         
     }
 
-
+#if UNITY_EDITOR
     [CustomPropertyDrawer(typeof(ObjectWithComponent<>), true)]
     public class FirstObjectWithComponentDrawer : PropertyDrawer
     {
@@ -131,6 +133,7 @@ namespace Type
             return EditorGUIUtility.singleLineHeight;
         }
     }
+#endif
 }
 
 namespace Type.Audio
