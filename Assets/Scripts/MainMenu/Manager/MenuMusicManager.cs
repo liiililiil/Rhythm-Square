@@ -164,7 +164,7 @@ public class MenuMusicManager : Managers<MenuMusicManager>
     // 비트 감지
     private void BeatDetection()
     {
-        if(audioSource.time >= nextSec)
+        if(audioSource.isPlaying && audioSource.time >= nextSec)
         {
             OnBeat.Invoke();
             beat++;
