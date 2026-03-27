@@ -315,8 +315,8 @@ namespace Type.Addressable
     // 에셋 로딩을 통합 관리하기위한 클래스
     public class LoadingRecoder
     {
-        private int index = 0;
-        private int leftPrograss = 0;
+        public int index {get; private set;}
+        public int leftPrograss{get; private set;}
 
         private List<float> prograssList = new List<float>();
 

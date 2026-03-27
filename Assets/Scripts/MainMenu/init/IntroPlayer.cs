@@ -118,8 +118,7 @@ public class IntroPlayer : MonoBehaviour
                 player.firstComponent.component.eulerAngles.z + 120f,
                 val => player.firstComponent.component.rotation = Quaternion.Euler(0, 0, val),
                 MenuMusicManager.Instance.beatPerSec,
-                EaseType.Linear,
-                () => Debug.Log("완료됨")
+                EaseType.Linear
             )
         );
 

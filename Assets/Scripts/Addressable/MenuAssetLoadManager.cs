@@ -31,7 +31,7 @@ public class MenuAssetLoadManager : Managers<MenuAssetLoadManager>
     {
         int index;
         assetLoadRecoder.StartLoading(out index);
-
+    
         loaderIndex.Push(index);
         loaderAction.Push(action);
     }
@@ -39,10 +39,11 @@ public class MenuAssetLoadManager : Managers<MenuAssetLoadManager>
     // 천천히 로딩 하기
     private IEnumerator MenuProgressiveLoading()
     {
-        Debug.Log($"Index : {loaderIndex.Count}");
         while(loaderIndex.Count > 0)
         {
+    
             loaderAction.Pop().Invoke();
+
 
             assetLoadRecoder.CompleteLoading(loaderIndex.Pop());
 
