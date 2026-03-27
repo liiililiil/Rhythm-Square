@@ -273,7 +273,7 @@ public class MenuMusicManager : Managers<MenuMusicManager>
 
     }
 
-    private void StartToRange(FloatRange range, FloatRange nextLoop = null)
+    private void StartToRange(FloatRange range, FloatRange nextLoop = null, bool isGoingToPart = true)
     {
         isLoop = false;
         RangeChange(range);
@@ -283,18 +283,18 @@ public class MenuMusicManager : Managers<MenuMusicManager>
         VolumeUpdate();
         BeatTimeCorrection(range.start);
 
-        if(nextLoop != null) this.SafeStartCoroutine(ref loopCoroutine, LoopWait(range, nextLoop));
+        if(nextLoop != null) this.SafeStartCoroutine(ref loopCoroutine, LoopWait(range, nextLoop,isGoingToPart));
     }
 
-    private void LoopToRange(FloatRange range)
+    private void LoopToRange(FloatRange range, bool isGoingToPart = true)
     {
         isLoop = true;
         SourceChange();
 
         RangeChange(range);
 
-        // audio의 time이 range에 없으면 그 range안으로 오도록 조정
-        if(!(otherSource.time >= range.start && otherSource.time <= range.end))
+        // 이동하도록 지정했거나 audio의 time이 range에 없으면 그 range안으로 오도록 조정
+        if(isGoingToPart && !(otherSource.time >= range.start && otherSource.time <= range.end))
         {
             // 이동까지의 시간 계산
             float delta = currentRange.start - previousRange.start;
@@ -327,7 +327,7 @@ public class MenuMusicManager : Managers<MenuMusicManager>
         currentRange = floatRange;
     }
 
-    private IEnumerator LoopWait(FloatRange end, FloatRange target)
+    private IEnumerator LoopWait(FloatRange end, FloatRange target, bool isGoingToPart)
     {
         //end에 도달할때 까지 대기
         while(audioSource.time < end.end)
@@ -336,7 +336,7 @@ public class MenuMusicManager : Managers<MenuMusicManager>
         }
 
         //적용
-        LoopToRange(target);
+        LoopToRange(target, isGoingToPart);
 
         this.SafeStopCoroutine(ref coroutine);
     }
