@@ -151,8 +151,9 @@ public class MenuMusicManager : Managers<MenuMusicManager>
         {
             if(audioSource.time >= currentRange.end)
             {
+                
                 audioSource.time -= currentRange.end - currentRange.start;
-                BeatTimeCorrection(currentRange.end - currentRange.start);
+                BeatTimeCorrection(audioSource.time);
             }
         } catch
         {
@@ -306,15 +307,17 @@ public class MenuMusicManager : Managers<MenuMusicManager>
             targetTime = currentRange.start + Mathf.Repeat(targetTime - currentRange.start, currentRange.end - currentRange.start);
 
             audioSource.time =  targetTime;
+            BeatTimeCorrection(targetTime);
         }
         else
         {
             // 이미 range 안이면 시간 바로 적용
             audioSource.time = otherSource.time;
+            BeatTimeCorrection(otherSource.time);
         }
 
 
-        BeatTimeCorrection(otherSource.time);
+        
     }
 
 
