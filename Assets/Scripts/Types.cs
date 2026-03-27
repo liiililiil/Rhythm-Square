@@ -768,6 +768,7 @@ namespace Type.Addressable.Table
         ModernArrows = 104,
         PlayerIcon = 105,
         SingleModernArrow = 106,
+        Star = 107,
         
     }
     // 텍스트 목록

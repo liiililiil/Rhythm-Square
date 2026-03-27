@@ -58,6 +58,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a695a18a5c090014aba3e23753fefa2e
+    m_Address: Assets/Sprites/SVGs/Menu/Star.svg
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b37c483a4d63deb4488ba6e7c49ad5fc
     m_Address: Assets/AddressableData/Sprite/MainMenu/Diamond.asset
     m_ReadOnly: 0
@@ -73,6 +78,12 @@ MonoBehaviour:
     m_Address: Assets/Sprites/SVGs/Menu/Fill Box.svg
     m_ReadOnly: 0
     m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: db0a9d0219c88fb4489d1e649c4c82ad
+    m_Address: Assets/AddressableData/Sprite/MainMenu/Square 1.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - MainMenuSprite
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e54c8dcea22b5fa47b7d56c0d2d903de
     m_Address: Assets/AddressableData/Sprite/MainMenu/PlayerIcon.asset
