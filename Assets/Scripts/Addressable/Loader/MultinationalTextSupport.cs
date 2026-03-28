@@ -41,7 +41,6 @@ public class MultinationalTextSupport : MonoBehaviour
 
     private void TextBind()
     {
-        gameObject.name += " And End";
         textObject.text= TextTable.Instance.GetText(index).GetString(SettingManager.Instance.GetSetting().language);
     }
 

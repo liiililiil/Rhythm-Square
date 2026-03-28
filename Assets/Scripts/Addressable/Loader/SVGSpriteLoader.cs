@@ -28,7 +28,6 @@ public class SVGSpriteLoader : MonoBehaviour
 
     private void OnMainMenuAssetLoaded()
     {
-        gameObject.name += " And End";
         sVGImage.sprite = SpriteTable.Instance.GetSprite(spriteIndex).sprite;
     }
 }

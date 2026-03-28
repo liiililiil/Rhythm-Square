@@ -18,7 +18,6 @@ public class PrefabLoader : MonoBehaviour
 
     private void OnLoadAsset()
     {
-        gameObject.name += " And End";
         foreach (var index in prefabIndex)
         {
             Instantiate(PrefabTable.Instance.GetPrefab(index).prefab).GetComponent<RectTransform>().SetParent(transform, false);
