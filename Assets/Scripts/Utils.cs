@@ -185,6 +185,8 @@ namespace Utils.Generic
 
                 case System.Type t when t == typeof(float):
                     return (Func<_T1, _T1, float, _T1>)(object)GetFloatLerp();
+                case System.Type t when t == typeof(Color):
+                    return (Func<_T1, _T1, float, _T1>)(object)GetColorLerp();
 
                 default:
                     throw new NotSupportedException($"타입 {typeof(_T1)}에 대응되는 Lerp가 존재하지 않습니다!");
@@ -204,6 +206,9 @@ namespace Utils.Generic
         {
             return Vector3.LerpUnclamped;
         }
-        
+        public static Func<Color, Color, float, Color> GetColorLerp()
+        {
+            return Color.LerpUnclamped;
+        }
     }
 }
