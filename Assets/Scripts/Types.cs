@@ -63,9 +63,9 @@ namespace Type
         {
             return _component;
         }
-        
     }
 
+    
     // 게임 오브젝트와 함께 추가로 필요한 컴포넌트가 한번에 포함된 타입
 
     [Serializable]
@@ -74,12 +74,16 @@ namespace Type
         [SerializeField]
         public GameObject gameObject;
 
-        public InitableComponent<_T1> component;
+        private InitableComponent<_T1> component;
 
         public void Bind(){
             component = new InitableComponent<_T1>(gameObject);
         }
 
+        public _T1 GetComponent()
+        {
+            return component.component;
+        }
     }
 
     [Serializable]
@@ -88,13 +92,22 @@ namespace Type
         [SerializeField]
         public GameObject gameObject;
 
-        public InitableComponent<_T1> firstComponent;
-        public InitableComponent<_T2> secondComponent;
+        private InitableComponent<_T1> firstComponent;
+        private InitableComponent<_T2> secondComponent;
 
         public void Bind()
         {
             firstComponent = new InitableComponent<_T1>(gameObject);
             secondComponent = new InitableComponent<_T2>(gameObject);
+        }
+
+        public _T1 GetFirstComponent()
+        {
+            return firstComponent.component;
+        }
+        public _T2 GetSecondComponent()
+        {
+            return secondComponent.component;
         }
         
     }

@@ -87,9 +87,9 @@ public class LanguageSwitch : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         this.SafeStartCoroutine(
             ref BarCoroutine,
             Utils.Generic.AnimationUtils.EasingChange(
-                bar.component.component.anchoredPosition,
+                bar.GetComponent().anchoredPosition,
                 new Vector2(value * BAR_POSITION_X, BAR_POSITION_Y),
-                val => bar.component.component.anchoredPosition = val,
+                bar.GetComponent().SetAnchoredPosition,
                 DURATION,
                 EASETYPE
             )
@@ -99,9 +99,9 @@ public class LanguageSwitch : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         this.SafeStartCoroutine(
             ref koreanCoroutine,
             Utils.Generic.AnimationUtils.EasingChange(
-                korean.component.component.anchoredPosition,
+                korean.GetComponent().anchoredPosition,
                 new Vector2(-200, -value * TEXT_POSITION_Y - 25),
-                val => korean.component.component.anchoredPosition = val,
+                korean.GetComponent().SetAnchoredPosition,
                 DURATION,
                 EASETYPE
             )
@@ -111,9 +111,9 @@ public class LanguageSwitch : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         this.SafeStartCoroutine(
             ref englishCoroutine,
             Utils.Generic.AnimationUtils.EasingChange(
-                english.component.component.anchoredPosition,
+                english.GetComponent().anchoredPosition,
                 new Vector2(200, value * TEXT_POSITION_Y - 25),
-                val => english.component.component.anchoredPosition = val,
+                english.GetComponent().SetAnchoredPosition,
                 DURATION,
                 EASETYPE
             )

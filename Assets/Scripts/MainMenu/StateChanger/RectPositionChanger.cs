@@ -49,7 +49,7 @@ public class RectPositionChanger : StateChanger
             Utils.Generic.AnimationUtils.EasingChange(
                 rect.anchoredPosition,
                 targetVector,
-                value => rect.anchoredPosition = value,
+                rect.SetAnchoredPosition,
                 duration,
                 easeType
             )

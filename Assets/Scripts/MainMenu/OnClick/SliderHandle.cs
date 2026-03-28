@@ -77,9 +77,9 @@ public class SliderHandle : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         this.SafeStartCoroutine(
             ref coroutine,
             Utils.Generic.AnimationUtils.EasingChange<Vector2>(
-                inside.component.component.localScale,
+                inside.GetComponent().localScale,
                 target,
-                value => inside.component.component.localScale = value,
+                inside.GetComponent().SetLocalScale,
                 duration,
                 EASETYPE
             )

@@ -87,17 +87,17 @@ public class IntroPlayer : MonoBehaviour
     {
 
         // 랜덤 위치로 이동
-        player.firstComponent.component.rotation = Quaternion.Euler(new Vector3(0,0,Random.Range(0,360)));    
-        player.firstComponent.component.anchoredPosition -= (Vector2)player.firstComponent.component.up * 1000;
+        player.GetFirstComponent().rotation = Quaternion.Euler(new Vector3(0,0,Random.Range(0,360)));    
+        player.GetFirstComponent().anchoredPosition -= (Vector2)player.GetFirstComponent().up * 1000;
 
         // 이미지 보이게 (조금 이따가)
         StartCoroutine(CoroutineUtils.SlowStart(PlayerEnabled, MenuMusicManager.Instance.beatPerSec / 2));
 
         StartCoroutine(
             Utils.Generic.AnimationUtils.EasingChange(
-                player.firstComponent.component.anchoredPosition,
+                player.GetFirstComponent().anchoredPosition,
                 Vector2Utils.FloatToVector2(0),
-                val => player.firstComponent.component.anchoredPosition = val,
+                player.GetFirstComponent().SetAnchoredPosition,
                 MenuMusicManager.Instance.beatPerSec,
                 EaseType.InCirc
             )
@@ -106,7 +106,7 @@ public class IntroPlayer : MonoBehaviour
 
     public void PlayerEnabled()
     {
-        player.secondComponent.component.enabled = true;
+        player.GetSecondComponent().enabled = true;
     }
 
     private void PlayerSliding()
@@ -114,9 +114,9 @@ public class IntroPlayer : MonoBehaviour
         StartCoroutine(Slide(player.gameObject, slidingSpeed, MenuMusicManager.Instance.beatPerSec));
         StartCoroutine(
             Utils.Generic.AnimationUtils.EasingChange(
-                player.firstComponent.component.eulerAngles.z,
-                player.firstComponent.component.eulerAngles.z + 120f,
-                val => player.firstComponent.component.rotation = Quaternion.Euler(0, 0, val),
+                player.GetFirstComponent().eulerAngles.z,
+                player.GetFirstComponent().eulerAngles.z + 120f,
+                player.GetFirstComponent().SetRotation,
                 MenuMusicManager.Instance.beatPerSec,
                 EaseType.Linear
             )
@@ -129,9 +129,9 @@ public class IntroPlayer : MonoBehaviour
         StartCoroutine(AnimatedRotation(player.gameObject, endPos, MenuMusicManager.Instance.beatPerSec, EaseType.OutCubic));
         StartCoroutine(
             Utils.Generic.AnimationUtils.EasingChange(
-                player.firstComponent.component.anchoredPosition,
+                player.GetFirstComponent().anchoredPosition,
                 endPos,
-                val => player.firstComponent.component.anchoredPosition = val,
+                player.GetFirstComponent().SetAnchoredPosition,
                 MenuMusicManager.Instance.beatPerSec * 1.1f,
                 EaseType.InBack
             )

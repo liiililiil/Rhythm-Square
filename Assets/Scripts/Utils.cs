@@ -89,6 +89,27 @@ namespace Utils
             return (min + max) * 0.5f;
         }
 
+        public static void SetAnchoredPosition(this RectTransform rt, Vector2 value)
+        {
+            rt.anchoredPosition = value;
+        }
+
+        public static void SetLocalScale(this RectTransform rt, Vector2 value)
+        {
+            rt.localScale = value;
+        }
+
+        public static void SetRotation(this RectTransform rt, Quaternion value)
+        {
+            rt.rotation = value;
+        }
+
+        public static void SetRotation(this RectTransform rt, float value)
+        {
+            rt.rotation = Quaternion.Euler(0, 0, value);
+        }
+
+
     }
 
     public static class CoroutineExtensions
