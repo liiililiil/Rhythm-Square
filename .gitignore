@@ -71,4 +71,6 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
+# 민감 자료 검열용
 Assets/Audio/HiddenMusic
+Assets/Sprites/HiddenSprites
