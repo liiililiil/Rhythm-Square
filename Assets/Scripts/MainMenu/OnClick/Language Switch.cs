@@ -28,9 +28,6 @@ public class LanguageSwitch : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     private const float TEXT_POSITION_Y = 25f;
 
     private void Start() {
-        korean.Bind();
-        english.Bind();
-        bar.Bind();
         
         SettingManager.Instance.onChangeLanguage.AddListener(ChangePosition);
 
@@ -87,9 +84,9 @@ public class LanguageSwitch : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         this.SafeStartCoroutine(
             ref BarCoroutine,
             Utils.Generic.AnimationUtils.EasingChange(
-                bar.GetComponent().anchoredPosition,
+                bar.component.anchoredPosition,
                 new Vector2(value * BAR_POSITION_X, BAR_POSITION_Y),
-                bar.GetComponent().SetAnchoredPosition,
+                bar.component.SetAnchoredPosition,
                 DURATION,
                 EASETYPE
             )
@@ -99,9 +96,9 @@ public class LanguageSwitch : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         this.SafeStartCoroutine(
             ref koreanCoroutine,
             Utils.Generic.AnimationUtils.EasingChange(
-                korean.GetComponent().anchoredPosition,
+                korean.component.anchoredPosition,
                 new Vector2(-200, -value * TEXT_POSITION_Y - 25),
-                korean.GetComponent().SetAnchoredPosition,
+                korean.component.SetAnchoredPosition,
                 DURATION,
                 EASETYPE
             )
@@ -111,9 +108,9 @@ public class LanguageSwitch : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         this.SafeStartCoroutine(
             ref englishCoroutine,
             Utils.Generic.AnimationUtils.EasingChange(
-                english.GetComponent().anchoredPosition,
+                english.component.anchoredPosition,
                 new Vector2(200, value * TEXT_POSITION_Y - 25),
-                english.GetComponent().SetAnchoredPosition,
+                english.component.SetAnchoredPosition,
                 DURATION,
                 EASETYPE
             )

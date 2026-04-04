@@ -46,14 +46,12 @@ public class MenuStateButton : MonoBehaviour, IPointerEnterHandler, IPointerExit
     const EaseType EASETYPE = EaseType.OutCubic;
 
     private void Awake() {
-        bar.Bind();
-        text.Bind();
 
         // 현재 설정된 값을 기본값으로 설정
-        normalScale = bar.GetComponent().localScale;
-        normalTextPos = text.GetFirstComponent().anchoredPosition;
+        normalScale = bar.component.localScale;
+        normalTextPos = text.component1.anchoredPosition;
 
-        normalFontSize = text.GetSecondComponent().fontSize;
+        normalFontSize = text.component2.fontSize;
     }
 
     // 버튼 호버, 호버 해제 시 애니메이션 재생
@@ -78,7 +76,7 @@ public class MenuStateButton : MonoBehaviour, IPointerEnterHandler, IPointerExit
             Utils.Generic.AnimationUtils.EasingChange(
                 startScale, 
                 endScale, 
-                bar.GetComponent().SetLocalScale,
+                bar.component.SetLocalScale,
                 duration, targetEaseType,
                 () => this.SafeStopCoroutine(ref barScaleCoroutine)
             )
@@ -89,7 +87,7 @@ public class MenuStateButton : MonoBehaviour, IPointerEnterHandler, IPointerExit
             Utils.Generic.AnimationUtils.EasingChange(
                 startPosition,
                 endPosition,
-                text.GetFirstComponent().SetAnchoredPosition,
+                text.component1.SetAnchoredPosition,
                 duration,
                 targetEaseType,
                 () => this.SafeStopCoroutine(ref textPositionCoroutine)
@@ -111,7 +109,7 @@ public class MenuStateButton : MonoBehaviour, IPointerEnterHandler, IPointerExit
             Utils.Generic.AnimationUtils.EasingChange(
                 onHoverTextPos,
                 normalTextPos,
-                text.GetFirstComponent().SetAnchoredPosition,
+                text.component1.SetAnchoredPosition,
                 DURATION,
                 EASETYPE,
                 () => this.SafeStopCoroutine(ref textPositionCoroutine)
@@ -133,6 +131,6 @@ public class MenuStateButton : MonoBehaviour, IPointerEnterHandler, IPointerExit
     }
     private void TextFontSizeChange(float value)
     {
-        text.GetSecondComponent().fontSize = (int)value;
+        text.component2.fontSize = (int)value;
     }
 }

@@ -25,8 +25,6 @@ public class SliderHandle : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     private const EaseType EASETYPE = EaseType.OutCubic;
 
     private void Start() {
-        //초기화
-        inside.Bind();
     }
     
     public void OnPointerDown(PointerEventData eventData)
@@ -77,9 +75,9 @@ public class SliderHandle : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         this.SafeStartCoroutine(
             ref coroutine,
             Utils.Generic.AnimationUtils.EasingChange<Vector2>(
-                inside.GetComponent().localScale,
+                inside.component.localScale,
                 target,
-                inside.GetComponent().SetLocalScale,
+                inside.component.SetLocalScale,
                 duration,
                 EASETYPE
             )

@@ -46,6 +46,7 @@ namespace Type
             }
         }
 
+
         public InitableComponent(GameObject gameObject) 
         {
             getter = () => ComponentInit(gameObject);
@@ -74,15 +75,13 @@ namespace Type
         [SerializeField]
         public GameObject gameObject;
 
-        private InitableComponent<_T1> component;
-
-        public void Bind(){
-            component = new InitableComponent<_T1>(gameObject);
-        }
-
-        public _T1 GetComponent()
-        {
-            return component.component;
+        private InitableComponent<_T1> _component;
+        public _T1 component {
+            get
+            {
+                if(_component == null) _component = new InitableComponent<_T1>(gameObject);
+                return _component.component;
+            }
         }
     }
 
@@ -95,21 +94,23 @@ namespace Type
         private InitableComponent<_T1> firstComponent;
         private InitableComponent<_T2> secondComponent;
 
-        public void Bind()
-        {
-            firstComponent = new InitableComponent<_T1>(gameObject);
-            secondComponent = new InitableComponent<_T2>(gameObject);
-        }
+        private Func<_T1> firstGetter;
+        private Func<_T2> secondGetter;
 
-        public _T1 GetFirstComponent()
-        {
-            return firstComponent.component;
+        public _T1 component1 {
+            get
+            {
+                if(firstComponent == null) firstComponent = new InitableComponent<_T1>(gameObject);
+                return firstComponent.component;
+            }
         }
-        public _T2 GetSecondComponent()
-        {
-            return secondComponent.component;
+        public _T2 component2 {
+            get
+            {
+                if(secondComponent == null) secondComponent = new InitableComponent<_T2>(gameObject);
+                return secondComponent.component;
+            }
         }
-        
     }
 
 #if UNITY_EDITOR

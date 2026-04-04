@@ -42,14 +42,6 @@ public class IntroArrow : MonoBehaviour
     private InitableComponent<RectTransform> rectTransform;
 
     private void Start() {
-        
-        //초기화
-        rightArrow.Bind();
-        leftArrow.Bind();
-        upArrow.Bind();
-        downArrow.Bind();
-        player.Bind();
-
         rectTransform = new InitableComponent<RectTransform>(gameObject);
 
         MenuMusicManager.Instance.OnBeat.AddListener(NextBeat);
@@ -96,8 +88,8 @@ public class IntroArrow : MonoBehaviour
     {
         float beat = MenuMusicManager.Instance.beatPerSec * 2;
 
-        upArrow.GetSecondComponent().enabled = true;
-        downArrow.GetSecondComponent().enabled = true;
+        upArrow.component2.enabled = true;
+        downArrow.component2.enabled = true;
 
         // 이동할 위치
         Vector2 upEnd = new Vector2(0,END_POS);
@@ -105,34 +97,34 @@ public class IntroArrow : MonoBehaviour
 
             // 이동
             StartCoroutine(Utils.Generic.AnimationUtils.EasingChange(
-                upArrow.GetFirstComponent().anchoredPosition,
+                upArrow.component1.anchoredPosition,
                 upEnd,
-                upArrow.GetFirstComponent().SetAnchoredPosition,
+                upArrow.component1.SetAnchoredPosition,
                 beat,
                 ARROW_ANIMATION
             ));
 
             StartCoroutine(Utils.Generic.AnimationUtils.EasingChange(
-                downArrow.GetFirstComponent().anchoredPosition,
+                downArrow.component1.anchoredPosition,
                 downEnd,
-                downArrow.GetFirstComponent().SetAnchoredPosition,
+                downArrow.component1.SetAnchoredPosition,
                 beat,
                 ARROW_ANIMATION
             ));
 
             // 넓이
             StartCoroutine(Utils.Generic.AnimationUtils.EasingChange<Vector2>(
-                upArrow.GetFirstComponent().localScale,
+                upArrow.component1.localScale,
                 END_SCALE,
-                upArrow.GetFirstComponent().SetLocalScale,
+                upArrow.component1.SetLocalScale,
                 beat,
                 ARROW_ANIMATION
             ));
             
             StartCoroutine(Utils.Generic.AnimationUtils.EasingChange<Vector2>(
-                downArrow.GetFirstComponent().localScale,
+                downArrow.component1.localScale,
                 END_SCALE,
-                downArrow.GetFirstComponent().SetLocalScale,
+                downArrow.component1.SetLocalScale,
                 beat,
                 ARROW_ANIMATION
             ));
@@ -143,8 +135,8 @@ public class IntroArrow : MonoBehaviour
         float beat = MenuMusicManager.Instance.beatPerSec * 2;
 
         // 표시
-        rightArrow.GetSecondComponent().enabled = true;
-        leftArrow.GetSecondComponent().enabled = true;
+        rightArrow.component2.enabled = true;
+        leftArrow.component2.enabled = true;
 
         // 이동할 위치
         Vector2 rightEnd = new Vector2(END_POS,0);
@@ -152,34 +144,34 @@ public class IntroArrow : MonoBehaviour
 
             // 이동
             StartCoroutine(Utils.Generic.AnimationUtils.EasingChange(
-                rightArrow.GetFirstComponent().anchoredPosition,
+                rightArrow.component1.anchoredPosition,
                 rightEnd,
-                rightArrow.GetFirstComponent().SetAnchoredPosition,
+                rightArrow.component1.SetAnchoredPosition,
                 beat,
                 ARROW_ANIMATION
             ));
 
             StartCoroutine(Utils.Generic.AnimationUtils.EasingChange(
-                leftArrow.GetFirstComponent().anchoredPosition,
+                leftArrow.component1.anchoredPosition,
                 leftEnd,
-                leftArrow.GetFirstComponent().SetAnchoredPosition,
+                leftArrow.component1.SetAnchoredPosition,
                 beat,
                 ARROW_ANIMATION
             ));
 
             // 넓이
             StartCoroutine(Utils.Generic.AnimationUtils.EasingChange<Vector2>(
-                rightArrow.GetFirstComponent().localScale,
+                rightArrow.component1.localScale,
                 END_SCALE,
-                rightArrow.GetFirstComponent().SetLocalScale,
+                rightArrow.component1.SetLocalScale,
                 beat,
                 ARROW_ANIMATION
             ));
             
             StartCoroutine(Utils.Generic.AnimationUtils.EasingChange<Vector2>(
-                leftArrow.GetFirstComponent().localScale,
+                leftArrow.component1.localScale,
                 END_SCALE,
-                leftArrow.GetFirstComponent().SetLocalScale,
+                leftArrow.component1.SetLocalScale,
                 beat,
                 ARROW_ANIMATION
             ));
@@ -206,7 +198,7 @@ public class IntroArrow : MonoBehaviour
     {
         RectTransform rectTransform = gameObject.GetComponent<RectTransform>();
 
-        transform.SetParent(player.GetComponent());
+        transform.SetParent(player.component);
         rectTransform.localPosition = Vector3.zero;
     }
 }

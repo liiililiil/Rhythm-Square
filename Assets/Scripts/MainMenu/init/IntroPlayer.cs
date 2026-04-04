@@ -39,10 +39,6 @@ public class IntroPlayer : MonoBehaviour
 
 
     private void Start() {
-        //초기화
-        player.Bind();
-        arrows.Bind();
-
         MenuMusicManager.Instance.OnBeat.AddListener(NextBeat);
         MenuAssetLoadManager.Instance.AssetLoaderBind(NextBeat);
         MenuStateManager.Instance.onMenuStateChanged.AddListener(DisableObject);
@@ -87,17 +83,17 @@ public class IntroPlayer : MonoBehaviour
     {
 
         // 랜덤 위치로 이동
-        player.GetFirstComponent().rotation = Quaternion.Euler(new Vector3(0,0,Random.Range(0,360)));    
-        player.GetFirstComponent().anchoredPosition -= (Vector2)player.GetFirstComponent().up * 1000;
+        player.component1.rotation = Quaternion.Euler(new Vector3(0,0,Random.Range(0,360)));    
+        player.component1.anchoredPosition -= (Vector2)player.component1.up * 1000;
 
         // 이미지 보이게 (조금 이따가)
         StartCoroutine(CoroutineUtils.SlowStart(PlayerEnabled, MenuMusicManager.Instance.beatPerSec / 2));
 
         StartCoroutine(
             Utils.Generic.AnimationUtils.EasingChange(
-                player.GetFirstComponent().anchoredPosition,
+                player.component1.anchoredPosition,
                 Vector2Utils.FloatToVector2(0),
-                player.GetFirstComponent().SetAnchoredPosition,
+                player.component1.SetAnchoredPosition,
                 MenuMusicManager.Instance.beatPerSec,
                 EaseType.InCirc
             )
@@ -106,7 +102,7 @@ public class IntroPlayer : MonoBehaviour
 
     public void PlayerEnabled()
     {
-        player.GetSecondComponent().enabled = true;
+        player.component2.enabled = true;
     }
 
     private void PlayerSliding()
@@ -114,9 +110,9 @@ public class IntroPlayer : MonoBehaviour
         StartCoroutine(Slide(player.gameObject, slidingSpeed, MenuMusicManager.Instance.beatPerSec));
         StartCoroutine(
             Utils.Generic.AnimationUtils.EasingChange(
-                player.GetFirstComponent().eulerAngles.z,
-                player.GetFirstComponent().eulerAngles.z + 120f,
-                player.GetFirstComponent().SetRotation,
+                player.component1.eulerAngles.z,
+                player.component1.eulerAngles.z + 120f,
+                player.component1.SetRotation,
                 MenuMusicManager.Instance.beatPerSec,
                 EaseType.Linear
             )
@@ -129,9 +125,9 @@ public class IntroPlayer : MonoBehaviour
         StartCoroutine(AnimatedRotation(player.gameObject, endPos, MenuMusicManager.Instance.beatPerSec, EaseType.OutCubic));
         StartCoroutine(
             Utils.Generic.AnimationUtils.EasingChange(
-                player.GetFirstComponent().anchoredPosition,
+                player.component1.anchoredPosition,
                 endPos,
-                player.GetFirstComponent().SetAnchoredPosition,
+                player.component1.SetAnchoredPosition,
                 MenuMusicManager.Instance.beatPerSec * 1.1f,
                 EaseType.InBack
             )
