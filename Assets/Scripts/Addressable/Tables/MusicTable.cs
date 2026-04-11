@@ -64,7 +64,7 @@ namespace Tables.MusicTable
             return info.table[musicIndex];
         }
 
-        public PlayableMusic GetPlaybleMusic(MusicIndex musicIndex)
+        public PlayableMusic GetPlayableMusic(MusicIndex musicIndex)
         {
             return playable.table[musicIndex];
         }
