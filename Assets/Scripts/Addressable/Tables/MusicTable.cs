@@ -6,6 +6,7 @@ using ScriptManagement;
 using Utils;
 using Type.Addressable.Table;
 using Type.Addressable;
+using System.Linq;
 
 namespace Tables.MusicTable
 {
@@ -16,18 +17,20 @@ namespace Tables.MusicTable
         EachLoader<PlayableMusic, MusicIndex> playable = new EachLoader<PlayableMusic, MusicIndex>();
         EachLoader<BackGroundInfo, MusicIndex> backgroundInfo = new EachLoader<BackGroundInfo, MusicIndex>();
 
-        private void Awake() {
+        private void Awake()
+        {
             Singleton(true);
         }
 
-        private void Start() {
+        private void Start()
+        {
             music.RecoderBind(MenuAssetLoadManager.Instance.addressableLoadRecoder);
             info.RecoderBind(MenuAssetLoadManager.Instance.addressableLoadRecoder);
             playable.RecoderBind(MenuAssetLoadManager.Instance.addressableLoadRecoder);
             backgroundInfo.RecoderBind(MenuAssetLoadManager.Instance.addressableLoadRecoder);
 
         }
-        
+
         public void Load()
         {
             this.SafeStartCoroutine(ref music.coroutine, music.LoadingAsset(Type.Addressable.Tag.Audio.MUSIC, ClipPreload));
@@ -43,7 +46,7 @@ namespace Tables.MusicTable
                 music.audioClip.LoadAudioData();
             }
         }
-        
+
 
         public void Release(MusicIndex ignore)
         {
@@ -64,6 +67,11 @@ namespace Tables.MusicTable
         public PlayableMusic GetPlaybleMusic(MusicIndex musicIndex)
         {
             return playable.table[musicIndex];
+        }
+
+        public PlayableMusic[] GetPlayableMusic()
+        {
+            return playable.table.Values.ToArray();
         }
 
         public BackGroundInfo GetBackGroundInfo(MusicIndex musicIndex)
