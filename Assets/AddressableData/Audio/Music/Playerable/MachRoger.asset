@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: MachRoger
   m_EditorClassIdentifier: Assembly-CSharp::AudioManagement.PlayableMusic
   index: 201
-  difficultyLevel: 0
+  difficultyLevel: 1
   previewStartTime: 0
   previewEndTime: 0

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: ZidandaStep
   m_EditorClassIdentifier: Assembly-CSharp::AudioManagement.PlayableMusic
   index: 202
-  difficultyLevel: 0
+  difficultyLevel: 8
   previewStartTime: 0
   previewEndTime: 0
