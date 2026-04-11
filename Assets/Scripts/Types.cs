@@ -267,8 +267,8 @@ namespace Type.Menu
         public Setting()
         {
             offset.value = 0;
-            music.value = 0.5f;
-            sfx.value = 0.5f;
+            music.value = 0.05f;
+            sfx.value = 0.05f;
             language.value = Language.English;
         }
 
