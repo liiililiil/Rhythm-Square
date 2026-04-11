@@ -29,7 +29,7 @@ namespace Utils
     {
         public static Vector2 FloatToVector2(float value)
         {
-            return new Vector2(value,value);
+            return new Vector2(value, value);
         }
 
         public static Vector3 FloatToVector3(float value)
@@ -125,7 +125,7 @@ namespace Utils
         // 코루틴 멈추기
         public static void SafeStopCoroutine(this MonoBehaviour mb, ref Coroutine coroutine)
         {
-            if(coroutine != null)
+            if (coroutine != null)
             {
                 mb.StopCoroutine(coroutine);
                 coroutine = null;
@@ -135,7 +135,7 @@ namespace Utils
         // 코루틴을 검사하여 코루틴이 비어있는 경우만 시작
         public static bool CheckedStartCoroutine(this MonoBehaviour mb, ref Coroutine coroutine, IEnumerator enumerator)
         {
-            if(coroutine != null) return false;
+            if (coroutine != null) return false;
 
             coroutine = mb.StartCoroutine(enumerator);
             return true;
@@ -157,7 +157,7 @@ namespace Utils
             }
         }
     }
-    
+
 }
 
 namespace Utils.Generic
@@ -169,16 +169,16 @@ namespace Utils.Generic
         public static IEnumerator EasingChange<_T1>(_T1 start, _T1 end, Action<_T1> applyAction, float duration, EaseType easeType, Action callback = null)
         {
             // Lerp 함수 찾기
-            Func<_T1,_T1,float,_T1> lerp = Utils.Generic.Generic.GetLerp<_T1>();
+            Func<_T1, _T1, float, _T1> lerp = Utils.Generic.Generic.GetLerp<_T1>();
 
             float elapsed = 0;
-            while(elapsed < duration)
+            while (elapsed < duration)
             {
                 elapsed += Time.deltaTime;
                 float t = Mathf.Clamp01(elapsed / duration);
                 t = Ease.Easing(t, easeType);
 
-                _T1 target= lerp(start, end, t);
+                _T1 target = lerp(start, end, t);
 
                 applyAction(target);
 
@@ -194,7 +194,7 @@ namespace Utils.Generic
     {
 
 
-        public static Func<_T1,_T1,float,_T1> GetLerp<_T1>()
+        public static Func<_T1, _T1, float, _T1> GetLerp<_T1>()
         {
             switch (typeof(_T1))
             {
