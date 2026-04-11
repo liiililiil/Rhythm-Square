@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 18704102}
   - component: {fileID: 18704103}
   - component: {fileID: 18704104}
+  - component: {fileID: 18704105}
   m_Layer: 0
   m_Name: MusicSelect
   m_TagString: Untagged
@@ -171,7 +172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f93f63886bac61a469fc005a18002738, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PrefabLoader
-  prefabIndex: c9320000cb320000ca320000
+  prefabIndex: 
 --- !u!114 &18704104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -184,6 +185,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2394eee4644c05f4fb36cffe96657a7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayableMusicSender
+--- !u!114 &18704105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 18704101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68a4458ac9dc68c4aa5e421d235ab529, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MusicSelectManager
+  position: 0
+  index: 0
 --- !u!1 &31703315
 GameObject:
   m_ObjectHideFlags: 0
@@ -757,9 +772,12 @@ MonoBehaviour:
     gameObject: {fileID: 1699935344}
   wing2:
     gameObject: {fileID: 2031801861}
-  duration: 1
+  duration: 0.6
   easeType: 5
-  phase2StarColor: {r: 0.6860552, g: 0.30588233, b: 1, a: 1}
+  starColor:
+  - {r: 0.3863008, g: 1, b: 0.36320752, a: 1}
+  - {r: 0.8301887, g: 0, b: 0, a: 1}
+  - {r: 0.344691, g: 0, b: 0.7264151, a: 1}
 --- !u!1 &381768357
 GameObject:
   m_ObjectHideFlags: 0
@@ -817,9 +835,12 @@ MonoBehaviour:
     gameObject: {fileID: 1695981838}
   wing2:
     gameObject: {fileID: 1504340692}
-  duration: 1
+  duration: 0.6
   easeType: 5
-  phase2StarColor: {r: 0.6860552, g: 0.30588233, b: 1, a: 1}
+  starColor:
+  - {r: 0.3863008, g: 1, b: 0.36320752, a: 1}
+  - {r: 0.8301887, g: 0, b: 0, a: 1}
+  - {r: 0.344691, g: 0, b: 0.7264151, a: 1}
 --- !u!1 &402564860
 GameObject:
   m_ObjectHideFlags: 0
@@ -1288,7 +1309,7 @@ GameObject:
   - component: {fileID: 699433624}
   - component: {fileID: 699433625}
   m_Layer: 0
-  m_Name: DifficuityDIsplayer
+  m_Name: DifficultyDIsplayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1330,7 +1351,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adc7b080308a7454a99be6fdbc2aaef7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DifficuityStarManager
-  difficuityStars:
+  difficultyStars:
   - {fileID: 1973183179}
   - {fileID: 1162425784}
   - {fileID: 379767131}
@@ -2567,9 +2588,12 @@ MonoBehaviour:
     gameObject: {fileID: 37077943}
   wing2:
     gameObject: {fileID: 48048809}
-  duration: 1
+  duration: 0.6
   easeType: 5
-  phase2StarColor: {r: 0.6860552, g: 0.30588233, b: 1, a: 1}
+  starColor:
+  - {r: 0.3863008, g: 1, b: 0.36320752, a: 1}
+  - {r: 0.8301887, g: 0, b: 0, a: 1}
+  - {r: 0.344691, g: 0, b: 0.7264151, a: 1}
 --- !u!1 &1206287648
 GameObject:
   m_ObjectHideFlags: 0
@@ -3470,9 +3494,12 @@ MonoBehaviour:
     gameObject: {fileID: 402564860}
   wing2:
     gameObject: {fileID: 707708031}
-  duration: 1
+  duration: 0.6
   easeType: 5
-  phase2StarColor: {r: 0.6860552, g: 0.30588233, b: 1, a: 1}
+  starColor:
+  - {r: 0.3863008, g: 1, b: 0.36320752, a: 1}
+  - {r: 0.8301887, g: 0, b: 0, a: 1}
+  - {r: 0.344691, g: 0, b: 0.7264151, a: 1}
 --- !u!1 &1597180936
 GameObject:
   m_ObjectHideFlags: 0
@@ -4233,9 +4260,12 @@ MonoBehaviour:
     gameObject: {fileID: 731935920}
   wing2:
     gameObject: {fileID: 667418871}
-  duration: 1
+  duration: 0.6
   easeType: 5
-  phase2StarColor: {r: 0.6860552, g: 0.30588233, b: 1, a: 1}
+  starColor:
+  - {r: 0.3863008, g: 1, b: 0.36320752, a: 1}
+  - {r: 0.8301887, g: 0, b: 0, a: 1}
+  - {r: 0.344691, g: 0, b: 0.7264151, a: 1}
 --- !u!1 &2031801861
 GameObject:
   m_ObjectHideFlags: 0
