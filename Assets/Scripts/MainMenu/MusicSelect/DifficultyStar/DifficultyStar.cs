@@ -1,18 +1,19 @@
+using System.Collections.Generic;
 using SimpleEasing;
 using Type;
 using Unity.VectorGraphics;
 using UnityEngine;
 using Utils;
 
-public class DifficuityStar : MonoBehaviour
+public class DifficultyStar : MonoBehaviour
 {
     [SerializeField]
-    private ObjectWithComponent<RectTransform,SVGImage> star;
+    private ObjectWithComponent<RectTransform, SVGImage> star;
 
     [SerializeField]
-    private ObjectWithComponent<RectTransform,SVGImage> wing1;
+    private ObjectWithComponent<RectTransform, SVGImage> wing1;
     [SerializeField]
-    private ObjectWithComponent<RectTransform,SVGImage> wing2;
+    private ObjectWithComponent<RectTransform, SVGImage> wing2;
 
     [Space(10), SerializeField]
     private float duration;
@@ -21,10 +22,7 @@ public class DifficuityStar : MonoBehaviour
     private EaseType easeType;
 
     [Space(10), SerializeField]
-    private Color phase2StarColor;
-
-
-    private Color defaultStarColor;
+    private List<Color> starColor;
 
     private Coroutine starCoroutine;
     private Coroutine starColorCoroutine;
@@ -41,10 +39,9 @@ public class DifficuityStar : MonoBehaviour
         ObjectUpdate();
     }
 
-    
+
     private void Start()
     {
-        defaultStarColor = star.component2.color;
         SetPhase(0);
     }
 
@@ -53,7 +50,7 @@ public class DifficuityStar : MonoBehaviour
         // 날개
         this.SafeStartCoroutine(ref wingCoroutine, Utils.Generic.AnimationUtils.EasingChange(
             wing1.component1.rotation.eulerAngles.z,
-            phase == 0 ? 0 :45,
+            phase == 0 ? 0 : 45,
             WingUpdate,
             duration,
             easeType
@@ -68,26 +65,13 @@ public class DifficuityStar : MonoBehaviour
             easeType
         ));
 
-        if(phase == 2)
-        {
-            this.SafeStartCoroutine(ref starColorCoroutine, Utils.Generic.AnimationUtils.EasingChange(
-                star.component2.color,
-                phase2StarColor,
-                c => star.component2.color = c,
-                duration,
-                easeType
-            ));
-        }
-        else
-        {
-            this.SafeStartCoroutine(ref starColorCoroutine, Utils.Generic.AnimationUtils.EasingChange(
-                star.component2.color,
-                defaultStarColor,
-                c => star.component2.color = c,
-                duration,
-                easeType
-            ));
-        }
+        this.SafeStartCoroutine(ref starColorCoroutine, Utils.Generic.AnimationUtils.EasingChange(
+            star.component2.color,
+            starColor[phase],
+            c => star.component2.color = c,
+            duration,
+            easeType
+        ));
     }
 
     private void WingUpdate(float target)
