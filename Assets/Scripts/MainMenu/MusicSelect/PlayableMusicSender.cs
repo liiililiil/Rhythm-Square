@@ -3,7 +3,7 @@ using SimpleActions;
 using Tables.MusicTable;
 using UnityEngine;
 
-public class PlayableMusicSender : MonoBehaviour
+public class PlayableMusicSender : Managers<PlayableMusicSender>
 {
 
     // 데이터가 로딩될때마다 invoke 되는 이벤트
@@ -12,6 +12,7 @@ public class PlayableMusicSender : MonoBehaviour
 
     private void Awake()
     {
+        Singleton(false);
     }
     private void Start()
     {
