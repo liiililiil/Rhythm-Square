@@ -9,32 +9,36 @@ public class OffsetSlider : MonoBehaviour
     [SerializeField]
     private InputField inputField;
 
-    private void Awake() {
+    private void Awake()
+    {
         inputField.onSubmit.AddListener(ValueChanged);
     }
 
-    private void OnEnable() {
+    private void OnEnable()
+    {
         slider.onValueChanged.AddListener(OnValueChange);
-        SettingManager.Instance.onChangeOffset.AddListener(OnChangeValue);
+        SettingManager.Instance.GetConfig<int>(ConfigType.Offset).OnChangeConfig.AddListener(OnChangeValue);
     }
 
     private void OnDisable()
     {
         slider.onValueChanged.RemoveListener(OnValueChange);
-        SettingManager.Instance.onChangeOffset.RemoveListener(OnChangeValue);
+        SettingManager.Instance.GetConfig<int>(ConfigType.Offset).OnChangeConfig.RemoveListener(OnChangeValue);
     }
 
-    private void Start() {
+    private void Start()
+    {
         //초기화
-        OnChangeValue(SettingManager.Instance.GetSetting().offset);
-        
+        OnChangeValue(SettingManager.Instance.GetConfigValue<int>(ConfigType.Offset));
+
     }
 
-    private void Update() {
+    private void Update()
+    {
         //인풋 포커싱 중에는 텍스트 변경 중단
-        if(inputField.isFocused) return;
+        if (inputField.isFocused) return;
     }
-    
+
 
 
     private void ValueChanged(string str)
@@ -48,15 +52,15 @@ public class OffsetSlider : MonoBehaviour
             return;
         }
 
-        SettingManager.Instance.SetOffset(result, false);
+        SettingManager.Instance.SetValue(result, ConfigType.Offset, false);
     }
 
 
     private void OnValueChange(float value)
     {
-        SettingManager.Instance.SetOffset((int)value, false);
+        SettingManager.Instance.SetValue<int>((int)value, ConfigType.Offset, false);
     }
-    
+
     private void OnChangeValue(int value)
     {
         slider.value = value;

@@ -26,7 +26,7 @@ public class MenuMusicManager : Managers<MenuMusicManager>
     private AudioSource audioSource;
     private AudioSource otherSource;
 
-    
+
     //노래 부분 기록
     private FloatRange currentRange;
     private FloatRange previousRange;
@@ -45,20 +45,20 @@ public class MenuMusicManager : Managers<MenuMusicManager>
     //음악 정보
     private MusicInfo musicInfo;
 
-    public float beatPerSec{get; private set;} = 1; //bpm 로드 실패시 오류 체인 방지
+    public float beatPerSec { get; private set; } = 1; //bpm 로드 실패시 오류 체인 방지
 
     //배경 정보
-    public BackGroundInfo backGroundInfo {get; private set;}
+    public BackGroundInfo backGroundInfo { get; private set; }
 
     //박자 변경되면 실행되는 이벤트
     public SimpleEvent<int> OnResetBeat = new SimpleEvent<int>();
 
-   
+
 
 
     // 다음 박자
     private float nextSec = 999999;
-    public int beat {get; private set;}
+    public int beat { get; private set; }
 
     // 오디오 반복해야하는지
     private bool isLoop = false;
@@ -85,9 +85,10 @@ public class MenuMusicManager : Managers<MenuMusicManager>
         Singleton(false);
     }
 
-    private void Start() {
+    private void Start()
+    {
         MenuAssetLoadManager.Instance.AssetLoaderBind(MusicLoad);
-        SettingManager.Instance.GetSetting().volumes[Type.Menu.AudioType.Music].onValueChanged.AddListener(VolumeUpdate);
+        SettingManager.Instance.GetConfig<float>(ConfigType.Music).OnChangeConfig.AddListener(VolumeUpdate);
     }
 
     private void MusicLoad()
@@ -123,17 +124,12 @@ public class MenuMusicManager : Managers<MenuMusicManager>
     }
 
     private void VolumeUpdate(float value)
-    {   
+    {
         //노래 변경 중이라면 무시
-        if(sourceCoroutine != null) return;
+        if (sourceCoroutine != null) return;
 
         audioSource.volume = value;
     }
-    private void VolumeUpdate()
-    {
-        VolumeUpdate(SettingManager.Instance.GetSetting().GetMatchedAudio(Type.Menu.AudioType.Music));
-    }
-
 
     /// <summary>
     /// 업데이트에서 사용되는 함수들
@@ -144,18 +140,19 @@ public class MenuMusicManager : Managers<MenuMusicManager>
     {
 
         // 반복 설정 안하면 넘기기
-        if(!isLoop) return;
-        
+        if (!isLoop) return;
+
         // 첫 변경시 Previous가 Null이 뜨므로 예외 처리 하기
         try
         {
-            if(audioSource.time >= currentRange.end)
+            if (audioSource.time >= currentRange.end)
             {
-                
+
                 audioSource.time -= currentRange.end - currentRange.start;
                 BeatTimeCorrection(audioSource.time);
             }
-        } catch
+        }
+        catch
         {
             return;
         }
@@ -164,11 +161,11 @@ public class MenuMusicManager : Managers<MenuMusicManager>
     // 비트 감지
     private void BeatDetection()
     {
-        if(audioSource.isPlaying && audioSource.time >= nextSec)
+        if (audioSource.isPlaying && audioSource.time >= nextSec)
         {
             OnBeat.Invoke();
             beat++;
-            nextSec +=  beatPerSec;
+            nextSec += beatPerSec;
         }
     }
 
@@ -188,9 +185,9 @@ public class MenuMusicManager : Managers<MenuMusicManager>
 
 
     }
-#endregion
-    
-    
+    #endregion
+
+
     private IEnumerator SourceSlowChange()
     {
         // 너무 빠른 변경으로 인한 버그 방지
@@ -198,38 +195,38 @@ public class MenuMusicManager : Managers<MenuMusicManager>
         float otherVolume = otherSource.volume;
 
         //오디오 천천히 전환하기
-        while(elapsed <= SOURCE_FADE_DURATION)
+        while (elapsed <= SOURCE_FADE_DURATION)
         {
             elapsed += Time.deltaTime;
             float t = Mathf.Clamp01(elapsed / SOURCE_FADE_DURATION);
 
             t = Ease.Easing(t, EaseType.Linear);
 
-            audioSource.volume = Mathf.Lerp(0, SettingManager.Instance.GetSetting().GetMatchedAudio(Type.Menu.AudioType.Music), t);
+            audioSource.volume = Mathf.Lerp(0, SettingManager.Instance.GetConfigValue<float>(ConfigType.Music), t);
             otherSource.volume = Mathf.Lerp(otherVolume, 0, t);
 
             yield return null;
         }
 
         //전환 완료되면 보정 및 끄기
-        audioSource.volume = SettingManager.Instance.GetSetting().GetMatchedAudio(Type.Menu.AudioType.Music);
+        audioSource.volume = SettingManager.Instance.GetConfigValue<float>(ConfigType.Music);
         otherSource.Stop();
 
         this.SafeStopCoroutine(ref sourceCoroutine);
     }
-    
+
     // 음악 시간 변경시 그 시간에 박자와 다음 박자를 계산
     private void BeatTimeCorrection(float time)
     {
 
         beat = (int)(time / beatPerSec);
-        nextSec = (beat+1) * beatPerSec;
+        nextSec = (beat + 1) * beatPerSec;
     }
     private void OnMenuStateChanged(MenuState newState)
     {
-        
 
-        switch(newState)
+
+        switch (newState)
         {
             case MenuState.InitLoading:
                 break;
@@ -261,7 +258,7 @@ public class MenuMusicManager : Managers<MenuMusicManager>
             default:
                 MusicStop();
                 break;
-            
+
         }
 
     }
@@ -280,10 +277,10 @@ public class MenuMusicManager : Managers<MenuMusicManager>
 
         audioSource.time = range.start;
 
-        VolumeUpdate();
+        VolumeUpdate(SettingManager.Instance.GetConfigValue<float>(ConfigType.Music));
         BeatTimeCorrection(range.start);
 
-        if(nextLoop != null) this.SafeStartCoroutine(ref loopCoroutine, LoopWait(range, nextLoop,isGoingToPart));
+        if (nextLoop != null) this.SafeStartCoroutine(ref loopCoroutine, LoopWait(range, nextLoop, isGoingToPart));
     }
 
     private void LoopToRange(FloatRange range, bool isGoingToPart = true)
@@ -294,11 +291,11 @@ public class MenuMusicManager : Managers<MenuMusicManager>
         RangeChange(range);
 
         // 이동하도록 지정했거나 audio의 time이 range에 없으면 그 range안으로 오도록 조정
-        if(isGoingToPart && !(otherSource.time >= range.start && otherSource.time <= range.end))
+        if (isGoingToPart && !(otherSource.time >= range.start && otherSource.time <= range.end))
         {
             // 이동까지의 시간 계산
             float delta = currentRange.start - previousRange.start;
-            float targetTime = otherSource.time+ delta;
+            float targetTime = otherSource.time + delta;
 
             // Debug.Log($"delta : {delta} | targetTime : {targetTime}, | range : {range.start} | current : {otherSource.time}");
 
@@ -306,7 +303,7 @@ public class MenuMusicManager : Managers<MenuMusicManager>
             // 적응형 오디오를 위해 이전 파츠와 이어지도록 조정
             targetTime = currentRange.start + Mathf.Repeat(targetTime - currentRange.start, currentRange.end - currentRange.start);
 
-            audioSource.time =  targetTime;
+            audioSource.time = targetTime;
             BeatTimeCorrection(targetTime);
         }
         else
@@ -317,7 +314,7 @@ public class MenuMusicManager : Managers<MenuMusicManager>
         }
 
 
-        
+
     }
 
 
@@ -330,7 +327,7 @@ public class MenuMusicManager : Managers<MenuMusicManager>
     private IEnumerator LoopWait(FloatRange end, FloatRange target, bool isGoingToPart)
     {
         //end에 도달할때 까지 대기
-        while(audioSource.time < end.end)
+        while (audioSource.time < end.end)
         {
             yield return null;
         }

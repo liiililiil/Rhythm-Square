@@ -6,12 +6,13 @@ using Menu = Type.Menu;
 public class AudioSlider : MonoBehaviour
 {
     [SerializeField]
-    private Menu.AudioType audioType;
+    private ConfigType configType;
 
     [SerializeField]
     private Slider slider;
 
-    private void OnEnable() {
+    private void OnEnable()
+    {
         slider.onValueChanged.AddListener(OnSliderChange);
     }
 
@@ -20,11 +21,12 @@ public class AudioSlider : MonoBehaviour
         slider.onValueChanged.RemoveListener(OnSliderChange);
     }
 
-    private void Start() {
-        SettingManager.Instance.GetSetting().volumes[audioType].onValueChanged.AddListener(OnSettingChange);
+    private void Start()
+    {
+        SettingManager.Instance.GetConfig<float>(configType).OnChangeConfig.AddListener(OnSettingChange);
 
         // 초기화
-        slider.SetValueWithoutNotify(SettingManager.Instance.GetSetting().volumes[audioType].value);
+        slider.SetValueWithoutNotify(SettingManager.Instance.GetConfigValue<float>(configType));
     }
 
     private void OnSettingChange(float value)
@@ -34,6 +36,6 @@ public class AudioSlider : MonoBehaviour
 
     private void OnSliderChange(float value)
     {
-        SettingManager.Instance.SetVolume(value, audioType);
+        SettingManager.Instance.SetValue(value, configType);
     }
 }

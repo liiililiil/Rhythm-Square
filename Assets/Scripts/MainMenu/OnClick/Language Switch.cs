@@ -27,12 +27,13 @@ public class LanguageSwitch : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     private const EaseType EASETYPE = EaseType.OutCubic;
     private const float TEXT_POSITION_Y = 25f;
 
-    private void Start() {
-        
-        SettingManager.Instance.onChangeLanguage.AddListener(ChangePosition);
+    private void Start()
+    {
+
+        SettingManager.Instance.GetConfig<Language>(ConfigType.Language).OnChangeConfig.AddListener(ChangePosition);
 
         //초기화
-        ChangePosition(SettingManager.Instance.GetSetting().language);
+        ChangePosition(SettingManager.Instance.GetConfigValue<Language>(ConfigType.Language));
 
 
     }
@@ -44,18 +45,18 @@ public class LanguageSwitch : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        ChangePosition(SettingManager.Instance.GetSetting().language);
+        ChangePosition(SettingManager.Instance.GetConfigValue<Language>(ConfigType.Language));
     }
 
     public void OnPointerClick(PointerEventData exentData)
     {
-        switch (SettingManager.Instance.GetSetting().language)
+        switch (SettingManager.Instance.GetConfigValue<Language>(ConfigType.Language))
         {
             case Language.Korean:
-                SettingManager.Instance.SetLanguage(Language.English);
+                SettingManager.Instance.SetValue(Language.English, ConfigType.Language);
                 break;
             case Language.English:
-                SettingManager.Instance.SetLanguage(Language.Korean);
+                SettingManager.Instance.SetValue(Language.Korean, ConfigType.Language);
                 break;
         }
     }

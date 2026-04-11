@@ -27,37 +27,33 @@ public class MultinationalTextSupport : MonoBehaviour
 
     private void Start()
     {
-        if(MenuAssetLoadManager.Instance.assetLoadRecoder.IsAllComplete())
+        if (MenuAssetLoadManager.Instance.assetLoadRecoder.IsAllComplete())
         {
             TextBind();
         }
         else
         {
             MenuAssetLoadManager.Instance.AssetLoaderBind(TextBind);
-        }   
+        }
 
-        SettingManager.Instance.onChangeLanguage.AddListener(OnChangeSetting);
+        SettingManager.Instance.GetConfig<Language>(ConfigType.Language).OnChangeConfig.AddListener(OnChangeSetting);
     }
 
     private void TextBind()
     {
-        textObject.text= TextTable.Instance.GetText(index).GetString(SettingManager.Instance.GetSetting().language);
-    }
-
-    private void OnChangeSetting()
-    {
-        OnChangeSetting(SettingManager.Instance.GetSetting().language);
+        Language language = SettingManager.Instance.GetConfig<Language>(ConfigType.Language).value;
+        textObject.text = TextTable.Instance.GetText(index).GetString(language);
     }
     private void OnChangeSetting(Language language)
     {
-        string targetText= TextTable.Instance.GetText(index).GetString(language);
+        string targetText = TextTable.Instance.GetText(index).GetString(language);
 
         // 같은 텍스트면 무시
-        if(targetText  == textObject.text) return;
+        if (targetText == textObject.text) return;
 
         // text가 꺼져있으면 그냥 바로 바꾸기
-        if(!textObject.enabled) textObject.text = targetText;
-        else this.SafeStartCoroutine(ref coroutine, SlowChangeText(textObject.text, targetText,DURATION));
+        if (!textObject.enabled) textObject.text = targetText;
+        else this.SafeStartCoroutine(ref coroutine, SlowChangeText(textObject.text, targetText, DURATION));
     }
 
     IEnumerator SlowChangeText(string start, string end, float duration)

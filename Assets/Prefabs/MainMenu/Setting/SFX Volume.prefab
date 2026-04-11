@@ -703,7 +703,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05cf48156ecea7b47ac61310b1ee9f15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AudioSlider
-  audioType: 1
+  configType: 1
   slider: {fileID: 7361496621537114510}
 --- !u!114 &1306487222111894380
 MonoBehaviour:

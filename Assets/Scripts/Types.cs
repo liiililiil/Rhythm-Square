@@ -16,6 +16,8 @@ using Utils;
 using System.Linq;
 using System.Data.SqlTypes;
 using UnityEditor;
+using Unity.VisualScripting;
+using Unity.Collections;
 
 namespace Type
 {
@@ -25,7 +27,7 @@ namespace Type
     {
         public float start;
         public float end;
-        
+
     }
 
     // 처음 컴포넌를 겟하면 그 컴포넌트를 불러 올수 있는 클래스
@@ -47,7 +49,7 @@ namespace Type
         }
 
 
-        public InitableComponent(GameObject gameObject) 
+        public InitableComponent(GameObject gameObject)
         {
             getter = () => ComponentInit(gameObject);
         }
@@ -66,7 +68,7 @@ namespace Type
         }
     }
 
-    
+
     // 게임 오브젝트와 함께 추가로 필요한 컴포넌트가 한번에 포함된 타입
 
     [Serializable]
@@ -76,17 +78,18 @@ namespace Type
         public GameObject gameObject;
 
         private InitableComponent<_T1> _component;
-        public _T1 component {
+        public _T1 component
+        {
             get
             {
-                if(_component == null) _component = new InitableComponent<_T1>(gameObject);
+                if (_component == null) _component = new InitableComponent<_T1>(gameObject);
                 return _component.component;
             }
         }
     }
 
     [Serializable]
-    public class ObjectWithComponent<_T1,_T2> where _T1 : Component where _T2 : Component
+    public class ObjectWithComponent<_T1, _T2> where _T1 : Component where _T2 : Component
     {
         [SerializeField]
         public GameObject gameObject;
@@ -97,17 +100,19 @@ namespace Type
         private Func<_T1> firstGetter;
         private Func<_T2> secondGetter;
 
-        public _T1 component1 {
+        public _T1 component1
+        {
             get
             {
-                if(firstComponent == null) firstComponent = new InitableComponent<_T1>(gameObject);
+                if (firstComponent == null) firstComponent = new InitableComponent<_T1>(gameObject);
                 return firstComponent.component;
             }
         }
-        public _T2 component2 {
+        public _T2 component2
+        {
             get
             {
-                if(secondComponent == null) secondComponent = new InitableComponent<_T2>(gameObject);
+                if (secondComponent == null) secondComponent = new InitableComponent<_T2>(gameObject);
                 return secondComponent.component;
             }
         }
@@ -200,51 +205,91 @@ namespace Type.Menu
     }
 
 
+    public class Config<_T1>
+    {
+        public SimpleEvent<_T1> OnChangeConfig { get; private set; } = new SimpleEvent<_T1>();
+        public ConfigType type { get; private set; }
+        public _T1 value { get; set; }
+
+        public Config(ConfigType targetType)
+        {
+            type = targetType;
+        }
+
+        public T1 Get<T1>()
+        {
+            if (value is T1 result)
+            {
+                return result;
+            }
+
+            throw new InvalidCastException("Value를 가져오는데 실패하였습니다!");
+        }
+
+        public void Set<T1>(T1 target, bool isSilence = false)
+        {
+            if (target is _T1 result)
+            {
+                value = result;
+                if (!isSilence) OnChangeConfig.Invoke(value);
+                return;
+            }
+
+            throw new InvalidCastException("Set에 실패하였습니다!");
+        }
+
+        public Config<T1> GetConfig<T1>()
+        {
+            if (this is Config<T1> result)
+            {
+                return result;
+            }
+
+            throw new InvalidCastException("Config을 가져오는데 실패하였습니다!");
+        }
+    }
+
+
     // 설정
     public class Setting
     {
-        //볼륨 영역
-        public Dictionary<AudioType,Volume> volumes{get; private set;} = new Dictionary<AudioType, Volume>();
-        public float GetMatchedAudio(AudioType audioType)
-        {
-            return volumes[audioType].value;
-        }
 
-        public void SetMatchedAudio(AudioType audioType, float value)
-        {
-            volumes[audioType].value = value;
-        }
+        // 오프셋
+        private Config<int> offset = new Config<int>(ConfigType.Offset);
 
-        //볼륨 종료
+        // 볼륨
+        private Config<float> music = new Config<float>(ConfigType.Music);
+        private Config<float> sfx = new Config<float>(ConfigType.SFX);
 
-        public Language language;
-
-        public int offset;
-
-        public Setting(int _offset, Language _langeuage)
-        {
-            //볼륨 영역
-            volumes.Add(AudioType.Music, new Volume(0.6f));
-            volumes.Add(AudioType.SFX, new Volume(0.6f));
-            
-
-            offset = _offset;
-            language = _langeuage;
-        }
+        //언어
+        private Config<Language> language = new Config<Language>(ConfigType.Offset);
 
         public Setting()
         {
-            //볼륨 영역
-            volumes.Add(AudioType.Music, new Volume(0.1f));
-            volumes.Add(AudioType.SFX, new Volume(0.1f));
+            offset.value = 0;
+            music.value = 0.5f;
+            sfx.value = 0.5f;
+            language.value = Language.English;
+        }
 
-            offset = 0;
-
-            //일단 보편적인 언어인 영어로 설정
-            language = Language.English;
+        public Config<T1> GetConfig<T1>(ConfigType configType)
+        {
+            switch (configType)
+            {
+                case ConfigType.Offset:
+                    return offset.GetConfig<T1>();
+                case ConfigType.Music:
+                    return music.GetConfig<T1>();
+                case ConfigType.SFX:
+                    return sfx.GetConfig<T1>();
+                case ConfigType.Language:
+                    return language.GetConfig<T1>();
+                default:
+                    throw new KeyNotFoundException("Type에 맞는 Config를 찾지 못하였습니다!");
+            }
         }
     }
-    
+
     //단일 볼륨 나열
     public class Volume
     {
@@ -263,14 +308,17 @@ namespace Type.Menu
 
     }
 
-    //오디오 종류 나열
+    //슬라이더로 조정하는 설정 타입
     [Serializable]
-    public enum AudioType : byte
+    public enum ConfigType : byte
     {
         Music,
         SFX,
-
+        Offset,
+        Language
     }
+
+
 
 }
 
@@ -313,7 +361,7 @@ namespace Type.Menu.StateChange
         public float duration;
         public EaseType easeType;
     }
-    
+
     // 기본
     [Serializable]
     public class SlowMenuStateDefault<T> : MenuStateDefault<T>
@@ -329,12 +377,12 @@ namespace Type.Addressable
     // 에셋 로딩을 통합 관리하기위한 클래스
     public class LoadingRecoder
     {
-        public int index {get; private set;}
-        public int leftPrograss{get; private set;}
+        public int index { get; private set; }
+        public int leftPrograss { get; private set; }
 
         private List<float> prograssList = new List<float>();
 
-        
+
         //에셋 레코더가 시작될떄 호출되는 이벤트
         public SimpleEvent OnRecodeReset = new SimpleEvent();
 
@@ -357,7 +405,7 @@ namespace Type.Addressable
         public void CloseRecode()
         {
         }
-        
+
         public void StartLoading(out int startIndex)
         {
             startIndex = index;
@@ -387,7 +435,7 @@ namespace Type.Addressable
                 Debug.LogWarning($"이미 완료된 loadIndex: {loadIndex}");
             }
 
-            
+
             leftPrograss--;
             prograssList[loadIndex] = 1;
             OnCompleteLoading.Invoke(loadIndex);
@@ -403,7 +451,7 @@ namespace Type.Addressable
 
             if (prograssList[loadIndex] >= 1f)
                 return; // 이미 완료된 경우 무시
-            
+
             leftPrograss--;
             prograssList[loadIndex] = -1;
             OnErrorLoading.Invoke(loadIndex, ex);
@@ -414,10 +462,10 @@ namespace Type.Addressable
 
         public float GetTotalPrograss()
         {
-            if(prograssList.Count == 0) return 0;
-            
+            if (prograssList.Count == 0) return 0;
+
             float total = 0;
-            foreach(var p in prograssList)
+            foreach (var p in prograssList)
             {
                 total += p;
             }
@@ -432,7 +480,7 @@ namespace Type.Addressable
 
         public bool IsAllComplete()
         {
-            if(GetTotalPrograss() < 1f) return false;
+            if (GetTotalPrograss() < 1f) return false;
             return leftPrograss <= 0;
         }
 
@@ -448,7 +496,7 @@ namespace Type.Addressable
 
 
     }
-    
+
     //로딩될 공간이 포함된 어드레서블 에셋
     [Serializable]
     public class AssetHolder<T> where T : UnityEngine.Object
@@ -470,7 +518,7 @@ namespace Type.Addressable
         //레퍼런스를 스크립트적으로 등록할때 사용
         public void SetReference(AssetReferenceT<T> assetReference)
         {
-            if(addressableAsset == assetReference) return;
+            if (addressableAsset == assetReference) return;
             if (_handle.IsValid() && !_handle.IsDone)
             {
                 Debug.LogError("에셋이 로딩되있는 상태로 레퍼런스 변경을 시도하였습니다!");
@@ -482,18 +530,18 @@ namespace Type.Addressable
 
         public T GetAsset()
         {
-        if (!_handle.IsValid() || !_handle.IsDone)
-            throw new Exception("Not Loaded Asset");
+            if (!_handle.IsValid() || !_handle.IsDone)
+                throw new Exception("Not Loaded Asset");
 
-        if (_handle.Status != AsyncOperationStatus.Succeeded)
-            throw new Exception("Load Failed Asset");
+            if (_handle.Status != AsyncOperationStatus.Succeeded)
+                throw new Exception("Load Failed Asset");
 
             return _handle.Result;
         }
 
         public void Release()
         {
-            if(!_handle.IsValid())
+            if (!_handle.IsValid())
                 return;
 
             AddressableUtils.SafeRelease(_handle);
@@ -501,7 +549,7 @@ namespace Type.Addressable
 
         public void Load(MonoBehaviour mono, ref Coroutine coroutine, Action callback)
         {
-            mono.SafeStartCoroutine(ref coroutine, StartLoading(callback)); 
+            mono.SafeStartCoroutine(ref coroutine, StartLoading(callback));
         }
 
         public IEnumerator StartLoading(Action InvokeLoadingComplete)
@@ -516,7 +564,7 @@ namespace Type.Addressable
 
             //에셋 로딩 신고
             int index = -1;
-            if(loadingRecoder != null) loadingRecoder.StartLoading(out index);
+            if (loadingRecoder != null) loadingRecoder.StartLoading(out index);
 
             //로딩
             _handle = Addressables.LoadAssetAsync<T>(addressableAsset);
@@ -526,23 +574,23 @@ namespace Type.Addressable
                 {
 
                     //진행도 기록
-                    if(loadingRecoder != null) loadingRecoder.SetPrograss(index, _handle.PercentComplete);
+                    if (loadingRecoder != null) loadingRecoder.SetPrograss(index, _handle.PercentComplete);
                     yield return null;
                 }
 
-                if(_handle.Status == AsyncOperationStatus.Succeeded)
-                {   
+                if (_handle.Status == AsyncOperationStatus.Succeeded)
+                {
                     //로딩 성공시 신고 후 콜백 함수 호출 
-                    if(loadingRecoder != null) loadingRecoder.CompleteLoading(index);
+                    if (loadingRecoder != null) loadingRecoder.CompleteLoading(index);
                     InvokeLoadingComplete.Invoke();
                 }
                 else
                 {
                     //실패시 신고후 오류 반환
                     Debug.LogError(_handle.OperationException);
-                    if(loadingRecoder != null) loadingRecoder.LoadingError(index, _handle.OperationException);
+                    if (loadingRecoder != null) loadingRecoder.LoadingError(index, _handle.OperationException);
                 }
-            } 
+            }
             finally
             {
                 isloading = false;
@@ -551,13 +599,13 @@ namespace Type.Addressable
 
     }
 
-    
+
     /// <summary>
     /// 어드레서블 에셋을 로딩하고 저장하기 위한 클래스
     /// </summary>
     /// <typeparam name="_T1">에셋의 타입</typeparam>
     /// <typeparam name="_T2">에셋의 인덱스</typeparam>
-    public class Loader<_T1, _T2> where _T1 : IndexedScriptableObject<_T2> where _T2: System.Enum
+    public class Loader<_T1, _T2> where _T1 : IndexedScriptableObject<_T2> where _T2 : System.Enum
     {
         public Coroutine coroutine;
         protected AsyncOperationHandle<IList<UnityEngine.ResourceManagement.ResourceLocations.IResourceLocation>> countHandle;
@@ -568,12 +616,13 @@ namespace Type.Addressable
         //값 저장을 위한 타입
         public Dictionary<_T2, _T1> table = new Dictionary<_T2, _T1>();
 
-        public Loader(LoadingRecoder recoder){
+        public Loader(LoadingRecoder recoder)
+        {
             RecoderBind(recoder);
         }
         public Loader()
         {
-            
+
         }
 
         public void RecoderBind(LoadingRecoder recoder)
@@ -591,81 +640,82 @@ namespace Type.Addressable
             table.Clear();
         }
 
-    protected Stack<int> recoderBindedIndex = new Stack<int>();
+        protected Stack<int> recoderBindedIndex = new Stack<int>();
 
-    public virtual IEnumerator LoadingAsset(string label, Action callback = null)
-    {
-        //에셋 갯수 확인 후 그 갯수만큼 신고
-        countHandle = Addressables.LoadResourceLocationsAsync(label);
-
-        yield return countHandle;
-
-        for(int i = 0; i < countHandle.Result.Count; i++)
+        public virtual IEnumerator LoadingAsset(string label, Action callback = null)
         {
-            // 부여된 인덱스 저장
-            int index;
-            if(loadingRecoder != null){
-                loadingRecoder.StartLoading(out index);
-                recoderBindedIndex.Push(index);
-            }
-        }
-        
-        //에셋 로딩
-        handle =
-            Addressables.LoadAssetsAsync<_T1>(
-                label,
-                loadedAsset =>
+            //에셋 갯수 확인 후 그 갯수만큼 신고
+            countHandle = Addressables.LoadResourceLocationsAsync(label);
+
+            yield return countHandle;
+
+            for (int i = 0; i < countHandle.Result.Count; i++)
+            {
+                // 부여된 인덱스 저장
+                int index;
+                if (loadingRecoder != null)
                 {
-                    AssetBind(loadedAsset);  
-                },
-                Addressables.MergeMode.Union
-            );
-        yield return handle;
+                    loadingRecoder.StartLoading(out index);
+                    recoderBindedIndex.Push(index);
+                }
+            }
 
-        //실패시 로그 출력
-        if (handle.Status != AsyncOperationStatus.Succeeded)
-        {
-            Debug.LogError(handle.OperationException);
+            //에셋 로딩
+            handle =
+                Addressables.LoadAssetsAsync<_T1>(
+                    label,
+                    loadedAsset =>
+                    {
+                        AssetBind(loadedAsset);
+                    },
+                    Addressables.MergeMode.Union
+                );
+            yield return handle;
+
+            //실패시 로그 출력
+            if (handle.Status != AsyncOperationStatus.Succeeded)
+            {
+                Debug.LogError(handle.OperationException);
+            }
+
+            // 콜백
+            callback?.Invoke();
         }
 
-        // 콜백
-        callback?.Invoke();
+
+        protected virtual void AssetBind(_T1 asset)
+        {
+            //레코더에게 완료알림
+            if (loadingRecoder != null) loadingRecoder.CompleteLoading(recoderBindedIndex.Pop());
+
+            //바인딩
+            table.Add(asset.index, asset);
+        }
     }
 
-
-    protected virtual void AssetBind(_T1 asset)
-    {
-        //레코더에게 완료알림
-        if(loadingRecoder != null) loadingRecoder.CompleteLoading(recoderBindedIndex.Pop());
-        
-        //바인딩
-        table.Add(asset.index, asset);
-    }
-    }
-    
     /// <summary>
     /// 에셋들을 각 핸들로 로딩해야하는 에셋을 위한 클래스
     /// </summary>
     /// <typeparam name="_T1">에셋의 타입</typeparam>
     /// <typeparam name="_T2">에셋의 인덱스</typeparam>
-    public class EachLoader<_T1, _T2>: Loader<_T1,_T2> where _T1 : IndexedScriptableObject<_T2> where _T2: System.Enum
+    public class EachLoader<_T1, _T2> : Loader<_T1, _T2> where _T1 : IndexedScriptableObject<_T2> where _T2 : System.Enum
     {
         protected new Dictionary<_T2, AsyncOperationHandle<_T1>> handle = new Dictionary<_T2, AsyncOperationHandle<_T1>>();
-         
+
         public EachLoader(LoadingRecoder recoder) : base(recoder)
         {
         }
 
         public EachLoader() : base()
         {
-            
+
         }
         public new void Release()
         {
             AddressableUtils.SafeRelease(countHandle);
 
             //각 핸들을 삭제
-            foreach(var dic in handle)
+            foreach (var dic in handle)
             {
                 AddressableUtils.SafeRelease(dic.Value);
             }
@@ -684,7 +734,7 @@ namespace Type.Addressable
 
             //카운트핸들은 이제 필요없으므로 바로 릴리즈
             AddressableUtils.SafeRelease(countHandle);
-            
+
             foreach (_T2 key in keys)
             {
                 if (!key.Equals(ignore) && table.ContainsKey(key))
@@ -696,13 +746,13 @@ namespace Type.Addressable
                 }
             }
         }
-        
+
 
         public new IEnumerator LoadingAsset(string label, Action callback = null)
         {
             // 이미 로딩된 경우 예외 처리
-            if(countHandle.IsValid()) throw new Exception("이미 로딩된 에셋입니다!");
-            
+            if (countHandle.IsValid()) throw new Exception("이미 로딩된 에셋입니다!");
+
             // 에셋 로딩 확인할 그룹화 하기 전 핸들 리스트
             List<AsyncOperationHandle> groupHandles = new List<AsyncOperationHandle>();
 
@@ -714,23 +764,24 @@ namespace Type.Addressable
             yield return countHandle;
 
             // 갯수만큼 신고
-            for(int i = 0; i < countHandle.Result.Count; i++)
+            for (int i = 0; i < countHandle.Result.Count; i++)
             {
 
                 // 부여된 인덱스 저장
                 int index;
 
-                if(loadingRecoder != null){
+                if (loadingRecoder != null)
+                {
                     loadingRecoder.StartLoading(out index);
                     recoderBindedIndex.Push(index);
                 }
             }
-            
+
             //에셋 로딩 시작
             foreach (var location in countHandle.Result)
             {
-                        
-                var loaded= Addressables.LoadAssetAsync<_T1>(location);
+
+                var loaded = Addressables.LoadAssetAsync<_T1>(location);
 
                 //핸들 그룹화 하기위해 추가
                 groupHandles.Add(loaded);
@@ -741,7 +792,7 @@ namespace Type.Addressable
             AsyncOperationHandle groupHandle = Addressables.ResourceManager.CreateGenericGroupOperation(groupHandles);
 
             yield return groupHandle;
-            foreach(var eachHandle in loadedHandle)
+            foreach (var eachHandle in loadedHandle)
             {
                 // 성공시 값 저장
                 if (eachHandle.Status == AsyncOperationStatus.Succeeded)
@@ -754,7 +805,7 @@ namespace Type.Addressable
                 {
                     // 에러 전달
                     Debug.LogError(eachHandle.OperationException);
-                    if(loadingRecoder != null) loadingRecoder.LoadingError(recoderBindedIndex.Pop(), eachHandle.OperationException);
+                    if (loadingRecoder != null) loadingRecoder.LoadingError(recoderBindedIndex.Pop(), eachHandle.OperationException);
                 }
             }
 
@@ -783,7 +834,7 @@ namespace Type.Addressable.Table
         PlayerIcon = 105,
         SingleModernArrow = 106,
         Star = 107,
-        
+
     }
     // 텍스트 목록
     public enum TextIndex
@@ -809,7 +860,7 @@ namespace Type.Addressable.Table
     {
         // 배경용
         iluvslapbass = 101,
-        
+
         // 플레이용
         MachRoger = 201,
         ZidandaStep = 202,
@@ -837,7 +888,7 @@ namespace Type.Addressable.Table
         ExitWarningText = 13001,
         ProgramExitButton = 13002,
         ExitToMenuButton = 13003,
-        
+
     }
 
 }
