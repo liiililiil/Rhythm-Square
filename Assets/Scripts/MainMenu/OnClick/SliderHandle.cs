@@ -14,7 +14,7 @@ public class SliderHandle : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     private bool isHolding = false;
     private bool isHover = false;
-    
+
     private const float NOMAL_SCALE = 0.5f;
     private const float ON_HOVER_SCALE = 0.7f;
     private const float ON_CLICK_SCALE = 0.3f;
@@ -24,9 +24,6 @@ public class SliderHandle : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     private const EaseType EASETYPE = EaseType.OutCubic;
 
-    private void Start() {
-    }
-    
     public void OnPointerDown(PointerEventData eventData)
     {
         isHolding = true;
@@ -54,7 +51,7 @@ public class SliderHandle : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         isHover = true;
 
         // 클릭 이벤트 중인 경우 무시
-        if(isHolding) return;
+        if (isHolding) return;
 
         ScaleAnimation(Vector2Utils.FloatToVector2(ON_HOVER_SCALE), NOMAL_DURATION);
     }
@@ -66,7 +63,7 @@ public class SliderHandle : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         ScaleAnimation(Vector2Utils.FloatToVector2(NOMAL_SCALE), NOMAL_DURATION);
 
         // 클릭 이벤트 중인 경우 무시
-        if(isHolding) return;
+        if (isHolding) return;
 
     }
 
