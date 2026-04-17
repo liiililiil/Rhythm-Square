@@ -18,8 +18,6 @@ public class MusicSelectManager : Managers<MusicSelectManager>
 
     private int maxIndex;
 
-    private bool isDown = false;
-
     private Coroutine mouseInputCoroutine;
 
     private void Awake()
@@ -45,32 +43,37 @@ public class MusicSelectManager : Managers<MusicSelectManager>
     }
     private void Update()
     {
-        KeyDetection();
         MouseDetection();
     }
 
-    private void KeyDetection()
-    {
-        bool upInput = Input.GetAxisRaw("Vertical") == 1 || Input.GetAxisRaw("Horizontal") == 1;
-        bool downInput = Input.GetAxisRaw("Vertical") == -1 || Input.GetAxisRaw("Horizontal") == -1;
 
-        // 꾹 눌러도 한번만 작동하게
-        if (!upInput && !downInput) isDown = false;
-        if (isDown) return;
+
+    public void KeyDetection(InputAction.CallbackContext context)
+    {
+        Vector2 value = context.ReadValue<Vector2>();
+
+        // 누를 때만
+        if (value == Vector2.zero)
+            return;
+
+        Debug.Log(context.ReadValue<Vector2>());
+
+        bool upInput = value.x == 1 || value.y == 1;
+        bool downInput = value.x == -1 || value.y == -1;
 
         // 위
         if (upInput)
         {
-            isDown = true;
             ChangePosition(1);
         }
 
         // 아래
         if (downInput)
         {
-            isDown = true;
             ChangePosition(-1);
         }
+
+        ChangePosition(-position);
     }
 
     private void MouseDetection()
