@@ -216,36 +216,23 @@ namespace Type.Menu
             type = targetType;
         }
 
-        public T1 Get<T1>()
+        public _T1 Get()
         {
-            if (value is T1 result)
-            {
-                return result;
-            }
-
-            throw new InvalidCastException("Value를 가져오는데 실패하였습니다!");
+            return value;
         }
 
-        public void Set<T1>(T1 target, bool isSilence = false)
+        public void Set(_T1 target, bool isSilence = false)
         {
-            if (target is _T1 result)
-            {
-                value = result;
-                if (!isSilence) OnChangeConfig.Invoke(value);
-                return;
-            }
-
-            throw new InvalidCastException("Set에 실패하였습니다!");
+            value = target;
+            if (!isSilence) OnChangeConfig.Invoke(value);
         }
 
         public Config<T1> GetConfig<T1>()
         {
-            if (this is Config<T1> result)
-            {
-                return result;
-            }
 
-            throw new InvalidCastException("Config을 가져오는데 실패하였습니다!");
+            if (this is Config<T1> config)
+                return config;
+            throw new InvalidOperationException($"Config를 {typeof(T1)}으로 변환하는데 실패하였습니다!");
         }
     }
 
@@ -870,24 +857,9 @@ namespace Type.Addressable.Table
     // 프리팹 목록
     public enum PrefabIndex
     {
-        //메인메뉴용
-        Title = 11001,
-        Logo = 11002,
-        SettingButton = 11003,
-        SelectButton = 11004,
-        ExitButton = 11005,
-
-        //메뉴 > 설정
-        LanguageSwitch = 12001,
-        SettingToMenuButton = 12002,
-        MusicVolumeSlider = 12003,
-        SFXVolumeSlider = 12004,
-        OffsetSlider = 12005,
-
-        //메뉴 > 종료 경고
-        ExitWarningText = 13001,
-        ProgramExitButton = 13002,
-        ExitToMenuButton = 13003,
+        MainMenu = 10001,
+        Setting = 10002,
+        ExitWarning = 10003,
 
     }
 

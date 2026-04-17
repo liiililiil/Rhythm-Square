@@ -14,7 +14,7 @@ public class SettingManager : Managers<SettingManager>
 
     public T1 GetConfigValue<T1>(ConfigType configType)
     {
-        return GetConfig<T1>(configType).Get<T1>();
+        return GetConfig<T1>(configType).Get();
     }
 
     public Config<T1> GetConfig<T1>(ConfigType configType)
