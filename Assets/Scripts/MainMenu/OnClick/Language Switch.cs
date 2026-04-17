@@ -3,11 +3,10 @@ using UnityEngine.EventSystems;
 
 using SimpleEasing;
 using Type.Menu;
-using System.Collections;
 using Utils;
 using Type;
 
-public class LanguageSwitch : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
+public class LanguageSwitch : UIClickable
 {
     [SerializeField]
     private ObjectWithComponent<RectTransform> korean;
@@ -27,7 +26,7 @@ public class LanguageSwitch : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     private const EaseType EASETYPE = EaseType.OutCubic;
     private const float TEXT_POSITION_Y = 25f;
 
-    private void Start()
+    protected override void OnStart()
     {
 
         SettingManager.Instance.GetConfig<Language>(ConfigType.Language).OnChangeConfig.AddListener(ChangePosition);
@@ -38,17 +37,17 @@ public class LanguageSwitch : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
+    protected override void OnEnter()
     {
         ChangePosition(Language.Empty);
     }
 
-    public void OnPointerExit(PointerEventData eventData)
+    protected override void OnExit()
     {
         ChangePosition(SettingManager.Instance.GetConfigValue<Language>(ConfigType.Language));
     }
 
-    public void OnPointerClick(PointerEventData exentData)
+    protected override void OnDown()
     {
         switch (SettingManager.Instance.GetConfigValue<Language>(ConfigType.Language))
         {

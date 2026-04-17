@@ -12,6 +12,7 @@ public class SliderHandle : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     private Coroutine coroutine;
 
+    [SerializeField]
     private bool isHolding = false;
     private bool isHover = false;
 
@@ -23,14 +24,13 @@ public class SliderHandle : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     private const float ONCLICK_DURATION = 0.2f;
 
     private const EaseType EASETYPE = EaseType.OutCubic;
-
-    public void OnPointerDown(PointerEventData eventData)
+    public void OnDown()
     {
         isHolding = true;
         ScaleAnimation(Vector2Utils.FloatToVector2(ON_CLICK_SCALE), ONCLICK_DURATION);
     }
 
-    public void OnPointerUp(PointerEventData eventData)
+    public void OnUp()
     {
         isHolding = false;
 
@@ -46,8 +46,10 @@ public class SliderHandle : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
         ScaleAnimation(Vector2Utils.FloatToVector2(end), NOMAL_DURATION);
     }
-    public void OnPointerEnter(PointerEventData eventData)
+
+    public void OnEnter()
     {
+
         isHover = true;
 
         // 클릭 이벤트 중인 경우 무시
@@ -56,15 +58,32 @@ public class SliderHandle : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         ScaleAnimation(Vector2Utils.FloatToVector2(ON_HOVER_SCALE), NOMAL_DURATION);
     }
 
-    public void OnPointerExit(PointerEventData eventData)
+    public void OnExit()
     {
         isHover = false;
 
         ScaleAnimation(Vector2Utils.FloatToVector2(NOMAL_SCALE), NOMAL_DURATION);
 
-        // 클릭 이벤트 중인 경우 무시
-        if (isHolding) return;
+        // // 클릭 이벤트 중인 경우 무시
+        // if (isHolding) return;
+    }
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        OnEnter();
+    }
 
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        OnExit();
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        OnDown();
+    }
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        OnUp();
     }
 
     private void ScaleAnimation(Vector2 target, float duration)

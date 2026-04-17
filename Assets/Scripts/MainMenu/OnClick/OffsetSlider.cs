@@ -2,10 +2,8 @@ using Type.Menu;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class OffsetSlider : MonoBehaviour
+public class OffsetSlider : UISilderable
 {
-    [SerializeField]
-    private Slider slider;
     [SerializeField]
     private InputField inputField;
 
@@ -19,14 +17,13 @@ public class OffsetSlider : MonoBehaviour
         slider.onValueChanged.AddListener(OnValueChange);
         SettingManager.Instance.GetConfig<int>(ConfigType.Offset).OnChangeConfig.AddListener(OnChangeValue);
     }
-
     private void OnDisable()
     {
         slider.onValueChanged.RemoveListener(OnValueChange);
         SettingManager.Instance.GetConfig<int>(ConfigType.Offset).OnChangeConfig.RemoveListener(OnChangeValue);
     }
 
-    private void Start()
+    protected override void OnStart()
     {
         //초기화
         OnChangeValue(SettingManager.Instance.GetConfigValue<int>(ConfigType.Offset));
@@ -65,5 +62,14 @@ public class OffsetSlider : MonoBehaviour
     {
         slider.value = value;
         inputField.text = value.ToString();
+    }
+
+    protected override void OnLeft()
+    {
+        OnChangeValue((int)slider.value - 1);
+    }
+    protected override void OnRight()
+    {
+        OnChangeValue((int)slider.value + 1);
     }
 }

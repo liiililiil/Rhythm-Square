@@ -3,14 +3,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using Menu = Type.Menu;
 
-public class AudioSlider : MonoBehaviour
+public class AudioSlider : UISilderable
 {
     [SerializeField]
     private ConfigType configType;
-
-    [SerializeField]
-    private Slider slider;
-
     private void OnEnable()
     {
         slider.onValueChanged.AddListener(OnSliderChange);
@@ -21,7 +17,7 @@ public class AudioSlider : MonoBehaviour
         slider.onValueChanged.RemoveListener(OnSliderChange);
     }
 
-    private void Start()
+    protected override void OnStart()
     {
         SettingManager.Instance.GetConfig<float>(configType).OnChangeConfig.AddListener(OnSettingChange);
 
@@ -37,5 +33,13 @@ public class AudioSlider : MonoBehaviour
     private void OnSliderChange(float value)
     {
         SettingManager.Instance.SetValue(value, configType);
+    }
+    protected override void OnLeft()
+    {
+        slider.value = (int)slider.value - 1;
+    }
+    protected override void OnRight()
+    {
+        slider.value = (int)slider.value + 1;
     }
 }
