@@ -162,7 +162,11 @@ namespace Utils
 
 namespace Utils.Generic
 {
-
+    [Serializable]
+    public class Row<_T1>
+    {
+        public _T1[] cells;
+    }
     public static class AnimationUtils
     {
 
