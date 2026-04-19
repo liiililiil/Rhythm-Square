@@ -1,6 +1,8 @@
 using System.Collections;
 using SimpleActions;
+using SimpleEasing;
 using Tables.MusicTable;
+using Type;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Utils;
@@ -13,6 +15,7 @@ public class MusicSelectManager : Managers<MusicSelectManager>
 
     [SerializeField]
     private float position;
+
     [SerializeField]
     private int index;
 
@@ -50,27 +53,26 @@ public class MusicSelectManager : Managers<MusicSelectManager>
 
     public void KeyDetection(InputAction.CallbackContext context)
     {
-        Vector2 value = context.ReadValue<Vector2>();
+        Vector2Byte value = Vector2Utils.CompositeToVector2Byte(context.ReadValue<Vector2>());
 
         // 누를 때만
-        if (value == Vector2.zero)
+        if (value == Vector2Byte.zero)
             return;
 
-        Debug.Log(context.ReadValue<Vector2>());
 
         bool upInput = value.x == 1 || value.y == 1;
-        bool downInput = value.x == -1 || value.y == -1;
+        bool downInput = value.x == 255 || value.y == 255;
 
         // 위
         if (upInput)
         {
-            ChangePosition(1);
+            ChangePosition(-1);
         }
 
         // 아래
         if (downInput)
         {
-            ChangePosition(-1);
+            ChangePosition(1);
         }
 
         ChangePosition(-position);
@@ -109,11 +111,15 @@ public class MusicSelectManager : Managers<MusicSelectManager>
     private void ChangePosition(float value)
     {
         float sum = value + index + position;
+
+        // 경계
         if (sum <= -0.4f) value = Mathf.Max(sum, -0.4f) - (index + position);
         if (sum >= maxIndex + 0.4f) value = Mathf.Min(sum, maxIndex + 0.4f) - (index + position);
 
         position += value;
         onChangePosition.Invoke(position);
+
+
 
         int roundedPosition = Mathf.RoundToInt(position);
         if (roundedPosition != 0)
