@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using SimpleEasing;
+using Type;
 using UnityEngine;
 using UnityEngine.ResourceManagement.AsyncOperations;
+using UnityEngine.UI;
 
 namespace Utils
 {
@@ -50,11 +52,27 @@ namespace Utils
 
             return Mathf.Atan2(dy, dx) * Mathf.Rad2Deg;
         }
+
+        public static Vector2Byte CompositeToVector2Byte(Vector2 vector2)
+        {
+            byte x = (byte)(int)vector2.x;
+            byte y = (byte)(int)vector2.y;
+
+            return new Vector2Byte(x, y);
+        }
     }
 
     public static class FloatUtils
     {
 
+    }
+
+    public static class TextExtensions
+    {
+        public static void SetText(this Text text, string value)
+        {
+            text.text = value;
+        }
     }
 
     public static class RectTransformExtensions
@@ -158,6 +176,14 @@ namespace Utils
         }
     }
 
+    public static class MathUtils
+    {
+        public static bool IsInRange(float value, float min, float max)
+        {
+            return value >= min && value <= max;
+        }
+    }
+
 }
 
 namespace Utils.Generic
@@ -212,6 +238,8 @@ namespace Utils.Generic
                     return (Func<_T1, _T1, float, _T1>)(object)GetFloatLerp();
                 case System.Type t when t == typeof(Color):
                     return (Func<_T1, _T1, float, _T1>)(object)GetColorLerp();
+                case System.Type t when t == typeof(string):
+                    return (Func<_T1, _T1, float, _T1>)(object)GetStringLerp();
 
                 default:
                     throw new NotSupportedException($"타입 {typeof(_T1)}에 대응되는 Lerp가 존재하지 않습니다!");
@@ -234,6 +262,32 @@ namespace Utils.Generic
         public static Func<Color, Color, float, Color> GetColorLerp()
         {
             return Color.LerpUnclamped;
+        }
+
+        public static Func<string, string, float, string> GetStringLerp()
+        {
+            return LerpString;
+        }
+
+        public static string LerpString(string a, string b, float t)
+        {
+            t = Mathf.Clamp01(t);
+
+            int aLen = a.Length;
+            int bLen = b.Length;
+
+            if (t < 0.5f)
+            {
+                float localT = t * 2f;
+                int len = aLen - (int)(localT * aLen);
+                return a.Substring(0, len);
+            }
+            else
+            {
+                float localT = (t - 0.5f) * 2f;
+                int len = (int)(localT * bLen);
+                return b.Substring(0, len);
+            }
         }
     }
 }
