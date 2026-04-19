@@ -5,11 +5,11 @@ using Type.Menu;
 
 
 public abstract class StateChanger : MonoBehaviour
-{    
-    
-    protected void Start() 
+{
+
+    protected void Start()
     {
-        MenuStateManager.Instance.onMenuStateChanged.AddListener(OnInvoke);
+
         OnStart();
     }
     protected virtual void OnStart()
@@ -18,6 +18,17 @@ public abstract class StateChanger : MonoBehaviour
     }
     protected virtual void OnInvoke(MenuState newState)
     {
-        Debug.LogWarning("StateChanger: OnInvoke가 재정의되지 않았습니다.");   
+        Debug.LogWarning("StateChanger: OnInvoke가 재정의되지 않았습니다.");
+    }
+
+    protected void OnDisable()
+    {
+        if (MenuStateManager.Instance != null)
+            MenuStateManager.Instance.onMenuStateChanged.RemoveListener(OnInvoke);
+    }
+    protected void OnEnable()
+    {
+        if (MenuStateManager.Instance != null)
+            MenuStateManager.Instance.onMenuStateChanged.AddListener(OnInvoke);
     }
 }
