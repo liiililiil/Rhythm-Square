@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Tables.MusicTable;
 using UnityEngine;
 
-public class DifficultyStarManager : MonoBehaviour
+public class DifficultyStarChanger : MonoBehaviour
 {
     [SerializeField]
     private List<DifficultyStar> difficultyStars;
