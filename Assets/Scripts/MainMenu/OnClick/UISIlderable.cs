@@ -1,42 +1,75 @@
+using Type;
 using UnityEngine;
 using UnityEngine.UI;
 
-public abstract class UISilderable : UIInteractable, IUIInteractable
+public abstract class UISilderable : UIInteractable
 {
+    protected Switcher<bool> isFocused = new Switcher<bool>(false);
+
+
     [Space(10), SerializeField]
     protected Slider slider;
 
     [SerializeField]
     protected SliderHandle sliderHandle;
-
-    public void InvokeDown()
+    private void SilderHandleUpdate()
     {
+        // 포커스 상태에 따라 함수 실행
+        if (isFocused)
+            sliderHandle.OnSubmit();
 
+        else
+            sliderHandle.OnUp();
     }
-    public virtual void InvokeEnter()
+
+
+    public override void InvokeSubmit()
+    {
+        if (isFocused.Switch(!isFocused.Value))
+        {
+            SilderHandleUpdate();
+        }
+    }
+    public override void InvokeCancel()
+    {
+        if (isFocused.Switch(false))
+        {
+            SilderHandleUpdate();
+        }
+    }
+    public override void InvokeEnter()
     {
         sliderHandle.OnEnter();
-        OnEnter();
     }
-    public virtual void InvokeExit()
+    public override void InvokeExit()
     {
+        isFocused.Switch(false);
+
         sliderHandle.OnExit();
         OnExit();
     }
 
-    public virtual void InvokeRight()
+    public override void InvokeRight()
     {
-        sliderHandle.OnDown();
         OnRight();
     }
-    public virtual void InvokeLeft()
+    public override void InvokeLeft()
     {
-        sliderHandle.OnDown();
         OnLeft();
+    }
+
+    public override bool InvokeNavigate(Vector2Byte value)
+    {
+        if (isFocused.Value)
+        {
+            if (value.x == 1) InvokeRight();
+            else if (value.x == 255) InvokeLeft();
+            return true;
+        }
+        return false;
     }
     protected virtual void OnEnter()
     {
-
     }
     protected virtual void OnExit()
     {

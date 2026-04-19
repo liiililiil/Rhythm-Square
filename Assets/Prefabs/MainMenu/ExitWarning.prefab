@@ -214,7 +214,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 43835585478945411}
   - {fileID: 2468972289423638268}
   - {fileID: 5973255804226260129}
   - {fileID: 1058472893405643546}
@@ -390,10 +389,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e09a2bc4221a81a47b8c8316acded8bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverAnimation
-  left: {fileID: 0}
-  right: {fileID: 0}
-  up: {fileID: 0}
-  down: {fileID: 0}
+  isDefault: 0
+  menuState: 6
+  _up: {fileID: 0}
+  _down: {fileID: 0}
+  _left: {fileID: 0}
+  _right: {fileID: 4688393623731687320}
   onHoverScale: {x: 1.2, y: 1}
   onHoverTextPos: {x: 0, y: 175}
   onClickFontSize: 175
@@ -530,10 +531,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e09a2bc4221a81a47b8c8316acded8bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverAnimation
-  left: {fileID: 0}
-  right: {fileID: 0}
-  up: {fileID: 0}
-  down: {fileID: 0}
+  isDefault: 1
+  menuState: 6
+  _up: {fileID: 2704940633997947128}
+  _down: {fileID: 0}
+  _left: {fileID: 2704940633997947128}
+  _right: {fileID: 0}
   onHoverScale: {x: 1.2, y: 1}
   onHoverTextPos: {x: 0, y: 175}
   onClickFontSize: 175
@@ -586,87 +589,6 @@ MonoBehaviour:
     - {fileID: 9142720135110223538}
     - {fileID: 5414518665907911151}
     delay: 1
---- !u!1 &7771126699155675818
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 43835585478945411}
-  - component: {fileID: 4304872234390358186}
-  - component: {fileID: 8349835601833186736}
-  - component: {fileID: 4618225204148566314}
-  m_Layer: 0
-  m_Name: Bar
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &43835585478945411
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7771126699155675818}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1616913298613344065}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -80, y: 10}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &4304872234390358186
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7771126699155675818}
-  m_CullTransparentMesh: 1
---- !u!114 &8349835601833186736
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7771126699155675818}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef8b96895a0ec4ba685178a052544251, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.VectorGraphics::Unity.VectorGraphics.SVGImage
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_PreserveAspect: 0
---- !u!114 &4618225204148566314
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7771126699155675818}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6830e515cce4084589ac513aa22a04d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SVGSpriteLoader
-  spriteIndex: 103
 --- !u!1 &7862848319519348846
 GameObject:
   m_ObjectHideFlags: 0

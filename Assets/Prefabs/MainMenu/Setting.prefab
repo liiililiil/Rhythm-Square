@@ -435,6 +435,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SliderHandle
   inside:
     gameObject: {fileID: 3548787663190050373}
+  isHolding: 0
 --- !u!1 &1127730308885122679
 GameObject:
   m_ObjectHideFlags: 0
@@ -1056,7 +1057,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 1500, y: 250}
+  m_AnchoredPosition: {x: 1500, y: -200}
   m_SizeDelta: {x: 500, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4522485100255007750
@@ -1071,10 +1072,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05cf48156ecea7b47ac61310b1ee9f15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AudioSlider
-  left: {fileID: 0}
-  right: {fileID: 0}
-  up: {fileID: 0}
-  down: {fileID: 0}
+  isDefault: 0
+  menuState: 5
+  _up: {fileID: 0}
+  _down: {fileID: 2638342671284466665}
+  _left: {fileID: 8087216084960428438}
+  _right: {fileID: 0}
   slider: {fileID: 7728164536190794015}
   sliderHandle: {fileID: 1227177768939683506}
   configType: 0
@@ -1328,7 +1331,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 1500, y: 500}
+  m_AnchoredPosition: {x: 1500, y: -500}
   m_SizeDelta: {x: 500, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2230994621004318917
@@ -1343,10 +1346,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05cf48156ecea7b47ac61310b1ee9f15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AudioSlider
-  left: {fileID: 0}
-  right: {fileID: 0}
-  up: {fileID: 0}
-  down: {fileID: 0}
+  isDefault: 0
+  menuState: 5
+  _up: {fileID: 2038673056013261496}
+  _down: {fileID: 6284807554896706939}
+  _left: {fileID: 4730227046726054366}
+  _right: {fileID: 0}
   slider: {fileID: 8974899929361683435}
   sliderHandle: {fileID: 8666186083277023917}
   configType: 1
@@ -2257,6 +2262,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SliderHandle
   inside:
     gameObject: {fileID: 4263008335237904264}
+  isHolding: 0
 --- !u!1 &4584359619077454902
 GameObject:
   m_ObjectHideFlags: 0
@@ -2382,10 +2388,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dfdb79a886919847a76fa0c5916d423, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OffsetInput
-  left: {fileID: 0}
-  right: {fileID: 0}
-  up: {fileID: 0}
-  down: {fileID: 0}
+  isDefault: 0
+  menuState: 5
+  _up: {fileID: 8087216084960428438}
+  _down: {fileID: 6284807554896706939}
+  _left: {fileID: 0}
+  _right: {fileID: 2638342671284466665}
   slider: {fileID: 6374036738376523050}
   sliderHandle: {fileID: 8996095226412470262}
   inputField: {fileID: 8044560887639524211}
@@ -2932,10 +2940,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e09a2bc4221a81a47b8c8316acded8bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverAnimation
-  left: {fileID: 0}
-  right: {fileID: 0}
-  up: {fileID: 0}
-  down: {fileID: 0}
+  isDefault: 1
+  menuState: 5
+  _up: {fileID: 4730227046726054366}
+  _down: {fileID: 0}
+  _left: {fileID: 2638342671284466665}
+  _right: {fileID: 0}
   onHoverScale: {x: 1, y: 1.2}
   onHoverTextPos: {x: 575, y: 0}
   onClickFontSize: 75
@@ -3277,6 +3287,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SliderHandle
   inside:
     gameObject: {fileID: 2755562138471767870}
+  isHolding: 0
 --- !u!1 &7653268191080046812
 GameObject:
   m_ObjectHideFlags: 0
@@ -3444,10 +3455,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b41e841d35b992248b0586db06c19db7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LanguageSwitch
-  left: {fileID: 0}
-  right: {fileID: 0}
-  up: {fileID: 0}
-  down: {fileID: 0}
+  isDefault: 0
+  menuState: 5
+  _up: {fileID: 0}
+  _down: {fileID: 4730227046726054366}
+  _left: {fileID: 0}
+  _right: {fileID: 2038673056013261496}
   korean:
     gameObject: {fileID: 1610954929878892894}
   english:

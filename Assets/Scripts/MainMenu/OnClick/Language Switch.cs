@@ -47,7 +47,7 @@ public class LanguageSwitch : UIClickable
         ChangePosition(SettingManager.Instance.GetConfigValue<Language>(ConfigType.Language));
     }
 
-    protected override void OnDown()
+    protected override void OnSubmit()
     {
         switch (SettingManager.Instance.GetConfigValue<Language>(ConfigType.Language))
         {

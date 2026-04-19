@@ -36,10 +36,10 @@ public class AudioSlider : UISilderable
     }
     protected override void OnLeft()
     {
-        slider.value = (int)slider.value - 1;
+        slider.value = slider.value - 0.1f;
     }
     protected override void OnRight()
     {
-        slider.value = (int)slider.value + 1;
+        slider.value = slider.value + 0.1f;
     }
 }

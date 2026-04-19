@@ -96,7 +96,7 @@ public class MenuStateButton : UIClickable
 );
     }
 
-    protected override void OnDown()
+    protected override void OnSubmit()
     {
         // 클릭 효과가 재생 중인 경우 무시
         if (onClickCoroutine != null) return;

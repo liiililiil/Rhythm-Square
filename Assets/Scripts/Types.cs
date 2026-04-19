@@ -18,6 +18,7 @@ using System.Data.SqlTypes;
 using UnityEditor;
 using Unity.VisualScripting;
 using Unity.Collections;
+using AudioManagement;
 
 namespace Type
 {
@@ -28,7 +29,22 @@ namespace Type
         public float start;
         public float end;
 
+        public FloatRange(float start = 0, float end = 0)
+        {
+            this.start = start;
+            this.end = end;
+        }
+
     }
+    public class PlayableMusicReceiver
+    {
+        public PlayableMusicReceiver(Action<PlayableMusic> onLoadPlayableMusic, Action<MusicInfo> onLoadMusicInfo)
+        {
+            PlayableMusicSender.Instance.onLoadMusicInfo.AddListener(onLoadMusicInfo);
+            PlayableMusicSender.Instance.onLoadPlayerableMusic.AddListener(onLoadPlayableMusic);
+        }
+    }
+
 
     // 처음 컴포넌를 겟하면 그 컴포넌트를 불러 올수 있는 클래스
     public class InitableComponent<_T1> where _T1 : Component
@@ -87,7 +103,87 @@ namespace Type
             }
         }
     }
+    public struct Switcher<_T1> where _T1 : IEquatable<_T1>
+    {
+        private _T1 value;
+        public _T1 Value => value;
 
+        public bool Switch(_T1 newValue)
+        {
+            // 이전 값과 다르면 덮어쓰고 true반환
+            if (!value.Equals(newValue))
+            {
+                value = newValue;
+                return true;
+            }
+
+            return false;
+        }
+
+        public Switcher(_T1 value)
+        {
+            this.value = value;
+        }
+
+        public static implicit operator _T1(Switcher<_T1> target)
+        {
+            return target.value;
+        }
+    }
+    public struct Vector2Byte : IEquatable<Vector2Byte>
+    {
+        private static readonly Vector2Byte zeroVector = new Vector2Byte(0, 0);
+        public byte x { get; set; }
+        public byte y { get; set; }
+
+        public Vector2Byte(byte x, byte y)
+        {
+            this.x = x;
+            this.y = y;
+        }
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(x, y);
+        }
+
+        //
+        public bool Equals(Vector2Byte other)
+        {
+            return x == other.x && y == other.y;
+        }
+        public override bool Equals(object obj)
+        {
+            return obj is Vector2Byte other && Equals(other);
+        }
+
+
+        public static implicit operator Vector2Byte(Vector2 target)
+        {
+            return new Vector2Byte((byte)target.x, (byte)target.y);
+        }
+
+        public static implicit operator Vector2Byte(Vector2Int target)
+        {
+            return new Vector2Byte((byte)target.x, (byte)target.y);
+        }
+
+        public static implicit operator Vector2(Vector2Byte target)
+        {
+            return new Vector2(target.x, target.y);
+        }
+
+        public static bool operator ==(Vector2Byte a, Vector2Byte b)
+        {
+            return a.Equals(b);
+        }
+
+        public static bool operator !=(Vector2Byte a, Vector2Byte b)
+        {
+            return !a.Equals(b);
+        }
+
+        public static Vector2Byte zero => zeroVector;
+    }
     [Serializable]
     public class ObjectWithComponent<_T1, _T2> where _T1 : Component where _T2 : Component
     {
@@ -193,7 +289,16 @@ namespace Type.Menu
         ExitWating = 7,
 
         //제작자
-        Credits = 8
+        Credits = 8,
+
+        // 인게임
+        Ingame = 9,
+
+        // 인게임 일시정지
+        InGamePhase = 10,
+
+        // 인게임 결과 창
+        InGameResult = 11,
     }
 
     // 언어들

@@ -24,7 +24,7 @@ public class SliderHandle : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     private const float ONCLICK_DURATION = 0.2f;
 
     private const EaseType EASETYPE = EaseType.OutCubic;
-    public void OnDown()
+    public void OnSubmit()
     {
         isHolding = true;
         ScaleAnimation(Vector2Utils.FloatToVector2(ON_CLICK_SCALE), ONCLICK_DURATION);
@@ -79,7 +79,7 @@ public class SliderHandle : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        OnDown();
+        OnSubmit();
     }
     public void OnPointerUp(PointerEventData eventData)
     {

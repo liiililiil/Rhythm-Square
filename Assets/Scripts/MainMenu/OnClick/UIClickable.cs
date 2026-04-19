@@ -1,30 +1,40 @@
+using Type;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public abstract class UIClickable : UIInteractable, IUIInteractable, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
+public abstract class UIClickable : UIInteractable, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
 {
-    public void InvokeDown()
+    public override void InvokeSubmit()
     {
-        OnDown();
+        OnSubmit();
     }
 
-    public void InvokeEnter()
+    public override void InvokeEnter()
     {
         OnEnter();
     }
-    public void InvokeExit()
+    public override void InvokeExit()
     {
         OnExit();
     }
 
-    public void InvokeRight()
+    public override void InvokeRight()
     {
-        OnDown();
+        OnSubmit();
     }
 
-    public void InvokeLeft()
+    public override void InvokeLeft()
     {
-        OnDown();
+        OnSubmit();
+    }
+
+    public override void InvokeCancel()
+    {
+    }
+
+    public override bool InvokeNavigate(Vector2Byte value)
+    {
+        return false;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -39,14 +49,14 @@ public abstract class UIClickable : UIInteractable, IUIInteractable, IPointerEnt
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        InvokeDown();
+        InvokeSubmit();
     }
     public void OnPointerUp(PointerEventData eventData)
     {
         InvokeExit();
     }
 
-    protected abstract void OnDown();
+    protected abstract void OnSubmit();
     protected abstract void OnEnter();
     protected abstract void OnExit();
 }

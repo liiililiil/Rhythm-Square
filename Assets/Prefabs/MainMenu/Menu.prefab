@@ -432,10 +432,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e09a2bc4221a81a47b8c8316acded8bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverAnimation
-  left: {fileID: 0}
-  right: {fileID: 0}
-  up: {fileID: 0}
-  down: {fileID: 0}
+  isDefault: 1
+  menuState: 2
+  _up: {fileID: 7336012649805027693}
+  _down: {fileID: 2748446708932335154}
+  _left: {fileID: 0}
+  _right: {fileID: 0}
   onHoverScale: {x: 1, y: 1.2}
   onHoverTextPos: {x: -575, y: 0}
   onClickFontSize: 125
@@ -758,10 +760,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e09a2bc4221a81a47b8c8316acded8bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverAnimation
-  left: {fileID: 0}
-  right: {fileID: 0}
-  up: {fileID: 0}
-  down: {fileID: 0}
+  isDefault: 0
+  menuState: 2
+  _up: {fileID: 2391307865750851827}
+  _down: {fileID: 0}
+  _left: {fileID: 0}
+  _right: {fileID: 0}
   onHoverScale: {x: 1, y: 1.2}
   onHoverTextPos: {x: -575, y: 0}
   onClickFontSize: 75
@@ -1217,10 +1221,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e09a2bc4221a81a47b8c8316acded8bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverAnimation
-  left: {fileID: 0}
-  right: {fileID: 0}
-  up: {fileID: 0}
-  down: {fileID: 0}
+  isDefault: 0
+  menuState: 2
+  _up: {fileID: 0}
+  _down: {fileID: 2391307865750851827}
+  _left: {fileID: 0}
+  _right: {fileID: 0}
   onHoverScale: {x: 1, y: 1.2}
   onHoverTextPos: {x: -575, y: 0}
   onClickFontSize: 75
