@@ -6,11 +6,11 @@ public class Managers<T> : MonoBehaviour
 
     public void Singleton(bool isDontDestroyOnLoad = true)
     {
-        if(Instance == null)
+        if (Instance == null)
         {
             Instance = (T)(object)this;
 
-            if(isDontDestroyOnLoad)
+            if (isDontDestroyOnLoad)
             {
                 DontDestroyOnLoad(gameObject);
             }
