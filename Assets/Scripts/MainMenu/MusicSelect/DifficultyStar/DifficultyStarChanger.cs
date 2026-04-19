@@ -36,4 +36,22 @@ public class DifficultyStarChanger : MonoBehaviour
     // n = 현재 난이도
     // m = 별들의 수
 
+
+    // 이 오브젝트가 비활성화 되면 하위 객체도 비활성화
+    // 이 클래스의 활성화 여부에 따라 하위 오브젝트의 활성화도 같이 변경
+    private void OnEnable()
+    {
+        foreach (var difficultyStar in difficultyStars)
+        {
+            difficultyStar.gameObject.SetActive(true);
+        }
+    }
+
+    private void OnDisable()
+    {
+        foreach (var difficultyStar in difficultyStars)
+        {
+            difficultyStar.gameObject.SetActive(false);
+        }
+    }
 }

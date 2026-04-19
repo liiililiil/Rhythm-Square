@@ -34,4 +34,21 @@ public class MusicBarChanger : MusicSelectValueEaser
         // 정보 적용
         musicBar.GetComponent<MusicBarInfo>().LoadInfo(musicInfo.title, musicInfo.artist);
     }
+
+    // 이 클래스의 활성화 여부에 따라 하위 오브젝트의 활성화도 같이 변경
+    private void OnEnable()
+    {
+        foreach (var musicBar in musicBars)
+        {
+            musicBar.gameObject.SetActive(true);
+        }
+    }
+
+    private void OnDisable()
+    {
+        foreach (var musicBar in musicBars)
+        {
+            musicBar.gameObject.SetActive(false);
+        }
+    }
 }
