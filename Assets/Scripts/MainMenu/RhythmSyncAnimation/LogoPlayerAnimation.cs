@@ -3,6 +3,7 @@ using Utils;
 using SimpleEasing;
 using Type.Menu;
 using System;
+using Extensions;
 
 public class LogoPlayerAnimation : MonoBehaviour
 {
@@ -19,7 +20,7 @@ public class LogoPlayerAnimation : MonoBehaviour
 
     private Func<float> rotationAction;
 
-    private void Awake() 
+    private void Awake()
     {
         MenuStateManager.Instance.onMenuStateChanged.AddListener(MenuStateChange);
 
@@ -30,30 +31,30 @@ public class LogoPlayerAnimation : MonoBehaviour
     private void MenuStateChange(MenuState _menuState)
     {
         // 메뉴로 상태가 바뀌면 액션 함수 바꾸기 
-        if(_menuState == MenuState.Main)
+        if (_menuState == MenuState.Main)
         {
-            rotationAction = Rotation; 
+            rotationAction = Rotation;
 
             //어차피 한번 바꾸면 되니까 해제
             MenuStateManager.Instance.onMenuStateChanged.RemoveListener(MenuStateChange);
-        } 
+        }
 
-        
-    } 
 
-    
+    }
+
+
     private void Start()
-    {        
+    {
         canvas = transform.GetComponentInParent<Canvas>();
         rectTransform = GetComponent<RectTransform>();
 
         MenuMusicManager.Instance.OnBeat.AddListener(NextStep);
     }
     void Update()
-    {   
-        Vector3 rotation = new Vector3(0,0,rotationAction.Invoke());
+    {
+        Vector3 rotation = new Vector3(0, 0, rotationAction.Invoke());
         rectTransform.eulerAngles = rotation;
-    
+
     }
 
 
@@ -80,7 +81,7 @@ public class LogoPlayerAnimation : MonoBehaviour
     // 특정 박자 때마다 한바퀴 돌리기
     private float RhythmSync()
     {
-        if(elapsed >= MenuMusicManager.Instance.beatPerSec * 2)
+        if (elapsed >= MenuMusicManager.Instance.beatPerSec * 2)
         {
             //보정
             return 0;
@@ -89,9 +90,9 @@ public class LogoPlayerAnimation : MonoBehaviour
         elapsed += Time.deltaTime;
 
         t = elapsed / (MenuMusicManager.Instance.beatPerSec * 2);
-        t = Ease.Easing(t,easeType);
+        t = Ease.Easing(t, easeType);
 
-        return Mathf.LerpUnclamped(0,360,t);
+        return Mathf.LerpUnclamped(0, 360, t);
     }
 
     //마우스 처다보게 하기
@@ -107,7 +108,7 @@ public class LogoPlayerAnimation : MonoBehaviour
         //상대 좌표로 변환
         mousePos += rectTransform.anchoredPosition;
         float targetZ = Vector2Utils.LookAt2d(rectTransform.GetRectInCanvas(canvas.transform as RectTransform), mousePos);
-        
+
         //스무딩하게
         float speed = 5f;   // 클수록 빠르게 따라감
 
@@ -122,8 +123,8 @@ public class LogoPlayerAnimation : MonoBehaviour
         int beatOffset = MenuMusicManager.Instance.backGroundInfo.beatOffset;
         int resetCycle = MenuMusicManager.Instance.backGroundInfo.playerBeatResetCycle;
         int cycle = MenuMusicManager.Instance.backGroundInfo.playerBeatCycle;
-        
-        if((MenuMusicManager.Instance.beat - beatOffset) % resetCycle == cycle)
+
+        if ((MenuMusicManager.Instance.beat - beatOffset) % resetCycle == cycle)
         {
             elapsed = 0;
         }

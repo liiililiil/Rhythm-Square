@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using ScriptManagement;
 
-using Utils;
+using Extensions;
 using Type.Addressable.Table;
 using Type.Addressable;
 
@@ -9,14 +9,16 @@ namespace Tables.TextTable
 {
     public class TextTable : Managers<TextTable>
     {
-        
+
         Loader<MultinationalString, TextIndex> loader = new Loader<MultinationalString, TextIndex>();
 
-        private void Awake() {
+        private void Awake()
+        {
             Singleton(true);
         }
 
-        private void Start() {
+        private void Start()
+        {
             loader.RecoderBind(MenuAssetLoadManager.Instance.addressableLoadRecoder);
         }
 

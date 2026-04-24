@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-using Utils;
+using Extensions;
 using Type.Menu;
 using SimpleEasing;
 using Type;

@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
-using Utils;
+using Extensions;
 using Type.Addressable.Table;
 using Tables.TextTable;
 using Type.Menu;

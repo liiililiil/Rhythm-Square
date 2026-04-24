@@ -6,7 +6,7 @@ using Type;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Utils;
-
+using Extensions;
 public class MusicSelectManager : Managers<MusicSelectManager>
 {
     public SimpleEvent<float> onChangePosition = new SimpleEvent<float>();

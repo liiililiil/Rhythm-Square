@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 
 using AudioManagement;
-using Utils;
+using Extensions;
 
 using Type.Menu;
 using Type.Addressable.Table;

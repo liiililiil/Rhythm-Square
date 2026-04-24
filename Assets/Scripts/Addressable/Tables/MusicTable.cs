@@ -3,7 +3,7 @@ using UnityEngine;
 
 using AudioManagement;
 using ScriptManagement;
-using Utils;
+using Extensions;
 using Type.Addressable.Table;
 using Type.Addressable;
 using System.Linq;

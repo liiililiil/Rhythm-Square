@@ -4,7 +4,7 @@ using UnityEngine;
 
 using Type.Menu.StateChange;
 using Type.Menu;
-using Utils;
+using Extensions;
 
 public class DisableChange : StateChanger
 {
@@ -15,14 +15,14 @@ public class DisableChange : StateChanger
     private DelayedMenuStateDefault<MonoBehaviour[]> stateDefault;
 
     private List<Coroutine> coroutines = new List<Coroutine>();
-    
+
     protected override void OnInvoke(MenuState newState)
     {
         ClearCoroutine();
-        
-        foreach(var stateChange in stateChange)
+
+        foreach (var stateChange in stateChange)
         {
-            if(stateChange.targetState == newState)
+            if (stateChange.targetState == newState)
             {
                 ChangeState(stateChange.value, false, stateChange.delay);
                 ChangeState(stateDefault.value, true);
@@ -41,7 +41,7 @@ public class DisableChange : StateChanger
     // 코루틴 정리용
     private void ClearCoroutine()
     {
-        for(int i = coroutines.Count-1; i >= 0; i--)
+        for (int i = coroutines.Count - 1; i >= 0; i--)
         {
             Coroutine coroutine = coroutines[i];
             this.SafeStopCoroutine(ref coroutine);
@@ -59,7 +59,7 @@ public class DisableChange : StateChanger
     private IEnumerator DelayedDiasble(MonoBehaviour[] targets, bool value, float delay)
     {
         if (delay > 0) yield return new WaitForSeconds(delay);
-        foreach(MonoBehaviour target in targets)
+        foreach (MonoBehaviour target in targets)
             target.enabled = value;
     }
 }

@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 
 using SimpleEasing;
 using Type.Menu;
-using Utils;
+using Extensions;
 using Type;
 
 public class LanguageSwitch : UIClickable

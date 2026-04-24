@@ -6,6 +6,7 @@ using Unity.VectorGraphics;
 using UnityEngine;
 
 using Utils;
+using Extensions;
 public class IntroPlayer : MonoBehaviour
 {
     [SerializeField]
@@ -25,7 +26,7 @@ public class IntroPlayer : MonoBehaviour
 
     [Space(10), SerializeField]
     private MenuState disableMenuState;
-    
+
 
 
     private int beat;
@@ -38,18 +39,19 @@ public class IntroPlayer : MonoBehaviour
 
 
 
-    private void Start() {
+    private void Start()
+    {
         MenuMusicManager.Instance.OnBeat.AddListener(NextBeat);
         MenuAssetLoadManager.Instance.AssetLoaderBind(NextBeat);
         MenuStateManager.Instance.onMenuStateChanged.AddListener(DisableObject);
 
- 
+
     }
 
     private void DisableObject(MenuState menuState)
     {
         // 목표 메뉴가 아니면 넘기기
-        if(menuState != disableMenuState) return;
+        if (menuState != disableMenuState) return;
         player.gameObject.SetActive(false);
 
         MenuStateManager.Instance.onMenuStateChanged.RemoveListener(DisableObject);
@@ -70,7 +72,7 @@ public class IntroPlayer : MonoBehaviour
                 PlayerGoingToEnd();
                 break;
             case 5:
-                
+
                 break;
             default:
                 MenuAssetLoadManager.Instance.OnMainMenuAssetLoaded.RemoveListener(NextBeat);
@@ -83,7 +85,7 @@ public class IntroPlayer : MonoBehaviour
     {
 
         // 랜덤 위치로 이동
-        player.component1.rotation = Quaternion.Euler(new Vector3(0,0,Random.Range(0,360)));    
+        player.component1.rotation = Quaternion.Euler(new Vector3(0, 0, Random.Range(0, 360)));
         player.component1.anchoredPosition -= (Vector2)player.component1.up * 1000;
 
         // 이미지 보이게 (조금 이따가)
@@ -141,7 +143,7 @@ public class IntroPlayer : MonoBehaviour
         RectTransform rectTransform = gameObject.GetComponent<RectTransform>();
 
         float elapsed = 0;
-        while(elapsed < duration)
+        while (elapsed < duration)
         {
             elapsed += Time.deltaTime;
             float t = Mathf.Clamp01(elapsed / duration);
@@ -149,7 +151,7 @@ public class IntroPlayer : MonoBehaviour
             float speed = Mathf.Lerp(startSpeed, 0, t);
 
             // Debug.Log(speed);
-            
+
             rectTransform.Translate(Vector2.up * speed * Time.deltaTime);
 
             yield return null;
@@ -167,12 +169,12 @@ public class IntroPlayer : MonoBehaviour
 
         // 바라볼 위치
         float endRotation;
-        
+
 
         float elapsed = 0;
-        while(elapsed < duration)
+        while (elapsed < duration)
         {
-            elapsed += Time.deltaTime;  
+            elapsed += Time.deltaTime;
             float t = Mathf.Clamp01(elapsed / duration);
             t = Ease.Easing(t, easeType);
 
@@ -182,7 +184,7 @@ public class IntroPlayer : MonoBehaviour
             // 보간
             float targetRotation = Mathf.LerpAngle(start, endRotation, t);
 
-            rectTransform.rotation = Quaternion.Euler(new Vector3(0,0,targetRotation ));
+            rectTransform.rotation = Quaternion.Euler(new Vector3(0, 0, targetRotation));
 
             yield return null;
         }
@@ -190,8 +192,8 @@ public class IntroPlayer : MonoBehaviour
         // 바라볼 위치
         endRotation = Vector2Utils.LookAt2d(rectTransform.anchoredPosition, target);
 
-        rectTransform.rotation = Quaternion.Euler(new Vector3(0,0,endRotation));
-        
+        rectTransform.rotation = Quaternion.Euler(new Vector3(0, 0, endRotation));
+
     }
 
 }

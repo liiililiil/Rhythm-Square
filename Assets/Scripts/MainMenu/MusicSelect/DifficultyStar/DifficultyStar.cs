@@ -3,7 +3,7 @@ using SimpleEasing;
 using Type;
 using Unity.VectorGraphics;
 using UnityEngine;
-using Utils;
+using Extensions;
 using Utils.Generic;
 
 public class DifficultyStar : MonoBehaviour

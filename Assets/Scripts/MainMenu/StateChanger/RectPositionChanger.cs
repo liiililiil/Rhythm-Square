@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 
 using SimpleEasing;
-using Utils;
+using Extensions;
 using Type.Menu.StateChange;
 using Type.Menu;
 
@@ -19,15 +19,16 @@ public class RectPositionChanger : StateChanger
 
     private Vector2 currentPosition;
 
-    private void Awake() {
+    private void Awake()
+    {
         rect = GetComponent<RectTransform>();
     }
 
     protected override void OnInvoke(MenuState newState)
     {
-        foreach(var stateChange in stateChange)
+        foreach (var stateChange in stateChange)
         {
-            if(stateChange.targetState == newState)
+            if (stateChange.targetState == newState)
             {
                 ChangePosition(stateChange.value, stateChange.duration, stateChange.easeType);
                 return;
@@ -40,7 +41,7 @@ public class RectPositionChanger : StateChanger
     private void ChangePosition(Vector2 targetVector, float duration, EaseType easeType)
     {
         //이동하려는 위치와 현재 위치가 같으면 무시
-        if(currentPosition == targetVector) return;
+        if (currentPosition == targetVector) return;
         currentPosition = targetVector;
 
         //기본값으로 변경

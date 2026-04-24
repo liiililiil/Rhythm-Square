@@ -4,12 +4,14 @@ using Type.Addressable;
 using Type.Addressable.Table;
 
 using UnityEngine;
-using Utils;
-namespace Tables.SpriteTable{
+using Extensions;
+namespace Tables.SpriteTable
+{
     public class SpriteTable : Managers<SpriteTable>
     {
         Loader<AddressableSprite, SpriteIndex> loader = new Loader<AddressableSprite, SpriteIndex>();
-        private void Awake() {
+        private void Awake()
+        {
             Singleton(true);
         }
         private void Start()
@@ -21,7 +23,7 @@ namespace Tables.SpriteTable{
         {
             this.SafeStartCoroutine(ref loader.coroutine, loader.LoadingAsset(tag));
         }
- 
+
         public AddressableSprite GetSprite(SpriteIndex spriteIndex)
         {
             return loader.table[spriteIndex];
