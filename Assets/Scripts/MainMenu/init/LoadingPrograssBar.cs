@@ -17,7 +17,8 @@ public class LoadingPrograssBar : MonoBehaviour
     int addressableCount;
     int addressableCompleteCount;
 
-    private void Start() {
+    private void Start()
+    {
         LoadingRecoder assetRecoder = MenuAssetLoadManager.Instance.assetLoadRecoder;
         LoadingRecoder addressableRecoder = MenuAssetLoadManager.Instance.addressableLoadRecoder;
 
@@ -43,7 +44,7 @@ public class LoadingPrograssBar : MonoBehaviour
     {
         addressableCompleteCount++;
         BarUpdate(AddressableLoadingBarRect, addressableCount, addressableCompleteCount);
-        
+
     }
 
     private void AssetAdd(int empty)
