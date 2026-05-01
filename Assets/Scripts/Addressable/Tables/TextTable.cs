@@ -10,7 +10,7 @@ namespace Tables.TextTable
     public class TextTable : Managers<TextTable>
     {
 
-        Loader<MultinationalString, TextIndex> loader = new Loader<MultinationalString, TextIndex>();
+        Loader<MultinationalString, TextIndex> loader;
 
         private void Awake()
         {
@@ -19,17 +19,17 @@ namespace Tables.TextTable
 
         private void Start()
         {
-            loader.RecoderBind(MenuAssetLoadManager.Instance.addressableLoadRecoder);
+            loader = new Loader<MultinationalString, TextIndex>(MenuAssetLoadManager.Instance.addressableLoadRecoder);
         }
 
         public void Load(string tag)
         {
-            this.SafeStartCoroutine(ref loader.coroutine, loader.LoadingAsset(tag));
+            loader.Load(this, tag);
         }
 
         public MultinationalString GetText(TextIndex textIndex)
         {
-            return loader.table[textIndex];
+            return loader.Get(textIndex);
         }
 
         //메인메뉴 텍스트 해제

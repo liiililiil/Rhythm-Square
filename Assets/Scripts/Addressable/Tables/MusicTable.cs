@@ -12,10 +12,10 @@ namespace Tables.MusicTable
 {
     public class MusicTable : Managers<MusicTable>
     {
-        EachLoader<Music, MusicIndex> music = new EachLoader<Music, MusicIndex>();
-        EachLoader<MusicInfo, MusicIndex> info = new EachLoader<MusicInfo, MusicIndex>();
-        EachLoader<PlayableMusic, MusicIndex> playable = new EachLoader<PlayableMusic, MusicIndex>();
-        EachLoader<BackGroundInfo, MusicIndex> backgroundInfo = new EachLoader<BackGroundInfo, MusicIndex>();
+        EachLoader<Music, MusicIndex> music;
+        EachLoader<MusicInfo, MusicIndex> info;
+        EachLoader<PlayableMusic, MusicIndex> playable;
+        EachLoader<BackGroundInfo, MusicIndex> backgroundInfo;
 
         private void Awake()
         {
@@ -24,24 +24,24 @@ namespace Tables.MusicTable
 
         private void Start()
         {
-            music.RecoderBind(MenuAssetLoadManager.Instance.addressableLoadRecoder);
-            info.RecoderBind(MenuAssetLoadManager.Instance.addressableLoadRecoder);
-            playable.RecoderBind(MenuAssetLoadManager.Instance.addressableLoadRecoder);
-            backgroundInfo.RecoderBind(MenuAssetLoadManager.Instance.addressableLoadRecoder);
+            music = new EachLoader<Music, MusicIndex>(MenuAssetLoadManager.Instance.addressableLoadRecoder);
+            info = new EachLoader<MusicInfo, MusicIndex>(MenuAssetLoadManager.Instance.addressableLoadRecoder);
+            playable = new EachLoader<PlayableMusic, MusicIndex>(MenuAssetLoadManager.Instance.addressableLoadRecoder);
+            backgroundInfo = new EachLoader<BackGroundInfo, MusicIndex>(MenuAssetLoadManager.Instance.addressableLoadRecoder);
 
         }
 
         public void Load()
         {
-            this.SafeStartCoroutine(ref music.coroutine, music.LoadingAsset(Type.Addressable.Tag.Audio.MUSIC, ClipPreload));
-            this.SafeStartCoroutine(ref info.coroutine, info.LoadingAsset(Type.Addressable.Tag.Audio.MUSICINFO));
-            this.SafeStartCoroutine(ref playable.coroutine, playable.LoadingAsset(Type.Addressable.Tag.Audio.PLAYERABLE));
-            this.SafeStartCoroutine(ref backgroundInfo.coroutine, backgroundInfo.LoadingAsset(Type.Addressable.Tag.Audio.BACKGROUNDINFO));
+            music.Load(this, Type.Addressable.Tag.Audio.MUSIC);
+            info.Load(this, Type.Addressable.Tag.Audio.MUSICINFO);
+            playable.Load(this, Type.Addressable.Tag.Audio.PLAYERABLE);
+            backgroundInfo.Load(this, Type.Addressable.Tag.Audio.BACKGROUNDINFO);
         }
 
         private void ClipPreload()
         {
-            foreach (var music in music.table.Values)
+            foreach (var music in music.GetAll())
             {
                 music.audioClip.LoadAudioData();
             }
@@ -56,27 +56,27 @@ namespace Tables.MusicTable
         }
         public Music GetMusic(MusicIndex musicIndex)
         {
-            return music.table[musicIndex];
+            return music.Get(musicIndex);
         }
 
         public MusicInfo GetMusicInfo(MusicIndex musicIndex)
         {
-            return info.table[musicIndex];
+            return info.Get(musicIndex);
         }
 
         public PlayableMusic GetPlayableMusic(MusicIndex musicIndex)
         {
-            return playable.table[musicIndex];
+            return playable.Get(musicIndex);
         }
 
         public PlayableMusic[] GetPlayableMusic()
         {
-            return playable.table.Values.ToArray();
+            return playable.GetAll();
         }
 
         public BackGroundInfo GetBackGroundInfo(MusicIndex musicIndex)
         {
-            return backgroundInfo.table[musicIndex];
+            return backgroundInfo.Get(musicIndex);
         }
 
     }

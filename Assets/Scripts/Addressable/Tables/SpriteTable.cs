@@ -9,24 +9,24 @@ namespace Tables.SpriteTable
 {
     public class SpriteTable : Managers<SpriteTable>
     {
-        Loader<AddressableSprite, SpriteIndex> loader = new Loader<AddressableSprite, SpriteIndex>();
+        Loader<AddressableSprite, SpriteIndex> loader;
         private void Awake()
         {
             Singleton(true);
         }
         private void Start()
         {
-            loader.RecoderBind(MenuAssetLoadManager.Instance.addressableLoadRecoder);
+            loader = new Loader<AddressableSprite, SpriteIndex>(MenuAssetLoadManager.Instance.addressableLoadRecoder);
         }
 
         public void Load(string tag)
         {
-            this.SafeStartCoroutine(ref loader.coroutine, loader.LoadingAsset(tag));
+            loader.Load(this, tag);
         }
 
         public AddressableSprite GetSprite(SpriteIndex spriteIndex)
         {
-            return loader.table[spriteIndex];
+            return loader.Get(spriteIndex);
         }
 
         //메인메뉴 텍스트 해제
