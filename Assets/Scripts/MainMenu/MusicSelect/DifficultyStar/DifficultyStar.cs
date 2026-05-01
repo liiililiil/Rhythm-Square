@@ -1,10 +1,9 @@
 using System.Collections.Generic;
 using SimpleEasing;
-using Type;
-using Unity.VectorGraphics;
 using UnityEngine;
 using Extensions;
 using Utils.Generic;
+using Types.Utils;
 
 public class DifficultyStar : MonoBehaviour
 {

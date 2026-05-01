@@ -1,8 +1,5 @@
 using UnityEngine;
-using UnityEngine.AddressableAssets;
-
-using AudioManagement;
-using Type.Addressable.Table;
+using Type.Enums.Addressable;
 namespace AddressableManagement
 {
     /// <summary>

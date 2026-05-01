@@ -3,8 +3,6 @@ using System.Collections;
 using SimpleEasing;
 using Type;
 using UnityEngine;
-using UnityEngine.ResourceManagement.AsyncOperations;
-using UnityEngine.UI;
 
 namespace Utils
 {

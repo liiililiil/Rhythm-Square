@@ -1,7 +1,6 @@
 using SimpleActions;
-using Type.Menu;
+using Type.Enums.Menu;
 using UnityEditor;
-using UnityEngine;
 
 
 

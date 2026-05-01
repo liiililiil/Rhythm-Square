@@ -1,12 +1,7 @@
-using UnityEngine;
-
-
 using AudioManagement;
-using ScriptManagement;
-using Extensions;
-using Type.Addressable.Table;
 using Type.Addressable;
-using System.Linq;
+using Type.Enums.Addressable;
+using Type.Consts.Addressable.Tag;
 
 namespace Tables.MusicTable
 {
@@ -33,10 +28,10 @@ namespace Tables.MusicTable
 
         public void Load()
         {
-            music.Load(this, Type.Addressable.Tag.Audio.MUSIC);
-            info.Load(this, Type.Addressable.Tag.Audio.MUSICINFO);
-            playable.Load(this, Type.Addressable.Tag.Audio.PLAYERABLE);
-            backgroundInfo.Load(this, Type.Addressable.Tag.Audio.BACKGROUNDINFO);
+            music.Load(this, Audio.MUSIC);
+            info.Load(this, Audio.MUSICINFO);
+            playable.Load(this, Audio.PLAYERABLE);
+            backgroundInfo.Load(this, Audio.BACKGROUNDINFO);
         }
 
         private void ClipPreload()

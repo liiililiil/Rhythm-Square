@@ -1,6 +1,5 @@
 using System.Collections;
 using SimpleActions;
-using SimpleEasing;
 using Tables.MusicTable;
 using Type;
 using UnityEngine;

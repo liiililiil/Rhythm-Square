@@ -1,12 +1,14 @@
 using UnityEngine;
 using Tables.PrefabTable;
-using Type.Addressable.Table;
+using Type.Enums.Addressable;
+
 public class PrefabLoader : MonoBehaviour
 {
     [SerializeField]
     private PrefabIndex[] prefabIndex;
-    private void Start() {
-        if(MenuAssetLoadManager.Instance.assetLoadRecoder.IsAllComplete())
+    private void Start()
+    {
+        if (MenuAssetLoadManager.Instance.assetLoadRecoder.IsAllComplete())
         {
             OnLoadAsset();
         }

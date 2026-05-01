@@ -1,6 +1,5 @@
+using Type.Enums.Menu;
 using UnityEngine;
-
-using Type.Menu;
 
 
 

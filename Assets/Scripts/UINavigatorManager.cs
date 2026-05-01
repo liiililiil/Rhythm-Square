@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using Type;
-using Type.Menu;
 using UnityEngine.InputSystem;
 using UnityEngine;
 using Utils;
+using Types.Utils;
+using Type.Enums.Menu;
 public class UINavigatorManager : Managers<UINavigatorManager>
 {
     private IUIInteractable currentInteractable;

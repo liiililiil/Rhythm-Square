@@ -1,10 +1,9 @@
 using UnityEngine;
-using System.Collections;
 
 using SimpleEasing;
 using Extensions;
-using Type.Menu.StateChange;
-using Type.Menu;
+using Type.StateChanges;
+using Type.Enums.Menu;
 
 public class RectPositionChanger : StateChanger
 {

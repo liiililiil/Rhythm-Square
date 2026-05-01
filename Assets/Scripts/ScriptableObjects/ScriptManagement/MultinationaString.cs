@@ -1,5 +1,5 @@
-using Type.Addressable.Table;
-using Type.Menu;
+using Type.Enums.Addressable;
+using Type.Enums.Menu;
 using UnityEngine;
 
 namespace ScriptManagement

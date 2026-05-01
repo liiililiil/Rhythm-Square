@@ -4,16 +4,14 @@ using System.Collections;
 using AudioManagement;
 using Extensions;
 
-using Type.Menu;
-using Type.Addressable.Table;
-using Type.Audio;
-
 using Tables.MusicTable;
 
 using SimpleEasing;
 using SimpleActions;
-using Unity.Mathematics;
-using Type;
+using Types.Utils;
+using Type.Enums.Settings;
+using Type.Enums.Menu;
+using Type.Enums.Addressable;
 
 public class MenuMusicManager : Managers<MenuMusicManager>
 {

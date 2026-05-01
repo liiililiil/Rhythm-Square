@@ -1,7 +1,6 @@
 using System.Collections;
+using Type.Enums.Menu;
 using UnityEngine;
-
-using Type.Menu;
 
 public class QuitInterceptor : MonoBehaviour
 {

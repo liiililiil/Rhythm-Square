@@ -1,4 +1,4 @@
-using Type.Menu;
+using Type.Enums.Settings;
 using UnityEngine;
 using UnityEngine.UI;
 

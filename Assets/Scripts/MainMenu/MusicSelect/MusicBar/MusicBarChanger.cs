@@ -1,9 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using AudioManagement;
-using Type;
 using UnityEngine;
-using Utils;
 
 public class MusicBarChanger : MusicSelectValueEaser
 {

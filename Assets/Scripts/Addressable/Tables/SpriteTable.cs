@@ -1,10 +1,6 @@
 using AddressableManagement;
-using SimpleActions;
 using Type.Addressable;
-using Type.Addressable.Table;
-
-using UnityEngine;
-using Extensions;
+using Type.Enums.Addressable;
 namespace Tables.SpriteTable
 {
     public class SpriteTable : Managers<SpriteTable>

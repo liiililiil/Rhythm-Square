@@ -1,12 +1,12 @@
 using System.Collections;
 using SimpleEasing;
-using Type;
-using Type.Menu;
 using Unity.VectorGraphics;
 using UnityEngine;
 
 using Utils;
 using Extensions;
+using Types.Utils;
+using Type.Enums.Menu;
 public class IntroPlayer : MonoBehaviour
 {
     [SerializeField]

@@ -1,7 +1,5 @@
-using Type.Menu;
+using Type.Enums.Settings;
 using UnityEngine;
-using UnityEngine.UI;
-using Menu = Type.Menu;
 
 public class AudioSlider : UISilderable
 {

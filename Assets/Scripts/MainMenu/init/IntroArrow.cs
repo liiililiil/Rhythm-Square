@@ -1,7 +1,7 @@
 using Extensions;
 using SimpleEasing;
-using Type;
-using Type.Menu;
+using Type.Enums.Menu;
+using Types.Utils;
 using Unity.VectorGraphics;
 using UnityEngine;
 

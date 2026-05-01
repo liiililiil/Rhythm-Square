@@ -1,12 +1,10 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
 
 using Extensions;
-using Type.Menu;
 using SimpleEasing;
-using Type;
+using Types.Utils;
+using Type.Enums.Menu;
 
 public class MenuStateButton : UIClickable
 {

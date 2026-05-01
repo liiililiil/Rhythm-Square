@@ -1,6 +1,6 @@
-using Type.Menu;
-using SimpleActions;
-using UnityEngine;
+using Type.Enums.Settings;
+using Types.Settings;
+
 public class SettingManager : Managers<SettingManager>
 {
     private Setting setting = new Setting();

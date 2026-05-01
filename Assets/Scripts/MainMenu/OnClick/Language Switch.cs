@@ -1,10 +1,10 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 using SimpleEasing;
-using Type.Menu;
 using Extensions;
-using Type;
+using Types.Utils;
+using Type.Enums.Settings;
+using Type.Enums.Menu;
 
 public class LanguageSwitch : UIClickable
 {

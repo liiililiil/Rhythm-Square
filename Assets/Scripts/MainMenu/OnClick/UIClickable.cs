@@ -1,5 +1,4 @@
 using Type;
-using UnityEngine;
 using UnityEngine.EventSystems;
 
 public abstract class UIClickable : UIInteractable, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler

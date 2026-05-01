@@ -1,9 +1,9 @@
 using UnityEngine;
 using Utils;
 using SimpleEasing;
-using Type.Menu;
 using System;
 using Extensions;
+using Type.Enums.Menu;
 
 public class LogoPlayerAnimation : MonoBehaviour
 {

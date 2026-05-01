@@ -1,7 +1,7 @@
 using UnityEngine;
 using Tables.SpriteTable;
-using Type.Addressable.Table;
 using Unity.VectorGraphics;
+using Type.Enums.Addressable;
 public class SVGSpriteLoader : MonoBehaviour
 {
     [SerializeField]
@@ -9,7 +9,8 @@ public class SVGSpriteLoader : MonoBehaviour
 
     private SVGImage sVGImage;
 
-    private void Awake() {
+    private void Awake()
+    {
         sVGImage = GetComponent<SVGImage>();
     }
 
@@ -22,7 +23,7 @@ public class SVGSpriteLoader : MonoBehaviour
         else
         {
             MenuAssetLoadManager.Instance.AssetLoaderBind(OnMainMenuAssetLoaded);
-            
+
         }
     }
 

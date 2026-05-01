@@ -1,7 +1,6 @@
 using Type;
-using Type.Menu;
+using Type.Enums.Menu;
 using UnityEngine;
-using UnityEngine.UI;
 
 public abstract class UIInteractable : MonoBehaviour, IUIInteractable
 {

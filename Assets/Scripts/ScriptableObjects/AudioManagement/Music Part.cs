@@ -1,6 +1,3 @@
-using Type;
-using UnityEngine;
-
 namespace AudioManagement
 {
     /// <summary>

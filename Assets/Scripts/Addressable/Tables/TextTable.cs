@@ -1,9 +1,6 @@
-using System.Collections.Generic;
 using ScriptManagement;
-
-using Extensions;
-using Type.Addressable.Table;
 using Type.Addressable;
+using Type.Enums.Addressable;
 
 namespace Tables.TextTable
 {
