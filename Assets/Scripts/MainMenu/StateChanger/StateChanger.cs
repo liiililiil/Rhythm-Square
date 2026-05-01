@@ -9,6 +9,8 @@ public abstract class StateChanger : MonoBehaviour
 
     protected void Start()
     {
+        if (MenuStateManager.Instance != null)
+            MenuStateManager.Instance.onMenuStateChanged.AddListener(OnInvoke);
 
         OnStart();
     }
