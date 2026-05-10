@@ -275,7 +275,7 @@ namespace Type.Addressable
         public _T1 Get(_T2 index)
         {
             if (!table.ContainsKey(index))
-                throw new KeyNotFoundException($"인덱스 {index}에 해당하는 에셋이 존재하지 않습니다!");
+                return null;
 
             return table[index].Value;
         }
