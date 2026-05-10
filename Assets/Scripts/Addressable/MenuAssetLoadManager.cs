@@ -8,7 +8,7 @@ using Type.Consts.Addressable.Tag;
 public class MenuAssetLoadManager : Managers<MenuAssetLoadManager>
 {
 
-    public SimpleEvent OnMainMenuAssetLoaded = new SimpleEvent();
+    public SimpleEvent onMainMenuAssetLoaded = new SimpleEvent();
 
     public LoadingRecoder assetLoadRecoder = new LoadingRecoder();
     public LoadingRecoder addressableLoadRecoder = new LoadingRecoder();
@@ -50,7 +50,7 @@ public class MenuAssetLoadManager : Managers<MenuAssetLoadManager>
         }
 
         //완료하면 완료 invoke
-        OnMainMenuAssetLoaded.Invoke();
+        onMainMenuAssetLoaded.Invoke();
     }
     public void Load()
     {
