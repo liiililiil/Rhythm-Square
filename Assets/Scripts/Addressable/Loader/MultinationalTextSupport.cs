@@ -49,7 +49,7 @@ public class MultinationalTextSupport : MonoBehaviour
         string targetText = TextTable.Instance.GetText(index).GetString(language);
 
         // 같은 텍스트면 무시
-        if (targetText == textObject.text) return;
+        //if (targetText == textObject.text) return;
 
         // text가 꺼져있으면 그냥 바로 바꾸기
         if (!textObject.enabled) textObject.text = targetText;
