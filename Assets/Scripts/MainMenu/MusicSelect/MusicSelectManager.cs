@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Utils;
 using Extensions;
+using AudioManagement;
 public class MusicSelectManager : Managers<MusicSelectManager>
 {
     public SimpleEvent<float> onChangePosition = new SimpleEvent<float>();
@@ -25,23 +26,20 @@ public class MusicSelectManager : Managers<MusicSelectManager>
     private void Awake()
     {
         Singleton(false);
+        PlayableMusicSender.Instance.onLoadPlayerableMusic.AddListener(UpdateIndex);
+
+
+        ResetMaxIndex();
     }
 
-    private void Start()
+    private void UpdateIndex(PlayableMusic playableMusic)
     {
-        if (MenuAssetLoadManager.Instance.assetLoadRecoder.IsAllComplete())
-        {
-            GetMax();
-        }
-        else
-        {
-            MenuAssetLoadManager.Instance.AssetLoaderBind(GetMax);
-        }
+        maxIndex++;
     }
 
-    private void GetMax()
+    public void ResetMaxIndex()
     {
-        maxIndex = MusicTable.Instance.GetPlayableMusic().Length - 1;
+        maxIndex = -1;
     }
     private void Update()
     {

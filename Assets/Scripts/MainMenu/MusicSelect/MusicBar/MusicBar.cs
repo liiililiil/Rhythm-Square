@@ -1,7 +1,7 @@
 using SimpleEasing;
 using UnityEngine;
 
-public class MusicBar : MonoBehaviour
+public class MusicBar : MusicSelectableObjectBase
 {
     private const float defaultPositionX = -400;
     private const float defaultWidth = 600;
@@ -19,8 +19,10 @@ public class MusicBar : MonoBehaviour
         rectTransform = gameObject.GetComponent<RectTransform>();
     }
 
-    public void PositionUpdate(float y)
+    public override void PositionUpdate(Vector2 position)
     {
+        float y = -position.y;
+
         // 중앙과의 차이 비교
         float delta = Mathf.Abs(y);
 
