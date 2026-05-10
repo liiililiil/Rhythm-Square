@@ -41,7 +41,7 @@ public class IntroPlayer : MonoBehaviour
 
     private void Start()
     {
-        MenuMusicManager.Instance.OnBeat.AddListener(NextBeat);
+        MenuMusicManager.Instance.onBeat.AddListener(NextBeat);
         MenuAssetLoadManager.Instance.AssetLoaderBind(NextBeat);
         MenuStateManager.Instance.onMenuStateChanged.AddListener(DisableObject);
 
@@ -75,7 +75,7 @@ public class IntroPlayer : MonoBehaviour
 
                 break;
             default:
-                MenuAssetLoadManager.Instance.OnMainMenuAssetLoaded.RemoveListener(NextBeat);
+                MenuAssetLoadManager.Instance.onMainMenuAssetLoaded.RemoveListener(NextBeat);
                 break;
         }
     }

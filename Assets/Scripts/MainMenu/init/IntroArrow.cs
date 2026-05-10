@@ -44,7 +44,7 @@ public class IntroArrow : MonoBehaviour
     {
         rectTransform = new InitableComponent<RectTransform>(gameObject);
 
-        MenuMusicManager.Instance.OnBeat.AddListener(NextBeat);
+        MenuMusicManager.Instance.onBeat.AddListener(NextBeat);
         MenuAssetLoadManager.Instance.AssetLoaderBind(NextBeat);
         MenuStateManager.Instance.onMenuStateChanged.AddListener(DisableObject);
 
@@ -79,7 +79,7 @@ public class IntroArrow : MonoBehaviour
                 PlayerBind();
                 break;
             default:
-                MenuAssetLoadManager.Instance.OnMainMenuAssetLoaded.RemoveListener(NextBeat);
+                MenuAssetLoadManager.Instance.onMainMenuAssetLoaded.RemoveListener(NextBeat);
                 break;
         }
     }
