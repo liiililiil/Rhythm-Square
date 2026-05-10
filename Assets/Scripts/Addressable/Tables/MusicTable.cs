@@ -74,5 +74,18 @@ namespace Tables.MusicTable
             return backgroundInfo.Get(musicIndex);
         }
 
+        public T Get<T>(MusicIndex index) where T : IndexedScriptableObject<MusicIndex>
+        {
+            if (typeof(T) == typeof(Music))
+                return music.Get(index) as T;
+            else if (typeof(T) == typeof(MusicInfo))
+                return info.Get(index) as T;
+            else if (typeof(T) == typeof(PlayableMusic))
+                return playable.Get(index) as T;
+            else if (typeof(T) == typeof(BackGroundInfo))
+                return backgroundInfo.Get(index) as T;
+            else
+                return null;
+        }
     }
 }
