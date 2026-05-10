@@ -4,6 +4,9 @@ using SimpleEasing;
 using System;
 using Extensions;
 using Type.Enums.Menu;
+using Type.Enums.Addressable;
+using AudioManagement;
+using Tables.MusicTable;
 
 public class LogoPlayerAnimation : MonoBehaviour
 {
@@ -15,6 +18,9 @@ public class LogoPlayerAnimation : MonoBehaviour
     private EaseType easeType;
     private float elapsed = 0;
     private float t;
+    private int beatOffset;
+    private int resetCycle;
+    private int cycle;
 
     private float mouseValue;
 
@@ -42,13 +48,23 @@ public class LogoPlayerAnimation : MonoBehaviour
 
     }
 
+    private void SetBackGroundInfo(MusicIndex musicIndex)
+    {
+        BackGroundInfo backGroundInfo = MusicTable.Instance.GetBackGroundInfo(musicIndex);
+
+        beatOffset = backGroundInfo.beatOffset;
+        resetCycle = backGroundInfo.playerBeatResetCycle;
+        cycle = backGroundInfo.playerBeatCycle;
+    }
+
 
     private void Start()
     {
         canvas = transform.GetComponentInParent<Canvas>();
         rectTransform = GetComponent<RectTransform>();
 
-        MenuMusicManager.Instance.OnBeat.AddListener(NextStep);
+        MenuMusicManager.Instance.onBeat.AddListener(NextStep);
+        MenuMusicManager.Instance.onClipChange.AddListener(SetBackGroundInfo);
     }
     void Update()
     {
@@ -120,9 +136,6 @@ public class LogoPlayerAnimation : MonoBehaviour
     }
     private void NextStep()
     {
-        int beatOffset = MenuMusicManager.Instance.backGroundInfo.beatOffset;
-        int resetCycle = MenuMusicManager.Instance.backGroundInfo.playerBeatResetCycle;
-        int cycle = MenuMusicManager.Instance.backGroundInfo.playerBeatCycle;
 
         if ((MenuMusicManager.Instance.beat - beatOffset) % resetCycle == cycle)
         {

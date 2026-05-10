@@ -1,6 +1,12 @@
 using SimpleActions;
 using Type.Enums.Menu;
+
+
+#if UNITY_EDITOR
 using UnityEditor;
+#else
+using UnityEngine;
+#endif
 
 
 
@@ -18,7 +24,7 @@ public class MenuStateManager : Managers<MenuStateManager>
     private void Start()
     {
         onMenuStateChanged.AddListener(OnChangeMenuState);
-        MenuAssetLoadManager.Instance.OnMainMenuAssetLoaded.AddListener(() => ChangeMenuState(MenuState.InitWaitng));
+        MenuAssetLoadManager.Instance.onMainMenuAssetLoaded.AddListener(() => ChangeMenuState(MenuState.InitWaitng));
 
         ChangeMenuState(MenuState.InitLoading);
     }
@@ -47,7 +53,7 @@ public class MenuStateManager : Managers<MenuStateManager>
         switch (menuState)
         {
             case MenuState.InitWaitng:
-                Invoke(nameof(ChangeToMainMenu), MenuMusicManager.Instance.beatPerSec * 4);
+                Invoke(nameof(ChangeToMainMenu), MenuMusicManager.Instance.beatPerSec * 4.5f);
                 break;
             case MenuState.ExitWating:
                 Invoke(nameof(Exit), MenuMusicManager.Instance.beatPerSec * 4);
@@ -65,7 +71,7 @@ public class MenuStateManager : Managers<MenuStateManager>
 #if UNITY_EDITOR
         EditorApplication.isPlaying = false; // 에디터 플레이 종료
 #else
-            Application.Quit(); // 실제 빌드 종료
+        Application.Quit(); // 실제 빌드 종료
 #endif
     }
 }

@@ -2,35 +2,51 @@ using UnityEngine;
 
 using SimpleEasing;
 using Utils;
+using AudioManagement;
+using Type.Enums.Addressable;
+using Tables.MusicTable;
 
 public class LogoArrowAnimation : MonoBehaviour
 {
     RectTransform rectTransform;
 
-    float elapsed = 0;
-    float t;
+    private int beatOffset;
+    private int resetCycle;
+    private int cycle;
+
+    private float elapsed = 0;
+    private float t;
 
 
     [SerializeField]
-    EaseType easeType;
+    private EaseType easeType;
 
 
-    void Awake()
+    private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
     }
 
     private void Start()
     {
-        MenuMusicManager.Instance.OnBeat.AddListener(NextStep);
+        MenuMusicManager.Instance.onBeat.AddListener(NextStep);
+        MenuMusicManager.Instance.onClipChange.AddListener(SetBackGroundInfo);
+    }
+
+    private void SetBackGroundInfo(MusicIndex musicIndex)
+    {
+        BackGroundInfo backGroundInfo = MusicTable.Instance.GetBackGroundInfo(musicIndex);
+
+        beatOffset = backGroundInfo.beatOffset;
+        resetCycle = backGroundInfo.arrowBeatResetCycle;
+        cycle = backGroundInfo.arrowBeatCycle;
     }
 
 
     void Update()
     {
-        int beatOffset = MenuMusicManager.Instance.backGroundInfo.beatOffset;
-        int resetCycle = MenuMusicManager.Instance.backGroundInfo.arrowBeatResetCycle;
-        int cycle = MenuMusicManager.Instance.backGroundInfo.arrowBeatCycle;
+        // 0 나누기 오류 방지
+        if (MenuMusicManager.Instance.beat == 0) return;
 
         // 특정 박자 마다 조금 느리게 시간 흐르기
         if ((MenuMusicManager.Instance.beat - beatOffset) % resetCycle >= cycle)
@@ -75,9 +91,6 @@ public class LogoArrowAnimation : MonoBehaviour
 
     private void NextStep()
     {
-        int beatOffset = MenuMusicManager.Instance.backGroundInfo.beatOffset;
-        int resetCycle = MenuMusicManager.Instance.backGroundInfo.arrowBeatResetCycle;
-        int cycle = MenuMusicManager.Instance.backGroundInfo.arrowBeatCycle;
 
         if ((MenuMusicManager.Instance.beat - beatOffset) % resetCycle != cycle)
         {
