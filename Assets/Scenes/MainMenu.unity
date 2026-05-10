@@ -521,7 +521,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 3286163911610860551, guid: d4660eb3c99bacc4daee8e16df18034e, type: 3}
+  m_Sprite: {fileID: 0}
   m_PreserveAspect: 0
 --- !u!222 &78733445
 CanvasRenderer:
@@ -1382,7 +1382,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 3286163911610860551, guid: d4660eb3c99bacc4daee8e16df18034e, type: 3}
+  m_Sprite: {fileID: 3286163911610860551, guid: 5764461ba690e0246873ec308cedaea9, type: 3}
   m_PreserveAspect: 0
 --- !u!222 &805114964
 CanvasRenderer:
@@ -1636,7 +1636,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 6}
   m_SizeDelta: {x: 600, y: 600}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &984780878
@@ -2594,7 +2594,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1491614277}
-  - component: {fileID: 1491614278}
+  - component: {fileID: 1491614279}
   m_Layer: 0
   m_Name: MusicSelecter
   m_TagString: Untagged
@@ -2621,7 +2621,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1491614278
+--- !u!114 &1491614279
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2630,10 +2630,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1491614276}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9db5929281b5004996ac512548cb43f, type: 3}
+  m_Script: {fileID: 11500000, guid: e25d140242d73ed43b60f027b2f62d0b, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MusicBarChanger
-  musicBarPrefab: {fileID: 1792107092364770023, guid: 8878e1a843c6eae43b6d007ea6581ac0, type: 3}
+  m_EditorClassIdentifier: Assembly-CSharp::MusicSelectChanger
+  prefab: {fileID: 1792107092364770023, guid: 8878e1a843c6eae43b6d007ea6581ac0, type: 3}
+  sensitivity: {x: 0, y: 200}
 --- !u!1 &1563647719
 GameObject:
   m_ObjectHideFlags: 0
