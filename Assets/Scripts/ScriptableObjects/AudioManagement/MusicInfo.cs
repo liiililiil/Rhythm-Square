@@ -13,6 +13,7 @@ namespace AudioManagement
     public class MusicInfo : IndexedScriptableObject<MusicIndex>
     {
         public Sprite sprite;
+        public Color borderColor;
         public string title;
         public string artist;
         public float bpm;
