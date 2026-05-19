@@ -13,6 +13,8 @@ namespace MenuMusicManagers
         private FloatRange previousRange;
         private Coroutine loopCoroutine;
 
+        private bool smoothLooping;
+
         protected override void OnUpdate()
         {
             AudioLoop();
@@ -24,19 +26,24 @@ namespace MenuMusicManagers
             // 반복 설정 안하면 넘기기
             if (!isLoop) return;
 
-            // 첫 변경시 Previous가 Null이 뜨므로 예외 처리 하기
-            try
-            {
-                if (audioSource.time >= currentRange.end)
-                {
+            if (previousRange == null) return;
 
-                    audioSource.time -= currentRange.end - currentRange.start;
-                    musicManager.onTimeChange.Invoke(audioSource.time);
-                }
-            }
-            catch
+            if (audioSource.time >= currentRange.end)
             {
-                return;
+                // 부드럽게 이동해야하면 처리
+                if (smoothLooping)
+                {
+                    musicManager.SourceChanged();
+                    audioSource.time = currentRange.start;
+                }
+                else
+                {
+                    audioSource.time -= currentRange.end - currentRange.start;
+                }
+
+
+
+                musicManager.onTimeChange.Invoke(audioSource.time);
             }
         }
 
@@ -56,28 +63,24 @@ namespace MenuMusicManagers
             else musicManager.SafeStopCoroutine(ref loopCoroutine);
         }
 
-        public void RangeLoop(FloatRange range, bool isGoingToPart = true)
+        public void RangeLoop(FloatRange range, bool isSmoothLoop = false, bool adaptiveloop = true, bool isGoingToPart = true)
         {
+            smoothLooping = isSmoothLoop;
+
             isLoop = true;
             musicManager.SourceChanged();
 
             RangeChange(range);
 
-            // 이동하도록 지정했거나 audio의 time이 range에 없으면 그 range안으로 오도록 조정
-            if (isGoingToPart && !(otherSource.time >= range.start && otherSource.time <= range.end))
+            //  audio의 time이 range에 없으면 그 range안으로 오도록 조정
+            if (!(otherSource.time >= range.start && otherSource.time <= range.end))
             {
-                // 이동까지의 시간 계산
-                float delta = currentRange.start - previousRange.start;
-                float targetTime = otherSource.time + delta;
 
-                // Debug.Log($"delta : {delta} | targetTime : {targetTime}, | range : {range.start} | current : {otherSource.time}");
-
-
-                // 적응형 오디오를 위해 이전 파츠와 이어지도록 조정
-                targetTime = currentRange.start + Mathf.Repeat(targetTime - currentRange.start, currentRange.end - currentRange.start);
-
-                audioSource.time = targetTime;
-
+                // 적응형 루프면 시간 조정, 아니면 바로 range 시작점으로 이동
+                if (adaptiveloop)
+                    AdaptTime(isGoingToPart);
+                else
+                    audioSource.time = range.start;
             }
             else
             {
@@ -86,6 +89,25 @@ namespace MenuMusicManagers
             }
 
             musicManager.onTimeChange.Invoke(audioSource.time);
+        }
+
+
+        private void AdaptTime(bool isGoingToPart)
+        {
+            // 이동까지의 시간 계산
+            float delta = currentRange.start - previousRange.start;
+            float targetTime = otherSource.time + delta;
+
+            // 만약 앞으로 이동해야할때 IsGoingToPart이 false면 이동 안함
+            if (delta > 0 && !isGoingToPart)
+            {
+                return;
+            }
+
+            // 적응형 오디오를 위해 이전 파츠와 이어지도록 조정
+            targetTime = currentRange.start + Mathf.Repeat(targetTime - currentRange.start, currentRange.end - currentRange.start);
+            audioSource.time = targetTime;
+
         }
 
 
