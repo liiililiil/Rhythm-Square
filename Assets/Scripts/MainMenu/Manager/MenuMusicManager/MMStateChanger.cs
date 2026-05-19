@@ -10,7 +10,7 @@ namespace MenuMusicManagers
 
         private BackGroundInfo backGroundInfo;
 
-        public MMStateChanger(MenuMusicManager musicManager) : base(musicManager)
+        protected override void OnBind()
         {
             MenuStateManager.Instance.onMenuStateChanged.AddListener(OnMenuStateChanged);
             musicManager.onClipChange.AddListener(BackGroundInfoBind);

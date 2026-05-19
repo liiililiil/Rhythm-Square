@@ -13,7 +13,7 @@ namespace MenuMusicManagers
 
         // 오디오 소스 교체 시간
         private const float SOURCE_FADE_DURATION = 1f;
-        public MMSourceManager(MenuMusicManager musicManager) : base(musicManager)
+        protected override void OnBind()
         {
             musicManager.onSourceChange.AddListener(SourceChanged);
 

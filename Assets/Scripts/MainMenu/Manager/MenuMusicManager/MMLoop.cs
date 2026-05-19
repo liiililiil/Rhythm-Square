@@ -13,11 +13,6 @@ namespace MenuMusicManagers
         private FloatRange previousRange;
         private Coroutine loopCoroutine;
 
-        public MMLoop(MenuMusicManager musicManager) : base(musicManager)
-        {
-
-        }
-
         protected override void OnUpdate()
         {
             AudioLoop();

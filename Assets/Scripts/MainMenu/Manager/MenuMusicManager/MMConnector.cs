@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace MenuMusicManagers
 {
-    public abstract class MMConnector
+    public abstract class MMConnector : MonoBehaviour
     {
         protected AudioSource audioSource = new AudioSource();
         protected AudioSource otherSource = new AudioSource();
@@ -11,13 +11,17 @@ namespace MenuMusicManagers
         protected MenuMusicManager musicManager;
 
         // 바인딩
-        public MMConnector(MenuMusicManager musicManager)
+        public void Bind(MenuMusicManager musicManager)
         {
             this.musicManager = musicManager;
 
             musicManager.onUpdate.AddListener(OnUpdate);
             musicManager.onSourceChange.AddListener(SourceChange);
+
+            OnBind();
         }
+
+        protected virtual void OnBind() { }
 
         protected virtual void OnUpdate()
         {

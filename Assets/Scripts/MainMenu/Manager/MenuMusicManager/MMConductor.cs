@@ -38,7 +38,7 @@ namespace MenuMusicManagers
             nextBeat = (beat + 1) * beatPerSec;
         }
 
-        public MMConductor(MenuMusicManager musicManager) : base(musicManager)
+        protected override void OnBind()
         {
             musicManager.onTimeChange.AddListener(BeatTimeCorrection);
             musicManager.onClipChange.AddListener(LoadMusicInfo);
