@@ -35,10 +35,17 @@ public class MenuMusicManager : Managers<MenuMusicManager>
     {
         Singleton(false);
 
-        conductor = new MMConductor(this);
-        loop = new MMLoop(this);
-        sourceManager = new MMSourceManager(this);
-        stateChanger = new MMStateChanger(this);
+        conductor = GetComponent<MMConductor>();
+        conductor.Bind(this);
+
+        loop = GetComponent<MMLoop>();
+        loop.Bind(this);
+
+        sourceManager = GetComponent<MMSourceManager>();
+        sourceManager.Bind(this);
+
+        stateChanger = GetComponent<MMStateChanger>();
+        stateChanger.Bind(this);
 
         onSourceChange.Invoke(audioSourceOne, audioSourceTwo);
     }
