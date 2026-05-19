@@ -13,7 +13,7 @@ namespace MenuMusicManagers
         protected override void OnBind()
         {
             MenuStateManager.Instance.onMenuStateChanged.AddListener(OnMenuStateChanged);
-            musicManager.onClipChange.AddListener(BackGroundInfoBind);
+            musicManager.onMusicInfoChange.AddListener(BackGroundInfoBind);
         }
 
 
@@ -37,7 +37,7 @@ namespace MenuMusicManagers
                     break;
 
                 case MenuState.Main:
-                    musicManager.RangeLoop(backGroundInfo.high.loop);
+                    musicManager.RangeLoop(backGroundInfo.high.loop, isGoingToPart: false);
                     break;
 
                 case MenuState.Setting:
