@@ -30,7 +30,7 @@ public class LogoArrowAnimation : MonoBehaviour
     private void Start()
     {
         MenuMusicManager.Instance.onBeat.AddListener(NextStep);
-        MenuMusicManager.Instance.onClipChange.AddListener(SetBackGroundInfo);
+        MenuMusicManager.Instance.onMusicInfoChange.AddListener(SetBackGroundInfo);
     }
 
     private void SetBackGroundInfo(MusicIndex musicIndex)

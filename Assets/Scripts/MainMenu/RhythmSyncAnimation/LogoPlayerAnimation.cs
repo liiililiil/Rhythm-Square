@@ -64,7 +64,7 @@ public class LogoPlayerAnimation : MonoBehaviour
         rectTransform = GetComponent<RectTransform>();
 
         MenuMusicManager.Instance.onBeat.AddListener(NextStep);
-        MenuMusicManager.Instance.onClipChange.AddListener(SetBackGroundInfo);
+        MenuMusicManager.Instance.onMusicInfoChange.AddListener(SetBackGroundInfo);
     }
     void Update()
     {
