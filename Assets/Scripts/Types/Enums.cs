@@ -14,6 +14,12 @@ namespace Type.Enums.Addressable
         SingleModernArrow = 106,
         Star = 107,
 
+        // 노래 선택시
+        TwoLine = 108,
+        TwoLineEnd = 109,
+
+
+
     }
     // 텍스트 목록
     public enum TextIndex
