@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1757182046233152575}
   - component: {fileID: 3615382439124348602}
   - component: {fileID: 6179935728303124094}
+  - component: {fileID: 3628383796007797069}
   m_Layer: 0
   m_Name: RIghtEnd
   m_TagString: Untagged
@@ -65,8 +66,21 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 3286163911610860551, guid: 43a138092155e8741a08f9b405b5c86e, type: 3}
+  m_Sprite: {fileID: 0}
   m_PreserveAspect: 0
+--- !u!114 &3628383796007797069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 944937752788146148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6830e515cce4084589ac513aa22a04d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SVGSpriteLoader
+  spriteIndex: 109
 --- !u!1 &965137914615980089
 GameObject:
   m_ObjectHideFlags: 0
@@ -78,6 +92,7 @@ GameObject:
   - component: {fileID: 1634257906692285213}
   - component: {fileID: 7229829255904547964}
   - component: {fileID: 5640007314023189147}
+  - component: {fileID: 5519521277244999523}
   m_Layer: 0
   m_Name: LeftEnd
   m_TagString: Untagged
@@ -132,8 +147,21 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 3286163911610860551, guid: 43a138092155e8741a08f9b405b5c86e, type: 3}
+  m_Sprite: {fileID: 0}
   m_PreserveAspect: 0
+--- !u!114 &5519521277244999523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 965137914615980089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6830e515cce4084589ac513aa22a04d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SVGSpriteLoader
+  spriteIndex: 109
 --- !u!1 &1792107092364770023
 GameObject:
   m_ObjectHideFlags: 0
@@ -373,6 +401,7 @@ GameObject:
   - component: {fileID: 4423445448726330633}
   - component: {fileID: 3498526409321644877}
   - component: {fileID: 2078053671321666219}
+  - component: {fileID: 7699571827178391879}
   m_Layer: 0
   m_Name: Line
   m_TagString: Untagged
@@ -427,5 +456,18 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 3286163911610860551, guid: 5764461ba690e0246873ec308cedaea9, type: 3}
+  m_Sprite: {fileID: 0}
   m_PreserveAspect: 0
+--- !u!114 &7699571827178391879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8846921668059956164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6830e515cce4084589ac513aa22a04d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SVGSpriteLoader
+  spriteIndex: 108
