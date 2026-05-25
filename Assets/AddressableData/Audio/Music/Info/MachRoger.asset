@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AudioManagement.MusicInfo
   index: 201
   sprite: {fileID: 424836421422347277, guid: 46a61c2a556134c4e814fab0abc0e2d5, type: 3}
+  borderColor: {r: 1, g: 0.20392157, b: 0.20392157, a: 1}
   title: Mach Roger
   artist: MYUKKE.
   bpm: 180

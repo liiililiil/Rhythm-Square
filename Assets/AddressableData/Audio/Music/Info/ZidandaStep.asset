@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AudioManagement.MusicInfo
   index: 202
   sprite: {fileID: 4325700180379299132, guid: c2aa8b8d5ed7c2b4ba9ee046a8e08455, type: 3}
+  borderColor: {r: 1, g: 0.8509804, b: 0.3372549, a: 1}
   title: Zidanda Step
   artist: MYUKKE.
   bpm: 128
